@@ -2,26 +2,26 @@ package com.bjpowernode.crm.workbench.activity.domain;
 
 /**
  * 数据库 tbl_marketing_activities
- * 
+ * 市场活动实体类
  * @author LauShuaichen
  *
  */
 public class MarketActivity {
 
-	private String id; // 字段id
-	private String owner; // 字段owner
-	private String type; // 字段type
-	private String name; // 字段name
-	private String state; // 字段state
-	private String startDate; // 字段startDate
-	private String endDate; // 字段endDate
-	private int budgetCost; // 字段budgetCost
-	private int actualCost; // 字段actualCost
-	private String description; // 字段description
-	private String createBy; // 字段createBy
-	private String createTime; // 字段createTime
-	private String editBy; // 字段editBy
-	private String editTime; // 字段editTime
+	private String id;
+	private String owner;
+	private String type;
+	private String name;
+	private String state;
+	private String startDate;
+	private String endDate;
+	private String budgetCost;
+	private String actualCost;
+	private String description;
+	private String createBy;
+	private String createTime;
+	private String editBy;
+	private String editTime;
 
 	public String getId() {
 		return id;
@@ -79,19 +79,19 @@ public class MarketActivity {
 		this.endDate = endDate;
 	}
 
-	public int getBudgetCost() {
+	public String getBudgetCost() {
 		return budgetCost;
 	}
 
-	public void setBudgetCost(int budgetCost) {
+	public void setBudgetCost(String budgetCost) {
 		this.budgetCost = budgetCost;
 	}
 
-	public int getActualCost() {
+	public String getActualCost() {
 		return actualCost;
 	}
 
-	public void setActualCost(int actualCost) {
+	public void setActualCost(String actualCost) {
 		this.actualCost = actualCost;
 	}
 

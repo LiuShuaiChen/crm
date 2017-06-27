@@ -45,36 +45,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- select id, loginAct,loginPwd, name, email, lockStatus, expireTime, allowIps, deptId, createBy, createTime, editBy,editTime
 		from tbl_user where id=#{id} -->
 		
-		SELECT id, deptId, NAME, loginAct, loginPwd, email, expireTime, lockStatus, allowIps, createBy, createTime, editBy, editTime 
-		from tbl_user where id = #{id}
+		SELECT user.id, dept.name as deptId, user.NAME, user.loginAct, user.loginPwd, user.email, user.expireTime, user.lockStatus, user.allowIps, user.createBy, user.createTime, user.editBy, user.editTime 
+		from tbl_user user
+		left join tbl_dept dept on user.deptId = dept.id;
+		where user.id = #{id}
 	</select>
 
 	
 	<!-- List<User> getByLimit(Map<String, Object>map); -->
 	<select id="getByAll" parameterType="map" resultMap="rUser">
-		SELECT
-		id, NAME, deptId, loginAct, loginPwd, email, expireTime, lockStatus, allowIps, createBy, createTime, editBy, editTime 
-		from tbl_user
+		SELECT user.id, dept.name as deptId, user.NAME, user.loginAct, user.loginPwd, user.email, user.expireTime, user.lockStatus, user.allowIps, user.createBy, user.createTime, user.editBy, user.editTime 
+		from tbl_user user
+		left join tbl_dept dept on user.deptId = dept.id
 
 		<where>
 			<if test="conditionMap.name != null and conditionMap.name != ''">
-				and name like #{conditionMap.name}
+				and user.name like #{conditionMap.name}
 			</if>
 			
 			<if test="conditionMap.deptId != null and conditionMap.deptId != ''">
-				and deptId like #{conditionMap.deptId}
+				and dept.id like #{conditionMap.deptId}
 			</if>
 			
 			<if test="conditionMap.lockStatus != null and conditionMap.lockStatus != ''">
-				and lockStatus like #{conditionMap.lockStatus}
+				and user.lockStatus like #{conditionMap.lockStatus}
 			</if>
 			
 			<if test="conditionMap.startTime != null and conditionMap.lockStatus != ''">
-				and expireTime &gt; #{conditionMap.startTime}
+				and user.expireTime &gt; #{conditionMap.startTime}
 			</if>
 			
 			<if test="conditionMap.endTime != null and conditionMap.endTime != ''">
-				and expireTime &lt; #{conditionMap.endTime}
+				and user.expireTime &lt; #{conditionMap.endTime}
 			</if>
 		</where>
 		limit #{puMap.skipCount},#{puMap.pageCount}

@@ -51,7 +51,6 @@ public class QxUserListController extends HttpServlet {
 		
 		PageUtils pu = (PageUtils) map.get("pu");
 		List<User> uList = (List<User>) map.get("uList");
-//		DeptService deptService = (DeptService) ServiceFactory.getService(new DeptServiceImpl());
 		
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("{\"pu\":{\"pageNo\":"+pu.getPageNo()+",\"pageCount\":"+pu.getPageCount()+",\"pageSize\":"+pu.getPageSize()+",\"total\":"+pu.getTotal()+"},\"uList\":[");
@@ -59,9 +58,6 @@ public class QxUserListController extends HttpServlet {
 		
 		for (int i = 0; i < uList.size(); i++) {
 			User u = uList.get(i);
-			
-			
-//			Dept dept = deptService.getById(u.getDeptId());
 			
 			String lockStatus1 = u.getLockStatus();
 			String lockStatusStr = "启用";
@@ -83,7 +79,7 @@ public class QxUserListController extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		
 		pw.print(buffer.toString());
-		pw.flush();
+		pw.close();
 		
 	}
 
