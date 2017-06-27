@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.bjpowernode.crm.settings.dictionary.dao.DictionaryValueDao">
+	<resultMap type="dictionaryValue" id="rdictionaryValue">
+		<id property="id" column="id" />
+		<result property="value" column="value" />
+		<result property="text" column="text" />
+		<result property="orderNo" column="orderNo" />
+		<result property="typeCode" column="typeCode" />
+	</resultMap>
+
+	<!-- void insert(DictionaryValue dictionaryValue); -->
+	<insert id="insert" parameterType="dictionaryValue">
+		INSERT into tbl_dictionary_value(id,typeCode,value,text,orderNo) VALUES(#{id}, #{typeCode}, #{value}, #{text}, #{orderNo})
+	</insert>
+	
+	<!-- void delete(String id); -->
+	<delete id="delete" parameterType="String">
+		delete from tbl_dictionary_value where id=#{id}
+	</delete>
+	
+	<!-- void update(DictionaryValue dictionaryValue); -->
+	<update id="update" parameterType="dictionaryValue">
+		update tbl_dictionary_value set value=#{value}, text=#{text}, orderNo=#{orderNo} where id=#{id}
+	</update>
+	
+	<!-- DictionaryValue getById(String id); -->
+	<select id="getById" parameterType="String" resultType="dictionaryValue">
+		select id, typeCode, value, text, orderNo from tbl_dictionary_value where id=#{id}
+	</select>
+	
+	<!-- List<DictionaryValue> getByAll(); -->
+	<select id="getByAll" resultMap="rdictionaryValue">
+		select id, typeCode, value, text, orderNo from tbl_dictionary_value
+	</select>
+	
+	
+	<!-- List<DictionaryValue> queryDicValueByType(String typeCode); -->
+	<select id="queryDicValueByType" resultType="dictionaryValue">
+		select * from tbl_dictionary_value where typeCode=#{typeCode} order by orderNo
+	</select>
+	
+
+</mapper>
