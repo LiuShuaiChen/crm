@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.bjpowernode.crm.workbench.dao.ActivityDao">
+	<resultMap type="dept" id="rDept">
+		<id property="id" column="id" />
+		<result property="no" column="no"/>
+		<result property="name" column="name"/>
+		<result property="manager" column="manager"/>
+		<result property="phone" column="phone"/>
+		<result property="description" column="description"/>
+
+	</resultMap>
+	<!-- void insert(Activity activity); -->
+
+
+</mapper>
+
+
+
+
