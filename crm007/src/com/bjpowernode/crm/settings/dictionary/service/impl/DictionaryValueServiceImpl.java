@@ -45,20 +45,6 @@ public class DictionaryValueServiceImpl implements DictionaryValueService {
 	}
 
 
-	public static void main(String[] args) {
-		DictionaryValueService dictionaryValueService = (DictionaryValueService) ServiceFactory.getService(new DictionaryValueServiceImpl());
-//		List<DictionaryValue> dList = dictionaryValueService.getByAll();
-		
-		DictionaryValue dictionaryValue = dictionaryValueService.getById("0449887955db4547b9005b7bad50a641");
-		
-		
-		System.out.println(dictionaryValue.toString());
-		
-//		for (DictionaryValue dic : dList) {
-//			System.out.println(dic.toString());
-//		}
-	}
-
 	@Override
 	public List<DictionaryValue> queryDicValueByType(String typeCode) {
 		return dictionaryValueDao.queryDicValueByType(typeCode);

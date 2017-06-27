@@ -1,10 +1,18 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+            <%
+		String path = request.getContextPath();
+		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+		System.out.println("/crm007/WebContent/workbench/index.jsp");
+	%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
-<link href="../jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="../jquery/jquery-1.11.1-min.js"></script>
-<script type="text/javascript" src="../jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<base href="<%=basePath%>">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
+<script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
 	//页面加载完毕
@@ -32,15 +40,15 @@
 		});
 		
 		//展示市场活动页面
-		window.open("main/index.html","workareaFrame");
+		window.open("workbench/main/index.html","workareaFrame");
 		
 	});
 	
 </script>
-
+<title>Insert title here</title>
 </head>
 <body>
-	
+
 	<!-- 我的资料 -->
 	<div class="modal fade" id="myInformation" role="dialog">
 		<div class="modal-dialog" role="document" style="width: 30%;">
@@ -162,7 +170,7 @@
 				<li class="liClass"><a href="javascript:void(0);" target="workareaFrame"><span class="glyphicon glyphicon-tag"></span> 动态</a></li>
 				<li class="liClass"><a href="javascript:void(0);" target="workareaFrame"><span class="glyphicon glyphicon-time"></span> 审批</a></li>
 				<li class="liClass"><a href="javascript:void(0);" target="workareaFrame"><span class="glyphicon glyphicon-user"></span> 客户公海</a></li>
-				<li class="liClass"><a href="activity/index.jsp" target="workareaFrame"><span class="glyphicon glyphicon-play-circle"></span> 市场活动</a></li>
+				<li class="liClass"><a href="workbench/activity/index.jsp" target="workareaFrame"><span class="glyphicon glyphicon-play-circle"></span> 市场活动</a></li>
 				<li class="liClass"><a href="clue/index.html" target="workareaFrame"><span class="glyphicon glyphicon-search"></span> 线索（潜在客户）</a></li>
 				<li class="liClass"><a href="customer/index.html" target="workareaFrame"><span class="glyphicon glyphicon-user"></span> 客户</a></li>
 				<li class="liClass"><a href="contacts/index.html" target="workareaFrame"><span class="glyphicon glyphicon-earphone"></span> 联系人</a></li>
@@ -200,6 +208,5 @@
 	
 	<!-- 底部 -->
 	<div id="down" style="height: 30px; width: 100%; position: absolute;bottom: 0px;"></div>
-	
 </body>
 </html>

@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="com.bjpowernode.crm.settings.qx.user.dao.UserDao">
-	<resultMap type="user" id="rUser">
+ <resultMap type="user" id="rUser">
 		<id property="id" column="id" />
 		<result property="loginAct" column="loginAct"/>
 		<result property="loginPwd" column="loginPwd"/>
@@ -19,8 +19,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="editBy" column="editBy"/>
 		<result property="editTime" column="editTime"/>
 
-	</resultMap>
-	
+	</resultMap> 
+
 	
 	<!-- void insert(User user); -->
 	<insert id="insert" parameterType="user">
@@ -53,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	
 	<!-- List<User> getByLimit(Map<String, Object>map); -->
-	<select id="getByAll" parameterType="map" resultMap="rUser">
+	<select id="getByAll" parameterType="map" resultType="User">
 		SELECT user.id, dept.name as deptId, user.NAME, user.loginAct, user.loginPwd, user.email, user.expireTime, user.lockStatus, user.allowIps, user.createBy, user.createTime, user.editBy, user.editTime 
 		from tbl_user user
 		left join tbl_dept dept on user.deptId = dept.id
@@ -116,10 +116,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="endTime != null and endTime != ''">
 				and expireTime &lt; #{endTime}
 			</if>
-		
 		</where>
 	</select>
 	
+	
+	<!-- User getActAndPwd(String act, String pwd); -->
+	<select id="getActAndPwd" resultType="user">
+		select * from tbl_user where loginAct=#{0} and loginPwd=#{1}
+	</select>
+	
+	<!-- List<User> queryAllUsers(); -->
+	<select id="queryAllUsers" resultType="user">
+		select * from tbl_user where lockStatus='0'
+	</select>
 
 
 </mapper>

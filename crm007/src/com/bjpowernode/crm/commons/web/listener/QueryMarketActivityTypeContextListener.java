@@ -19,13 +19,6 @@ import com.bjpowernode.crm.utils.ServiceFactory;
 @WebListener
 public class QueryMarketActivityTypeContextListener implements ServletContextListener {
 
-    /**
-     * Default constructor. 
-     */
-    public QueryMarketActivityTypeContextListener() {
-        // TODO Auto-generated constructor stub
-    }
-
 	/**
      * @see ServletContextListener#contextDestroyed(ServletContextEvent)
      */

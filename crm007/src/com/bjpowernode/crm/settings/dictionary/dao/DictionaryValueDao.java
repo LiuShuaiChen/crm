@@ -21,11 +21,14 @@ public interface DictionaryValueDao {
 
 	List<DictionaryValue> getByAll();
 	
+	
 	/**
 	 * 根据类型查询数据字典值列表
 	 * @param typeCode
 	 * @return
 	 */
 	List<DictionaryValue> queryDicValueByType(String typeCode);
+	
+
 
 }

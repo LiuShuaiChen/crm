@@ -1,5 +1,6 @@
 package com.bjpowernode.crm.settings.qx.user.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.bjpowernode.crm.settings.qx.user.domain.User;
@@ -19,6 +20,12 @@ public interface UserService {
 	Map<String, Object> getAll(String pageNoStr, String name, String deptId, String lockStatus, String startTime, String endTime);
 	
 	void changeStatus(String id);
+	
+	User login(String act, String pwd, String ip);
+	
+	List<User> queryAllUsers();
+	
+	
 	
 
 }

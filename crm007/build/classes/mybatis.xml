@@ -5,6 +5,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
 	<typeAliases>
 		<package name="com.bjpowernode.crm.settings.dictionary.domain" />
+		
 		<package name="com.bjpowernode.crm.settings.qx.user.domain"/>
 		<package name="com.bjpowernode.crm.settings.dept.domain"/>
 		
