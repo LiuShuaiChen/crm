@@ -6,7 +6,7 @@ package com.bjpowernode.crm.workbench.activity.domain;
  * @author LauShuaichen
  *
  */
-public class Activity {
+public class MarketActivity {
 
 	private String id; // 字段id
 	private String owner; // 字段owner

@@ -1,9 +1,9 @@
 package com.bjpowernode.crm.workbench.activity.dao;
 
-import com.bjpowernode.crm.workbench.activity.domain.Activity;
+import com.bjpowernode.crm.workbench.activity.domain.MarketActivity;
 
 public interface ActivityDao {
 	
-	void insert(Activity activity);
+	void insert(MarketActivity activity);
 
 }

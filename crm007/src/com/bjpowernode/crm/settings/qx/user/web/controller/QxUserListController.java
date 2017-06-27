@@ -83,7 +83,7 @@ public class QxUserListController extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		
 		pw.print(buffer.toString());
-		pw.close();
+		pw.flush();
 		
 	}
 
