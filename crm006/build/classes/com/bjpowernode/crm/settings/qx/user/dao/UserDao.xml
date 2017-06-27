@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.bjpowernode.crm.settings.qx.user.dao.UserDao">
+	<resultMap type="user" id="rUser">
+		<id property="id" column="id" />
+		<result property="loginAct" column="loginAct"/>
+		<result property="loginPwd" column="loginPwd"/>
+		<result property="name" column="name"/>
+		<result property="email" column="email"/>
+		<result property="lockStatus" column="lockStatus"/>
+		<result property="expireTime" column="expireTime"/>
+		<result property="allowIps" column="allowIps"/>
+		<result property="deptId" column="deptId"/>
+		<result property="createBy" column="createBy"/>
+		<result property="createTime" column="createTime"/>
+		<result property="editBy" column="editBy"/>
+		<result property="editTime" column="editTime"/>
+
+	</resultMap>
+	
+	
+	<!-- void insert(User user); -->
+	<insert id="insert" parameterType="user">
+		insert into tbl_user(id,deptId,loginAct,name,loginPwd,email,expireTime,lockStatus,allowIps,createBy,createTime)                                             
+			values(#{id},#{deptId},#{loginAct},#{name},#{loginPwd},#{email},#{expireTime},#{lockStatus},#{allowIps},#{createBy},#{createTime})
+	</insert>
+	
+	
+	<!-- void delete(String id); -->
+	<delete id="delete" parameterType="string">
+		delete from tbl_user where id=#{id}
+	</delete>
+	
+	<!-- void update(User user); -->
+	<update id="update" parameterType="user">
+		update tbl_user set loginAct=#{loginAct}, loginPwd=#{loginPwd},name=#{name},deptId=#{deptId},email=#{email}, expireTime=#{expireTime},lockStatus=#{lockStatus}, allowIps=#{allowIps},editBy=#{editBy},editTime=#{editTime}
+		where id=#{id}
+	</update>
+	
+	<!-- User getById(String Id); -->
+	<select id="getById" parameterType="string" resultType="user">
+		<!-- select id, loginAct,loginPwd, name, email, lockStatus, expireTime, allowIps, deptId, createBy, createTime, editBy,editTime
+		from tbl_user where id=#{id} -->
+		
+		SELECT id, deptId, NAME, loginAct, loginPwd, email, expireTime, lockStatus, allowIps, createBy, createTime, editBy, editTime 
+		from tbl_user where id = #{id}
+	</select>
+
+	
+	<!-- List<User> getByLimit(Map<String, Object>map); -->
+	<select id="getByAll" parameterType="map" resultMap="rUser">
+		SELECT
+		id, NAME, deptId, loginAct, loginPwd, email, expireTime, lockStatus, allowIps, createBy, createTime, editBy, editTime 
+		from tbl_user
+
+		<where>
+			<if test="conditionMap.name != null and conditionMap.name != ''">
+				and name like #{conditionMap.name}
+			</if>
+			
+			<if test="conditionMap.deptId != null and conditionMap.deptId != ''">
+				and deptId like #{conditionMap.deptId}
+			</if>
+			
+			<if test="conditionMap.lockStatus != null and conditionMap.lockStatus != ''">
+				and lockStatus like #{conditionMap.lockStatus}
+			</if>
+			
+			<if test="conditionMap.startTime != null and conditionMap.lockStatus != ''">
+				and expireTime &gt; #{conditionMap.startTime}
+			</if>
+			
+			<if test="conditionMap.endTime != null and conditionMap.endTime != ''">
+				and expireTime &lt; #{conditionMap.endTime}
+			</if>
+		</where>
+		limit #{puMap.skipCount},#{puMap.pageCount}
+	</select>
+	
+	
+	<!-- int getToal(Map<String, String>map); -->
+		<!-- 
+		Map<String,String> map1 = new HashMap<String,String>();
+		map1.put("name","%"+name+"%");
+		map1.put("deptId","%"+deptId+"%");
+		map1.put("lockStatus",lockStatus);
+		map1.put("startTime",startTime);
+		map1.put("endTime",endTime);
+		-->
+
+	<select id="getTotal" parameterType="map" resultType="int">
+		select count(*) from tbl_user
+		
+		<where>
+			<if test="name != null and name != ''">
+				and name like #{name}
+			</if>
+			
+			<if test="deptId != null and deptId != ''">
+				and deptId like #{deptId}
+			</if>
+			
+			<if test="lockStatus != null and lockStatus != ''">
+				and lockStatus like #{lockStatus}
+			</if>
+			
+			<if test="startTime != null and lockStatus != ''">
+				and expireTime &gt; #{startTime}
+			</if>
+			
+			<if test="endTime != null and endTime != ''">
+				and expireTime &lt; #{endTime}
+			</if>
+		
+		</where>
+	</select>
+	
+
+
+</mapper>
