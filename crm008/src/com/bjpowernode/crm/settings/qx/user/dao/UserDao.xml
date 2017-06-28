@@ -120,9 +120,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
-	<!-- User getActAndPwd(String act, String pwd); -->
-	<select id="getActAndPwd" resultType="user">
-		select * from tbl_user where loginAct=#{0} and loginPwd=#{1}
+	<!-- User getActAndPwd(User user); -->
+	<select id="getActAndPwd" parameterType="User" resultType="user">
+		select * from tbl_user 
+		<where>
+			<if test="loginAct!=null and loginAct != ''">
+				and loginAct = #{loginAct}
+			</if>
+			
+			<if test="loginPwd != null and loginPwd != ''">
+				and loginPwd = #{loginPwd}
+			</if>
+		</where>
+
 	</select>
 	
 	<!-- List<User> queryAllUsers(); -->

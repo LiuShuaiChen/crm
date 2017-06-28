@@ -129,7 +129,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User login(String act, String pwd, String ip) {
-		User user = userDao.getActAndPwd(act, pwd);
+		User paramUser = new User();
+		
+		paramUser.setLoginAct(act);
+		paramUser.setLoginPwd(pwd);
+//		paramUser.setAllowIps(ip);
+		User user = userDao.getActAndPwd(paramUser);
 
 		// 判断用户名 密码是否正确
 		if (user == null) {

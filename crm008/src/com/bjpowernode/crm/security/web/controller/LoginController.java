@@ -42,7 +42,7 @@ public class LoginController extends HttpServlet {
 		
 		System.out.println(userService.toString() + "==ip==>" + ip);
 		
-		String msg = "";
+		String message = "";
 		String json = "";
 		
 		try{
@@ -50,9 +50,9 @@ public class LoginController extends HttpServlet {
 			request.getSession().setAttribute("user",user);
 			json = "{\"success\":true}";
 		}catch(ApplicationException e){
-			e.printStackTrace();
-			msg = e.getMessage();
-			json = "{\"success\":false,\"msg\":\""+msg+"\"}";
+			//e.printStackTrace();
+			message = e.getMessage();
+			json = "{\"success\":false,\"msg\":\""+message+"\"}";
 		}
 		
 		PrintWriter pw = response.getWriter();

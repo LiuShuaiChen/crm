@@ -34,7 +34,7 @@ public interface UserDao {
 	 * @return
 	 */
 	//User getActAndPwd(String act, String pwd);
-	User getActAndPwd(@Param("act")String act,@Param("pwd")String pwd);
+	User getActAndPwd(User user);
 	
 	
 	/**
