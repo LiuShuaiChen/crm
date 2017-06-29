@@ -169,11 +169,11 @@ $(function(){
 	//页面加载成功之后,显示首页数据
 	display(1,5);
 	
-	/* //当页面加载成功之后 显示第一页数据
+	//当页面加载成功之后 显示第一页数据
 	$("#queryActivityButton").click(function(){
 		display(1,5);
 	});
-	 */
+	
 });
 
 	// 市场活动列表显示
@@ -193,12 +193,10 @@ $(function(){
 			},
 			type:'post',
 			success:function(data){
-				alert(5555);
 				//设置市场活动列表
 				var htmlStr = "";
 				$.each(data.dataList,function(index,obj){
-					alert(1111);
-				/* htmlStr += "<tr>";
+				htmlStr += "<tr>";
 				htmlStr += "<td><input value='"+obj.id+"' type = 'checkbox'/></td>";
 				htmlStr += "<td><a style = 'text-decoration : none; cursor : pointer; 'onclick = 'window.location.href = \"detail.html\";'>"+obj.name+"</a></td>";
 				htmlStr += "<td>"+obj.type+"</td>";
@@ -213,8 +211,7 @@ $(function(){
 				htmlStr += "<td>"+obj.editBy+"</td>";
 				htmlStr += "<td>"+obj.editTime+"</td>";
 				htmlStr += "<td>"+obj.description+"</td>";
-				htmlStr += "</tr>"; */
-				alert(obj.type);
+				htmlStr += "</tr>";
 				});
 				
 				$("#activityListTBody").html(htmlStr);
