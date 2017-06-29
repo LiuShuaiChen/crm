@@ -4,16 +4,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="com.bjpowernode.crm.workbench.activity.dao.MarketActivityDao">
-	<resultMap type="dept" id="rDept">
-		<id property="id" column="id" />
-		<result property="no" column="no"/>
-		<result property="name" column="name"/>
-		<result property="manager" column="manager"/>
-		<result property="phone" column="phone"/>
-		<result property="description" column="description"/>
 
-	</resultMap>
-	<!-- void insert(Activity activity); -->
+	<!-- void insertCreateMarketActivity(MarketActivity marketActivity); -->
+	<insert id="insertCreateMarketActivity" parameterType="marketActivity">
+		insert into tbl_marketing_activities 
+		{id, owner, type, name, state, startDate, endDate, budgetCost, actualCost, description, createBy, createTime, editBy, editTime}
+		values
+		(#{id},#{owner},#{type},#{name},#{state},#{startDate},#{endDate},#{budgetCost},#{actualCost},#{description},#{createBy},#{createTime},#{editBy},#{editTime})
+	</insert>
+	
+	
 
 
 </mapper>

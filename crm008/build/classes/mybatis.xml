@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<package name="com.bjpowernode.crm.settings.dictionary.domain" />
 		<package name="com.bjpowernode.crm.settings.qx.user.domain"/>
 		<package name="com.bjpowernode.crm.settings.dept.domain"/>
-		<package name="com.bjpowernode.crm.workbench.activity.domain.MarketActivity"/>
+		<package name="com.bjpowernode.crm.workbench.activity.domain"/>
 		
 	</typeAliases>
 	<environments default="development">

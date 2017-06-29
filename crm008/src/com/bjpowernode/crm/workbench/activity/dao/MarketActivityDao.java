@@ -2,8 +2,13 @@ package com.bjpowernode.crm.workbench.activity.dao;
 
 import com.bjpowernode.crm.workbench.activity.domain.MarketActivity;
 
+/**
+ * MarketActivityDao
+ * @author LauShuaichen
+ *
+ */
 public interface MarketActivityDao {
 	
-	void insert(MarketActivity marketActivity);
+	int insertCreateMarketActivity(MarketActivity marketActivity);
 
 }
