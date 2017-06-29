@@ -2,7 +2,7 @@ package com.bjpowernode.crm.workbench.activity.service;
 
 import java.util.Map;
 
-import com.bjpowernode.crm.commons.vo.PainationVO;
+import com.bjpowernode.crm.commons.vo.PaginationVO;
 import com.bjpowernode.crm.workbench.activity.domain.MarketActivity;
 
 /**
@@ -24,5 +24,5 @@ public interface MarketActivityService {
 	 * @param map
 	 * @return
 	 */
-	PainationVO<MarketActivity> queryMarketActivityForPageByCondition(Map<String, Object>map);
+	PaginationVO<MarketActivity> queryMarketActivityForPageByCondition(Map<String, Object>map);
 }

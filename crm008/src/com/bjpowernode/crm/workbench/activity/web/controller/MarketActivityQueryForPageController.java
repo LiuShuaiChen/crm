@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bjpowernode.crm.commons.vo.PainationVO;
+import com.bjpowernode.crm.commons.vo.PaginationVO;
 import com.bjpowernode.crm.utils.ServiceFactory;
 import com.bjpowernode.crm.workbench.activity.domain.MarketActivity;
 import com.bjpowernode.crm.workbench.activity.service.MarketActivityService;
@@ -32,7 +32,7 @@ public class MarketActivityQueryForPageController extends HttpServlet {
 		System.out
 				.println("com.bjpowernode.crm.workbench.activity.web.controller.MarketActivityQueryForPageController");
 		// 获取参数
-		String pageNoStr = request.getParameter("paegNo");
+		String pageNoStr = request.getParameter("pageNo");
 		String pageSizeStr = request.getParameter("pageSize");
 		String name = request.getParameter("name");
 		String owner = request.getParameter("owner");
@@ -68,16 +68,15 @@ public class MarketActivityQueryForPageController extends HttpServlet {
 		// 调用service方法 查询市场活动
 		MarketActivityService marketActivityService = (MarketActivityService) ServiceFactory
 				.getService(new MarketActivityServiceImpl());
-		PainationVO<MarketActivity> vo = marketActivityService.queryMarketActivityForPageByCondition(map);
+		PaginationVO<MarketActivity> vo = marketActivityService.queryMarketActivityForPageByCondition(map);
 
 		// 把vo转换成json对象
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(vo);
 		
-		System.out.println(json);
 
 		request.setAttribute("data", json);
-		request.getRequestDispatcher("/data.json").forward(request, response);
+		request.getRequestDispatcher("/data.jsp").forward(request, response);
 	}
 
 	/**

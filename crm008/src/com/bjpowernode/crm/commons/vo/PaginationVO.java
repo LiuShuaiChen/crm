@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @param <T>
  */
-public class PainationVO<T> {
+public class PaginationVO<T> {
 
 	private long totalCount;
 

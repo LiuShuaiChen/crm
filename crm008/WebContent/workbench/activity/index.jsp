@@ -236,8 +236,8 @@
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="create-marketActivityState">
 								  <option></option>
-								  <c:if test="${not empty activityStateList }">
-								  	<c:forEach var="as" items="${activityStateList }">
+								  <c:if test="${not empty acitivityStatusList }">
+								  	<c:forEach var="as" items="${acitivityStatusList }">
 								  		<option value="${as.id }">${as.text }</option>
 								  	</c:forEach>
 								  </c:if>
@@ -473,8 +473,8 @@
 				      <div class="input-group-addon">状态</div>
 					  <select class="form-control" id="query-state">
 					  	<option></option>
-					    <c:if test="${not empty activityStateList }">
-					      	<c:forEach var="as" items="${activityStateList }">
+					    <c:if test="${not empty acitivityStatusList }">
+					      	<c:forEach var="as" items="${acitivityStatusList }">
 					      		<option value="${as.id }">${as.text }</option>
 					      	</c:forEach>
 					    </c:if>

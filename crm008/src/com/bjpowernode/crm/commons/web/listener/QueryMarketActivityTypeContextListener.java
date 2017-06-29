@@ -33,10 +33,10 @@ public class QueryMarketActivityTypeContextListener implements ServletContextLis
          System.out.println("com.bjpowernode.crm.commons.web.listener.QueryMarketActivityTypeContextListener");
          // 调用service  查询市场活动
          DictionaryValueService dictionaryValueService = (DictionaryValueService) ServiceFactory.getService(new DictionaryValueServiceImpl());
-         List<DictionaryValue> aictivityTypeList = dictionaryValueService.queryDicValueByType("marketActivityType");
+         List<DictionaryValue> activityTypeList = dictionaryValueService.queryDicValueByType("marketActivityType");
          // 把aictivityTypeList 保存到context中 
          ServletContext servletContext = sce.getServletContext();
-         servletContext.setAttribute("aictivityTypeList", aictivityTypeList);
+         servletContext.setAttribute("activityTypeList", activityTypeList);
     }
 	
 }
