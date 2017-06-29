@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper
 	namespace="com.bjpowernode.crm.workbench.activity.dao.MarketActivityDao">
 
-	<!-- void insertCreateMarketActivity(MarketActivity marketActivity); -->
-	<insert id="insertCreateMarketActivity" parameterType="marketActivity">
+	<!-- int insertCreateMarketActivity(MarketActivity marketActivity); -->
+	<insert id="insertCreateMarketActivity" parameterType="MarketActivity">
 		insert into tbl_marketing_activities 
 		{id, owner, type, name, state, startDate, endDate, budgetCost, actualCost, description, createBy, createTime, editBy, editTime}
 		values

@@ -62,6 +62,17 @@
 $(function(){
 	
 	$("#createActivityBtn").click(function(){
+		
+		$("#create-marketActivityOwner").val("");
+		$("#create-marketActivityType").val("");
+		$("#create-marketActivityName").val("");
+		$("#create-marketActivityState").val("");
+		$("#create-startTime").val("");
+		$("#create-endTime").val("");
+		$("#create-actualCost").val("");
+		$("#create-budgetCost").val("");
+		$("#create-describe").val("");
+		
 		$.ajax({
 			url:'workbench/activity/market/create.do',
 			type:'post',
