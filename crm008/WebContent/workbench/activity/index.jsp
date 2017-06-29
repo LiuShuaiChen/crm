@@ -62,7 +62,7 @@
 <script type="text/javascript">
 $(function(){
 	
-	$("#createActivityBtn").click(function{
+	$("#createActivityBtn").click(function(){
 		$.ajax({
 			url:'workbench/activity/market/create.do',
 			type:'post',
@@ -73,7 +73,7 @@ $(function(){
 					if (obj.id == '$user.id') {
 						htmlStr += "<option value= '"+obj.id+"' selected>" + obj.name + "</option>";
 					}else {
-						htmlStr += "<option value= '"+obj.id+"'>" + obj.name + "</option>
+						htmlStr += "<option value= '"+obj.id+"'>" + obj.name + "</option>";
 					}
 				});
 				
@@ -82,6 +82,53 @@ $(function(){
 				$("#createActivityModal").modal("show");
 			}
 		});
+	});
+	
+	$("#saveActivityBtn").click(function(){
+		//收集参数
+		var owner = $("#create-marketActivityOwner").val();
+		var type = $("#create-marketActivityType").val();
+		var name = $("#create-marketActivityName").val();
+		var state = $("#create-marketActivityState").val();
+		var startDate = $("#create-startTime").val();
+		var endDate = $("#create-endTime").val();
+		var actualCost = $("#create-actualCost").val();
+		var budgetCost = $("#create-budgetCost").val();
+		var description = $("#create-describe").val();
+		
+		//表单验证 ** 名称不能为空**
+		if (name == null || name.length == 0) {
+			alert("名称不能为空");
+			return;
+		}
+		
+		//表单验证 ** 验证结束日期不能比开始日期小 **
+		if (startDate != null && startDate.length > 0) {
+			if (endDate != null && endDate.length > 0) {
+				if (startDate > endDate) {
+					alert("结束日期不能在开始日期前")
+					return;
+				}
+			}
+		}
+		
+		var reqExp = /^([1-9][0-9]*||0)$/;
+		if (!reqExp.test(budgetCost)) {
+			alert("预算成本只能为非负整数");
+			return;
+		}
+		
+		if (!reqExp.test(actualCost)) {
+			alert("实际成本只能为非负整数");
+			return;
+		}
+		
+		//发送请求
+		$.ajax({
+			
+		});
+		
+		
 	});
 	
 });
@@ -178,7 +225,7 @@ $(function(){
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
+					<button type="button" id="saveActivityBtn" class="btn btn-primary" data-dismiss="modal">保存</button>
 				</div>
 			</div>
 		</div>
