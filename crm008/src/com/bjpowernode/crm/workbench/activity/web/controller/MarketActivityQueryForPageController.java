@@ -22,7 +22,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @WebServlet("/workbench/activity/queryMarketActivityForPage.do")
 public class MarketActivityQueryForPageController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -57,14 +56,14 @@ public class MarketActivityQueryForPageController extends HttpServlet {
 
 		long beginNo = (pageNo - 1) * pageSize;
 
+		map.put("beginNo", beginNo);
+		map.put("pageSize", pageSize);
 		map.put("name", name);
 		map.put("owner", owner);
 		map.put("type", type);
 		map.put("state", state);
 		map.put("startDate", startDate);
 		map.put("endDate", endDate);
-		map.put("beginNo", beginNo);
-		map.put("pageSize", pageSize);
 
 		// 调用service方法 查询市场活动
 		MarketActivityService marketActivityService = (MarketActivityService) ServiceFactory
@@ -77,7 +76,6 @@ public class MarketActivityQueryForPageController extends HttpServlet {
 		
 		System.out.println(json);
 
-		response.setContentType("text/json;charset=utf-8");
 		request.setAttribute("data", json);
 		request.getRequestDispatcher("/data.json").forward(request, response);
 	}

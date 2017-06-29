@@ -1,18 +1,16 @@
-    <%
-		String path = request.getContextPath();
-		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-		System.out.println("/crm008/WebContent/workbench/activity/index.jsp");
-		
-    %>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"
+    import="com.bjpowernode.crm.settings.qx.user.domain.User"
+    %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 	request.getServerPort() + request.getContextPath() + "/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <base href="<%=basePath%>">
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 
 <link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 <link href="jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
@@ -53,132 +51,100 @@
 	        e.stopPropagation();
 	    });
 		
-	});
-	
-	
-
-
-$(function(){
-	
-	//创建市场活动
-	$("#createActivityBtn").click(function(){
 		
-		$("#create-marketActivityOwner").val("");
-		$("#create-marketActivityType").val("");
-		$("#create-marketActivityName").val("");
-		$("#create-marketActivityState").val("");
-		$("#create-startTime").val("");
-		$("#create-endTime").val("");
-		$("#create-actualCost").val("");
-		$("#create-budgetCost").val("");
-		$("#create-describe").val("");
-		
-		$.ajax({
-			url:'workbench/activity/market/create.do',
-			type:'post',
-			success:function(data){
-				//设置所有者
-				var htmlStr = "";
-				$.each(data,function(index,obj){
-					if (obj.id == '$user.id') {
-						htmlStr += "<option value= '"+obj.id+"' selected>" + obj.name + "</option>";
-					}else {
-						htmlStr += "<option value= '"+obj.id+"'>" + obj.name + "</option>";
-					}
-				});
-				
-				$("#create-marketActivityOwner").html(htmlStr);
-				//显示模态窗口
-				$("#createActivityModal").modal("show");
-			}
+		//给"创建"按钮添加单击事件
+		$("#createActivityBtn").click(function(){
+			$.ajax({
+				url:'workbench/activity/createMarketActivity.do',
+				type:'post',
+				success:function(data){
+					//设置所有者
+					var htmlStr="";
+					$.each(data,function(index,obj){
+						if(obj.id=='${user.id}'){
+							htmlStr+="<option value='"+obj.id+"' selected>"+obj.name+"</option>";
+						}else{
+							htmlStr+="<option value='"+obj.id+"'>"+obj.name+"</option>";
+						}
+					});
+					$("#create-marketActivityOwner").html(htmlStr);
+					//显示模态窗口
+					$("#createActivityModal").modal("show");
+				}
+			});
 		});
 		
-	});
-	
-	//保存市场活动
-	$("#saveActivityBtn").click(function(){
-		//收集参数
-		var owner = $("#create-marketActivityOwner").val();
-		var type = $("#create-marketActivityType").val();
-		var name = $("#create-marketActivityName").val();
-		var state = $("#create-marketActivityState").val();
-		var startDate = $("#create-startTime").val();
-		var endDate = $("#create-endTime").val();
-		var actualCost = $("#create-actualCost").val();
-		var budgetCost = $("#create-budgetCost").val();
-		var description = $("#create-describe").val();
-		
-		//表单验证 ** 名称不能为空**
-		if (name == null || name.length == 0) {
-			alert("名称不能为空");
-			return;
-		}
-		
-		//表单验证 ** 验证结束日期不能比开始日期小 **
-		if (startDate != null && startDate.length > 0) {
-			if (endDate != null && endDate.length > 0) {
-				if (startDate > endDate) {
-					alert("结束日期不能在开始日期前")
+		//给"保存"按钮添加单击事件
+		$("#saveCreateActivityBtn").click(function(){
+			//收集参数
+			var owner=$("#create-marketActivityOwner").val();
+			var type=$("#create-marketActivityType").val();
+			var name=$.trim($("#create-marketActivityName").val());
+			var state=$("#create-marketActivityState").val();
+			var startDate=$("#create-startDate").val();
+			var endDate=$("#create-endDate").val();
+			var budgetCost=$.trim($("#create-budgetCost").val());
+			var actualCost=$.trim($("#create-actualCost").val());
+			var description=$.trim($("#create-describe").val());
+			//表单验证
+			if(name==null||name.length==0){
+				alert("名称不能为空！");
+				return;
+			}
+			if(startDate!=null&&startDate.length>0&&endDate!=null&&endDate.length>0){
+				if(startDate>endDate){//yyyy-MM-dd
+					alert("结束日期不能比开始日期小！");
 					return;
 				}
 			}
-		}
-		
-		var reqExp = /^([1-9][0-9]*||0)$/;
-		if (!reqExp.test(budgetCost)) {
-			alert("预算成本只能为非负整数");
-			return;
-		}
-		
-		if (!reqExp.test(actualCost)) {
-			alert("实际成本只能为非负整数");
-			return;
-		}
-
-		//发送请求
-		$.ajax({
-			url:'workbench/activity/market/save.do',
-			data:{
-				owner:owner,
-				type:type,
-				name:name,
-				state:state,
-				startDate:startDate,
-				endDate:endDate,
-				budgetCost:budgetCost,
-				actualCost:actualCost,
-				description:description
-			},
-			type:'post',
-			success:function(data){
-				if (data.success) {
-					//关闭模态窗口
-					$("#createActivityModal").modal("hide");
-					//刷新列表
-					display(1,5);
-				}else {
-					alert("创建失败");
-					$("#createActivityModal").modal("show");
-				}
+			var regExp=/^([1-9][0-9]*||0)$/;
+			if(!regExp.test(budgetCost)){
+				alert("预算成本只能为非负整数！");
+				return;
 			}
-			
-			
+			if(!regExp.test(actualCost)){
+				alert("实际成本只能为非负整数！");
+				return;
+			}
+			//发送请求
+			$.ajax({
+				url:'workbench/activity/saveCreateMarketActivity.do',
+				data:{
+					owner:owner,
+					type:type,
+					name:name,
+					state:state,
+					startDate:startDate,
+					endDate:endDate,
+					budgetCost:budgetCost,
+					actualCost:actualCost,
+					description:description
+				},
+				type:'post',
+				success:function(data){
+					if(data.success){
+						//关闭模态窗口
+						$("#createActivityModal").modal("hide");
+						//刷新列表
+						display(1,5);
+					}else{
+						alert("创建失败！");
+						$("#createActivityModal").modal("show");
+					}
+				}
+			});
+		});
+		
+		//当页面加载成功之后，显示第一页数据
+		display(1,5);
+		
+		//给"查询"按钮添加单击事件
+		$("#queryActivityBtn").click(function(){
+			display(1,5);
 		});
 	});
 	
-	//页面加载成功之后,显示首页数据
-	display(1,5);
-	
-	//当页面加载成功之后 显示第一页数据
-	$("#queryActivityButton").click(function(){
-		display(1,5);
-	});
-	
-});
-
-	// 市场活动列表显示
 	function display(pageNo,pageSize){
-		alert(111);
 		$.ajax({
 			url:'workbench/activity/queryMarketActivityForPage.do',
 			data:{
@@ -194,41 +160,38 @@ $(function(){
 			type:'post',
 			success:function(data){
 				//设置市场活动列表
-				var htmlStr = "";
+				var htmlStr="";
 				$.each(data.dataList,function(index,obj){
-				htmlStr += "<tr>";
-				htmlStr += "<td><input value='"+obj.id+"' type = 'checkbox'/></td>";
-				htmlStr += "<td><a style = 'text-decoration : none; cursor : pointer; 'onclick = 'window.location.href = \"detail.html\";'>"+obj.name+"</a></td>";
-				htmlStr += "<td>"+obj.type+"</td>";
-				htmlStr += "<td>"+obj.state+"</td>";
-				htmlStr += "<td>"+obj.startDate+"</td>";
-				htmlStr += "<td>"+obj.endDate+"</td>";
-				htmlStr += "<td>"+obj.owner+"</td>";
-				htmlStr += "<td>"+obj.budgetCost+"</td>";
-				htmlStr += "<td>"+obj.actualCost+"</td>";
-				htmlStr += "<td>"+obj.createBy+"</td>";
-				htmlStr += "<td>"+obj.createTime+"</td>";
-				htmlStr += "<td>"+obj.editBy+"</td>";
-				htmlStr += "<td>"+obj.editTime+"</td>";
-				htmlStr += "<td>"+obj.description+"</td>";
-				htmlStr += "</tr>";
+					htmlStr+="<tr>";
+					htmlStr+="<td><input value='"+obj.id+"' type='checkbox' /></td>";
+					htmlStr+="<td><a style='text-decoration: none; cursor: pointer;' onclick='window.location.href=\"detail.html\";'>"+obj.name+"</a></td>";
+					htmlStr+="<td>"+obj.type+"</td>";
+					htmlStr+="<td>"+obj.state+"</td>";
+					htmlStr+="<td>"+obj.startDate+"</td>";
+					htmlStr+="<td>"+obj.endDate+"</td>";
+					htmlStr+="<td>"+obj.owner+"</td>";
+					htmlStr+="<td>"+obj.budgetCost+"</td>";
+					htmlStr+="<td>"+obj.actualCost+"</td>";
+					htmlStr+="<td>"+obj.createBy+"</td>";
+					htmlStr+="<td>"+obj.createTime+"</td>";
+					htmlStr+="<td>"+obj.editBy+"</td>";
+					htmlStr+="<td>"+obj.editTime+"</td>";
+					htmlStr+="<td>"+obj.description+"</td>";
+					htmlStr+="</tr>";
 				});
-				
 				$("#activityListTBody").html(htmlStr);
-				
 				//设置总页数
 				$("#totalCount").html(data.totalCount);
 				//隔行换颜色
-				$("#activityListTBody tr even").addClass("active");
+				$("#activityListTBody tr:even").addClass("active");
 			}
 		});
 	}
-
 </script>
-<title>Insert title here</title>
 </head>
 <body>
-<!-- 创建市场活动的模态窗口 -->
+
+	<!-- 创建市场活动的模态窗口 -->
 	<div class="modal fade" id="createActivityModal" role="dialog">
 		<div class="modal-dialog" role="document" style="width: 85%;">
 			<div class="modal-content">
@@ -246,7 +209,7 @@ $(function(){
 							<label for="create-marketActivityOwner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="create-marketActivityOwner">
-								 <!--  <option>zhangsan123123</option>
+								  <!-- <option>zhangsan</option>
 								  <option>lisi</option>
 								  <option>wangwu</option> -->
 								</select>
@@ -255,8 +218,8 @@ $(function(){
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="create-marketActivityType">
 								  <option></option>
-								  <c:if test="${!empty aictivityTypeList }">
-								  	<c:forEach var="at" items="${aictivityTypeList }">
+								  <c:if test="${not empty activityTypeList }">
+								  	<c:forEach var="at" items="${activityTypeList }">
 								  		<option value="${at.id }">${at.text }</option>
 								  	</c:forEach>
 								  </c:if>
@@ -273,8 +236,8 @@ $(function(){
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="create-marketActivityState">
 								  <option></option>
-								  <c:if test="${!empty acitivityStatusList }">
-								  	<c:forEach var="as" items="${acitivityStatusList }">
+								  <c:if test="${not empty activityStateList }">
+								  	<c:forEach var="as" items="${activityStateList }">
 								  		<option value="${as.id }">${as.text }</option>
 								  	</c:forEach>
 								  </c:if>
@@ -285,11 +248,11 @@ $(function(){
 						<div class="form-group">
 							<label for="create-startTime" class="col-sm-2 control-label">开始日期</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-startTime">
+								<input type="text" class="form-control" id="create-startDate">
 							</div>
 							<label for="create-endTime" class="col-sm-2 control-label">结束日期</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-endTime">
+								<input type="text" class="form-control" id="create-endDate">
 							</div>
 						</div>
 						
@@ -316,7 +279,7 @@ $(function(){
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" id="saveActivityBtn" class="btn btn-primary" data-dismiss="modal">保存</button>
+					<button id="saveCreateActivityBtn" type="button" class="btn btn-primary">保存</button>
 				</div>
 			</div>
 		</div>
@@ -340,9 +303,9 @@ $(function(){
 							<label for="edit-marketActivityOwner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="edit-marketActivityOwner">
-								 <!--  <option>zhangsan</option>
+								  <option>zhangsan</option>
 								  <option>lisi</option>
-								  <option>wangwu</option> -->
+								  <option>wangwu</option>
 								</select>
 							</div>
 							<label for="edit-marketActivityType" class="col-sm-2 control-label">类型</label>
@@ -478,7 +441,7 @@ $(function(){
 				  <div class="form-group">
 				    <div class="input-group">
 				      <div class="input-group-addon">名称</div>
-				      <input class="form-control" type="text" id="query-name" >
+				      <input class="form-control" type="text" id="query-name">
 				    </div>
 				  </div>
 				  
@@ -493,8 +456,8 @@ $(function(){
 				    <div class="input-group">
 				      <div class="input-group-addon">类型</div>
 					  <select class="form-control" id="query-type">
-					  <option></option>
-					  	   <c:if test="${not empty activityTypeList }">
+					  	  <option></option>
+					      <c:if test="${not empty activityTypeList }">
 					      	<c:forEach var="at" items="${activityTypeList }">
 					      		<option value="${at.id }">${at.text }</option>
 					      	</c:forEach>
@@ -510,11 +473,11 @@ $(function(){
 				      <div class="input-group-addon">状态</div>
 					  <select class="form-control" id="query-state">
 					  	<option></option>
-					    <c:if test="${not empty acitivityStatusList }">
-					      	<c:forEach var="as" items="${acitivityStatusList }">
+					    <c:if test="${not empty activityStateList }">
+					      	<c:forEach var="as" items="${activityStateList }">
 					      		<option value="${as.id }">${as.text }</option>
 					      	</c:forEach>
-					      </c:if>
+					    </c:if>
 					  </select>
 				    </div>
 				  </div>
@@ -533,13 +496,13 @@ $(function(){
 				    </div>
 				  </div>
 				  
-				  <button type="button" id="queryActivityButton" class="btn btn-default">查询</button>
+				  <button id="queryActivityBtn" type="button" class="btn btn-default">查询</button>
 				  
 				</form>
 			</div>
 			<div class="btn-toolbar" role="toolbar" style="background-color: #F7F7F7; height: 50px; position: relative;top: 5px;">
 				<div class="btn-group" style="position: relative; top: 18%;">
-				  <button type="button" id="createActivityBtn" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> 创建</button>
+				  <button id="createActivityBtn" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> 创建</button>
 				  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editActivityModal"><span class="glyphicon glyphicon-pencil"></span> 修改</button>
 				  <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span> 删除</button>
 				</div>
@@ -601,11 +564,41 @@ $(function(){
 						</tr>
 					</thead>
 					<tbody id="activityListTBody">
-						
+						<!-- <tr class="active">
+							<td><input type="checkbox" /></td>
+							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.html';">发传单</a></td>
+							<td>广告</td>
+							<td>激活的</td>
+							<td>2020-10-10</td>
+							<td>2020-10-20</td>
+							<td>zhangsan</td>
+							<td>5,000</td>
+							<td>4,000</td>
+							<td>zhangsan</td>
+							<td>2017-01-18 10:10:10</td>
+							<td>zhangsan</td>
+							<td>2017-01-19 10:10:10</td>
+							<td>发传单....</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" /></td>
+							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.html';">发传单</a></td>
+							<td>广告</td>
+							<td>激活的</td>
+							<td>2020-10-10</td>
+							<td>2020-10-20</td>
+							<td>zhangsan</td>
+							<td>5,000</td>
+							<td>4,000</td>
+							<td>zhangsan</td>
+							<td>2017-01-18 10:10:10</td>
+							<td>zhangsan</td>
+							<td>2017-01-19 10:10:10</td>
+							<td>发传单....</td>
+						</tr> -->
 					</tbody>
 				</table>
 			</div>
-
 			
 			<div style="height: 50px; position: relative;top: 30px;">
 				<div>
@@ -642,8 +635,8 @@ $(function(){
 				</div>
 			</div>
 			
-			
 		</div>
+		
 	</div>
 </body>
 </html>

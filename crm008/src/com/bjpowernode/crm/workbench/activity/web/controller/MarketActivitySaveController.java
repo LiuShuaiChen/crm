@@ -34,7 +34,7 @@ public class MarketActivitySaveController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		System.out.println("/workbench/activity/market/save.do");
+		System.out.println("/workbench/activity/saveCreateMarketActivity.do");
 		
 //		String id = request.getParameter("id");
 		String owner = request.getParameter("owner");	//所有者
