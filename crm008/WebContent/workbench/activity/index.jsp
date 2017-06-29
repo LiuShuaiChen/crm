@@ -1,7 +1,7 @@
     <%
 		String path = request.getContextPath();
 		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-		System.out.println("/crm006/WebContent/workbench/activity/index.jsp");
+		System.out.println("/crm008/WebContent/workbench/activity/index.jsp");
 		
     %>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -54,7 +54,6 @@
 	    });
 		
 	});
-	
 	
 	
 </script>
@@ -125,12 +124,32 @@ $(function(){
 		
 		//发送请求
 		$.ajax({
+			url:'workbench/activity/market/save.do',
+			data:{
+				owner:owner,
+				type:type,
+				name:name,
+				state:state,
+				startDate:startDate,
+				endDate:endDate,
+				budgetCost:budgetCost,
+				actualCost:actualCost,
+				description:description
+			},
+			type:'post',
+			success:function(data){
+				if (data.success) {
+					//关闭模态窗口
+					$("#createActivityModal").modal("hide");
+				}else {
+					alert("创建失败");
+					$("#createActivityModal").modal("show");
+				}
+			}
+			
 			
 		});
-		
-		
 	});
-	
 });
 
 </script>
