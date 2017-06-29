@@ -68,7 +68,19 @@ $(function(){
 			type:'post',
 			success:function(data){
 				//设置所有者
-			}			
+				var htmlStr = "";
+				$.each(data,function(index,obj){
+					if (obj.id == '$user.id') {
+						htmlStr += "<option value= '"+obj.id+"' selected>" + obj.name + "</option>";
+					}else {
+						htmlStr += "<option value= '"+obj.id+"'>" + obj.name + "</option>
+					}
+				});
+				
+				$("#create-marketActivityOwner").html(htmlStr);
+				//显示模态窗口
+				$("#createActivityModal").modal("show");
+			}
 		});
 	});
 	
