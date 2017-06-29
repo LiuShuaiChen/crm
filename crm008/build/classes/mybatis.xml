@@ -5,9 +5,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 <configuration>
 	<typeAliases>
 		<package name="com.bjpowernode.crm.settings.dictionary.domain" />
-		
 		<package name="com.bjpowernode.crm.settings.qx.user.domain"/>
 		<package name="com.bjpowernode.crm.settings.dept.domain"/>
+		<package name="com.bjpowernode.crm.workbench.activity.domain.MarketActivity"/>
 		
 	</typeAliases>
 	<environments default="development">
@@ -26,6 +26,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="com/bjpowernode/crm/settings/dictionary/dao/DictionaryValueDao.xml" />
 		<mapper resource="com/bjpowernode/crm/settings/qx/user/dao/UserDao.xml"/>
 		<mapper resource="com/bjpowernode/crm/settings/dept/dao/DeptDao.xml"/>
+		<mapper resource="com/bjpowernode/crm/workbench/activity/dao/MarketActivityDao.xml"/>
 		
 	</mappers>
 	
