@@ -50,5 +50,15 @@ public class DictionaryValueServiceImpl implements DictionaryValueService {
 		return dictionaryValueDao.queryDicValueByType(typeCode);
 	}
 
+	/**
+	 * 根据等级 查询字典值列表
+	 */
+	@Override
+	public List<DictionaryValue> queryDicValueBygrade(String grade) {
+		return dictionaryValueDao.queryDicValueByType(grade);
+	}
+	
+	
+
 
 }

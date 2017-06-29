@@ -29,6 +29,4 @@ public interface DictionaryValueDao {
 	 */
 	List<DictionaryValue> queryDicValueByType(String typeCode);
 	
-
-
 }

@@ -26,7 +26,17 @@ public interface DictionaryValueService {
 	 */
 	List<DictionaryValue> queryDicValueByType(String typeCode);
 	
+	/**
+	 * 根据 *等级* 查询数据字典值列表
+	 * @param grade
+	 * @return
+	 */
+	List<DictionaryValue> queryDicValueBygrade(String grade);
+
+	
 	
 	List<DictionaryValue> getByAll();
+	
+	
 
 }
