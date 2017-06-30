@@ -20,6 +20,18 @@
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
 
+<!--  JQUERY -->
+<script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
+ 
+<!--  BOOTSTRAP -->
+<link rel="stylesheet" type="text/css" href="jquery/bootstrap_3.3.0/css/bootstrap.min.css">
+<script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+ 
+<!--  PAGINATION plugin -->
+<link rel="stylesheet" type="text/css" href="jquery/bs_pagination/jquery.bs_pagination.min.css">
+<script type="text/javascript" src="jquery/bs_pagination/jquery.bs_pagination.min.js"></script>
+<script type="text/javascript" src="jquery/bs_pagination/localization/en.js"></script>
+
 <script type="text/javascript">
 
 	$(function(){
@@ -50,6 +62,9 @@
 			//防止下拉菜单消失
 	        e.stopPropagation();
 	    });
+		
+		
+		
 		
 		
 		//给"创建"按钮添加单击事件
@@ -126,7 +141,7 @@
 						//关闭模态窗口
 						$("#createActivityModal").modal("hide");
 						//刷新列表
-						display(1,5);
+						display(1,$("#pageDiv").bs_pagination('getOption','rowPerPage'));
 					}else{
 						alert("创建失败！");
 						$("#createActivityModal").modal("show");
@@ -140,7 +155,7 @@
 		
 		//给"查询"按钮添加单击事件
 		$("#queryActivityBtn").click(function(){
-			display(1,5);
+			display(1,$("#pageDiv").bs_pagination('getOption','rowPerPage'));
 		});
 	});
 	
@@ -180,10 +195,40 @@
 					htmlStr+="</tr>";
 				});
 				$("#activityListTBody").html(htmlStr);
-				//设置总页数
-				$("#totalCount").html(data.totalCount);
+				
+				/* //设置总页数  分页功能由插件取代
+				$("#totalCount").html(data.totalCount); */
+				
+				
 				//隔行换颜色
 				$("#activityListTBody tr:even").addClass("active");
+				
+				//计算总页数
+				var totalPage = 1;
+				if (data.totalCount % pageSize == 0) {
+					totalPage = (data.totalCount/pageSize) + 1
+					
+				}
+				
+				$("#pageDiv").bs_pagination({
+					currentPage: pageNo,//当前页号
+					rowsPerPage: pageSize,//每页显示的条数
+				    totalPages: totalPage,//总页数
+				    totalRows: data.totalCount,//总记录条数
+				    
+				    visiblePageLinks: 3,//显示的卡片数
+				    
+				    showGoToPage: true,//是否显示"跳转到第几页"
+				    showRowsPerPage: true,//是否显示"每页显示多少条"
+				    showRowsInfo: true,//是否显示记录信息
+				    
+				    //当页号改变的时候，执行的回调函数。
+				    onChangePage: function(event,obj) { // returns page_num and rows_per_page after a link has clicked
+						//alert(obj.currentPage);//将要转向的页号
+				    	//alert(obj.rowsPerPage);//将要显示的 每页条数
+				    	display(obj,currentPage,obj.rowsPerPage);
+				    }
+				  });
 			}
 		});
 	}
@@ -564,76 +609,13 @@
 						</tr>
 					</thead>
 					<tbody id="activityListTBody">
-						<!-- <tr class="active">
-							<td><input type="checkbox" /></td>
-							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.html';">发传单</a></td>
-							<td>广告</td>
-							<td>激活的</td>
-							<td>2020-10-10</td>
-							<td>2020-10-20</td>
-							<td>zhangsan</td>
-							<td>5,000</td>
-							<td>4,000</td>
-							<td>zhangsan</td>
-							<td>2017-01-18 10:10:10</td>
-							<td>zhangsan</td>
-							<td>2017-01-19 10:10:10</td>
-							<td>发传单....</td>
-						</tr>
-						<tr>
-							<td><input type="checkbox" /></td>
-							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.html';">发传单</a></td>
-							<td>广告</td>
-							<td>激活的</td>
-							<td>2020-10-10</td>
-							<td>2020-10-20</td>
-							<td>zhangsan</td>
-							<td>5,000</td>
-							<td>4,000</td>
-							<td>zhangsan</td>
-							<td>2017-01-18 10:10:10</td>
-							<td>zhangsan</td>
-							<td>2017-01-19 10:10:10</td>
-							<td>发传单....</td>
-						</tr> -->
+						
 					</tbody>
 				</table>
 			</div>
 			
-			<div style="height: 50px; position: relative;top: 30px;">
-				<div>
-					<button type="button" class="btn btn-default" style="cursor: default;">共<b id="totalCount">50</b>条记录</button>
-				</div>
-				<div class="btn-group" style="position: relative;top: -34px; left: 110px;">
-					<button type="button" class="btn btn-default" style="cursor: default;">显示</button>
-					<div class="btn-group">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-							10
-							<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">20</a></li>
-							<li><a href="#">30</a></li>
-						</ul>
-					</div>
-					<button type="button" class="btn btn-default" style="cursor: default;">条/页</button>
-				</div>
-				<div style="position: relative;top: -88px; left: 285px;">
-					<nav>
-						<ul class="pagination">
-							<li class="disabled"><a href="#">首页</a></li>
-							<li class="disabled"><a href="#">上一页</a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">下一页</a></li>
-							<li class="disabled"><a href="#">末页</a></li>
-						</ul>
-					</nav>
-				</div>
-			</div>
+			<!-- 分页 页码插件  容器-->
+			<div id="pageDiv"></div>
 			
 		</div>
 		
