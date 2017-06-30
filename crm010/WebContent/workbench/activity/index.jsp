@@ -26,6 +26,10 @@
 <script type="text/javascript" src="jquery/bs_pagination/jquery.bs_pagination.min.js"></script>
 <script type="text/javascript" src="jquery/bs_pagination/localization/en.js"></script>
 
+<link rel="stylesheet" type="text/css" href="jquery/datetimepicker/css/bootstrap-datetimepicker.css">
+<script type="text/javascript" src="jquery/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="jquery/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
 <script type="text/javascript">
 
 	$(function(){
@@ -63,6 +67,23 @@
 
 
 $(function(){
+	
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~时间插件 ~~~~~~~开始~~~~~~~~~~~~~~~~~~~~~~~~~~~  */  
+	
+	//时间插件
+	$("#create-startTime,#create-endTime,#edit-startTime,#edit-endTime,#query-startDate,#query-endDate").datetimepicker({
+		  language: 'zh-CN',//显示中文
+		  format: 'yyyy-mm-dd',//显示格式
+		  minView: "month",//设置只显示到月份
+		  initialDate: new Date(),//初始化当前日期
+		  autoclose: true,//选中自动关闭
+		  todayBtn: true,//显示今日按钮
+		  clearBtn:true//显示清空按钮
+	})
+	
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~时间插件 ~~~~~~~~~~~结束~~~~~~~~~~~~~~~~~~~~~~~~~~~  */  
+	
+	
 	
 	//创建市场活动
 	$("#createActivityBtn").click(function(){
@@ -400,12 +421,12 @@ $(function(){
 						
 						<div class="form-group">
 							<label for="create-startTime" class="col-sm-2 control-label">开始日期</label>
-							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-startTime">
+							<div class="col-sm-10" style="width: 300px;" >
+								<input type="text" class="form-control" id="create-startTime" readonly>
 							</div>
 							<label for="create-endTime" class="col-sm-2 control-label">结束日期</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-endTime">
+								<input type="text" class="form-control" id="create-endTime" readonly>
 							</div>
 						</div>
 						
@@ -632,14 +653,14 @@ $(function(){
 				  <div class="form-group">
 				    <div class="input-group">
 				      <div class="input-group-addon">开始日期</div>
-					  <input class="form-control" type="text" id="query-startDate" />
+					  <input class="form-control" type="text" id="query-startDate" readonly />
 				    </div>
 				  </div>
 				  
 				  <div class="form-group">
 				    <div class="input-group">
 				      <div class="input-group-addon">结束日期</div>
-					  <input class="form-control" type="text" id="query-endDate">
+					  <input class="form-control" type="text" id="query-endDate" readonly>
 				    </div>
 				  </div>
 				  
