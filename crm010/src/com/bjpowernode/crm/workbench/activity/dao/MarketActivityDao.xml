@@ -80,6 +80,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</where>
 	</select>
+	
+	
+	<!-- int deleteMarketActivityById(String[] ids); -->
+	<delete id="deleteMarketActivityById">
+		delete from tbl_marketing_activities where id in
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+
 
 </mapper>
 

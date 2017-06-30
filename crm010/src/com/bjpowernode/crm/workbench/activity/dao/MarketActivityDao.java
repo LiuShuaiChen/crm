@@ -32,5 +32,13 @@ public interface MarketActivityDao {
 	 * @return
 	 */
 	long queryTotalCountofMarketActivityByCondition(Map<String, Object>map);
+
+	
+	/**
+	 * 根据查找id批量删除市场活动
+	 * @param ids
+	 * @return
+	 */
+	int deleteMarketActivityById(String[] ids);
 	
 }

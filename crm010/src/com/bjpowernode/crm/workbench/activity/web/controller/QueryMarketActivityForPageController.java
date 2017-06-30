@@ -18,10 +18,10 @@ import com.bjpowernode.crm.workbench.activity.service.impl.MarketActivityService
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Servlet implementation class MarketActivityQueryForPageController
+ * Servlet implementation class QueryMarketActivityForPageController
  */
 @WebServlet("/workbench/activity/queryMarketActivityForPage.do")
-public class MarketActivityQueryForPageController extends HttpServlet {
+public class QueryMarketActivityForPageController extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse

@@ -44,4 +44,13 @@ public class MarketActivityServiceImpl implements MarketActivityService {
 		return vo;
 	}
 
+	/**
+	 * 根据查找id删除市场活动
+	 */
+	@Override
+	public int deleteMarketActivityByIds(String[] ids) {
+		return marketActivityDao.deleteMarketActivityById(ids);
+
+	}
+
 }

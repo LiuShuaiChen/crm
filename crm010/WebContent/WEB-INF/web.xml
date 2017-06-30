@@ -4,15 +4,4 @@
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
-  
-<!--   	
-查询市场活动
-	<servlet>
-		<servlet-name>queryMarketActivityForPageController</servlet-name>
-		<servlet-class>com.bjpowernode.crm.workbench.activity.web.controller.MarketActivityQueryForPageController</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>queryMarketActivityForPageController</servlet-name>
-		<url-pattern>/workbench/activity/queryMarketActivityForPage.do</url-pattern>
-	</servlet-mapping> -->
 </web-app>

@@ -85,7 +85,7 @@ $(function(){
 	
 	
 	
-	//创建市场活动
+	/********************** *********************创建市场活动 **********************************************/
 	$("#createActivityBtn").click(function(){
 		
 		/* 清空表单 */
@@ -120,8 +120,10 @@ $(function(){
 		});
 		
 	});
+	/********************** *********************创建市场活动 **********************************************/
 	
-	//保存市场活动
+	
+	/************** ********** ****************保存市场活动************* ***** ********************* */
 	$("#saveActivityBtn").click(function(){
 		//收集参数
 		var owner = $("#create-marketActivityOwner").val();
@@ -192,18 +194,26 @@ $(function(){
 		});
 	});
 	
+	/************** ********** ****************保存市场活动************* ***** ********************* */
 	
 	
 	
-	//页面加载成功之后,显示首页数据
+	
+	/* //*******页面加载成功之后,显示首页数据 ******* ********** *****************************/
 	display(1,5);
+	/* //*******页面加载成功之后,显示首页数据******* ********** **************************** */
 	
-	//当 "查询"按钮 添加 单击事件
+	
+	
+	
+	/** ********** ***************** //当 "查询"按钮 添加 单击事件 * ********** ******************/
 	$("#queryActivityButton").click(function(){
 		display(1,$("#pageNoDiv").bs_pagination('getOption', 'rowsPerPage'));
 	});
+	/** ********** ***************** //当 "查询"按钮 添加 单击事件 * ********** ******************/
 	
-	//当页面加载成功之后 "添加字段"中的所有checkBox都默认选中状态
+	
+	/********* ********************** *************当页面加载成功之后 "添加字段"中的所有checkBox都默认选中状态******** ************** */
 	$("#definedColumns input[type='checkbox']").prop("checked",true);
 	//添加字段 中的 所有checkbox 添加单击事件
 	$("#definedColumns input[type='checkbox']").click(function(){
@@ -213,13 +223,64 @@ $(function(){
 			$("#activityListTable td[name="+this.name+"]").hide();
 		}
 	});
+	/********* ********************** *************当页面加载成功之后 "添加字段"中的所有checkBox都默认选中状态******** ************** */
+	
+	
+	/************** 删除按钮  添加单击事件********************************************/
+	$("#deleteActivityBtn").click(function(){
+		//判断是否选中记录
+		var ids = $("#activityListTBody input[type='checkbox']:checked");
+		if (ids.size() == 0) {
+			alert("请选择要删除的市场活动");
+			return;
+		}
+		
+		if (window.confirm("确定要删除吗")) {
+			var idsStr = "";
+			$.each(ids,function(index,obj){
+				idsStr += "id=" + obj.value + "&";
+			});
+			$.ajax({
+				url:'workbench/activity/deleteMarketActivity.do',
+				data:idsStr.substr(0,idsStr.length-1),
+				type:'post',
+				success:function(data){
+					if (data.success) {
+						alert("删除成功");
+						display(1,$("#pageNoDiv").bs_pagination('getOption', 'rowsPerPage'));
+					}else {
+						alert("删除失败");
+					}
+				}
+			});
+		}
+		
+	});
+	/************** 删除按钮  添加单击事件********************************************/
+	
+	
+	/**************全选  单选***全选  单选***全选  单选*********全选  单选*********全选  单选**************全选  单选******/
+	//给全选按钮 添加单击事件
+	$("#chk_all").click(function(){
+		$("#activityListTBody input[type='checkbox']").prop("checked",$(this).prop("checked"));
+	});
+	//给列表中的所有checkbox添加单击事件
+	$("#activityListTBody").on("click","input[type='checkbox']",function(){
+		if ($("#activityListTBody input[type='checkbox']").size()==$("#activityListTBody input[type='checkbox']:checked").size()) {
+			$("#chk_all").prop("checked",true);
+		}else {
+			$("#chk_all").prop("checked",false);
+			}
+		});
+	/**************全选  单选***全选  单选***全选  单选*********全选  单选*********全选  单选**************全选  单选******/
+	
 	
 	
 	
 	
 });
 
-	// 市场活动列表显示
+	/* //******* ********** ************** 市场活动列表显示************ ********** ************ ********** ********* */
 	function display(pageNo,pageSize){
 
 		$.ajax({
@@ -361,6 +422,12 @@ $(function(){
 				
 			}
 		});
+		/* //******* ********** ************** 市场活动列表显示******************** ********** **** ********** ********* */
+		
+		
+		
+		
+		
 	}
 
 </script>
@@ -672,7 +739,7 @@ $(function(){
 				<div class="btn-group" style="position: relative; top: 18%;">
 				  <button type="button" id="createActivityBtn" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> 创建</button>
 				  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editActivityModal"><span class="glyphicon glyphicon-pencil"></span> 修改</button>
-				  <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span> 删除</button>
+				  <button type="button" id="deleteActivityBtn" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span> 删除</button>
 				</div>
 				<div class="btn-group" style="position: relative; top: 18%;">
 				  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#importActivityModal"><span class="glyphicon glyphicon-import"></span> 导入</button>
@@ -715,7 +782,7 @@ $(function(){
 				<table id="activityListTable" class="table table-hover">
 					<thead>
 						<tr style="color: #B3B3B3;">
-							<td><input type="checkbox" /></td>
+							<td><input id="chk_all" type="checkbox" /></td>
 							<td name='name'>名称</td>
 							<td name='type'>类型</td>
 							<td name='state'>状态</td>
@@ -731,6 +798,8 @@ $(function(){
 							<td name='description' width="10%">描述</td>
 						</tr>
 					</thead>
+					
+					
 					<tbody id="activityListTBody">
 						
 					</tbody>

@@ -24,10 +24,10 @@ import com.bjpowernode.crm.workbench.activity.service.impl.MarketActivityService
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Servlet implementation class MarketActivitySaveController
+ * Servlet implementation class CreateMarketActivityController
  */	
 @WebServlet("/workbench/activity/createMarketActivity.do")
-public class MarketActivityCreateController extends HttpServlet {
+public class CreateMarketActivityController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
