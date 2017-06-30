@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -16,7 +17,7 @@
 <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	
+
 	$("#loginBtn").click(function(){
 		var act = $("#act").val();
 		var pwd = $("#pwd").val();

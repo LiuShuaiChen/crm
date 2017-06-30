@@ -129,41 +129,51 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User login(String act, String pwd, String ip) {
-		User paramUser = new User();
 		
-		paramUser.setLoginAct(act);
-		paramUser.setLoginPwd(pwd);
-//		paramUser.setAllowIps(ip);
-		User user = userDao.getActAndPwd(paramUser);
+		User user = null;
+		
+		if (act == "" && pwd == "") {
+			throw new ApplicationException("请输入用户名或密码");
+		}else {
+			User paramUser = new User();
+			
+			paramUser.setLoginAct(act);
+			paramUser.setLoginPwd(pwd);
+//			paramUser.setAllowIps(ip);
+			user = userDao.getActAndPwd(paramUser);
 
-		// 判断用户名 密码是否正确
-		if (user == null) {
-			throw new ApplicationException("用户名或者密码错误,登录失败");
-		}
-
-		// 判断ip是否受限
-		String ips = user.getAllowIps();
-		if (ips != null && !"".equals(ips.trim())) {
-			if (!ips.contains(ip)) {
-				throw new ApplicationException("ip地址受限,请联系管理员");
+			// 判断用户名 密码是否正确
+			if (user == null) {
+				throw new ApplicationException("用户名或者密码错误,登录失败");
 			}
-		}
 
-		// 判断失效时间
-		String expireTime = user.getExpireTime();
-		if (expireTime != null && !"".equals(expireTime.trim())) {
-			// 获取当前时间
-			String currentDateTime = DateUtils.getDate();
-			if (expireTime.compareTo(currentDateTime) < 0) {
-				throw new ApplicationException("用户失效,请联系管理员");
+			// 判断ip是否受限
+			String ips = user.getAllowIps();
+			if (ips != null && !"".equals(ips.trim())) {
+				if (!ips.contains(ip)) {
+					throw new ApplicationException("ip地址受限,请联系管理员");
+				}
 			}
-		}
 
-		// 判断用户是否锁定
-		String lockStatus = user.getLockStatus();
-		if ("1".equals(lockStatus)) {
-			throw new ApplicationException("用户已经被锁定,请联系管理员");
+			// 判断失效时间
+			String expireTime = user.getExpireTime();
+			if (expireTime != null && !"".equals(expireTime.trim())) {
+				// 获取当前时间
+				String currentDateTime = DateUtils.getDate();
+				if (expireTime.compareTo(currentDateTime) < 0) {
+					throw new ApplicationException("用户失效,请联系管理员");
+				}
+			}
+
+			// 判断用户是否锁定
+			String lockStatus = user.getLockStatus();
+			if ("1".equals(lockStatus)) {
+				throw new ApplicationException("用户已经被锁定,请联系管理员");
+			}	
 		}
+		
+		
+		
 		return user;
 	}
 

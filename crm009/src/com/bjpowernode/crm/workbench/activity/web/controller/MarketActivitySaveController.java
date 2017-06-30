@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * Servlet implementation class MarketActivitySaveController
  */
-@WebServlet("/workbench/activity/market/save.do")
+@WebServlet("/workbench/activity/saveMarketActivity.do")
 public class MarketActivitySaveController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
