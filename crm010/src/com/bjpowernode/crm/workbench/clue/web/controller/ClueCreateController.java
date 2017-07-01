@@ -39,10 +39,7 @@ public class ClueCreateController extends HttpServlet {
 		
 		request.setAttribute("data", json);
 		request.getRequestDispatcher("/data.jsp").forward(request, response);
-		
-		
-		
-		
+
 	}
 
 	/**

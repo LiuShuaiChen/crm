@@ -15,13 +15,46 @@
 <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 
+<!--  PAGINATION plugin -->
+<link rel="stylesheet" type="text/css" href="jquery/bs_pagination/jquery.bs_pagination.min.css">
+<script type="text/javascript" src="jquery/bs_pagination/jquery.bs_pagination.min.js"></script>
+<script type="text/javascript" src="jquery/bs_pagination/localization/en.js"></script>
+
 <script type="text/javascript">
 $(function(){
+	
 	var pageNo = 1;
 	var pageSize = 0;
 	var pageCount = 0;
 	var total = 0;
+	
 	pageList();
+	
+	
+	/* 时间插件**************************************** */
+	
+	 $("#pagDiv").bs_pagination({
+		 
+
+			currentPage: 5,//当前页号
+			rowsPerPage: 20,//每页显示的条数
+		    totalPages: 50,//总页数
+		    totalRows: 100,//总记录条数
+		    
+		    visiblePageLinks: 5,//显示的卡片数
+		    
+		    showGoToPage: true,//是否显示"跳转到第几页"
+		    showRowsPerPage: true,//是否显示"每页显示多少条"
+		    showRowsInfo: true,//是否显示记录信息
+		    
+		    //当页号改变的时候，执行的回调函数。
+		    onChangePage: function(event,obj) { // returns page_num and rows_per_page after a link has clicked
+				//alert(obj.currentPage);//将要转向的页号
+		    	//alert(obj.rowsPerPage);//将要显示的 每页条数
+		    }
+		  });
+		/* 时间插件**************************************** */
+	
 	
 	function pageList(){
 		var count = 0;
@@ -59,7 +92,8 @@ $(function(){
 		pageList();
 	})
 	
-	function btnCss(){
+	
+	/* function btnCss(){
 		if (pageNo == 1) {
 			$("#firstPage").addClass("disabled");
 			$("#proPage").addClass("disabled");
@@ -120,7 +154,9 @@ $(function(){
 			pageNo = pageSize;
 			pageList();
 		}
-	})
+	}) */
+	
+	
 	
 	$("#createBtn").click(function(){
 		
@@ -414,28 +450,9 @@ $(function(){
 				
 			</tbody>
 		</table>
+	<div id="pagDiv"></div>
 	</div>
 	
-	<div style="height: 50px; position: relative;top: 30px; left: 30px;">
-		<div>
-				<button type="button" class="btn btn-default" style="cursor: default;">共<b id="myTotal"></b>条记录</button>
-		</div>
-		<div class="btn-group" style="position: relative;top: -34px; left: 110px;">
-			<button type="button" class="btn btn-default" style="cursor: default;">共<b id="mypageSize"></b>页</button>
-			<button type="button" class="btn btn-default" style="cursor: default;">每页<b id="mypageCount"></b>条记录</button>
-			<button type="button" class="btn btn-default" style="cursor: default;">当前是<b id="mypageNo"></b>页</button>
-		</div>
-		<div style="position: relative;top: -88px; left: 385px;">
-			<nav>
-				<ul class="pagination">
-					<li id="firstPage"><a href="javascript:void(0)">首页</a></li>
-					<li id="proPage"><a href="javascript:void(0)">上一页</a></li>
-					<li id="nextPage"><a href="javascript:void(0)">下一页</a></li>
-					<li id="lastPage"><a href="javascript:void(0)">末页</a></li>
-				</ul>
-			</nav>
-		</div>
-	</div>
 			
 </body>
 </html>
