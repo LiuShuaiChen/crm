@@ -63,7 +63,15 @@ public class MarketActivityServiceImpl implements MarketActivityService {
 	public int updateEditMarketActivity(MarketActivity marketActivity) {
 		return marketActivityDao.updateEditMarketActivity(marketActivity);
 	}
-	
+
+	/**
+	 * 根据id 获取市场活动id put到 市场活动详情页
+	 */
+	@Override
+	public MarketActivity queryMarketActivityForDetailById(String id) {
+		return marketActivityDao.queryMarketActivityForDetailById(id);
+	}
+
 
 	
 	

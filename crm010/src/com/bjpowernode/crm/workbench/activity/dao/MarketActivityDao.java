@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.bjpowernode.crm.workbench.activity.domain.MarketActivity;
+import com.bjpowernode.crm.workbench.activity.domain.MarketActivityRemark;
 
 /**
  * MarketActivityDao
@@ -54,5 +55,14 @@ public interface MarketActivityDao {
 	 * @return
 	 */
 	int updateEditMarketActivity(MarketActivity marketActivity);
+
+	/**
+	 * 根据id获取市场活动详情信息
+	 * @param id
+	 * @return
+	 */
+	MarketActivity queryMarketActivityForDetailById(String id);
+
+
 	
 }

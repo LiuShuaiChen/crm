@@ -31,4 +31,6 @@ public interface MarketActivityService {
 	MarketActivity queryMarketActivityById(String string);
 
 	int updateEditMarketActivity(MarketActivity marketActivity);
+
+	MarketActivity queryMarketActivityForDetailById(String id);
 }

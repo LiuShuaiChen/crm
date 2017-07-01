@@ -104,11 +104,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- int updateEditMarketActivity(MarketActivity marketActivity); -->
 	<update id="updateEditMarketActivity" parameterType="marketActivity">
-	
 		update tbl_marketing_activities set owner=#{owner},type=#{type},name=#{name},state=#{state},startDate=#{startDate},endDate=#{endDate},
 		budgetCost=#{budgetCost},actualCost=#{actualCost},description=#{description},editBy=#{editBy},editTime=#{editTime} 
 		where id=#{id}
 	</update>
+	
+	<!-- 根据市场活动id  拿到市场活动 detail 信息 -->
+	<!-- MarketActivity queryMarketActivityForDetailById(String id); -->
+	<select id="queryMarketActivityForDetailById" resultType="marketActivity">
+		select ma.id,ma.name,dv1.text as type,dv2.text as state,ma.startDate,ma.endDate,u1.name as owner,ma.budgetCost,ma.actualCost,
+		       u2.name as createBy,ma.createTime,u3.name as editBy,ma.editTime,ma.description
+		from tbl_marketing_activities ma
+		left join tbl_dictionary_value dv1 on ma.type=dv1.id
+		left join tbl_dictionary_value dv2 on ma.state=dv2.id
+		join tbl_user u1 on ma.owner=u1.id
+		join tbl_user u2 on ma.createBy=u2.id
+		left join tbl_user u3 on ma.editBy=u3.id
+		where ma.id=#{id}
+		
+	</select>
 
 
 </mapper>

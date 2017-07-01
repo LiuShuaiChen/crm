@@ -29,6 +29,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="com/bjpowernode/crm/settings/dept/dao/DeptDao.xml"/>
 		<mapper resource="com/bjpowernode/crm/workbench/activity/dao/MarketActivityDao.xml"/>
 		<mapper resource="com/bjpowernode/crm/workbench/clue/dao/ClueDao.xml"/>
+		<mapper resource="com/bjpowernode/crm/workbench/activity/dao/MarketActivityRemarkDao.xml"/>
 		
 	</mappers>
 	

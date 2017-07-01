@@ -396,10 +396,10 @@ $(function(){
 				$.each(data.dataList,function(index,obj){
 				htmlStr += "<tr>";
 				htmlStr += "<td><input value='"+obj.id+"' type = 'checkbox'/></td>";
-				if ($("#definedColumns input[name=name]").prop("checked")) {
-					htmlStr += "<td name = 'name'><a style = 'text-decoration : none; cursor : pointer; 'onclick = 'window.location.href = \"detail.html\";'>"+obj.name+"</a></td>";
+				if ($("#definedColumns input[name='name']").prop("checked")) {
+					htmlStr += "<td name = 'name'><a style = 'text-decoration : none; cursor : pointer; 'onclick = 'window.location.href = \"workbench/activity/detailMarketActivity.do?id="+obj.id+"\";'>"+obj.name+"</a></td>";
 				}else {
-					htmlStr += "<td name = 'name'><a style = 'display : none; cursor : pointer; 'onclick = 'window.location.href = \"detail.html\";'>"+obj.name+"</a></td>";
+					htmlStr += "<td name = 'name'><a style = 'display : none; cursor : pointer; 'onclick = 'window.location.href = \"workbench/activity/detailMarketActivity.do?id="+obj.id+"\";'>"+obj.name+"</a></td>";
 				}
 				
 				if ($("#definedColumns input[name=type]").prop("checked")) {

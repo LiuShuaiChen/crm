@@ -8,6 +8,7 @@ package com.bjpowernode.crm.workbench.activity.domain;
  */
 public class MarketActivity {
 
+
 	private String id;
 	private String owner;
 	private String type;
@@ -134,6 +135,5 @@ public class MarketActivity {
 	public void setEditTime(String editTime) {
 		this.editTime = editTime;
 	}
-
 
 }
