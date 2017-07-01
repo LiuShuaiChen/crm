@@ -15,11 +15,6 @@
 <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 
-<!--  PAGINATION plugin -->
-<link rel="stylesheet" type="text/css" href="jquery/bs_pagination/jquery.bs_pagination.min.css">
-<script type="text/javascript" src="jquery/bs_pagination/jquery.bs_pagination.min.js"></script>
-<script type="text/javascript" src="jquery/bs_pagination/localization/en.js"></script>
-
 <script type="text/javascript">
 $(function(){
 	
@@ -51,8 +46,8 @@ $(function(){
 					total = data.pu.total;
 					
 					$("#myPageNo").html(pageNo);
-					$("#mypageCount").html(pageCount);
-					$("#mypageSize").html(pageSize);
+					$("#myPageCount").html(pageCount);
+					$("#myPageSize").html(pageSize);
 					$("#myTotal").html(total);
 					
 					$(data.uList).each(function(){
@@ -106,7 +101,7 @@ $(function(){
 	})
 	
 	$("#proPage").click(function(){
-		if (pageNo = 1) {
+		if (pageNo == 1) {
 			return false;
 		}else {
 			pageNo--;
