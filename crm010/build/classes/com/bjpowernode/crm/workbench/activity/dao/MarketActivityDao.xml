@@ -84,11 +84,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- int deleteMarketActivityById(String[] ids); -->
 	<delete id="deleteMarketActivityById">
+	
 		delete from tbl_marketing_activities where id in
 		<foreach collection="array" item="id" open="(" close=")" separator=",">
 			#{id}
 		</foreach>
 	</delete>
+	
+	
+	<!-- MarketActivity queryMarketActivityById(String id); -->
+	<select id="queryMarketActivityById" parameterType="string" resultType="MarketActivity">
+	
+		select id, owner, type, name, state, startDate, endDate, budgetCost, actualCost, description, createBy, createTime, editBy, editTime 
+		from tbl_marketing_activities where id = #{id}
+	</select>
+	
+	
+
+	
+	<!-- int updateEditMarketActivity(MarketActivity marketActivity); -->
+	<update id="updateEditMarketActivity" parameterType="marketActivity">
+	
+		update tbl_marketing_activities set owner=#{owner},type=#{type},name=#{name},state=#{state},startDate=#{startDate},endDate=#{endDate},
+		budgetCost=#{budgetCost},actualCost=#{actualCost},description=#{description},editBy=#{editBy},editTime=#{editTime} 
+		where id=#{id}
+	</update>
 
 
 </mapper>

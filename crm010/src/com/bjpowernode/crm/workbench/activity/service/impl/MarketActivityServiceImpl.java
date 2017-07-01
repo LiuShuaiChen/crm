@@ -53,4 +53,18 @@ public class MarketActivityServiceImpl implements MarketActivityService {
 
 	}
 
+	@Override
+	public MarketActivity queryMarketActivityById(String id) {
+
+		return marketActivityDao.queryMarketActivityById(id);
+	}
+
+	@Override
+	public int updateEditMarketActivity(MarketActivity marketActivity) {
+		return marketActivityDao.updateEditMarketActivity(marketActivity);
+	}
+	
+
+	
+	
 }

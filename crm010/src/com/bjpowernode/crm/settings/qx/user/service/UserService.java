@@ -24,6 +24,7 @@ public interface UserService {
 	User login(String act, String pwd, String ip);
 	
 	List<User> queryAllUsers();
+
 	
 	
 	

@@ -135,4 +135,5 @@ public class MarketActivity {
 		this.editTime = editTime;
 	}
 
+
 }

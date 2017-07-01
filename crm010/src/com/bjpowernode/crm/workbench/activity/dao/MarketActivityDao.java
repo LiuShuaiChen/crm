@@ -40,5 +40,19 @@ public interface MarketActivityDao {
 	 * @return
 	 */
 	int deleteMarketActivityById(String[] ids);
+
+	/**
+	 * 根据id查找市场活动 返回datail
+	 * @param id
+	 * @return
+	 */
+	MarketActivity queryMarketActivityById(String id);
+
+	/**
+	 * 保存修改的市场活动信息
+	 * @param marketActivity
+	 * @return
+	 */
+	int updateEditMarketActivity(MarketActivity marketActivity);
 	
 }
