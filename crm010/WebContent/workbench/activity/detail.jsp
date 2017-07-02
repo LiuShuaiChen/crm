@@ -60,6 +60,50 @@
 	
 </script>
 
+<script type="text/javascript">
+$(function(){
+	
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~时间插件 ~~~~~~~开始~~~~~~~~~~~~~~~~~~~~~~~~~~~  */  
+	
+	//时间插件
+	$("#edit-startTime,#edit-endTime").datetimepicker({
+		  language: 'zh-CN',//显示中文
+		  format: 'yyyy-mm-dd',//显示格式
+		  minView: "month",//设置只显示到月份
+		  initialDate: new Date(),//初始化当前日期
+		  autoclose: true,//选中自动关闭
+		  todayBtn: true,//显示今日按钮
+		  clearBtn:true//显示清空按钮
+	})
+	
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~时间插件 ~~~~~~~~~~~结束~~~~~~~~~~~~~~~~~~~~~~~~~~~  */  
+	
+	
+	
+	/* 市场活动编辑*********市场活动编辑***********市场活动编辑*********市场活动编辑*********市场活动编辑*市场活动编辑***市场活动编辑 */
+	$("#editMarketActivityDetailBtn").click(function(){
+		$.ajax({
+			url:'workbench/activity/detail/editMarketActivityDetail.do',
+			data:{
+				id:id
+			},
+			type:'post',
+			success:function(data){
+				
+			}
+			
+		});
+	});
+	/* 市场活动编辑*********市场活动编辑***********市场活动编辑*********市场活动编辑*********市场活动编辑*市场活动编辑***市场活动编辑 */
+	
+	/* 添加市场活动备注******添加市场活动备注*********添加市场活动备注*********添加市场活动备注*********添加市场活动备注*** */
+	$("#createMarketActivityRemarkBtn").click(function(){
+		
+	});
+})
+
+</script>
+
 </head>
 <body>
 	
@@ -80,30 +124,21 @@
 						<div class="form-group">
 							<label for="edit-marketActivityOwner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
-								<select class="form-control" id="edit-marketActivityOwner">
-								  <option>zhangsan</option>
-								  <option>lisi</option>
-								  <option>wangwu</option>
-								</select>
+								 <select class="form-control" id="edit-marketActivityOwner"></select>
 							</div>
+							
 							<label for="edit-marketActivityType" class="col-sm-2 control-label">类型</label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="edit-marketActivityType">
 								  <option></option>
-								  <option>会议</option>
-								  <option>web研讨</option>
-								  <option>交易会</option>
-								  <option>公开媒介</option>
-								  <option>合作伙伴</option>
-								  <option>推举程序</option>
-								  <option selected>广告</option>
-								  <option>条幅广告</option>
-								  <option>直接邮件</option>
-								  <option>邮箱</option>
-								  <option>电子市场</option>
-								  <option>其它</option>
+								  <c:if test="${not empty activityTypeList }">
+								  	<c:forEach var="at" items="${activityTypeList }">
+								  		<option value="${at.id }">${at.text }</option>
+								  	</c:forEach>
+								  </c:if>
 								</select>
 							</div>
+							
 						</div>
 						
 						<div class="form-group">
@@ -113,12 +148,14 @@
 							</div>
 							<label for="edit-marketActivityState" class="col-sm-2 control-label">状态</label>
 							<div class="col-sm-10" style="width: 300px;">
+								
 								<select class="form-control" id="edit-marketActivityState">
 								  <option></option>
-								  <option>计划中</option>
-								  <option selected>激活的</option>
-								  <option>休眠</option>
-								  <option>完成</option>
+								  <c:if test="${not empty activityStateList }">
+								  	<c:forEach var="as" items="${activityStateList }">
+								  		<option value="${as.id }">${as.text }</option>
+								  	</c:forEach>
+								  </c:if>
 								</select>
 							</div>
 						</div>
@@ -126,11 +163,11 @@
 						<div class="form-group">
 							<label for="edit-startTime" class="col-sm-2 control-label">开始日期</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-startTime" value="2020-10-10">
+								<input type="text" class="form-control" id="edit-startTime" value="2020-10-10" readonly>
 							</div>
 							<label for="edit-endTime" class="col-sm-2 control-label">结束日期</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-endTime" value="2020-10-20">
+								<input type="text" class="form-control" id="edit-endTime" value="2020-10-20" readonly>
 							</div>
 						</div>
 						
@@ -174,7 +211,7 @@
 			<h3>市场活动-${marketActivity.name } <small>${marketActivity.startDate } ~ ${marketActivity.endDate }</small></h3>
 		</div>
 		<div style="position: relative; height: 50px; width: 250px;  top: -72px; left: 700px;">
-			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#editActivityModal"><span class="glyphicon glyphicon-edit"></span> 编辑</button>
+			<button type="button" id="editMarketActivityDetailBtn" class="btn btn-default" ><span class="glyphicon glyphicon-edit"></span> 编辑</button>
 			<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span> 删除</button>
 		</div>
 	</div>
@@ -237,10 +274,29 @@
 	<!-- 备注 -->
 	<div style="position: relative; top: 30px; left: 40px;">
 		<div class="page-header">
-			<h4>备注</h4>
+			<h4>市场活动备注</h4>
 		</div>
+		<c:if test="${not empty remarkList }">
+			<c:forEach var='remark' items='${remarkList }'>
+				<div class="remarkDiv" style="height: 60px;">
+			<img title="zhangsan" src="image/user-thumbnail.png" style="width: 30px; height:30px;">
+			<div style="position: relative; top: -40px; left: 40px;" >
+				<h5>哎呦！</h5>
+				<font color="gray">市场活动</font> <font color="gray">-</font> <b>发传单</b> <small style="color: gray;"> 2017-01-22 10:10:10 由zhangsan</small>
+				<div style="position: relative; left: 500px; top: -30px; height: 30px; width: 100px; display: none;">
+					<a class="myHref" href="javascript:void(0);"><span class="glyphicon glyphicon-edit" style="font-size: 20px; color: #E6E6E6;"></span></a>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<a class="myHref" href="javascript:void(0);"><span class="glyphicon glyphicon-remove" style="font-size: 20px; color: #E6E6E6;"></span></a>
+				</div>
+			</div>
+		</div>
+			</c:forEach>
+		</c:if>
 		
-		<!-- 备注1 -->
+		
+		
+		<!-- 
+		备注1
 		<div class="remarkDiv" style="height: 60px;">
 			<img title="zhangsan" src="image/user-thumbnail.png" style="width: 30px; height:30px;">
 			<div style="position: relative; top: -40px; left: 40px;" >
@@ -254,7 +310,7 @@
 			</div>
 		</div>
 		
-		<!-- 备注2 -->
+		备注2
 		<div class="remarkDiv" style="height: 60px;">
 			<img title="zhangsan" src="image/user-thumbnail.png" style="width: 30px; height:30px;">
 			<div style="position: relative; top: -40px; left: 40px;" >
@@ -266,14 +322,14 @@
 					<a class="myHref" href="javascript:void(0);"><span class="glyphicon glyphicon-remove" style="font-size: 20px; color: #E6E6E6;"></span></a>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		
 		<div id="remarkDiv" style="background-color: #E6E6E6; width: 870px; height: 90px;">
 			<form role="form" style="position: relative;top: 10px; left: 10px;">
 				<textarea id="remark" class="form-control" style="width: 850px; resize : none;" rows="2"  placeholder="添加备注..."></textarea>
 				<p id="cancelAndSaveBtn" style="position: relative;left: 737px; top: 10px; display: none;">
 					<button id="cancelBtn" type="button" class="btn btn-default">取消</button>
-					<button type="button" class="btn btn-primary">保存</button>
+					<button type="button" id="createMarketActivityRemarkBtn" class="btn btn-primary">保存</button>
 				</p>
 			</form>
 		</div>

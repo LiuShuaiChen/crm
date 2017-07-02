@@ -33,4 +33,11 @@ public interface MarketActivityService {
 	int updateEditMarketActivity(MarketActivity marketActivity);
 
 	MarketActivity queryMarketActivityForDetailById(String id);
+
+	/**
+	 * 保存 修改市场活动明细页
+	 * @param id
+	 * @return
+	 */
+	MarketActivity updateEditMarketActivityDetail(String id);
 }

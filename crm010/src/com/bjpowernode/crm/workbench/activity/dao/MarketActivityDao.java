@@ -63,6 +63,13 @@ public interface MarketActivityDao {
 	 */
 	MarketActivity queryMarketActivityForDetailById(String id);
 
+	/**
+	 * 根据id 获取到市场活动明细 铺到 市场活动明细页中的编辑模态窗口中
+	 * @param marketActivity
+	 * @return
+	 */
+	MarketActivity updateEditMarketActivityDetail(String id);
+
 
 	
 }

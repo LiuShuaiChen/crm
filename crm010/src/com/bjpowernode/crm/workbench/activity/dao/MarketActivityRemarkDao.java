@@ -14,4 +14,12 @@ public interface MarketActivityRemarkDao {
 	 */
 	List<MarketActivityRemark> queryMarketActivityRemarkByActivityId(String id);
 
+
+	/**
+	 * 添加市场活动备注
+	 * @param marketActivityRemark
+	 * @return
+	 */
+	int createMarketActivityRemaerk(MarketActivityRemark marketActivityRemark);
+
 }

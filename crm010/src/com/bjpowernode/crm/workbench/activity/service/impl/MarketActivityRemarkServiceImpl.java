@@ -16,4 +16,10 @@ public class MarketActivityRemarkServiceImpl implements MarketActivityRemarkServ
 		return marketActivityRemarkDao.queryMarketActivityRemarkByActivityId(id);
 	}
 
+
+	@Override
+	public int createMarketActivityRemaerk(MarketActivityRemark marketActivityRemark) {
+		return marketActivityRemarkDao.createMarketActivityRemaerk(marketActivityRemark);
+	}
+
 }

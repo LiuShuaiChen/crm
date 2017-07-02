@@ -12,6 +12,14 @@ public interface MarketActivityRemarkService {
 	 * @return
 	 */
 	List<MarketActivityRemark> queryMarketActivityRemarkByActivityId(String id);
+
+
+	/**
+	 * 新增市场活动明细页中的 备注
+	 * @param marketActivityRemark
+	 * @return
+	 */
+	int createMarketActivityRemaerk(MarketActivityRemark marketActivityRemark);
 	
 	
 
