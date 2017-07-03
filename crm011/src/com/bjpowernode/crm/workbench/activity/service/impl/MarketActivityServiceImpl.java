@@ -77,6 +77,11 @@ public class MarketActivityServiceImpl implements MarketActivityService {
 		return marketActivityDao.updateEditMarketActivityDetail(id);
 	}
 
+	@Override
+	public List<MarketActivity> queryMarketActivityByCondition(Map<String, Object> map) {
+		return marketActivityDao.queryMarketActivityByCondition(map);
+	}
+
 
 	
 	

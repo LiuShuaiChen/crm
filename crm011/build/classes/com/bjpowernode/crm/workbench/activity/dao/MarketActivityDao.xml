@@ -139,6 +139,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
+	<!-- List<MarketActivity> queryMarketActivityByCondition(Map<String, Object> map); -->
+	<select id="queryMarketActivityByCondition" parameterType="map" resultType="MarketActivity">
+		select ma.id,ma.name,dv1.text as type,dv2.text as state,ma.startDate,ma.endDate,u1.name as owner,ma.budgetCost,ma.actualCost,
+		       u2.name as createBy,ma.createTime,u3.name as editBy,ma.editTime,ma.description
+		from tbl_marketing_activities ma
+		left join tbl_dictionary_value dv1 on ma.type=dv1.id
+		left join tbl_dictionary_value dv2 on ma.state=dv2.id
+		join tbl_user u1 on ma.owner=u1.id
+		join tbl_user u2 on ma.createBy=u2.id
+		left join tbl_user u3 on ma.editBy=u3.id
+		<where>
+			<if test="name!=null and name!=''">
+				and ma.name like '%' #{name} '%'
+			</if>
+			<if test="owner!=null and owner!=''">
+				and u1.name like '%' #{owner} '%'
+			</if>
+			<if test="type!=null and type!=''">
+				and ma.type=#{type}
+			</if>
+			<if test="state!=null and state!=''">
+				and ma.state=#{state}
+			</if>
+			<if test="startDate!=null and startDate!=''">
+				and ma.startDate&gt;=#{startDate}
+			</if>
+			<if test="endDate!=null and endDate!=''">
+				and ma.endDate&lt;=#{endDate}
+			</if>
+		</where>
+		order by ma.createTime desc
+	</select>
 
 </mapper>
 

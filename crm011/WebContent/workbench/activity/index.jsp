@@ -517,8 +517,19 @@ $(function(){
 		/* //******* ********** ************** 市场活动列表显示******************** ********** **** ********** ********* */
 		
 		
-		
-		
+		/* 市场活动列表 导出 ***********************************************/
+		//给"导出"按钮添加单击事件
+		$("#exportActivityBtn").click(function(){
+			window.location.href=
+			"workbench/activity/exportMarketActivity.do?name="
+			+$.trim($("#query-name").val())
+			+"&owner="+$.trim($("#query-owner").val())
+			+"&type="+$("#query-type").val()
+			+"&state="+$("#query-state").val()
+			+"&startDate="+$.trim($("#query-startDate").val())
+			+"&endDate="+$.trim($("#query-endDate").val());
+		});
+		/* 市场活动列表 导出 ***********************************************/
 		
 	}
 
@@ -833,7 +844,7 @@ $(function(){
 				</div>
 				<div class="btn-group" style="position: relative; top: 18%;">
 				  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#importActivityModal"><span class="glyphicon glyphicon-import"></span> 导入</button>
-				  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-export"></span> 导出</button>
+				  <button id="exportActivityBtn" type="button" class="btn btn-default"><span class="glyphicon glyphicon-export"></span> 导出</button>
 				</div>
 				
 				<div class="btn-group" style="position: relative; top: 18%; left: 5px;">

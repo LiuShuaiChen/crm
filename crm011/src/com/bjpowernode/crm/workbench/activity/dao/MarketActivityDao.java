@@ -70,6 +70,13 @@ public interface MarketActivityDao {
 	 */
 	MarketActivity updateEditMarketActivityDetail(String id);
 
+	/**
+	 * 根据条件查询市场活动
+	 * @param map
+	 * @return
+	 */
+	List<MarketActivity> queryMarketActivityByCondition(Map<String, Object> map);
+
 
 	
 }
