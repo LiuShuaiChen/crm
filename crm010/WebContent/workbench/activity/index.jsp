@@ -21,13 +21,11 @@
 <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
-
 <script type="text/javascript" src="jquery/bs_pagination/jquery.bs_pagination.min.js"></script>
 <script type="text/javascript" src="jquery/bs_pagination/localization/en.js"></script>
-
-<link rel="stylesheet" type="text/css" href="jquery/datetimepicker/css/bootstrap-datetimepicker.css">
 <script type="text/javascript" src="jquery/datetimepicker/js/bootstrap-datetimepicker.js"></script>
-<script type="text/javascript" src="jquery/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="jquery/bs_pagination/jquery.bs_pagination.min.css"></script>
+<script type="text/javascript" src="jquery/datetimepicker/css/bootstrap-datetimepicker.css"></script>
 
 <script type="text/javascript">
 

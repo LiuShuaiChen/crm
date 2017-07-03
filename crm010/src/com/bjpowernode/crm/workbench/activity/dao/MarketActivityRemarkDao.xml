@@ -17,9 +17,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- int createMarketActivityRemaerk(MarketActivityRemark marketActivityRemark); -->
 	<insert id="createMarketActivityRemaerk" parameterType="marketActivityRemark">
-		insert into tbl_marketing_activities_remark set(id,notePerson,noteContent,noteTime,editPerson,editTime,editFlag)
-		values(#{id}, #{notePerson}, #{noteContent}, #{noteTime}, #{editPerson}, #{editTime}, #{editFlag})
+		insert into tbl_marketing_activities_remark(id,notePerson,noteContent,noteTime,editFlag,marketingActivitiesId)
+		values(#{id}, #{notePerson}, #{noteContent}, #{noteTime}, #{editFlag}, #{marketingActivitiesId})
 	</insert>
+	
+	
 </mapper>
 
 

@@ -26,7 +26,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @WebServlet("/workbench/activity/detail/createMarketActivityRemark.do")
 public class CreateMarketActivityRemarkController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -36,35 +35,38 @@ public class CreateMarketActivityRemarkController extends HttpServlet {
 			throws ServletException, IOException {
 		System.out.println("com.bjpowernode.crm.workbench.activity.web.controller.CreateMarketActivityRemarkController");
 
-		// 获取表单***********
+		// 获取表单****************获取表单*****获取表单******获取表单**获取表单***获取表单****
 		// 市场活动id
 		String activityId = request.getParameter("activityId");
 		// 备注表单
 		String noteContent = request.getParameter("noteContent");
-
+		// 获取表单****************获取表单*****获取表单******获取表单**获取表单***获取表单****
+		
+		
 		// 封装参数************
 		MarketActivityRemark marketActivityRemark = new MarketActivityRemark();
 		marketActivityRemark.setId(UUIDutils.getUUid());
 
-		//获取session的登陆用户
+		//获取session的当前登陆用户
 		HttpSession httpSession = request.getSession();
 		User user = (User) httpSession.getAttribute("user");
 
-		marketActivityRemark.setNotePerson(user.getId());
-		marketActivityRemark.setNoteContent(noteContent);
-		marketActivityRemark.setNoteTime(DateUtils.getDate());
-
 		// 创建的时候 备注创建者 0 修改的时候 备注修改1*****
 		marketActivityRemark.setEditFlag(0);
-		marketActivityRemark.setId(UUIDutils.getUUid());
+
 		marketActivityRemark.setNotePerson(user.getId());
 		marketActivityRemark.setNoteTime(DateUtils.getDate());
+		
+		marketActivityRemark.setNoteContent(noteContent);
 
 		marketActivityRemark.setMarketingActivitiesId(activityId);
 
+
+		//调用service方法 保存新添加的备注
 		MarketActivityRemarkService marketActivityRemarkService = (MarketActivityRemarkService) ServiceFactory.getService(new MarketActivityRemarkServiceImpl());
 		int ret = marketActivityRemarkService.createMarketActivityRemaerk(marketActivityRemark);
 
+		// 根据处理结果 返回响应信息
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		if (ret > 0) {
