@@ -20,6 +20,22 @@ public interface MarketActivityRemarkService {
 	 * @return
 	 */
 	int createMarketActivityRemaerk(MarketActivityRemark marketActivityRemark);
+
+
+	/**
+	 * 根据id删除备注
+	 * @param id
+	 * @return
+	 */
+	int deleteMarketActivityRemarkById(String id);
+
+
+	/**
+	 * 根据id 更新 市场备注内容
+	 * @param id
+	 * @return
+	 */
+	int updateMarketActivityRemarkById(MarketActivityRemark marketActivityRemark);
 	
 	
 

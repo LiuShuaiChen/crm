@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 添加市场活动备注
+ * @author LauShuaichen
  * Servlet implementation class CreateMarketActivityRemarkController
  */
 @WebServlet("/workbench/activity/detail/createMarketActivityRemark.do")
@@ -71,7 +72,7 @@ public class CreateMarketActivityRemarkController extends HttpServlet {
 
 		if (ret > 0) {
 			map.put("success", true);
-			map.put("marketActivityRemark", marketActivityRemark);
+			map.put("remark", marketActivityRemark);
 		} else {
 			map.put("success", false);
 		}

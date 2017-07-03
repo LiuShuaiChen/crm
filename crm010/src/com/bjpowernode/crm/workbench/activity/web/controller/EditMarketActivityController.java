@@ -23,6 +23,8 @@ import com.bjpowernode.crm.workbench.activity.service.impl.MarketActivityService
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
+ * @author LauShuaichen
+ * 拿到市场活动id 取得要编辑市场活动
  * Servlet implementation class EditMarketActivityController
  */
 @WebServlet("/workbench/activity/editMarketActivity.do")

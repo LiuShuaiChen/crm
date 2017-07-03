@@ -18,6 +18,8 @@ import com.bjpowernode.crm.workbench.activity.service.impl.MarketActivityService
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
+ * @author LauShuaichen
+ * 分页查询市场活动列表
  * Servlet implementation class QueryMarketActivityForPageController
  */
 @WebServlet("/workbench/activity/queryMarketActivityForPage.do")
@@ -29,8 +31,7 @@ public class QueryMarketActivityForPageController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out
-				.println("com.bjpowernode.crm.workbench.activity.web.controller.MarketActivityQueryForPageController");
+		System.out.println("com.bjpowernode.crm.workbench.activity.web.controller.MarketActivityQueryForPageController");
 		// 获取参数
 		String pageNoStr = request.getParameter("pageNo");
 		String pageSizeStr = request.getParameter("pageSize");

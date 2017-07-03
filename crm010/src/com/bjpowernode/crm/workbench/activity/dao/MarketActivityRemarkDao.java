@@ -22,4 +22,20 @@ public interface MarketActivityRemarkDao {
 	 */
 	int createMarketActivityRemaerk(MarketActivityRemark marketActivityRemark);
 
+
+	/**
+	 * 删除市场活动备注
+	 * @param id
+	 * @return
+	 */
+	int deleteMarketActivityRemarkById(String id);
+
+
+	/**
+	 * 更新市场活动备注内容
+	 * @param id
+	 * @return
+	 */
+	int updateMarketActivityRemarkById(MarketActivityRemark marketActivityRemark);
+
 }

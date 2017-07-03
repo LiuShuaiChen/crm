@@ -16,6 +16,9 @@ import com.bjpowernode.crm.workbench.activity.service.impl.MarketActivityService
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
+ * 删除市场活动
+ * @author LauShuaichen
+ * 
  * Servlet implementation class DeleteMarketActivityController
  */
 @WebServlet("/workbench/activity/deleteMarketActivity.do")

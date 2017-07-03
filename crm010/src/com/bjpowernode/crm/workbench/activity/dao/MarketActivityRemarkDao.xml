@@ -21,6 +21,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{id}, #{notePerson}, #{noteContent}, #{noteTime}, #{editFlag}, #{marketingActivitiesId})
 	</insert>
 	
+	<!-- int deleteMarketActivityRemarkById(String id); -->
+	<delete id="deleteMarketActivityRemarkById" parameterType="string">
+		delete from tbl_marketing_activities_remark where id = #{id}
+	</delete>
+	
+	
+	<!-- int updateMarketActivityRemarkById(String id); -->
+	<update id="updateMarketActivityRemarkById" parameterType="marketActivityRemark">
+		update tbl_marketing_activities_remark set noteContent=#{noteContent},editTime=#{editTime},editPerson=#{editPerson},editFlag=#{editFlag} where id=#{id}
+	</update>
 	
 </mapper>
 

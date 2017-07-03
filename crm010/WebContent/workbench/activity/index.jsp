@@ -458,15 +458,15 @@ $(function(){
 				}
 				
 				if ($("#definedColumns input[name=editBy]").prop("checked")) {
-					htmlStr += "<td name = 'editBy'>"+obj.editBy+"</td>";
+					htmlStr += "<td name = 'editBy'>"+(obj.editBy==null?'':obj.editBy)+"</td>";
 				}else {
-					htmlStr += "<td name = 'editBy' style='display:none'>"+obj.editBy+"</td>";
+					htmlStr += "<td name = 'editBy' style='display:none'>"+(obj.editBy==null?'':obj.editBy)+"</td>";
 				}
 				
 				if ($("#definedColumns input[name=editTime]").prop("checked")) {
-					htmlStr += "<td name = 'editTime'>"+obj.editTime+"</td>";
+					htmlStr += "<td name = 'editTime'>"+(obj.editTime==null?'':obj.editTime)+"</td>";
 				}else {
-					htmlStr += "<td name = 'editTime' style='display:none'>"+obj.editTime+"</td>";
+					htmlStr += "<td name = 'editTime' style='display:none'>"+(obj.editTime==null?'':obj.editTime)+"</td>";
 				}
 				
 				if ($("#definedColumns input[name=description]").prop("checked")) {

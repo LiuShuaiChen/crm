@@ -24,6 +24,8 @@ import com.bjpowernode.crm.workbench.activity.service.impl.MarketActivityService
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
+ * 添加市场活动
+ * @author LauShuaichen
  * Servlet implementation class CreateMarketActivityController
  */	
 @WebServlet("/workbench/activity/createMarketActivity.do")
@@ -38,6 +40,7 @@ public class CreateMarketActivityController extends HttpServlet {
 			throws ServletException, IOException {
 		
 		System.out.println("/workbench/activity/market/create.do");
+		
 		
 		UserService userService = (UserService) ServiceFactory.getService(new UserServiceImpl());
 		List<User> userList =  userService.queryAllUsers();

@@ -21,6 +21,8 @@ import com.bjpowernode.crm.workbench.activity.service.impl.MarketActivityService
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
+ * 添加市场活动
+ * @author LauShuaichen
  * Servlet implementation class SaveMarketActivityController
  */
 @WebServlet("/workbench/activity/saveMarketActivity.do")
