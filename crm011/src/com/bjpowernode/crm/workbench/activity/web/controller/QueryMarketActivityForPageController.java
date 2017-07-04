@@ -74,7 +74,6 @@ public class QueryMarketActivityForPageController extends HttpServlet {
 		// 把vo转换成json对象
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(vo);
-		
 
 		request.setAttribute("data", json);
 		request.getRequestDispatcher("/data.jsp").forward(request, response);
