@@ -14,15 +14,13 @@ public class ClueServiceImpl implements ClueService {
 	
 	private ClueDao clueDao = SqlSessionutils.getSession().getMapper(ClueDao.class);
 
-	
-	/**
-	 * 创建线索
-	 */
 	@Override
-	public int insertCreateClude(Clue clue) {
-		return clueDao.insertCreateClue(clue);
+	public int createClue(Clue clue) {
+		return clueDao.createClue(clue);
 	}
+
 	
+
 	
 
 }

@@ -14,6 +14,7 @@ import com.bjpowernode.crm.settings.dictionary.service.impl.DictionaryValueServi
 import com.bjpowernode.crm.utils.ServiceFactory;
 
 /**
+ * 称呼
  * Application Lifecycle Listener implementation class
  * QueryAppellationContextListener
  * @author LauShuaichen

@@ -4,8 +4,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bjpowernode.crm.workbench.clue.dao.ClueDao">
 
-	<!-- int insertCreateClue(Clue clue); -->
-	<insert id="insertCreateClue" parameterType="Clue">
+	<!-- int createClue(Clue clue); -->
+	<insert id="createClue" parameterType="Clue">
 		insert into tbl_clue
 		(id,owner,company,phone,website,grade,industry,annualIncome,empNums,country,province,city,street,zipcode,description,fullName,appellation,source,email,mphone,job,state,createBy,createTime,editBy,editTime,contactSummary,nextContactTime)
 		values

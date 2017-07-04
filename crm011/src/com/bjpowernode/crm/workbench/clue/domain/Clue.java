@@ -15,7 +15,7 @@ public class Clue {
 	private String website;
 	private String grade;
 	private String industry;
-	private String annualIncome;
+	private int annualIncome;
 	private int empNums;
 	private String country;
 	private String province;
@@ -93,11 +93,11 @@ public class Clue {
 		this.industry = industry;
 	}
 
-	public String getAnnualIncome() {
+	public int getAnnualIncome() {
 		return annualIncome;
 	}
 
-	public void setAnnualIncome(String annualIncome) {
+	public void setAnnualIncome(int annualIncome) {
 		this.annualIncome = annualIncome;
 	}
 
