@@ -1,10 +1,16 @@
+<%@page import="java.lang.annotation.Target"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 	System.out.println("/crm008/WebContent/workbench/clue/index.jsp");
 %>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,6 +24,8 @@
 <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="jquery/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="jquery/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 
 <script type="text/javascript">
 
@@ -32,6 +40,164 @@
 	});
 	
 </script>
+
+<script type="text/javascript">
+$(function(){
+	
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~时间插件 ~~~~~~~开始~~~~~~~~~~~~~~~~~~~~~~~~~~~  */  
+	//时间插件
+	$("#create-nextContactTime,#edit-nextContactTime").datetimepicker({
+		  language: 'zh-CN',//显示中文
+		  format: 'yyyy-mm-dd',//显示格式
+		  minView: "month",//设置只显示到月份
+		  initialDate: new Date(),//初始化当前日期
+		  autoclose: true,//选中自动关闭
+		  todayBtn: true,//显示今日按钮
+		  clearBtn:true//显示清空按钮
+	})
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~时间插件 ~~~~~~~~~~~结束~~~~~~~~~~~~~~~~~~~~~~~~~~~  */  
+	
+	
+	
+	/* //创建线索 ***创建线索 ***创建线索 ***创建线索 ***创建线索 ***创建线索 ***创建线索 ***创建线索 ***/
+	$("#createClueBtn").click(function(){
+		
+		//模态窗口开启之前  需要清空表单
+		$("#create-clueOwner").val("");
+		$("#create-company").val("");
+		$("#create-call").val("");
+		$("#create-surname").val("");
+		$("#create-job").val("");
+		$("#create-email").val("");
+		$("#create-phone").val("");
+		$("#create-website").val("");
+		$("#create-mphone").val("");
+		$("#create-status").val("");
+		$("#create-source").val("");
+		$("#create-empnums").val("");
+		$("#create-industry").val("");
+		$("#create-grade").val("");
+		$("#create-yearIncome").val("");
+		$("#create-describe").val("");
+		$("#create-contactSummary").val("");
+		$("#create-nextContactTime").val("");
+		$("#create-country").val("");
+		$("#create-province").val("");
+		$("#create-city").val("");
+		$("#create-street").val("");
+		$("#create-zipcode").val("");
+		
+		$.ajax({
+			url:'workbench/clue/createClue.do',
+			type:'post',
+			success:function(data){
+				//设置所有者
+				var htmlStr="";
+				$.each(data,function(index,obj){
+					if (obj.id == '${user.id}') {
+						htmlStr += "<option value= '"+obj.id+"' selected>" + obj.name + "</option>";
+					}else {
+						htmlStr += "<option value= '"+obj.id+"'>" + obj.name + "</option>";
+					}
+				});
+				$("#create-clueOwner").html(htmlStr);
+				//显示模态窗口
+				$("#createClueModal").modal("show");
+			}
+		});
+		
+	});
+	
+	
+	
+	/* 保存新创建的线索 *保存新创建的线索 *保存新创建的线索 *保存新创建的线索 *保存新创建的线索 *保存新创建的线索 *保存新创建的线索 */
+				
+	$("#saveNewClueBtn").click(function() {
+					var clueOwner = $("#create-clueOwner").val();
+					var company = $("#create-company").val();
+					var call = $("#create-call").val();
+					var surname = $("#create-surname").val();
+					var job = $("#create-job").val();
+					var email = $("#create-email").val();
+					var phone = $("#create-phone").val();
+					var website = $("#create-website").val();
+					var mphone = $("#create-mphone").val();
+					var status = $("#create-status").val();
+					var source = $("#create-source").val();
+					var empnums = $("#create-empnums").val();
+					var industry = $("#create-industry").val();
+					var grade = $("#create-grade").val();
+					var yearIncome = $("#create-yearIncome").val();
+					var describe = $("#create-describe").val();
+					var contactSummary = $("#create-contactSummary").val();
+					var nextContactTime = $("#create-nextContactTime").val();
+					var country = $("#create-country").val();
+					var province = $("#create-province").val();
+					var city = $("#create-city").val();
+					var street = $("#create-street").val();
+					var zipcode = $("#create-zipcode").val();
+					
+					//表单验证 ** 名称不能为空**
+					if (surname == null || surname.length == 0) {
+						alert("名称不能为空");
+						return;
+					}
+					//表单验证 ** 公司名称不能为空**
+					if (company == null || company.length == 0) {
+						alert("名称不能为空");
+						return;
+					}
+					
+					$.ajax({
+						url:'worbench/clue/addNewClue.do',
+						type:'post',
+						data:{
+							clueOwner:clueOwner,
+							company:company,
+							call:call,
+							surname:surname,
+							job:job,
+							email:email,
+							phone:phone,
+							website:website,
+							mphone:mphone,
+							status:status,
+							source:source,
+							empnums:empnums,
+							industry:industry,
+							grade:grade,
+							yearIncome:yearIncome,
+							describe:describe,
+							contactSummary:contactSummary,
+							nextContactTime:nextContactTime,
+							country:country,
+							province:province,
+							city:city,
+							street:street,
+							zipcode:zipcode
+						},
+						success:function(data){
+							if(data.success){
+								//关闭模态窗口
+								$("#createClueModal").modal("hide");
+								//刷新列表
+								/*************************************************  */
+							}else {
+								alert("添加失败");
+								//模态窗口不关闭
+								$("#createClueModal").modal("show");
+							}
+						}
+						
+					});
+					
+				});
+	/* 保存新创建的线索 *保存新创建的线索 *保存新创建的线索 *保存新创建的线索 *保存新创建的线索 *保存新创建的线索 *保存新创建的线索 */
+
+			})
+</script>
+
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -52,11 +218,7 @@
 						<div class="form-group">
 							<label for="create-clueOwner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
-								<select class="form-control" id="create-clueOwner">
-								  <option>zhangsan</option>
-								  <option>lisi</option>
-								  <option>wangwu</option>
-								</select>
+								<select class="form-control" id="create-clueOwner"></select>
 							</div>
 							<label for="create-company" class="col-sm-2 control-label">公司<span style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
@@ -69,11 +231,11 @@
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="create-call">
 								  <option></option>
-								  <option>先生</option>
-								  <option>夫人</option>
-								  <option>女士</option>
-								  <option>博士</option>
-								  <option>教授</option>
+								  <c:if test="${!empty appellationList }">
+								  	<c:forEach var="at" items="${appellationList }">
+								  		<option value="${at.id }">${at.text }</option>
+								  	</c:forEach>
+								  </c:if>
 								</select>
 							</div>
 							<label for="create-surname" class="col-sm-2 control-label">姓名<span style="font-size: 15px; color: red;">*</span></label>
@@ -113,13 +275,11 @@
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="create-status">
 								  <option></option>
-								  <option>试图联系</option>
-								  <option>将来联系</option>
-								  <option>已联系</option>
-								  <option>虚假线索</option>
-								  <option>丢失线索</option>
-								  <option>未联系</option>
-								  <option>需要条件</option>
+								 <c:if test="${!empty clueStateList }">
+								  	<c:forEach var="cs" items="${clueStateList }">
+								  		<option value="${cs.id }">${cs.text }</option>
+								  	</c:forEach>
+								  </c:if>
 								</select>
 							</div>
 						</div>
@@ -156,33 +316,22 @@
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="create-industry">
 								  <option></option>
-								  <option>应用服务提供商</option>
-								  <option>数据/电信/OEM</option>
-								  <option>企业资源管理</option>
-								  <option>政府/军队</option>
-								  <option>大企业</option>
-								  <option>管理软件提供商</option>
-								  <option>MSP（管理服务提供商）</option>
-								  <option>网络设备（企业）</option>
-								  <option>非管理软件提供商</option>
-								  <option>光网络</option>
-								  <option>服务提供商</option>
-								  <option>中小企业</option>
-								  <option>存储设备</option>
-								  <option>存储服务提供商</option>
-								  <option>系统集成</option>
-								  <option>无线企业</option>
+								  <c:if test="${!empty industryList }">
+								  	<c:forEach var="indu" items="${industryList }">
+								  		<option value="${indu.id }">${indu.text }</option>
+								  	</c:forEach>
+								  </c:if>
 								</select>
 							</div>
 							<label for="create-grade" class="col-sm-2 control-label">等级</label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="create-grade">
 								  <option></option>
-								  <option>已获得</option>
-								  <option>激活的</option>
-								  <option>市场失败</option>
-								  <option>项目取消</option>
-								  <option>关闭</option>
+								  <c:if test="${!empty industryList }">
+								  	<c:forEach var="grade" items="${gradeList }">
+								  		<option value="${grade.id }">${grade.text }</option>
+								  	</c:forEach>
+								  </c:if>
 								</select>
 							</div>
 						</div>
@@ -212,7 +361,7 @@
 							<div class="form-group">
 								<label for="create-nextContactTime" class="col-sm-2 control-label">下次联系时间</label>
 								<div class="col-sm-10" style="width: 300px;">
-									<input type="text" class="form-control" id="create-nextContactTime">
+									<input type="text" class="form-control" id="create-nextContactTime" readonly>
 								</div>
 							</div>
 						</div>
@@ -254,7 +403,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
+					<button id="saveNewClueBtn" type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
 				</div>
 			</div>
 		</div>
@@ -293,11 +442,11 @@
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="edit-call">
 								  <option></option>
-								  <option selected>先生</option>
-								  <option>夫人</option>
-								  <option>女士</option>
-								  <option>博士</option>
-								  <option>教授</option>
+								 <c:if test="${!empty appellationList }">
+								  	<c:forEach var="at" items="${appellationList }">
+								  		<option value="${at.id }">${at.text }</option>
+								  	</c:forEach>
+								  </c:if>
 								</select>
 							</div>
 							<label for="edit-surname" class="col-sm-2 control-label">姓名<span style="font-size: 15px; color: red;">*</span></label>
@@ -337,13 +486,11 @@
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="edit-status">
 								  <option></option>
-								  <option>试图联系</option>
-								  <option>将来联系</option>
-								  <option selected>已联系</option>
-								  <option>虚假线索</option>
-								  <option>丢失线索</option>
-								  <option>未联系</option>
-								  <option>需要条件</option>
+								  <c:if test="${!empty clueStateList }">
+								  	<c:forEach var="cs" items="${clueStateList }">
+								  		<option value="${cs.id }">${cs.text }</option>
+								  	</c:forEach>
+								  </c:if>
 								</select>
 							</div>
 						</div>
@@ -353,20 +500,11 @@
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="edit-source">
 								  <option></option>
-								  <option selected>广告</option>
-								  <option>推销电话</option>
-								  <option>员工介绍</option>
-								  <option>外部介绍</option>
-								  <option>在线商场</option>
-								  <option>合作伙伴</option>
-								  <option>公开媒介</option>
-								  <option>销售邮件</option>
-								  <option>合作伙伴研讨会</option>
-								  <option>内部研讨会</option>
-								  <option>交易会</option>
-								  <option>web下载</option>
-								  <option>web调研</option>
-								  <option>聊天</option>
+								  <c:if test="${!empty sourceList }">
+								  	<c:forEach var="source" items="${sourceList }">
+								  		<option value="${source.id }">${source.text }</option>
+								  	</c:forEach>
+								  </c:if>
 								</select>
 							</div>
 							<label for="edit-empnums" class="col-sm-2 control-label">员工数</label>
@@ -380,33 +518,22 @@
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="edit-industry">
 								  <option></option>
-								  <option>应用服务提供商</option>
-								  <option>数据/电信/OEM</option>
-								  <option>企业资源管理</option>
-								  <option>政府/军队</option>
-								  <option>大企业</option>
-								  <option>管理软件提供商</option>
-								  <option>MSP（管理服务提供商）</option>
-								  <option>网络设备（企业）</option>
-								  <option>非管理软件提供商</option>
-								  <option>光网络</option>
-								  <option>服务提供商</option>
-								  <option selected>中小企业</option>
-								  <option>存储设备</option>
-								  <option>存储服务提供商</option>
-								  <option>系统集成</option>
-								  <option>无线企业</option>
+								   <c:if test="${!empty industryList }">
+								  	<c:forEach var="indu" items="${industryList }">
+								  		<option value="${indu.id }">${indu.text }</option>
+								  	</c:forEach>
+								  </c:if>
 								</select>
 							</div>
 							<label for="edit-grade" class="col-sm-2 control-label">等级</label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="edit-grade">
 								  <option></option>
-								  <option selected>已获得</option>
-								  <option>激活的</option>
-								  <option>市场失败</option>
-								  <option>项目取消</option>
-								  <option>关闭</option>
+								 <c:if test="${!empty industryList }">
+								  	<c:forEach var="grade" items="${gradeList }">
+								  		<option value="${grade.id }">${grade.text }</option>
+								  	</c:forEach>
+								  </c:if>
 								</select>
 							</div>
 						</div>
@@ -436,7 +563,7 @@
 							<div class="form-group">
 								<label for="edit-nextContactTime" class="col-sm-2 control-label">下次联系时间</label>
 								<div class="col-sm-10" style="width: 300px;">
-									<input type="text" class="form-control" id="edit-nextContactTime" value="2017-05-01">
+									<input type="text" class="form-control" id="edit-nextContactTime" readonly value="2017-05-01">
 								</div>
 							</div>
 						</div>
@@ -566,20 +693,11 @@
 				      <div class="input-group-addon">来源</div>
 					  <select class="form-control">
 					  	  <option></option>
-					  	  <option>广告</option>
-						  <option>推销电话</option>
-						  <option>员工介绍</option>
-						  <option>外部介绍</option>
-						  <option>在线商场</option>
-						  <option>合作伙伴</option>
-						  <option>公开媒介</option>
-						  <option>销售邮件</option>
-						  <option>合作伙伴研讨会</option>
-						  <option>内部研讨会</option>
-						  <option>交易会</option>
-						  <option>web下载</option>
-						  <option>web调研</option>
-						  <option>聊天</option>
+					  	  <c:if test="${!empty sourceList }">
+								  	<c:forEach var="source" items="${sourceList }">
+								  		<option value="${source.id }">${source.text }</option>
+								  	</c:forEach>
+								  </c:if>
 					  </select>
 				    </div>
 				  </div>
@@ -607,13 +725,11 @@
 				      <div class="input-group-addon">状态</div>
 					  <select class="form-control">
 					  	<option></option>
-					  	<option>试图联系</option>
-					  	<option>将来联系</option>
-					  	<option>已联系</option>
-					  	<option>虚假线索</option>
-					  	<option>丢失线索</option>
-					  	<option>未联系</option>
-					  	<option>需要条件</option>
+					   <c:if test="${!empty clueStateList }">
+								  	<c:forEach var="cs" items="${clueStateList }">
+								  		<option value="${cs.id }">${cs.text }</option>
+								  	</c:forEach>
+								  </c:if>
 					  </select>
 				    </div>
 				  </div>
@@ -623,22 +739,11 @@
 				      <div class="input-group-addon">行业</div>
 					  <select class="form-control">
 					  	  <option></option>
-						  <option>应用服务提供商</option>
-						  <option>数据/电信/OEM</option>
-						  <option>企业资源管理</option>
-						  <option>政府/军队</option>
-						  <option>大企业</option>
-						  <option>管理软件提供商</option>
-						  <option>MSP（管理服务提供商）</option>
-						  <option>网络设备（企业）</option>
-						  <option>非管理软件提供商</option>
-						  <option>光网络</option>
-						  <option>服务提供商</option>
-						  <option>中小企业</option>
-						  <option>存储设备</option>
-						  <option>存储服务提供商</option>
-						  <option>系统集成</option>
-						  <option>无线企业</option>
+						  <c:if test="${!empty industryList }">
+								  	<c:forEach var="indu" items="${industryList }">
+								  		<option value="${indu.id }">${indu.text }</option>
+								  	</c:forEach>
+								  </c:if>
 					  </select>
 				    </div>
 				  </div>
@@ -650,11 +755,11 @@
 				      <div class="input-group-addon">等级</div>
 					  <select class="form-control">
 					  	<option></option>
-					  	<option>已获得</option>
-					  	<option>激活的</option>
-					  	<option>市场失败</option>
-					  	<option>项目取消</option>
-					  	<option>关闭</option>
+					  	 <c:if test="${!empty industryList }">
+								  	<c:forEach var="grade" items="${gradeList }">
+								  		<option value="${grade.id }">${grade.text }</option>
+								  	</c:forEach>
+								  </c:if>
 					  </select>
 				    </div>
 				  </div>
@@ -665,7 +770,7 @@
 			</div>
 			<div class="btn-toolbar" role="toolbar" style="background-color: #F7F7F7; height: 50px; position: relative;top: 40px;">
 				<div class="btn-group" style="position: relative; top: 18%;">
-				  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createClueModal"><span class="glyphicon glyphicon-plus"></span> 创建</button>
+				  <button id="createClueBtn" type="button" class="btn btn-primary" ><span class="glyphicon glyphicon-plus"></span> 创建</button>
 				  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editClueModal"><span class="glyphicon glyphicon-pencil"></span> 修改</button>
 				  <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span> 删除</button>
 				</div>
