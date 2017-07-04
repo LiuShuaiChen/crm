@@ -31,7 +31,7 @@ public class QueryClueStateContextListener implements ServletContextListener {
 	 * @see ServletContextListener#contextInitialized(ServletContextEvent)
 	 */
 	public void contextInitialized(ServletContextEvent sce) {
-		System.out.println("com.bjpowernode.crm.commons.web.listener.QueryClueGradeContextListener");
+		System.err.println("com.bjpowernode.crm.commons.web.listener.QueryClueGradeContextListener");
 		// 调用 service 查询 **线索状态** --!
 		DictionaryValueService dictionaryValueService = (DictionaryValueService) ServiceFactory.getService(new DictionaryValueServiceImpl());
 		List<DictionaryValue> clueStateList = dictionaryValueService.queryDicValueBygrade("clueState");

@@ -13,29 +13,36 @@ import com.bjpowernode.crm.settings.dictionary.service.impl.DictionaryValueServi
 import com.bjpowernode.crm.utils.ServiceFactory;
 
 /**
- * Application Lifecycle Listener implementation class QueryMarketActivityTypeContextListener
+ * Application Lifecycle Listener implementation class QueryReturnPriorityContextListener
  *
  */
 @WebListener
-public class QueryMarketActivityTypeContextListener implements ServletContextListener {
+public class QueryReturnPriorityContextListener implements ServletContextListener {
+
+    /**
+     * Default constructor. 
+     */
+    public QueryReturnPriorityContextListener() {
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
      * @see ServletContextListener#contextDestroyed(ServletContextEvent)
      */
     public void contextDestroyed(ServletContextEvent sce)  { 
+         // TODO Auto-generated method stub
     }
 
 	/**
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent sce)  { 
-         System.err.println("com.bjpowernode.crm.commons.web.listener.QueryMarketActivityTypeContextListener");
-         // 调用service  查询市场活动
-         DictionaryValueService dictionaryValueService = (DictionaryValueService) ServiceFactory.getService(new DictionaryValueServiceImpl());
-         List<DictionaryValue> activityTypeList = dictionaryValueService.queryDicValueByType("marketActivityType");
-         // 把aictivityTypeList 保存到context中 
-         ServletContext servletContext = sce.getServletContext();
-         servletContext.setAttribute("activityTypeList", activityTypeList);
+         System.err.println("=====com.bjpowernode.crm.commons.web.listener.QueryReturnPriorityContextListener");
+         DictionaryValueService dictionaryValueService = (DictionaryValueService) ServiceFactory
+ 				.getService(new DictionaryValueServiceImpl());
+ 		List<DictionaryValue> returnPriorityList = dictionaryValueService.queryDicValueBygrade("returnPriority");
+ 		ServletContext servletContext = sce.getServletContext();
+ 		servletContext.setAttribute("returnPriorityList", returnPriorityList);
     }
 	
 }

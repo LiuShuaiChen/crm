@@ -29,7 +29,7 @@ public class QueryMarketActivityStateContextListener implements ServletContextLi
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent sce)  { 
-        System.out.println("com.bjpowernode.crm.commons.web.listener.QueryMarketActivityStateContextListener");
+        System.err.println("com.bjpowernode.crm.commons.web.listener.QueryMarketActivityStateContextListener");
         //调用service  查询市场活动状态
         DictionaryValueService dictionaryValueService = (DictionaryValueService) ServiceFactory.getService(new DictionaryValueServiceImpl());
         List<DictionaryValue> acitivityStatusList =  dictionaryValueService.queryDicValueByType("marketActivityStatus");
