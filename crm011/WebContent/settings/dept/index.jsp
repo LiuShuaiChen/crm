@@ -1,21 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    %>
-    <%
+	pageEncoding="UTF-8"%>
+<%
 		String path = request.getContextPath();
 		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 		System.out.println("/crm003/WebContent/settings/dept/index.jsp");
 	%>
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css"
+	type="text/css" rel="stylesheet" />
 
 <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
-<script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
 $(function(){
@@ -269,11 +270,9 @@ $(function(){
 				</div>
 				<div class="modal-body">
 					<div style="position: relative; left: 40px;">
-						姓名：<b>张三</b><br><br>
-						登录帐号：<b>zhangsan</b><br><br>
-						组织机构：<b>1005，市场部，二级部门</b><br><br>
-						邮箱：<b>zhangsan@bjpowernode.com</b><br><br>
-						失效时间：<b>2017-02-14 10:10:10</b><br><br>
+						姓名：<b>张三</b><br> <br> 登录帐号：<b>zhangsan</b><br> <br>
+						组织机构：<b>1005，市场部，二级部门</b><br> <br> 邮箱：<b>zhangsan@bjpowernode.com</b><br>
+						<br> 失效时间：<b>2017-02-14 10:10:10</b><br> <br>
 						允许访问IP：<b>127.0.0.1,192.168.100.2</b>
 					</div>
 				</div>
@@ -299,33 +298,37 @@ $(function(){
 						<div class="form-group">
 							<label for="oldPwd" class="col-sm-2 control-label">原密码</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="oldPwd" style="width: 200%;">
+								<input type="text" class="form-control" id="oldPwd"
+									style="width: 200%;">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="newPwd" class="col-sm-2 control-label">新密码</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="newPwd" style="width: 200%;">
+								<input type="text" class="form-control" id="newPwd"
+									style="width: 200%;">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="confirmPwd" class="col-sm-2 control-label">确认密码</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="confirmPwd" style="width: 200%;">
+								<input type="text" class="form-control" id="confirmPwd"
+									style="width: 200%;">
 							</div>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="window.location.href='../login.html';">更新</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						onclick="window.location.href='../login.html';">更新</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- 退出系统的模态窗口 -->
 	<div class="modal fade" id="exitModal" role="dialog">
 		<div class="modal-dialog" role="document" style="width: 30%;">
@@ -341,33 +344,47 @@ $(function(){
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="window.location.href='../../login.html';">确定</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						onclick="window.location.href='../../login.html';">确定</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- 顶部 -->
-	<div id="top" style="height: 50px; background-color: #3C3C3C; width: 100%;">
-		<div style="position: absolute; top: 5px; left: 0px; font-size: 30px; font-weight: 400; color: white; font-family: 'times new roman'">CRM &nbsp;<span style="font-size: 12px;">&copy;2017&nbsp;刘帅辰</span></div>
+	<div id="top"
+		style="height: 50px; background-color: #3C3C3C; width: 100%;">
+		<div
+			style="position: absolute; top: 5px; left: 0px; font-size: 30px; font-weight: 400; color: white; font-family: 'times new roman'">
+			CRM &nbsp;<span style="font-size: 12px;">&copy;2017&nbsp;刘帅辰</span>
+		</div>
 		<div style="position: absolute; top: 15px; right: 15px;">
 			<ul>
-				<li class="dropdown user-dropdown">
-					<a href="javascript:void(0)" style="text-decoration: none; color: white;" class="dropdown-toggle" data-toggle="dropdown">
-						<span class="glyphicon glyphicon-user"></span> zhangsan <span class="caret"></span>
-					</a>
+				<li class="dropdown user-dropdown"><a href="javascript:void(0)"
+					style="text-decoration: none; color: white;"
+					class="dropdown-toggle" data-toggle="dropdown"> <span
+						class="glyphicon glyphicon-user"></span> zhangsan <span
+						class="caret"></span>
+				</a>
 					<ul class="dropdown-menu">
-						<li><a href="../../workbench/index.html"><span class="glyphicon glyphicon-home"></span> 工作台</a></li>
-						<li><a href="../index.html"><span class="glyphicon glyphicon-wrench"></span> 系统设置</a></li>
-						<li><a href="javascript:void(0)" data-toggle="modal" data-target="#myInformation"><span class="glyphicon glyphicon-file"></span> 我的资料</a></li>
-						<li><a href="javascript:void(0)" data-toggle="modal" data-target="#editPwdModal"><span class="glyphicon glyphicon-edit"></span> 修改密码</a></li>
-						<li><a href="javascript:void(0);" data-toggle="modal" data-target="#exitModal"><span class="glyphicon glyphicon-off"></span> 退出</a></li>
-					</ul>
-				</li>
+						<li><a href="../../workbench/index.html"><span
+								class="glyphicon glyphicon-home"></span> 工作台</a></li>
+						<li><a href="../index.html"><span
+								class="glyphicon glyphicon-wrench"></span> 系统设置</a></li>
+						<li><a href="javascript:void(0)" data-toggle="modal"
+							data-target="#myInformation"><span
+								class="glyphicon glyphicon-file"></span> 我的资料</a></li>
+						<li><a href="javascript:void(0)" data-toggle="modal"
+							data-target="#editPwdModal"><span
+								class="glyphicon glyphicon-edit"></span> 修改密码</a></li>
+						<li><a href="javascript:void(0);" data-toggle="modal"
+							data-target="#exitModal"><span
+								class="glyphicon glyphicon-off"></span> 退出</a></li>
+					</ul></li>
 			</ul>
 		</div>
 	</div>
-	
+
 	<!-- 创建部门的模态窗口 -->
 	<div class="modal fade" id="createDeptModal" role="dialog">
 		<div class="modal-dialog" role="document" style="width: 80%;">
@@ -376,57 +393,67 @@ $(function(){
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">×</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-plus"  ></span> 新增部门</h4>
+					<h4 class="modal-title" id="myModalLabel">
+						<span class="glyphicon glyphicon-plus"></span> 新增部门
+					</h4>
 				</div>
 				<div class="modal-body">
-				
+
 					<form class="form-horizontal" role="form">
-					
+
 						<div class="form-group">
-							<label for="create-code" class="col-sm-2 control-label">编号<span style="font-size: 15px; color: red;">*</span></label>
+							<label for="create-code" class="col-sm-2 control-label">编号<span
+								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-code" name="code" style="width: 200%;" placeholder="编号为四位数字，不能为空，具有唯一性">
-								<input type="hidden" name="id">
+								<input type="text" class="form-control" id="create-code"
+									name="code" style="width: 200%;"
+									placeholder="编号为四位数字，不能为空，具有唯一性"> <input type="hidden"
+									name="id">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="create-name" class="col-sm-2 control-label">名称</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-name" name="name" style="width: 200%;">
+								<input type="text" class="form-control" id="create-name"
+									name="name" style="width: 200%;">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="create-manager" class="col-sm-2 control-label">负责人</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-manager" name="manager" style="width: 200%;">
+								<input type="text" class="form-control" id="create-manager"
+									name="manager" style="width: 200%;">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="create-phone" class="col-sm-2 control-label">电话</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-phone" name="phone" style="width: 200%;">
+								<input type="text" class="form-control" id="create-phone"
+									name="phone" style="width: 200%;">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="create-describe" class="col-sm-2 control-label">描述</label>
 							<div class="col-sm-10" style="width: 55%;">
-								<textarea class="form-control" rows="3" id="create-describe" name="description"></textarea>
+								<textarea class="form-control" rows="3" id="create-describe"
+									name="description"></textarea>
 							</div>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal" id="saveBtn">保存</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						id="saveBtn">保存</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- 修改部门的模态窗口 -->
 	<div class="modal fade" id="editDeptModal" role="dialog">
 		<div class="modal-dialog" role="document" style="width: 80%;">
@@ -435,57 +462,68 @@ $(function(){
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">×</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-edit"></span> 编辑部门</h4>
+					<h4 class="modal-title" id="myModalLabel">
+						<span class="glyphicon glyphicon-edit"></span> 编辑部门
+					</h4>
 				</div>
 				<div class="modal-body">
-				
+
 					<form class="form-horizontal" role="form">
-					
+
 						<div class="form-group">
-							<label for="create-code" class="col-sm-2 control-label">编号<span style="font-size: 15px; color: red;">*</span></label>
+							<label for="create-code" class="col-sm-2 control-label">编号<span
+								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-code" name="code" style="width: 200%;" placeholder="编号为四位数字，不能为空，具有唯一性" value="${deptList.code }">
-								<input type="hidden" id="edit-id" name="id" value="${deptList.id }">
+								<input type="text" class="form-control" id="edit-code"
+									name="code" style="width: 200%;"
+									placeholder="编号为四位数字，不能为空，具有唯一性" value="${deptList.code }">
+								<input type="hidden" id="edit-id" name="id"
+									value="${deptList.id }">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="create-name" class="col-sm-2 control-label">名称</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-name" name="name"  style="width: 200%;" value="${deptList.name}">
+								<input type="text" class="form-control" id="edit-name"
+									name="name" style="width: 200%;" value="${deptList.name}">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="create-manager" class="col-sm-2 control-label">负责人</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-manager" name="manager" style="width: 200%;" value="${deptList.manager }">
+								<input type="text" class="form-control" id="edit-manager"
+									name="manager" style="width: 200%;"
+									value="${deptList.manager }">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="create-phone" class="col-sm-2 control-label">电话</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-phone" name="phone" style="width: 200%;" value="${deptList.phone }">
+								<input type="text" class="form-control" id="edit-phone"
+									name="phone" style="width: 200%;" value="${deptList.phone }">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="create-describe" class="col-sm-2 control-label">描述</label>
 							<div class="col-sm-10" style="width: 55%;">
-								<textarea class="form-control" rows="3" id="edit-description" name="description" >${deptList.description }</textarea>
+								<textarea class="form-control" rows="3" id="edit-description"
+									name="description">${deptList.description }</textarea>
 							</div>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" id="updateBtn" >更新</button>
+					<button type="button" class="btn btn-primary" id="updateBtn">更新</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<div style="width: 95%">
 		<div>
 			<div style="position: relative; left: 30px; top: -10px;">
@@ -494,13 +532,20 @@ $(function(){
 				</div>
 			</div>
 		</div>
-		<div class="btn-toolbar" role="toolbar" style="background-color: #F7F7F7; height: 50px; position: relative;left: 30px; top:-30px;">
+		<div class="btn-toolbar" role="toolbar"
+			style="background-color: #F7F7F7; height: 50px; position: relative; left: 30px; top: -30px;">
 			<div class="btn-group" style="position: relative; top: 18%;">
-			<!-- 创建  insertBtn 事件 -->
-			  <button type="button" class="btn btn-primary" id="createDeptBtn" ><span class="glyphicon glyphicon-plus"></span> 创建</button>
-			  
-			  <button type="button" class="btn btn-default" id="editDeptBtn" ><span class="glyphicon glyphicon-edit"></span> 编辑</button>
-			  <button type="button" class="btn btn-danger" id ="deleteDeptBtn" ><span class="glyphicon glyphicon-minus"></span> 删除</button>
+				<!-- 创建  insertBtn 事件 -->
+				<button type="button" class="btn btn-primary" id="createDeptBtn">
+					<span class="glyphicon glyphicon-plus"></span> 创建
+				</button>
+
+				<button type="button" class="btn btn-default" id="editDeptBtn">
+					<span class="glyphicon glyphicon-edit"></span> 编辑
+				</button>
+				<button type="button" class="btn btn-danger" id="deleteDeptBtn">
+					<span class="glyphicon glyphicon-minus"></span> 删除
+				</button>
 			</div>
 		</div>
 		<div style="position: relative; left: 30px; top: -10px;">
@@ -535,34 +580,46 @@ $(function(){
 				</tbody>
 			</table>
 		</div>
-		
-		<div style="height: 50px; position: relative;top: 0px; left:30px;">
-		
+
+		<div style="height: 50px; position: relative; top: 0px; left: 30px;">
+
 			<div>
-				<button type="button" class="btn btn-default" style="cursor: default;">共<b id="myTotal"></b>条记录</button>
+				<button type="button" class="btn btn-default"
+					style="cursor: default;">
+					共<b id="myTotal"></b>条记录
+				</button>
 			</div>
-				<div class="btn-group" style="position: relative;top: -34px; left: 110px;">
-			
-				<button type="button" class="btn btn-default" style="cursor: default;">共<b id="myPageSize"></b>页</button>
-				<button type="button" class="btn btn-default" style="cursor: default;"><b id="myPageCount"></b>条/页</button>
-				<button type="button" class="btn btn-default" style="cursor: default;">当前是第<b id="myPageNo"></b>页</button>
-				
+			<div class="btn-group"
+				style="position: relative; top: -34px; left: 110px;">
+
+				<button type="button" class="btn btn-default"
+					style="cursor: default;">
+					共<b id="myPageSize"></b>页
+				</button>
+				<button type="button" class="btn btn-default"
+					style="cursor: default;">
+					<b id="myPageCount"></b>条/页
+				</button>
+				<button type="button" class="btn btn-default"
+					style="cursor: default;">
+					当前是第<b id="myPageNo"></b>页
+				</button>
+
 			</div>
-			
-			<div style="position: relative;top: -88px; left: 385px;">
-			
+
+			<div style="position: relative; top: -88px; left: 385px;">
+
 				<nav>
-					<ul class="pagination">
-					
-						<li id="firstPage"><a>首页</a></li>
-						<li id="proPage"><a>上一页</a></li>
-						<li id="nextPage"><a>下一页</a></li>
-						<li id="lastPage"><a>末页</a></li>
-						
-					</ul>
+				<ul class="pagination">
+
+					<li id="firstPage"><a>首页</a></li>
+					<li id="proPage"><a>上一页</a></li>
+					<li id="nextPage"><a>下一页</a></li>
+					<li id="lastPage"><a>末页</a></li>
+
+				</ul>
 				</nav>
 			</div>
 		</div>
-	
 </body>
 </html>

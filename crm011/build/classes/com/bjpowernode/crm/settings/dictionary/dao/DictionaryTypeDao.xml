@@ -13,33 +13,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- void insert(DictionaryType dictionaryType); -->
 	<insert id="insert" parameterType="dictionaryType">
-		insert into tbl_dictionary_type(code,name,description) values(#{code},#{name},#{description})
+		insert into
+		tbl_dictionary_type(code,name,description)
+		values(#{code},#{name},#{description})
 	</insert>
 
 	<!-- void delete(String code); -->
 	<delete id="delete" parameterType="string">
-		delete from tbl_dictionary_type where code=#{code}
+		delete from
+		tbl_dictionary_type where code=#{code}
 	</delete>
 
 	<!-- void update(DictionaryType dictionaryType); -->
 	<update id="update" parameterType="dictionaryType">
 
-		update tbl_dictionary_type set code=#{code}, name=#{name}, description=#{description} where code=#{code}
+		update tbl_dictionary_type set
+		code=#{code}, name=#{name}, description=#{description} where
+		code=#{code}
 	</update>
 
 	<!-- DictionaryType getByCode(String code); -->
 	<select id="getByCode" parameterType="String" resultType="dictionaryType">
-		select code,name,description from tbl_dictionary_type where code=#{code}
+		select
+		code,name,description from tbl_dictionary_type where code=#{code}
 	</select>
 
 	<!-- List<DictionaryType> getByAll(); -->
 	<select id="getByAll" resultMap="rDictionaryType">
-		select code,name,description from tbl_dictionary_type
+		select code,name,description
+		from tbl_dictionary_type
 	</select>
-	
+
 	<!-- int getCount(String code); -->
 	<select id="getCount" resultType="int">
-		select count(*) from tbl_dictionary_type where code=#{code}
+		select count(*) from
+		tbl_dictionary_type where code=#{code}
 	</select>
 
 </mapper>

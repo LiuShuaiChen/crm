@@ -1,20 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%
+	pageEncoding="UTF-8"%>
+<%
 		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/";
     	System.out.println("/crm002/WebContent/settings/dictionary/type/index.jsp");
     	// String str = (String)session.getAttribute("str");
 	%>
-	
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css"
+	type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
-<script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
 $(function(){
@@ -67,14 +69,22 @@ $(function(){
 			</div>
 		</div>
 	</div>
-	<div class="btn-toolbar" role="toolbar" style="background-color: #F7F7F7; height: 50px; position: relative;left: 30px;">
+	<div class="btn-toolbar" role="toolbar"
+		style="background-color: #F7F7F7; height: 50px; position: relative; left: 30px;">
 		<div class="btn-group" style="position: relative; top: 18%;">
-		
-		  <button type="button" class="btn btn-primary" onclick="window.location.href='settings/dictionary/type/save.jsp'"><span class="glyphicon glyphicon-plus"></span> 创建</button>
-		  
-		  <button type="button" class="btn btn-default" id="edit"><span class="glyphicon glyphicon-edit"></span> 编辑</button>
-		  
-		  <button type="button" class="btn btn-danger" id="delete"><span class="glyphicon glyphicon-minus"></span> 删除</button>
+
+			<button type="button" class="btn btn-primary"
+				onclick="window.location.href='settings/dictionary/type/save.jsp'">
+				<span class="glyphicon glyphicon-plus"></span> 创建
+			</button>
+
+			<button type="button" class="btn btn-default" id="edit">
+				<span class="glyphicon glyphicon-edit"></span> 编辑
+			</button>
+
+			<button type="button" class="btn btn-danger" id="delete">
+				<span class="glyphicon glyphicon-minus"></span> 删除
+			</button>
 		</div>
 	</div>
 	<div style="position: relative; left: 30px; top: 20px;">
@@ -89,7 +99,7 @@ $(function(){
 				</tr>
 			</thead>
 			<tbody>
-			
+
 				<!-- <tr class="active">
 					<td><input type="checkbox" /></td>
 					<td>1</td>
@@ -97,18 +107,16 @@ $(function(){
 					<td>性别</td>
 					<td>性别包括男和女</td>
 				</tr> -->
-				
+
 				<c:if test="${empty dicList }">
 					<tr>
-						<td colspan="5" align="center">
-							没有相关记录
-						</td>
+						<td colspan="5" align="center">没有相关记录</td>
 					</tr>
 				</c:if>
 				<c:if test="${!empty dicList }">
 					<c:forEach items="${dicList }" var="d" varStatus="vs">
 						<tr class="active">
-							<td><input type="checkbox" name="xz" value="${d.code }"/></td>
+							<td><input type="checkbox" name="xz" value="${d.code }" /></td>
 							<td>${vs.count }</td>
 							<td>${d.code }</td>
 							<td>${d.name }</td>
@@ -119,6 +127,6 @@ $(function(){
 			</tbody>
 		</table>
 	</div>
-	
+
 </body>
 </html>

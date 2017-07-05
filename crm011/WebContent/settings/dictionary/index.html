@@ -2,9 +2,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="../../jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<link href="../../jquery/bootstrap_3.3.0/css/bootstrap.min.css"
+	type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="../../jquery/jquery-1.11.1-min.js"></script>
-<script type="text/javascript" src="../../jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="../../jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
 	//页面加载完毕
@@ -53,11 +55,9 @@
 				</div>
 				<div class="modal-body">
 					<div style="position: relative; left: 40px;">
-						姓名：<b>张三</b><br><br>
-						登录帐号：<b>zhangsan</b><br><br>
-						组织机构：<b>1005，市场部，二级部门</b><br><br>
-						邮箱：<b>zhangsan@bjpowernode.com</b><br><br>
-						失效时间：<b>2017-02-14 10:10:10</b><br><br>
+						姓名：<b>张三</b><br> <br> 登录帐号：<b>zhangsan</b><br> <br>
+						组织机构：<b>1005，市场部，二级部门</b><br> <br> 邮箱：<b>zhangsan@bjpowernode.com</b><br>
+						<br> 失效时间：<b>2017-02-14 10:10:10</b><br> <br>
 						允许访问IP：<b>127.0.0.1,192.168.100.2</b>
 					</div>
 				</div>
@@ -83,33 +83,37 @@
 						<div class="form-group">
 							<label for="oldPwd" class="col-sm-2 control-label">原密码</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="oldPwd" style="width: 200%;">
+								<input type="text" class="form-control" id="oldPwd"
+									style="width: 200%;">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="newPwd" class="col-sm-2 control-label">新密码</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="newPwd" style="width: 200%;">
+								<input type="text" class="form-control" id="newPwd"
+									style="width: 200%;">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="confirmPwd" class="col-sm-2 control-label">确认密码</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="confirmPwd" style="width: 200%;">
+								<input type="text" class="form-control" id="confirmPwd"
+									style="width: 200%;">
 							</div>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="window.location.href='../login.html';">更新</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						onclick="window.location.href='../login.html';">更新</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- 退出系统的模态窗口 -->
 	<div class="modal fade" id="exitModal" role="dialog">
 		<div class="modal-dialog" role="document" style="width: 30%;">
@@ -125,59 +129,84 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="window.location.href='../../login.html';">确定</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						onclick="window.location.href='../../login.html';">确定</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- 顶部 -->
-	<div id="top" style="height: 50px; background-color: #3C3C3C; width: 100%;">
-		<div style="position: absolute; top: 5px; left: 0px; font-size: 30px; font-weight: 400; color: white; font-family: 'times new roman'">CRM &nbsp;<span style="font-size: 12px;">&copy;2017&nbsp;刘帅辰</span></div>
+	<div id="top"
+		style="height: 50px; background-color: #3C3C3C; width: 100%;">
+		<div
+			style="position: absolute; top: 5px; left: 0px; font-size: 30px; font-weight: 400; color: white; font-family: 'times new roman'">
+			CRM &nbsp;<span style="font-size: 12px;">&copy;2017&nbsp;刘帅辰</span>
+		</div>
 		<div style="position: absolute; top: 15px; right: 15px;">
 			<ul>
-				<li class="dropdown user-dropdown">
-					<a href="javascript:void(0)" style="text-decoration: none; color: white;" class="dropdown-toggle" data-toggle="dropdown">
-						<span class="glyphicon glyphicon-user"></span> zhangsan <span class="caret"></span>
-					</a>
+				<li class="dropdown user-dropdown"><a href="javascript:void(0)"
+					style="text-decoration: none; color: white;"
+					class="dropdown-toggle" data-toggle="dropdown"> <span
+						class="glyphicon glyphicon-user"></span> zhangsan <span
+						class="caret"></span>
+				</a>
 					<ul class="dropdown-menu">
-						<li><a href="../../workbench/index.html"><span class="glyphicon glyphicon-home"></span> 工作台</a></li>
-						<li><a href="../index.html"><span class="glyphicon glyphicon-wrench"></span> 系统设置</a></li>
-						<li><a href="javascript:void(0)" data-toggle="modal" data-target="#myInformation"><span class="glyphicon glyphicon-file"></span> 我的资料</a></li>
-						<li><a href="javascript:void(0)" data-toggle="modal" data-target="#editPwdModal"><span class="glyphicon glyphicon-edit"></span> 修改密码</a></li>
-						<li><a href="javascript:void(0);" data-toggle="modal" data-target="#exitModal"><span class="glyphicon glyphicon-off"></span> 退出</a></li>
-					</ul>
-				</li>
+						<li><a href="../../workbench/index.html"><span
+								class="glyphicon glyphicon-home"></span> 工作台</a></li>
+						<li><a href="../index.html"><span
+								class="glyphicon glyphicon-wrench"></span> 系统设置</a></li>
+						<li><a href="javascript:void(0)" data-toggle="modal"
+							data-target="#myInformation"><span
+								class="glyphicon glyphicon-file"></span> 我的资料</a></li>
+						<li><a href="javascript:void(0)" data-toggle="modal"
+							data-target="#editPwdModal"><span
+								class="glyphicon glyphicon-edit"></span> 修改密码</a></li>
+						<li><a href="javascript:void(0);" data-toggle="modal"
+							data-target="#exitModal"><span
+								class="glyphicon glyphicon-off"></span> 退出</a></li>
+					</ul></li>
 			</ul>
 		</div>
 	</div>
-	
+
 	<!-- 中间 -->
-	<div id="center" style="position: absolute;top: 50px; bottom: 30px; left: 0px; right: 0px;">
-	
+	<div id="center"
+		style="position: absolute; top: 50px; bottom: 30px; left: 0px; right: 0px;">
+
 		<!-- 导航 -->
-		<div id="navigation" style="left: 0px; width: 18%; position: relative; height: 100%; overflow:auto;">
-		
+		<div id="navigation"
+			style="left: 0px; width: 18%; position: relative; height: 100%; overflow: auto;">
+
 			<ul id="no1" class="nav nav-pills nav-stacked">
-				<li class="liClass"><a href="type/index.html" target="workareaFrame"><span class="glyphicon glyphicon-book"></span> 字典类型</a></li>
-				<li class="liClass"><a href="value/index.html" target="workareaFrame"><span class="glyphicon glyphicon-list"></span> 字典值</a></li>
+				<li class="liClass"><a href="type/index.html"
+					target="workareaFrame"><span class="glyphicon glyphicon-book"></span>
+						字典类型</a></li>
+				<li class="liClass"><a href="value/index.html"
+					target="workareaFrame"><span class="glyphicon glyphicon-list"></span>
+						字典值</a></li>
 			</ul>
-			
+
 			<!-- 分割线 -->
-			<div id="divider1" style="position: absolute; top : 0px; right: 0px; width: 1px; height: 100% ; background-color: #B3B3B3;"></div>
+			<div id="divider1"
+				style="position: absolute; top: 0px; right: 0px; width: 1px; height: 100%; background-color: #B3B3B3;"></div>
 		</div>
-		
+
 		<!-- 工作区 -->
-		<div id="workarea" style="position: absolute; top : 0px; left: 18%; width: 82%; height: 100%;">
-			<iframe style="border-width: 0px; width: 100%; height: 100%;" name="workareaFrame"></iframe>
+		<div id="workarea"
+			style="position: absolute; top: 0px; left: 18%; width: 82%; height: 100%;">
+			<iframe style="border-width: 0px; width: 100%; height: 100%;"
+				name="workareaFrame"></iframe>
 		</div>
-		
+
 	</div>
-	
-	<div id="divider2" style="height: 1px; width: 100%; position: absolute;bottom: 30px; background-color: #B3B3B3;"></div>
-	
+
+	<div id="divider2"
+		style="height: 1px; width: 100%; position: absolute; bottom: 30px; background-color: #B3B3B3;"></div>
+
 	<!-- 底部 -->
-	<div id="down" style="height: 30px; width: 100%; position: absolute;bottom: 0px;"></div>
-	
+	<div id="down"
+		style="height: 30px; width: 100%; position: absolute; bottom: 0px;"></div>
+
 </body>
 </html>

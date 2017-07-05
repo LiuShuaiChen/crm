@@ -1,11 +1,12 @@
-    <%
+
+<%
 		String path = request.getContextPath();
 		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 		System.out.println("/crm010/WebContent/workbench/activity/detail.jsp");
     %>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,19 +14,31 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-<link href="jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="jquery/bs_pagination/jquery.bs_pagination.min.css">
+<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css"
+	type="text/css" rel="stylesheet" />
+<link
+	href="jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css"
+	type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css"
+	href="jquery/bs_pagination/jquery.bs_pagination.min.css">
 
 <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
-<script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
-<script type="text/javascript" src="jquery/bs_pagination/jquery.bs_pagination.min.js"></script>
-<script type="text/javascript" src="jquery/bs_pagination/localization/en.js"></script>
-<script type="text/javascript" src="jquery/datetimepicker/js/bootstrap-datetimepicker.js"></script>
-<script type="text/javascript" src="jquery/bs_pagination/jquery.bs_pagination.min.css"></script>
-<script type="text/javascript" src="jquery/datetimepicker/css/bootstrap-datetimepicker.css"></script>
+<script type="text/javascript"
+	src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript"
+	src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript"
+	src="jquery/bs_pagination/jquery.bs_pagination.min.js"></script>
+<script type="text/javascript"
+	src="jquery/bs_pagination/localization/en.js"></script>
+<script type="text/javascript"
+	src="jquery/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript"
+	src="jquery/bs_pagination/jquery.bs_pagination.min.css"></script>
+<script type="text/javascript"
+	src="jquery/datetimepicker/css/bootstrap-datetimepicker.css"></script>
 
 
 <script type="text/javascript">
@@ -538,7 +551,7 @@ $(function(){
 <title>Insert title here</title>
 </head>
 <body>
-<!-- 创建市场活动的模态窗口 -->
+	<!-- 创建市场活动的模态窗口 -->
 	<div class="modal fade" id="createActivityModal" role="dialog">
 		<div class="modal-dialog" role="document" style="width: 85%;">
 			<div class="modal-content">
@@ -549,58 +562,67 @@ $(function(){
 					<h4 class="modal-title" id="myModalLabel">创建市场活动</h4>
 				</div>
 				<div class="modal-body">
-				
+
 					<form class="form-horizontal" role="form">
-					
+
 						<div class="form-group">
-							<label for="create-marketActivityOwner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
+							<label for="create-marketActivityOwner"
+								class="col-sm-2 control-label">所有者<span
+								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="create-marketActivityOwner">
-	
+
 								</select>
 							</div>
-							<label for="create-marketActivityType" class="col-sm-2 control-label">类型</label>
+							<label for="create-marketActivityType"
+								class="col-sm-2 control-label">类型</label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="create-marketActivityType">
-								  <option></option>
-								  <c:if test="${!empty activityTypeList }">
-								  	<c:forEach var="at" items="${activityTypeList }">
-								  		<option value="${at.id }">${at.text }</option>
-								  	</c:forEach>
-								  </c:if>
+									<option></option>
+									<c:if test="${!empty activityTypeList }">
+										<c:forEach var="at" items="${activityTypeList }">
+											<option value="${at.id }">${at.text }</option>
+										</c:forEach>
+									</c:if>
 								</select>
 							</div>
 						</div>
-						
+
 						<div class="form-group">
-							<label for="create-marketActivityName" class="col-sm-2 control-label">名称<span style="font-size: 15px; color: red;">*</span></label>
+							<label for="create-marketActivityName"
+								class="col-sm-2 control-label">名称<span
+								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-marketActivityName">
+								<input type="text" class="form-control"
+									id="create-marketActivityName">
 							</div>
-							<label for="create-marketActivityState" class="col-sm-2 control-label">状态</label>
+							<label for="create-marketActivityState"
+								class="col-sm-2 control-label">状态</label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="create-marketActivityState">
-								  <option></option>
-								  <c:if test="${!empty acitivityStatusList }">
-								  	<c:forEach var="as" items="${acitivityStatusList }">
-								  		<option value="${as.id }">${as.text }</option>
-								  	</c:forEach>
-								  </c:if>
+									<option></option>
+									<c:if test="${!empty acitivityStatusList }">
+										<c:forEach var="as" items="${acitivityStatusList }">
+											<option value="${as.id }">${as.text }</option>
+										</c:forEach>
+									</c:if>
 								</select>
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="create-startTime" class="col-sm-2 control-label">开始日期</label>
-							<div class="col-sm-10" style="width: 300px;" >
-								<input type="text" class="form-control" id="create-startTime" readonly>
+							<div class="col-sm-10" style="width: 300px;">
+								<input type="text" class="form-control" id="create-startTime"
+									readonly>
 							</div>
 							<label for="create-endTime" class="col-sm-2 control-label">结束日期</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-endTime" readonly>
+								<input type="text" class="form-control" id="create-endTime"
+									readonly>
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="create-actualCost" class="col-sm-2 control-label">实际成本</label>
 							<div class="col-sm-10" style="width: 300px;">
@@ -611,25 +633,25 @@ $(function(){
 								<input type="text" class="form-control" id="create-budgetCost">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="create-describe" class="col-sm-2 control-label">描述</label>
 							<div class="col-sm-10" style="width: 81%;">
 								<textarea class="form-control" rows="3" id="create-describe"></textarea>
 							</div>
 						</div>
-						
+
 					</form>
-					
+
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" id="saveActivityBtn" class="btn btn-primary" >保存</button>
+					<button type="button" id="saveActivityBtn" class="btn btn-primary">保存</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- 修改市场活动的模态窗口 -->
 	<div class="modal fade" id="editActivityModal" role="dialog">
 		<div class="modal-dialog" role="document" style="width: 85%;">
@@ -641,88 +663,98 @@ $(function(){
 					<h4 class="modal-title" id="myModalLabel">修改市场活动</h4>
 				</div>
 				<div class="modal-body">
-				
+
 					<form class="form-horizontal" role="form">
-						<input id="edit-marketActivityId" type="hidden" >
+						<input id="edit-marketActivityId" type="hidden">
 						<div class="form-group">
-							<label for="edit-marketActivityOwner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
+							<label for="edit-marketActivityOwner"
+								class="col-sm-2 control-label">所有者<span
+								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="edit-marketActivityOwner">
-						
+
 								</select>
 							</div>
-							<label for="edit-marketActivityType" class="col-sm-2 control-label">类型</label>
+							<label for="edit-marketActivityType"
+								class="col-sm-2 control-label">类型</label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="edit-marketActivityType">
-								  <option></option>
-								  <c:if test="${!empty activityTypeList }">
-								  	<c:forEach var="at" items="${activityTypeList }">
-								  		<option value="${at.id }">${at.text }</option>
-								  	</c:forEach>
-								  </c:if>
+									<option></option>
+									<c:if test="${!empty activityTypeList }">
+										<c:forEach var="at" items="${activityTypeList }">
+											<option value="${at.id }">${at.text }</option>
+										</c:forEach>
+									</c:if>
 								</select>
 							</div>
 						</div>
-						
+
 						<div class="form-group">
-							<label for="edit-marketActivityName" class="col-sm-2 control-label">名称<span style="font-size: 15px; color: red;">*</span></label>
+							<label for="edit-marketActivityName"
+								class="col-sm-2 control-label">名称<span
+								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-marketActivityName" value="发传单">
+								<input type="text" class="form-control"
+									id="edit-marketActivityName" value="发传单">
 							</div>
-							<label for="edit-marketActivityState" class="col-sm-2 control-label">状态</label>
+							<label for="edit-marketActivityState"
+								class="col-sm-2 control-label">状态</label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="edit-marketActivityState">
-								  <option></option>
-								  <c:if test="${!empty acitivityStatusList }">
-								  	<c:forEach var="as" items="${acitivityStatusList }">
-								  		<option value="${as.id }">${as.text }</option>
-								  	</c:forEach>
-								  </c:if>
+									<option></option>
+									<c:if test="${!empty acitivityStatusList }">
+										<c:forEach var="as" items="${acitivityStatusList }">
+											<option value="${as.id }">${as.text }</option>
+										</c:forEach>
+									</c:if>
 								</select>
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="edit-startTime" class="col-sm-2 control-label">开始日期</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-startDate" readonly >
+								<input type="text" class="form-control" id="edit-startDate"
+									readonly>
 							</div>
 							<label for="edit-endTime" class="col-sm-2 control-label">结束日期</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-endDate" readonly>
+								<input type="text" class="form-control" id="edit-endDate"
+									readonly>
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="edit-actualCost" class="col-sm-2 control-label">实际成本</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-actualCost" >
+								<input type="text" class="form-control" id="edit-actualCost">
 							</div>
 							<label for="edit-budgetCost" class="col-sm-2 control-label">预算成本</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-budgetCost" >
+								<input type="text" class="form-control" id="edit-budgetCost">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="edit-describe" class="col-sm-2 control-label">描述</label>
 							<div class="col-sm-10" style="width: 81%;">
 								<textarea class="form-control" rows="3" id="edit-description">市场活动Marketing，是指品牌主办或参与的展览会议与公关市场活动，包括自行主办的各类研讨会、客户交流会、演示会、新产品发布会、体验会、答谢会、年会和出席参加并布展或演讲的展览会、研讨会、行业交流会、颁奖典礼等</textarea>
 							</div>
 						</div>
-						
+
 					</form>
-					
+
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button id="updateMarketActivityBtn" type="button" class="btn btn-primary" data-dismiss="modal">更新</button>
+					<button id="updateMarketActivityBtn" type="button"
+						class="btn btn-primary" data-dismiss="modal">更新</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 	<!-- 导入市场活动的模态窗口 -->
 	<div class="modal fade" id="importActivityModal" role="dialog">
 		<div class="modal-dialog" role="document" style="width: 85%;">
@@ -734,13 +766,14 @@ $(function(){
 					<h4 class="modal-title" id="myModalLabel">导入市场活动</h4>
 				</div>
 				<div class="modal-body" style="height: 350px;">
-					<div style="position: relative;top: 20px; left: 50px;">
+					<div style="position: relative; top: 20px; left: 50px;">
 						请选择要上传的文件：<small style="color: gray;">[仅支持.xls或.xlsx格式]</small>
 					</div>
-					<div style="position: relative;top: 40px; left: 50px;">
+					<div style="position: relative; top: 40px; left: 50px;">
 						<input type="file">
 					</div>
-					<div style="position: relative; width: 400px; height: 320px; left: 45% ; top: -40px;" >
+					<div
+						style="position: relative; width: 400px; height: 320px; left: 45%; top: -40px;">
 						<h3>重要提示</h3>
 						<ul>
 							<li>给定文件的第一行将视为字段名。</li>
@@ -761,7 +794,7 @@ $(function(){
 			</div>
 		</div>
 	</div>
-	
+
 	<div>
 		<div style="position: relative; left: 10px; top: -10px;">
 			<div class="page-header">
@@ -769,118 +802,154 @@ $(function(){
 			</div>
 		</div>
 	</div>
-	<div style="position: relative; top: -20px; left: 0px; width: 100%; height: 100%;">
-		<div style="width: 130%; position: absolute;top: 5px; left: 10px;">
-		
+	<div
+		style="position: relative; top: -20px; left: 0px; width: 100%; height: 100%;">
+		<div style="width: 130%; position: absolute; top: 5px; left: 10px;">
+
 			<div class="btn-toolbar" role="toolbar" style="height: 80px;">
-				<form class="form-inline" role="form" style="position: relative;top: 8%; left: 5px;">
-				  
-				  <div class="form-group">
-				    <div class="input-group">
-				      <div class="input-group-addon">名称</div>
-				      <input class="form-control" type="text" id="query-name" >
-				    </div>
-				  </div>
-				  
-				  <div class="form-group">
-				    <div class="input-group">
-				      <div class="input-group-addon">所有者</div>
-				      <input class="form-control" type="text" id="query-owner">
-				    </div>
-				  </div>
-				  
-				  <div class="form-group">
-				    <div class="input-group">
-				      <div class="input-group-addon">类型</div>
-					  <select class="form-control" id="query-type">
-					  <option></option>
-					  	   <c:if test="${not empty activityTypeList }">
-					      	<c:forEach var="at" items="${activityTypeList }">
-					      		<option value="${at.id }">${at.text }</option>
-					      	</c:forEach>
-					      </c:if>
-					  </select>
-				    </div>
-				  </div>
-				  
-				  <br>
-				  
-				  <div class="form-group">
-				    <div class="input-group">
-				      <div class="input-group-addon">状态</div>
-					  <select class="form-control" id="query-state">
-					  	<option></option>
-					    <c:if test="${not empty acitivityStatusList }">
-					      	<c:forEach var="as" items="${acitivityStatusList }">
-					      		<option value="${as.id }">${as.text }</option>
-					      	</c:forEach>
-					      </c:if>
-					  </select>
-				    </div>
-				  </div>
-				  
-				  <div class="form-group">
-				    <div class="input-group">
-				      <div class="input-group-addon">开始日期</div>
-					  <input class="form-control" type="text" id="query-startDate" readonly />
-				    </div>
-				  </div>
-				  
-				  <div class="form-group">
-				    <div class="input-group">
-				      <div class="input-group-addon">结束日期</div>
-					  <input class="form-control" type="text" id="query-endDate" readonly>
-				    </div>
-				  </div>
-				  
-				  <button type="button" id="queryActivityButton" class="btn btn-default">查询</button>
-				  
+				<form class="form-inline" role="form"
+					style="position: relative; top: 8%; left: 5px;">
+
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-addon">名称</div>
+							<input class="form-control" type="text" id="query-name">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-addon">所有者</div>
+							<input class="form-control" type="text" id="query-owner">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-addon">类型</div>
+							<select class="form-control" id="query-type">
+								<option></option>
+								<c:if test="${not empty activityTypeList }">
+									<c:forEach var="at" items="${activityTypeList }">
+										<option value="${at.id }">${at.text }</option>
+									</c:forEach>
+								</c:if>
+							</select>
+						</div>
+					</div>
+
+					<br>
+
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-addon">状态</div>
+							<select class="form-control" id="query-state">
+								<option></option>
+								<c:if test="${not empty acitivityStatusList }">
+									<c:forEach var="as" items="${acitivityStatusList }">
+										<option value="${as.id }">${as.text }</option>
+									</c:forEach>
+								</c:if>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-addon">开始日期</div>
+							<input class="form-control" type="text" id="query-startDate"
+								readonly />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-addon">结束日期</div>
+							<input class="form-control" type="text" id="query-endDate"
+								readonly>
+						</div>
+					</div>
+
+					<button type="button" id="queryActivityButton"
+						class="btn btn-default">查询</button>
+
 				</form>
 			</div>
-			<div class="btn-toolbar" role="toolbar" style="background-color: #F7F7F7; height: 50px; position: relative;top: 5px;">
+			<div class="btn-toolbar" role="toolbar"
+				style="background-color: #F7F7F7; height: 50px; position: relative; top: 5px;">
 				<div class="btn-group" style="position: relative; top: 18%;">
-				  <button type="button" id="createActivityBtn" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> 创建</button>
-				  <button type="button" id="editActivityBtn" class="btn btn-default" ><span class="glyphicon glyphicon-pencil"></span> 修改</button>
-				  <button type="button" id="deleteActivityBtn" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span> 删除</button>
-				</div>
-				<div class="btn-group" style="position: relative; top: 18%;">
-				  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#importActivityModal"><span class="glyphicon glyphicon-import"></span> 导入</button>
-				  <button id="exportActivityBtn" type="button" class="btn btn-default"><span class="glyphicon glyphicon-export"></span> 导出</button>
-				</div>
-				
-				<div class="btn-group" style="position: relative; top: 18%; left: 5px;">
-					<button type="button" class="btn btn-default">添加字段</button>
-					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-						<span class="caret"></span>
-						<span class="sr-only">Toggle Dropdown</span>
+					<button type="button" id="createActivityBtn"
+						class="btn btn-primary">
+						<span class="glyphicon glyphicon-plus"></span> 创建
 					</button>
-					<ul id="definedColumns" class="dropdown-menu" role="menu"> 
-						<li><a href="javascript:void(0);"><input name="name" type="checkbox"/> 名称</a></li>
-						<li><a href="javascript:void(0);"><input name="type" type="checkbox"/> 类型</a></li>
-						<li><a href="javascript:void(0);"><input name="state" type="checkbox"/> 状态</a></li>
-						<li><a href="javascript:void(0);"><input name="startDate" type="checkbox"/> 开始日期</a></li>
-						<li><a href="javascript:void(0);"><input name="endDate" type="checkbox"/> 结束日期</a></li>
-						<li><a href="javascript:void(0);"><input name="owner" type="checkbox"/> 所有者</a></li>
-						<li><a href="javascript:void(0);"><input name="budgetCost" type="checkbox"/> 预算成本</a></li>
-						<li><a href="javascript:void(0);"><input name="actualCost" type="checkbox"/> 实际成本</a></li>
-						<li><a href="javascript:void(0);"><input name="createBy" type="checkbox"/> 创建者</a></li>
-						<li><a href="javascript:void(0);"><input name="createTime" type="checkbox"/> 创建时间</a></li>
-						<li><a href="javascript:void(0);"><input name="editBy" type="checkbox"/> 修改者</a></li>
-						<li><a href="javascript:void(0);"><input name="editTime" type="checkbox"/> 修改时间</a></li>
-						<li><a href="javascript:void(0);"><input name="description" type="checkbox"/> 描述</a></li>
+					<button type="button" id="editActivityBtn" class="btn btn-default">
+						<span class="glyphicon glyphicon-pencil"></span> 修改
+					</button>
+					<button type="button" id="deleteActivityBtn" class="btn btn-danger">
+						<span class="glyphicon glyphicon-minus"></span> 删除
+					</button>
+				</div>
+				<div class="btn-group" style="position: relative; top: 18%;">
+					<button type="button" class="btn btn-default" data-toggle="modal"
+						data-target="#importActivityModal">
+						<span class="glyphicon glyphicon-import"></span> 导入
+					</button>
+					<button id="exportActivityBtn" type="button"
+						class="btn btn-default">
+						<span class="glyphicon glyphicon-export"></span> 导出
+					</button>
+				</div>
+
+				<div class="btn-group"
+					style="position: relative; top: 18%; left: 5px;">
+					<button type="button" class="btn btn-default">添加字段</button>
+					<button type="button" class="btn btn-default dropdown-toggle"
+						data-toggle="dropdown">
+						<span class="caret"></span> <span class="sr-only">Toggle
+							Dropdown</span>
+					</button>
+					<ul id="definedColumns" class="dropdown-menu" role="menu">
+						<li><a href="javascript:void(0);"><input name="name"
+								type="checkbox" /> 名称</a></li>
+						<li><a href="javascript:void(0);"><input name="type"
+								type="checkbox" /> 类型</a></li>
+						<li><a href="javascript:void(0);"><input name="state"
+								type="checkbox" /> 状态</a></li>
+						<li><a href="javascript:void(0);"><input name="startDate"
+								type="checkbox" /> 开始日期</a></li>
+						<li><a href="javascript:void(0);"><input name="endDate"
+								type="checkbox" /> 结束日期</a></li>
+						<li><a href="javascript:void(0);"><input name="owner"
+								type="checkbox" /> 所有者</a></li>
+						<li><a href="javascript:void(0);"><input
+								name="budgetCost" type="checkbox" /> 预算成本</a></li>
+						<li><a href="javascript:void(0);"><input
+								name="actualCost" type="checkbox" /> 实际成本</a></li>
+						<li><a href="javascript:void(0);"><input name="createBy"
+								type="checkbox" /> 创建者</a></li>
+						<li><a href="javascript:void(0);"><input
+								name="createTime" type="checkbox" /> 创建时间</a></li>
+						<li><a href="javascript:void(0);"><input name="editBy"
+								type="checkbox" /> 修改者</a></li>
+						<li><a href="javascript:void(0);"><input name="editTime"
+								type="checkbox" /> 修改时间</a></li>
+						<li><a href="javascript:void(0);"><input
+								name="description" type="checkbox" /> 描述</a></li>
 					</ul>
 				</div>
 
-				<div class="btn-group" style="position: relative; top: 18%; left: 8px;">
+				<div class="btn-group"
+					style="position: relative; top: 18%; left: 8px;">
 					<form class="form-inline" role="form">
-					  <div class="form-group has-feedback">
-					    <input type="email" class="form-control" style="width: 300px;" placeholder="支持任何字段搜索">
-					    <span class="glyphicon glyphicon-search form-control-feedback"></span>
-					  </div>
+						<div class="form-group has-feedback">
+							<input type="email" class="form-control" style="width: 300px;"
+								placeholder="支持任何字段搜索"> <span
+								class="glyphicon glyphicon-search form-control-feedback"></span>
+						</div>
 					</form>
 				</div>
 			</div>
-			<div style="position: relative;top: 10px;">
+			<div style="position: relative; top: 10px;">
 				<table id="activityListTable" class="table table-hover">
 					<thead>
 						<tr style="color: #B3B3B3;">
@@ -900,18 +969,18 @@ $(function(){
 							<td name='description' width="10%">描述</td>
 						</tr>
 					</thead>
-					
-					
+
+
 					<tbody id="activityListTBody">
-						
+
 					</tbody>
 				</table>
 				<div id="pageNoDiv"></div>
 			</div>
-			
-			
-			
-			
+
+
+
+
 		</div>
 	</div>
 </body>

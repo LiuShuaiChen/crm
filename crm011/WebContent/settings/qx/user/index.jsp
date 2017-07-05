@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-    <%
+	pageEncoding="UTF-8"%>
+
+<%
 		String path = request.getContextPath();
 		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 		System.out.println("/crm004/WebContent/settings/qx/user/index.jsp");
@@ -9,11 +9,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<base href="<%=basePath%>"> 
+<base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css"
+	type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
-<script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
 $(function(){
@@ -245,11 +247,12 @@ $(function(){
 					<h4 class="modal-title" id="myModalLabel">新增用户</h4>
 				</div>
 				<div class="modal-body">
-				
+
 					<form class="form-horizontal" role="form">
-					
+
 						<div class="form-group">
-							<label for="create-loginActNo" class="col-sm-2 control-label">登录帐号<span style="font-size: 15px; color: red;">*</span></label>
+							<label for="create-loginActNo" class="col-sm-2 control-label">登录帐号<span
+								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
 								<input type="text" class="form-control" id="create-loginActNo">
 							</div>
@@ -259,13 +262,16 @@ $(function(){
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="create-loginPwd" class="col-sm-2 control-label">登录密码<span style="font-size: 15px; color: red;">*</span></label>
+							<label for="create-loginPwd" class="col-sm-2 control-label">登录密码<span
+								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
 								<input type="password" class="form-control" id="create-loginPwd">
 							</div>
-							<label for="create-confirmPwd" class="col-sm-2 control-label">确认密码<span style="font-size: 15px; color: red;">*</span></label>
+							<label for="create-confirmPwd" class="col-sm-2 control-label">确认密码<span
+								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="password" class="form-control" id="create-confirmPwd">
+								<input type="password" class="form-control"
+									id="create-confirmPwd">
 							</div>
 						</div>
 						<div class="form-group">
@@ -282,33 +288,37 @@ $(function(){
 							<label for="create-lockStatus" class="col-sm-2 control-label">锁定状态</label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="create-lockStatus">
-								  <option></option>
-								  <option value="0" selected="selected">启用0</option>
-								  <option value="1">锁定1</option>
+									<option></option>
+									<option value="0" selected="selected">启用0</option>
+									<option value="1">锁定1</option>
 								</select>
 							</div>
-							<label for="create-org" class="col-sm-2 control-label">部门<span style="font-size: 15px; color: red;">*</span></label>
+							<label for="create-org" class="col-sm-2 control-label">部门<span
+								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-org" placeholder="输入部门名称，自动补全">
+								<input type="text" class="form-control" id="create-org"
+									placeholder="输入部门名称，自动补全">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="create-allowIps" class="col-sm-2 control-label">允许访问的IP</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-allowIps" style="width: 280%" placeholder="多个用逗号隔开">
+								<input type="text" class="form-control" id="create-allowIps"
+									style="width: 280%" placeholder="多个用逗号隔开">
 							</div>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal" id="saveBtn">保存</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						id="saveBtn">保存</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	
+
+
 	<div>
 		<div style="position: relative; left: 30px; top: -10px;">
 			<div class="page-header">
@@ -316,88 +326,110 @@ $(function(){
 			</div>
 		</div>
 	</div>
-	
-	<div class="btn-toolbar" role="toolbar" style="position: relative; height: 80px; left: 30px; top: -10px;">
-		<form class="form-inline" role="form" style="position: relative;top: 8%; left: 5px;">
-		  
-		  <div class="form-group">
-		    <div class="input-group">
-		      <div class="input-group-addon">用户姓名</div>
-		      <input class="form-control" type="text" id="myName">
-		    </div>
-		  </div>
-		  &nbsp;&nbsp;&nbsp;&nbsp;
-		  <div class="form-group">
-		    <div class="input-group">
-		      <div class="input-group-addon">部门名称</div>
-		      <input class="form-control" type="text" id="myDeptId">
-		    </div>
-		  </div>
-		  &nbsp;&nbsp;&nbsp;&nbsp;
-		  <div class="form-group">
-		    <div class="input-group">
-		      <div class="input-group-addon">锁定状态</div>
-			  <select class="form-control" id="myLockStatus">
-			  	  <option></option>
-			      <option>锁定</option>
-				  <option>启用</option>
-			  </select>
-		    </div>
-		  </div>
-		  <br><br>
-		  
-		  <div class="form-group">
-		    <div class="input-group">
-		      <div class="input-group-addon">失效时间</div>
-			  <input class="form-control" type="text" id="myStartTime"  />
-		    </div>
-		  </div>
-		  
-		  ~
-		  
-		  <div class="form-group">
-		    <div class="input-group">
-			  <input class="form-control" type="text" id="myEndTime" />
-		    </div>
-		  </div>
-		  
-		  
-		  
+
+	<div class="btn-toolbar" role="toolbar"
+		style="position: relative; height: 80px; left: 30px; top: -10px;">
+		<form class="form-inline" role="form"
+			style="position: relative; top: 8%; left: 5px;">
+
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon">用户姓名</div>
+					<input class="form-control" type="text" id="myName">
+				</div>
+			</div>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon">部门名称</div>
+					<input class="form-control" type="text" id="myDeptId">
+				</div>
+			</div>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon">锁定状态</div>
+					<select class="form-control" id="myLockStatus">
+						<option></option>
+						<option>锁定</option>
+						<option>启用</option>
+					</select>
+				</div>
+			</div>
+			<br> <br>
+
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon">失效时间</div>
+					<input class="form-control" type="text" id="myStartTime" />
+				</div>
+			</div>
+
+			~
+
+			<div class="form-group">
+				<div class="input-group">
+					<input class="form-control" type="text" id="myEndTime" />
+				</div>
+			</div>
+
+
+
 		</form>
 	</div>
-	
-	
-	<div class="btn-toolbar" role="toolbar" style="background-color: #F7F7F7; height: 50px; position: relative;left: 30px; width: 110%; top: 20px;">
+
+
+	<div class="btn-toolbar" role="toolbar"
+		style="background-color: #F7F7F7; height: 50px; position: relative; left: 30px; width: 110%; top: 20px;">
 		<div class="btn-group" style="position: relative; top: 18%;">
-		  <button type="button" class="btn btn-primary" id="createBtn" ><span class="glyphicon glyphicon-plus"></span> 创建</button>
-		  <button type="button" class="btn btn-danger" id="deleteBtn" ><span class="glyphicon glyphicon-minus"></span> 删除</button>
-		  
-		  <!-- 高级查询提交按钮 -->
-		  <button type="button" class="btn btn-default" style="background-color: orange" id="query"><span class="glyphicon glyphicon-search" ></span> 查询</button>
+			<button type="button" class="btn btn-primary" id="createBtn">
+				<span class="glyphicon glyphicon-plus"></span> 创建
+			</button>
+			<button type="button" class="btn btn-danger" id="deleteBtn">
+				<span class="glyphicon glyphicon-minus"></span> 删除
+			</button>
+
+			<!-- 高级查询提交按钮 -->
+			<button type="button" class="btn btn-default"
+				style="background-color: orange" id="query">
+				<span class="glyphicon glyphicon-search"></span> 查询
+			</button>
 
 		</div>
-		<div class="btn-group" style="position: relative; top: 18%; left: 5px;">
+		<div class="btn-group"
+			style="position: relative; top: 18%; left: 5px;">
 			<!-- <button type="button" class="btn btn-default">设置显示字段</button>
 			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 				<span class="caret"></span>
 				<span class="sr-only">Toggle Dropdown</span>
 			</button> -->
-			<ul id="definedColumns" class="dropdown-menu" role="menu"> 
-				<li><a href="javascript:void(0);"><input type="checkbox"/> 登录帐号</a></li>
-				<li><a href="javascript:void(0);"><input type="checkbox"/> 用户姓名</a></li>
-				<li><a href="javascript:void(0);"><input type="checkbox"/> 部门名称</a></li>
-				<li><a href="javascript:void(0);"><input type="checkbox"/> 邮箱</a></li>
-				<li><a href="javascript:void(0);"><input type="checkbox"/> 失效时间</a></li>
-				<li><a href="javascript:void(0);"><input type="checkbox"/> 允许访问IP</a></li>
-				<li><a href="javascript:void(0);"><input type="checkbox"/> 锁定状态</a></li>
-				<li><a href="javascript:void(0);"><input type="checkbox"/> 创建者</a></li>
-				<li><a href="javascript:void(0);"><input type="checkbox"/> 创建时间</a></li>
-				<li><a href="javascript:void(0);"><input type="checkbox"/> 修改者</a></li>
-				<li><a href="javascript:void(0);"><input type="checkbox"/> 修改时间</a></li>
+			<ul id="definedColumns" class="dropdown-menu" role="menu">
+				<li><a href="javascript:void(0);"><input type="checkbox" />
+						登录帐号</a></li>
+				<li><a href="javascript:void(0);"><input type="checkbox" />
+						用户姓名</a></li>
+				<li><a href="javascript:void(0);"><input type="checkbox" />
+						部门名称</a></li>
+				<li><a href="javascript:void(0);"><input type="checkbox" />
+						邮箱</a></li>
+				<li><a href="javascript:void(0);"><input type="checkbox" />
+						失效时间</a></li>
+				<li><a href="javascript:void(0);"><input type="checkbox" />
+						允许访问IP</a></li>
+				<li><a href="javascript:void(0);"><input type="checkbox" />
+						锁定状态</a></li>
+				<li><a href="javascript:void(0);"><input type="checkbox" />
+						创建者</a></li>
+				<li><a href="javascript:void(0);"><input type="checkbox" />
+						创建时间</a></li>
+				<li><a href="javascript:void(0);"><input type="checkbox" />
+						修改者</a></li>
+				<li><a href="javascript:void(0);"><input type="checkbox" />
+						修改时间</a></li>
 			</ul>
 		</div>
 	</div>
-	
+
 	<div style="position: relative; left: 30px; top: 40px; width: 110%">
 		<table class="table table-hover">
 			<thead>
@@ -418,32 +450,45 @@ $(function(){
 				</tr>
 			</thead>
 			<tbody id="mytBody">
-				
+
 			</tbody>
 		</table>
 
 	</div>
-	<div style="height: 50px; position: relative;top: 30px; left: 30px;">
+	<div style="height: 50px; position: relative; top: 30px; left: 30px;">
 		<div>
-			<button type="button" class="btn btn-default" style="cursor: default;">共<b id="myTotal"></b>条记录</button>
+			<button type="button" class="btn btn-default"
+				style="cursor: default;">
+				共<b id="myTotal"></b>条记录
+			</button>
 		</div>
-		<div class="btn-group" style="position: relative;top: -34px; left: 110px;">
-			<button type="button" class="btn btn-default" style="cursor: default;">共<b id="myPageSize"></b>页</button>
-			
-			<button type="button" class="btn btn-default" style="cursor: default;"><b id="myPageCount"></b>条/页</button>
-			<button type="button" class="btn btn-default" style="cursor: default;">当前是第<b id="myPageNo"></b>页</button>
+		<div class="btn-group"
+			style="position: relative; top: -34px; left: 110px;">
+			<button type="button" class="btn btn-default"
+				style="cursor: default;">
+				共<b id="myPageSize"></b>页
+			</button>
+
+			<button type="button" class="btn btn-default"
+				style="cursor: default;">
+				<b id="myPageCount"></b>条/页
+			</button>
+			<button type="button" class="btn btn-default"
+				style="cursor: default;">
+				当前是第<b id="myPageNo"></b>页
+			</button>
 		</div>
-		<div style="position: relative;top: -88px; left: 385px;">
+		<div style="position: relative; top: -88px; left: 385px;">
 			<nav>
-				<ul class="pagination">
-					<li id="firstPage"><a href="javascript:void(0)">首页</a></li>
-					<li id="proPage"><a href="javascript:void(0)">上一页</a></li>
-					<li id="nextPage"><a href="javascript:void(0)">下一页</a></li>
-					<li id="lastPage"><a href="javascript:void(0)">末页</a></li>
-				</ul>
+			<ul class="pagination">
+				<li id="firstPage"><a href="javascript:void(0)">首页</a></li>
+				<li id="proPage"><a href="javascript:void(0)">上一页</a></li>
+				<li id="nextPage"><a href="javascript:void(0)">下一页</a></li>
+				<li id="lastPage"><a href="javascript:void(0)">末页</a></li>
+			</ul>
 			</nav>
 		</div>
 	</div>
-			
+
 </body>
 </html>

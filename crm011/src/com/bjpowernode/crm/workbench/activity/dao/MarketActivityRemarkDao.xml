@@ -5,11 +5,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper
 	namespace="com.bjpowernode.crm.workbench.activity.dao.MarketActivityRemarkDao">
 
-	<!-- List<MarketActivityRemark> queryMarketActivityRemarkByActivityId(String id); -->
-	<select id="queryMarketActivityRemarkByActivityId" parameterType="string" resultType="MarketActivityRemark">
-		select mar.id,mar.noteContent,u1.name as notePerson,mar.editFlag,mar.noteTime,mar.editTime,u2.name as editPerson
+	<!-- List<MarketActivityRemark> queryMarketActivityRemarkByActivityId(String 
+		id); -->
+	<select id="queryMarketActivityRemarkByActivityId"
+		parameterType="string" resultType="MarketActivityRemark">
+		select
+		mar.id,mar.noteContent,u1.name as
+		notePerson,mar.editFlag,mar.noteTime,mar.editTime,u2.name as
+		editPerson
 		from tbl_marketing_activities_remark mar
-		join tbl_user u1 on mar.notePerson=u1.id
+		join tbl_user u1 on
+		mar.notePerson=u1.id
 		left join tbl_user u2 on mar.editPerson=u2.id
 		where mar.marketingActivitiesId=#{activityId}
 	</select>
@@ -17,21 +23,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- int createMarketActivityRemaerk(MarketActivityRemark marketActivityRemark); -->
 	<insert id="createMarketActivityRemaerk" parameterType="marketActivityRemark">
-		insert into tbl_marketing_activities_remark(id,notePerson,noteContent,noteTime,editFlag,marketingActivitiesId)
-		values(#{id}, #{notePerson}, #{noteContent}, #{noteTime}, #{editFlag}, #{marketingActivitiesId})
+		insert
+		into
+		tbl_marketing_activities_remark(id,notePerson,noteContent,noteTime,editFlag,marketingActivitiesId)
+		values(#{id}, #{notePerson}, #{noteContent}, #{noteTime}, #{editFlag},
+		#{marketingActivitiesId})
 	</insert>
-	
+
 	<!-- int deleteMarketActivityRemarkById(String id); -->
 	<delete id="deleteMarketActivityRemarkById" parameterType="string">
 		delete from tbl_marketing_activities_remark where id = #{id}
 	</delete>
-	
-	
+
+
 	<!-- int updateMarketActivityRemarkById(String id); -->
 	<update id="updateMarketActivityRemarkById" parameterType="marketActivityRemark">
-		update tbl_marketing_activities_remark set noteContent=#{noteContent},editTime=#{editTime},editPerson=#{editPerson},editFlag=#{editFlag} where id=#{id}
+		update tbl_marketing_activities_remark set
+		noteContent=#{noteContent},editTime=#{editTime},editPerson=#{editPerson},editFlag=#{editFlag}
+		where id=#{id}
 	</update>
-	
+
 </mapper>
 
 

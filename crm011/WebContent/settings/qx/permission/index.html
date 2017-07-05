@@ -2,12 +2,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="../../../jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-<link href="../../../jquery/zTree_v3-master/css/zTreeStyle/zTreeStyle.css" type="text/css" rel="stylesheet" />
+<link href="../../../jquery/bootstrap_3.3.0/css/bootstrap.min.css"
+	type="text/css" rel="stylesheet" />
+<link
+	href="../../../jquery/zTree_v3-master/css/zTreeStyle/zTreeStyle.css"
+	type="text/css" rel="stylesheet" />
 
-<script type="text/javascript" src="../../../jquery/jquery-1.11.1-min.js"></script>
-<script type="text/javascript" src="../../../jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../../jquery/zTree_v3-master/js/jquery.ztree.all.min.js"></script>
+<script type="text/javascript"
+	src="../../../jquery/jquery-1.11.1-min.js"></script>
+<script type="text/javascript"
+	src="../../../jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="../../../jquery/zTree_v3-master/js/jquery.ztree.all.min.js"></script>
 
 <SCRIPT type="text/javascript">
 	var setting = {
@@ -76,7 +82,7 @@
 	});
 	
 </SCRIPT>
-	
+
 </head>
 <body>
 
@@ -91,34 +97,39 @@
 					<h4 class="modal-title" id="myModalLabel">新增许可</h4>
 				</div>
 				<div class="modal-body">
-				
+
 					<form class="form-horizontal" role="form">
-					
+
 						<div class="form-group">
-							<label for="create-permissionName" class="col-sm-2 control-label">名称<span style="font-size: 15px; color: red;">*</span></label>
+							<label for="create-permissionName" class="col-sm-2 control-label">名称<span
+								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-permissionName" style="width: 200%;">
+								<input type="text" class="form-control"
+									id="create-permissionName" style="width: 200%;">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="create-moduleUrl" class="col-sm-2 control-label">模块URL</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-moduleUrl" style="width: 200%;">
+								<input type="text" class="form-control" id="create-moduleUrl"
+									style="width: 200%;">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="create-operationUrl" class="col-sm-2 control-label">操作URL</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-operationUrl" style="width: 200%;" placeholder="多个用逗号隔开">
+								<input type="text" class="form-control" id="create-operationUrl"
+									style="width: 200%;" placeholder="多个用逗号隔开">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="create-orderNo" class="col-sm-2 control-label">排序号</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-orderNo" style="width: 200%;">
+								<input type="text" class="form-control" id="create-orderNo"
+									style="width: 200%;">
 							</div>
 						</div>
 					</form>
@@ -131,7 +142,7 @@
 		</div>
 	</div>
 
-	<!-- 修改许可 -->	
+	<!-- 修改许可 -->
 	<div class="modal fade" id="editPermissionModal" role="dialog">
 		<div class="modal-dialog" role="document" style="width: 80%;">
 			<div class="modal-content">
@@ -142,34 +153,40 @@
 					<h4 class="modal-title" id="myModalLabel">修改许可</h4>
 				</div>
 				<div class="modal-body">
-				
+
 					<form class="form-horizontal" role="form">
-					
+
 						<div class="form-group">
-							<label for="edit-permissionName" class="col-sm-2 control-label">名称<span style="font-size: 15px; color: red;">*</span></label>
+							<label for="edit-permissionName" class="col-sm-2 control-label">名称<span
+								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-permissionName" style="width: 200%;" value="市场活动">
+								<input type="text" class="form-control" id="edit-permissionName"
+									style="width: 200%;" value="市场活动">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="edit-moduleUrl" class="col-sm-2 control-label">模块URL</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-moduleUrl" style="width: 200%;" value="activity/index.do">
+								<input type="text" class="form-control" id="edit-moduleUrl"
+									style="width: 200%;" value="activity/index.do">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="edit-operationUrl" class="col-sm-2 control-label">操作URL</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-operationUrl" style="width: 200%;" placeholder="多个用逗号隔开" value="activity/create.do,activity/save.do">
+								<input type="text" class="form-control" id="edit-operationUrl"
+									style="width: 200%;" placeholder="多个用逗号隔开"
+									value="activity/create.do,activity/save.do">
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label for="edit-orderNo" class="col-sm-2 control-label">排序号</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-orderNo" style="width: 200%;" value="1">
+								<input type="text" class="form-control" id="edit-orderNo"
+									style="width: 200%;" value="1">
 							</div>
 						</div>
 					</form>
@@ -181,42 +198,70 @@
 			</div>
 		</div>
 	</div>
-	
-	<div style="width: 20%; height: 100%; background-color: #F7F7F7; position: absolute; overflow:auto;">
-		<ul id="treeDemo" class="ztree" style="position: relative; top: 15px; left: 15px;"></ul>
+
+	<div
+		style="width: 20%; height: 100%; background-color: #F7F7F7; position: absolute; overflow: auto;">
+		<ul id="treeDemo" class="ztree"
+			style="position: relative; top: 15px; left: 15px;"></ul>
 	</div>
-	<div style="position: absolute; width: 80%; height: 100%; overflow: auto; left: 20%;">
+	<div
+		style="position: absolute; width: 80%; height: 100%; overflow: auto; left: 20%;">
 		<!-- 大标题 -->
 		<div style="position: relative; left: 30px; top: -10px;">
 			<div class="page-header">
-				<h3>市场活动 <small>许可明细</small></h3>
+				<h3>
+					市场活动 <small>许可明细</small>
+				</h3>
 			</div>
-			<div style="position: relative; height: 50px; width: 250px;  top: -72px; left: 60%;">
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createPermissionModal"><span class="glyphicon glyphicon-plus"></span> 新增</button>
-				<button type="button" class="btn btn-default" data-toggle="modal" data-target="#editPermissionModal"><span class="glyphicon glyphicon-edit"></span> 编辑</button>
+			<div
+				style="position: relative; height: 50px; width: 250px; top: -72px; left: 60%;">
+				<button type="button" class="btn btn-primary" data-toggle="modal"
+					data-target="#createPermissionModal">
+					<span class="glyphicon glyphicon-plus"></span> 新增
+				</button>
+				<button type="button" class="btn btn-default" data-toggle="modal"
+					data-target="#editPermissionModal">
+					<span class="glyphicon glyphicon-edit"></span> 编辑
+				</button>
 			</div>
 		</div>
 		<!-- 详细信息 -->
 		<div style="position: relative; top: -70px;">
 			<div style="position: relative; left: 40px; height: 30px; top: 20px;">
 				<div style="width: 300px; color: gray;">名称</div>
-				<div style="width: 500px;position: relative; left: 200px; top: -20px;"><b>市场活动</b></div>
-				<div style="height: 1px; width: 600px; background: #D5D5D5; position: relative; top: -20px;"></div>
+				<div
+					style="width: 500px; position: relative; left: 200px; top: -20px;">
+					<b>市场活动</b>
+				</div>
+				<div
+					style="height: 1px; width: 600px; background: #D5D5D5; position: relative; top: -20px;"></div>
 			</div>
 			<div style="position: relative; left: 40px; height: 30px; top: 40px;">
 				<div style="width: 300px; color: gray;">模块URL</div>
-				<div style="width: 500px;position: relative; left: 200px; top: -20px;"><b>activity/index.do</b></div>
-				<div style="height: 1px; width: 600px; background: #D5D5D5; position: relative; top: -20px;"></div>
+				<div
+					style="width: 500px; position: relative; left: 200px; top: -20px;">
+					<b>activity/index.do</b>
+				</div>
+				<div
+					style="height: 1px; width: 600px; background: #D5D5D5; position: relative; top: -20px;"></div>
 			</div>
 			<div style="position: relative; left: 40px; height: 30px; top: 60px;">
 				<div style="width: 300px; color: gray;">操作URL</div>
-				<div style="width: 500px;position: relative; left: 200px; top: -20px;"><b>activity/create.do,activity/edit.do,activity/delete.do</b></div>
-				<div style="height: 1px; width: 600px; background: #D5D5D5; position: relative; top: -20px;"></div>
+				<div
+					style="width: 500px; position: relative; left: 200px; top: -20px;">
+					<b>activity/create.do,activity/edit.do,activity/delete.do</b>
+				</div>
+				<div
+					style="height: 1px; width: 600px; background: #D5D5D5; position: relative; top: -20px;"></div>
 			</div>
 			<div style="position: relative; left: 40px; height: 30px; top: 80px;">
 				<div style="width: 300px; color: gray;">排序号</div>
-				<div style="width: 500px;position: relative; left: 200px; top: -20px;"><b>1</b></div>
-				<div style="height: 1px; width: 600px; background: #D5D5D5; position: relative; top: -20px;"></div>
+				<div
+					style="width: 500px; position: relative; left: 200px; top: -20px;">
+					<b>1</b>
+				</div>
+				<div
+					style="height: 1px; width: 600px; background: #D5D5D5; position: relative; top: -20px;"></div>
 			</div>
 		</div>
 	</div>
