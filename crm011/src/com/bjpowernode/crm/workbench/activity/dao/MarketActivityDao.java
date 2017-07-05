@@ -76,6 +76,13 @@ public interface MarketActivityDao {
 	 */
 	List<MarketActivity> queryMarketActivityByCondition(Map<String, Object> map);
 
+	/**
+	 * 批量导入市场活动
+	 * @param activityList
+	 * @return
+	 */
+	int saveCreateMarketActivityByList(List<MarketActivity> activityList);
+
 
 	
 }

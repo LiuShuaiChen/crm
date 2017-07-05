@@ -161,8 +161,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 根据id 拿到 市场活动明细 铺到 编辑模态窗口中 -->
 	<!-- MarketActivity updateEditMarketActivityDetail(String id); -->
-	<select id="updateEditMarketActivityDetail" parameterType="string"
-		resultType="MarketActivity">
+	<select id="updateEditMarketActivityDetail" parameterType="string" resultType="MarketActivity">
 		select ma.id,ma.name,dv1.text as type,dv2.text as
 		state,ma.startDate,ma.endDate,u1.name as
 		owner,ma.budgetCost,ma.actualCost,
@@ -186,8 +185,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- List<MarketActivity> queryMarketActivityByCondition(Map<String, Object> 
 		map); -->
-	<select id="queryMarketActivityByCondition" parameterType="map"
-		resultType="MarketActivity">
+	<select id="queryMarketActivityByCondition" parameterType="map" resultType="MarketActivity">
 		select ma.id,ma.name,dv1.text as type,dv2.text as
 		state,ma.startDate,ma.endDate,u1.name as
 		owner,ma.budgetCost,ma.actualCost,
@@ -227,6 +225,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 		order by ma.createTime desc
 	</select>
+	
+	
+	
+	<!-- int saveCreateMarketActivityByList(List<MarketActivity> activityList); -->
+	<insert id="saveCreateMarketActivityByList" parameterType="MarketActivity">
+		insert into
+		tbl_marketing_activities(id,owner,type,name,state,startDate,endDate,budgetCost,actualCost,description,createBy,createTime)
+		values
+		<foreach collection="list" item="obj" separator=",">
+			(#{obj.id},#{obj.owner},#{obj.type},#{obj.name},#{obj.state},#{obj.startDate},#{obj.endDate},#{obj.budgetCost},#{obj.actualCost},#{obj.description},#{obj.createBy},#{obj.createTime})
+		</foreach>
+	</insert>
 
 </mapper>
 

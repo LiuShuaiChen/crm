@@ -82,6 +82,14 @@ public class MarketActivityServiceImpl implements MarketActivityService {
 		return marketActivityDao.queryMarketActivityByCondition(map);
 	}
 
+	/**
+	 * 批量导入市场活动
+	 */
+	@Override
+	public int saveCreateMarketActivityByList(List<MarketActivity> activityList) {
+		return marketActivityDao.saveCreateMarketActivityByList(activityList);
+	}
+
 
 	
 	

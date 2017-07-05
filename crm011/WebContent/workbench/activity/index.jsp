@@ -545,6 +545,54 @@ $(function(){
 		});
 		/* 市场活动列表 导出 ***********************************************/
 		
+		
+		/* 导入市场活动********导入市场活动************导入市场活动*******导入市场活动导入市场活动导入市场活动******/
+		$("#importActivityBtn").click(function(){
+			//收集参数
+			var maFile=$("#activityFile")[0].files[0];
+			
+			var fileName=$("#activityFile").val();
+			var suffix=(fileName.substr(fileName.lastIndexOf(".")+1)).toUpperCase();
+			if(!(suffix=='XLS'||suffix=='XLSX')){
+				alert("只能上传XLS或者XLSX类型的文件！");
+				return;
+			}
+			
+			if(maFile.size>1024*1024*5){
+				alert("上传文件不能超过5M!");
+				return;
+			}
+			
+			
+			//发送请求
+			/*
+			FormData是jquery提供的一个接口，可以，模拟键值对向服务器提交参数；
+			它最大的优势是可以提交二进制数据。
+			*/
+			var formData=new FormData();
+			formData.append("activityFile",maFile);
+			$.ajax({
+				url:'workbench/activity/remark/importMarketActivity.do',
+				data:formData,
+				type:'post',
+				processData:false,//processData主要是配合contentType使用的，在ajax对参数进行x-www-form-urlencoded编码之前，把所有的数据统一转化为字符串；现在，不需要进行x-www-form-urlencoded格式的编码，则也不需要进行字符串转化了。
+				contentType:false,//默认情况下，ajax向服务器发送请求采用x-www-form-urlencoded编码格式，这种格式只能处理文本数据；如果有上传文件这种二进制数据，则要设置contentType为false,使ajax不再对参数做x-www-form-urlencoded格式的编码
+				success:function(data){
+					if(data.success){
+						alert("成功导入"+data.count+"条数据！");
+						$("#importActivityModal").modal("hide");
+						display(1,$("#pageNoDiv").bs_pagination('getOption', 'rowsPerPage'));
+					}else{
+						alert("导入失败！请检查文件格式！");
+						$("#importActivityModal").modal("show");
+					}
+				}
+			});
+		
+		});
+		
+		
+		/* 导入市场活动********导入市场活动************导入市场活动*******导入市场活动导入市场活动导入市场活动******/
 	}
 
 </script>
@@ -770,7 +818,7 @@ $(function(){
 						请选择要上传的文件：<small style="color: gray;">[仅支持.xls或.xlsx格式]</small>
 					</div>
 					<div style="position: relative; top: 40px; left: 50px;">
-						<input type="file">
+						<input type="file" id="activityFile">
 					</div>
 					<div
 						style="position: relative; width: 400px; height: 320px; left: 45%; top: -40px;">
@@ -789,7 +837,7 @@ $(function(){
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">导入</button>
+					<button type="button" id="importActivityBtn" >导入</button>
 				</div>
 			</div>
 		</div>
@@ -892,7 +940,7 @@ $(function(){
 				<div class="btn-group" style="position: relative; top: 18%;">
 					<button type="button" class="btn btn-default" data-toggle="modal"
 						data-target="#importActivityModal">
-						<span class="glyphicon glyphicon-import"></span> 导入
+						<span id="" class="glyphicon glyphicon-import"></span> 导入
 					</button>
 					<button id="exportActivityBtn" type="button"
 						class="btn btn-default">
