@@ -14,17 +14,18 @@
 <meta charset="UTF-8">
 
 <link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<link href="jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="jquery/bs_pagination/jquery.bs_pagination.min.css">
 
 <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css"></script>
-<script type="text/javascript" src="jquery/bootstrap_3.3.0/css/bootstrap.min.css"></script>
 <script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript" src="jquery/bs_pagination/jquery.bs_pagination.min.css"></script>
+<script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
 <script type="text/javascript" src="jquery/bs_pagination/jquery.bs_pagination.min.js"></script>
-<script type="text/javascript" src="jquery/datetimepicker/css/bootstrap-datetimepicker.css"></script>
+<script type="text/javascript" src="jquery/bs_pagination/localization/en.js"></script>
 <script type="text/javascript" src="jquery/datetimepicker/js/bootstrap-datetimepicker.js"></script>
-
+<script type="text/javascript" src="jquery/bs_pagination/jquery.bs_pagination.min.css"></script>
+<script type="text/javascript" src="jquery/datetimepicker/css/bootstrap-datetimepicker.css"></script>
 <script type="text/javascript">
 
 	//默认情况下取消和保存按钮是隐藏的
@@ -90,7 +91,7 @@ $(function(){
 	/* 市场活动编辑*********市场活动编辑***********市场活动编辑*********市场活动编辑*********市场活动编辑*市场活动编辑***市场活动编辑 */
 	$("#editMarketActivityDetailBtn").click(function(){
 	 	 $.ajax({
-			url:'workbench/activity/detail/editMarketActivityDetailById.do',
+			url:'workbench/activity/editMarketActivity.do',
 			data:{
 				id:$("#edit-marketActivityId").val()
 			},
@@ -136,7 +137,7 @@ $(function(){
 		var owner = $("#edit-marketActivityOwner").val();
 		var type = $("#edit-marketActivityType").val();
 		var name = $("#edit-marketActivityName").val();
-		var state = $("#edit-marketActivityStat").val();
+		var state = $("#edit-marketActivityState").val();
 		var startDate = $("#edit-startDate").val();
 		var endDate = $("#edit-endDate").val();
 		var actualCost = $("#edit-actualCost").val();
@@ -198,35 +199,7 @@ $(function(){
 	});
 	/* ******************************市场活动详情页 更新************************************************************ */
 	
-	/* 局部刷新 */ /* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 */
-	function reflushDetailMarketActivity(){
-		$.ajax({
-			url:"workbench/activity/detail/editMarketActivityDetail.do",
-			data:{
-				id:id
-			},
-			type:"post",
-			success:function(data){
-				// 修改后标题
-				$("#activityTitle").html("市场活动-"+data.name+"<small>  "+data.startDate+" ~ "+data.endDate+"</small>");
-				// 修改后详细信息
-				$("#marketActivityOwner").html(data.owner);
-				$("#marketActivityType").html(data.type);
-				$("#marketActivityState").html(data.state);
-				$("#marketActivityName").html(data.name);
-				$("#marketActivityStartDate").html(data.startTime);
-				$("#marketActivityEndDate").html(data.endTime);
-				$("#marketActivityActualCost").html(data.actualCost);
-				$("#activityBmarketActivityBudgetCostudgetCost").html(data.budgetCost);
-				$("#marketActivityEditBy").html(data.editBy+"&nbsp;&nbsp;");
-				$("#marketActivityEditTime").html(data.editTime);
-				$("#marketActivityDescription").html(data.description);
-				// 修改后备注信息中(市场活动名称改变)
-				$("b[name='marketingActivitiesId']").html(data.name);
-			}
-		});
-	}
-	/* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 */
+	
 	
 	
 	
@@ -346,7 +319,7 @@ $(function(){
 					
 					$("#div_"+id+" h5:eq(0)").html(noteContent);
 					$("#div_"+id+" small:eq(0)").html(" "+data.remark.editTime+" 由 ${user.name}  修改");
-					
+					reflushDetailMarketActivity();
 					$("#editActivityRemarkModal").modal("hide");
 				}else {
 					alert("修改失败");
@@ -359,6 +332,40 @@ $(function(){
 	/* 修改备注模态窗口中的 更新 按钮 */
 
 })
+
+/* 局部刷新 */ /* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 */
+	function reflushDetailMarketActivity(){
+		$.ajax({
+			url:"workbench/activity/detail/editMarketActivityDetail.do",
+			data:{
+				id:"${param.id}"
+			},
+			type:"post",
+			success:function(data){
+				if(data.success){
+					// 修改后标题
+					$("#activityTitle").html("市场活动-"+data.marketActivity.name+"<small>  "+data.marketActivity.startDate+" ~ "+data.marketActivity.endDate+"</small>");
+					// 修改后详细信息
+					$("#marketActivityOwner").html(data.marketActivity.owner);
+					$("#marketActivityType").html(data.marketActivity.type);
+					$("#marketActivityState").html(data.marketActivity.state);
+					$("#marketActivityName").html(data.marketActivity.name);
+					$("#marketActivityStartDate").html(data.marketActivity.startDate);
+					$("#marketActivityEndDate").html(data.marketActivity.endDate);
+					$("#marketActivityActualCost").html(data.marketActivity.actualCost);
+					$("#MarketActivityBudgetCost").html(data.marketActivity.budgetCost);
+					$("#marketActivityEditBy").html(data.marketActivity.editBy+"&nbsp;&nbsp;");
+					$("#marketActivityEditTime").html(data.marketActivity.editTime);
+					$("#marketActivityDescription").html(data.marketActivity.description);
+					// 修改后备注信息中(市场活动名称改变)
+					$("b[name='marketingActivitiesId']").html(data.marketActivity.name);
+				}else{
+					alert("刷新失败");
+				}
+			}
+		});
+	}
+	/* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 */
 
 </script>
 
@@ -508,7 +515,7 @@ $(function(){
 	<!-- 大标题 -->
 	<div style="position: relative; left: 40px; top: -30px;">
 		<div class="page-header">
-			<h3>
+			<h3 id="activityTitle">
 				市场活动-${marketActivity.name } <small>${marketActivity.startDate }
 					~ ${marketActivity.endDate }</small>
 			</h3>
@@ -516,7 +523,7 @@ $(function(){
 		<div
 			style="position: relative; height: 50px; width: 250px; top: -72px; left: 700px;">
 			<button type="button" id="editMarketActivityDetailBtn" class="btn btn-default">
-				<span class="glyphicon glyphicon-edit"></span> 编辑123
+				<span class="glyphicon glyphicon-edit"></span> 编辑jsp
 			</button>
 			<button type="button" class="btn btn-danger">
 				<span class="glyphicon glyphicon-minus"></span> 删除
@@ -639,7 +646,7 @@ $(function(){
 						style="width: 30px; height: 30px;">
 					<div style="position: relative; top: -40px; left: 40px;">
 						<h5>${remark.noteContent }</h5>
-						<font color="gray">市场活动</font> <font color="gray">-</font> <b id="marketingActivitiesId">${marketActivity.name }</b>
+						<font color="gray">市场活动</font> <font color="gray">-</font> <b name="marketingActivitiesId">${marketActivity.name }</b>
 						<small style="color: gray;">
 							${remark.editFlag==0?remark.noteTime:remark.editTime } 由
 							${remark.editFlag==0?remark.notePerson:remark.editPerson }${remark.editFlag==0?'创建':'修改' }</small>

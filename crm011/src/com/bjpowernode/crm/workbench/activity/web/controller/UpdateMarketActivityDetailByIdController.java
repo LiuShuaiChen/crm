@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bjpowernode.crm.settings.qx.user.domain.User;
+import com.bjpowernode.crm.utils.DateUtils;
 import com.bjpowernode.crm.utils.ServiceFactory;
 import com.bjpowernode.crm.workbench.activity.domain.MarketActivity;
 import com.bjpowernode.crm.workbench.activity.service.MarketActivityService;
@@ -57,6 +59,8 @@ public class UpdateMarketActivityDetailByIdController extends HttpServlet {
 		marketActivity.setActualCost(Long.parseLong(actualCost));
 		marketActivity.setBudgetCost(Long.parseLong(budgetCost));
 		marketActivity.setDescription(description);
+		marketActivity.setEditTime(DateUtils.getDate());
+		marketActivity.setEditBy(((User)request.getSession().getAttribute("user")).getId());
 
 		// 调用service
 		MarketActivityService marketActivityService = (MarketActivityService) ServiceFactory

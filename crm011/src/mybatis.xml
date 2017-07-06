@@ -9,6 +9,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<package name="com.bjpowernode.crm.settings.dept.domain" />
 		<package name="com.bjpowernode.crm.workbench.activity.domain" />
 		<package name="com.bjpowernode.crm.workbench.clue.domain" />
+		<package name="com.bjpowernode.crm.workbench.clue.remark.domain"/>
+		
+		
 
 	</typeAliases>
 	<environments default="development">
@@ -30,6 +33,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="com/bjpowernode/crm/workbench/activity/dao/MarketActivityDao.xml" />
 		<mapper resource="com/bjpowernode/crm/workbench/clue/dao/ClueDao.xml" />
 		<mapper resource="com/bjpowernode/crm/workbench/activity/dao/MarketActivityRemarkDao.xml" />
+		<mapper resource="com/bjpowernode/crm/workbench/clue/remark/dao/ClueRemarkDao,xml.xml"/>
+		
+		
 
 	</mappers>
 
