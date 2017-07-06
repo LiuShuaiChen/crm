@@ -76,5 +76,12 @@ public interface MarketActivityService {
 	 */
 	int saveCreateMarketActivityByList(List<MarketActivity> activityList);
 
+	/**
+	 * 更改 detail页 修改模态窗口 更新按钮
+	 * @param marketActivity
+	 * @return
+	 */
+	int updateEditMarketActivityDetailByMarketActivity(MarketActivity marketActivity);
+
 	
 }

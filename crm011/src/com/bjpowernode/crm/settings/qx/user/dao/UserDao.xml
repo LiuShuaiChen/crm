@@ -150,8 +150,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- List<User> queryAllUsers(); -->
 	<select id="queryAllUsers" resultType="user">
-		select * from tbl_user
-		where lockStatus='0'
+		select * from tbl_user where lockStatus='0'
 	</select>
 
 

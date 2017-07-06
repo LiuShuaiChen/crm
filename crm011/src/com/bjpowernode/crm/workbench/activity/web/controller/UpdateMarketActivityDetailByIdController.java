@@ -17,74 +17,76 @@ import com.bjpowernode.crm.workbench.activity.service.impl.MarketActivityService
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * 更新市场活动
- * Servlet implementation class UpdateEditMarketActivityController
- * @author LauShuaichen
+ * @author LauShuaichen Servlet implementation class
+ *         UpdateMarketActivityDetailByIdController
  */
-@WebServlet("/workbench/activity/updateEditMarketActivity.do")
-public class UpdateEditMarketActivityController extends HttpServlet {
+@WebServlet("/workbench/activity/detail/updateMarketActivityDetailById.do")
+public class UpdateMarketActivityDetailByIdController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("com.bjpowernode.crm.workbench.activity.web.controller.UpdateEditMarketActivityController");
-		
-		//获取表单
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.err.println(
+				"com.bjpowernode.crm.workbench.activity.web.controller.UpdateMarketActivityDetailByIdController");
+
+		// 获取参数
 		String id = request.getParameter("id");
 		String owner = request.getParameter("owner");
 		String type = request.getParameter("type");
 		String name = request.getParameter("name");
 		String state = request.getParameter("state");
-		String startDate = request.getParameter("startDate");
-		String endDate = request.getParameter("endDate");
+		String startTime = request.getParameter("startDate");
+		String endTime = request.getParameter("endDate");
 		String actualCost = request.getParameter("actualCost");
 		String budgetCost = request.getParameter("budgetCost");
 		String description = request.getParameter("description");
-		
-		
-		//封装参数
+
+		// 封装对象
 		MarketActivity marketActivity = new MarketActivity();
 		marketActivity.setId(id);
 		marketActivity.setOwner(owner);
 		marketActivity.setType(type);
 		marketActivity.setName(name);
 		marketActivity.setState(state);
-		marketActivity.setStartDate(startDate);
-		marketActivity.setEndDate(endDate);
+		marketActivity.setStartDate(startTime);
+		marketActivity.setEndDate(endTime);
 		marketActivity.setActualCost(Long.parseLong(actualCost));
 		marketActivity.setBudgetCost(Long.parseLong(budgetCost));
 		marketActivity.setDescription(description);
-		
-		//调用service 保存 更新信息
-		MarketActivityService marketActivityService = (MarketActivityService) ServiceFactory.getService(new MarketActivityServiceImpl());
-		int ret = marketActivityService.updateEditMarketActivity(marketActivity);
-		
-		//根据处理结果 返回响应信息
-		Map<String, Object> map = new HashMap<String,Object>();
+
+		// 调用service
+		MarketActivityService marketActivityService = (MarketActivityService) ServiceFactory
+				.getService(new MarketActivityServiceImpl());
+		int ret = marketActivityService.updateEditMarketActivityDetailByMarketActivity(marketActivity);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
 		if (ret > 0) {
 			map.put("success", true);
-
-		}else {
+			map.put("marketActivity", "marketActivity");
+		} else {
 			map.put("success", false);
 		}
-		
-		//封装json
-		ObjectMapper mapper = new ObjectMapper();
-		String json = mapper.writeValueAsString(map);
-		
-		//转发
+
+		// 转换json
+		String json = new ObjectMapper().writeValueAsString(map);
+
+		// 响应
 		request.setAttribute("data", json);
 		request.getRequestDispatcher("/data.jsp").forward(request, response);
-		
-		
-		
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		this.doGet(request, response);
 	}
 

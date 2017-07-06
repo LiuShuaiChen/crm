@@ -21,10 +21,10 @@ import com.bjpowernode.crm.workbench.clue.service.impl.ClueServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Servlet implementation class AddNewClueController
+ * Servlet implementation class SaveClueController
  */
-@WebServlet("/worbench/clue/addNewClue.do")
-public class AddNewClueController extends HttpServlet {
+@WebServlet("/worbench/clue/saveClue.do")
+public class SaveClueController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -107,7 +107,6 @@ public class AddNewClueController extends HttpServlet {
 		String json = new ObjectMapper().writeValueAsString(map);
 		request.setAttribute("data", json);
 		request.getRequestDispatcher("/data.jsp").forward(request, response);
-		
 
 	}
 

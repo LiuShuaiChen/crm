@@ -238,6 +238,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 	</insert>
 
+	<!-- int updateEditMarketActivityDetailByMarketActivity(MarketActivity marketActivity); -->
+	<update id="updateEditMarketActivityDetailByMarketActivity" parameterType="marketActivity">
+		update
+		tbl_marketing_activities set
+		owner=#{owner},type=#{type},name=#{name},state=#{state},startDate=#{startDate},endDate=#{endDate},
+		budgetCost=#{budgetCost},actualCost=#{actualCost},description=#{description},editBy=#{editBy},editTime=#{editTime}
+		where id=#{id}
+	</update>
+
+
+
 </mapper>
 
 

@@ -67,7 +67,7 @@ $(function(){
 	
 	
 	
-	/* //创建线索 ***创建线索 ***创建线索 ***创建线索 ***创建线索 ***创建线索 ***创建线索 ***创建线索 ***/
+	/* 创建线索 *//* 创建线索 *//* 创建线索 *//* 创建线索 *//* 创建线索 *//* 创建线索 *//* 创建线索 *//* 创建线索 */
 	$("#createClueBtn").click(function(){
 		
 		//模态窗口开启之前  需要清空表单
@@ -96,7 +96,7 @@ $(function(){
 		$("#create-zipcode").val("");
 		
 		$.ajax({
-			url:'workbench/clue/createClue.do',
+			url:'workbench/clue/queryUser.do',
 			type:'post',
 			success:function(data){
 				//设置所有者
@@ -115,6 +115,7 @@ $(function(){
 		});
 		
 	});
+	/* 创建线索 *//* 创建线索 *//* 创建线索 *//* 创建线索 *//* 创建线索 *//* 创建线索 *//* 创建线索 *//* 创建线索 */
 	
 	
 	
@@ -157,7 +158,7 @@ $(function(){
 					}
 					
 					$.ajax({
-						url:'worbench/clue/addNewClue.do',
+						url:'worbench/clue/saveClue.do',
 						type:'post',
 						data:{
 							clueOwner:clueOwner,
@@ -201,8 +202,10 @@ $(function(){
 					
 				});
 	/* 保存新创建的线索 *保存新创建的线索 *保存新创建的线索 *保存新创建的线索 *保存新创建的线索 *保存新创建的线索 *保存新创建的线索 */
+	
+	
 
-			})
+})
 </script>
 
 

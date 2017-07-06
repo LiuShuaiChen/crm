@@ -83,6 +83,13 @@ public interface MarketActivityDao {
 	 */
 	int saveCreateMarketActivityByList(List<MarketActivity> activityList);
 
+	/**
+	 * 更新市场活动详情信息 详细页中的编辑按钮 出来的修改市场活动模态窗口 更新按钮
+	 * @param marketActivity
+	 * @return
+	 */
+	int updateEditMarketActivityDetailByMarketActivity(MarketActivity marketActivity);
+
 
 	
 }

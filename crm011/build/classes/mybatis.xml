@@ -23,17 +23,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		</environment>
 	</environments>
 	<mappers>
-		<mapper
-			resource="com/bjpowernode/crm/settings/dictionary/dao/DictionaryTypeDao.xml" />
-		<mapper
-			resource="com/bjpowernode/crm/settings/dictionary/dao/DictionaryValueDao.xml" />
+		<mapper resource="com/bjpowernode/crm/settings/dictionary/dao/DictionaryTypeDao.xml" />
+		<mapper resource="com/bjpowernode/crm/settings/dictionary/dao/DictionaryValueDao.xml" />
 		<mapper resource="com/bjpowernode/crm/settings/qx/user/dao/UserDao.xml" />
 		<mapper resource="com/bjpowernode/crm/settings/dept/dao/DeptDao.xml" />
-		<mapper
-			resource="com/bjpowernode/crm/workbench/activity/dao/MarketActivityDao.xml" />
+		<mapper resource="com/bjpowernode/crm/workbench/activity/dao/MarketActivityDao.xml" />
 		<mapper resource="com/bjpowernode/crm/workbench/clue/dao/ClueDao.xml" />
-		<mapper
-			resource="com/bjpowernode/crm/workbench/activity/dao/MarketActivityRemarkDao.xml" />
+		<mapper resource="com/bjpowernode/crm/workbench/activity/dao/MarketActivityRemarkDao.xml" />
 
 	</mappers>
 
