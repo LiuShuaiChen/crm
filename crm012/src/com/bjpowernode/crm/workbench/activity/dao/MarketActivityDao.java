@@ -90,6 +90,13 @@ public interface MarketActivityDao {
 	 */
 	int updateEditMarketActivityDetailByMarketActivity(MarketActivity marketActivity);
 
+	/**
+	 * 删除市场活动明细
+	 * @param id
+	 * @return
+	 */
+	int deleteMarketActivityDetail(String id);
+
 
 	
 }

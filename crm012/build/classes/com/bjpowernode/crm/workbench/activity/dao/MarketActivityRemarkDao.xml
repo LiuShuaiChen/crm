@@ -42,6 +42,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		noteContent=#{noteContent},editTime=#{editTime},editPerson=#{editPerson},editFlag=#{editFlag}
 		where id=#{id}
 	</update>
+	
+	<!-- void deleteMarketActivityRemarkByActivityId(String id); -->
+	<delete id="deleteMarketActivityRemarkByActivityId" parameterType="string">
+		delete from tbl_marketing_activities_remark where marketingActivitiesId = #{id}
+	</delete>
+	
+	<!-- void deleteMarketActivityRemarkByActivityIds(String[] ids); -->
+	<delete id="deleteMarketActivityRemarkByActivityIds" parameterType="string">
+		delete from tbl_marketing_activities_remark where marketingActivitiesId in
+		<foreach collection="array" open="(" close=")" item="id" separator=",">
+			#{id}
+		</foreach>
+	</delete>
 
 </mapper>
 

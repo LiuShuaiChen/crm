@@ -38,4 +38,18 @@ public interface MarketActivityRemarkDao {
 	 */
 	int updateMarketActivityRemarkById(MarketActivityRemark marketActivityRemark);
 
+
+	/**
+	 * 删除市场活动 级联删除市场活动备注
+	 * @param id
+	 */
+	void deleteMarketActivityRemarkByActivityId(String id);
+
+
+	/**
+	 * 删除市场活动 级联删除市场活动备注
+	 * @param ids
+	 */
+	void deleteMarketActivityRemarkByActivityIds(String[] ids);
+
 }

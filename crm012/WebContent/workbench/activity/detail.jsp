@@ -330,7 +330,25 @@ $(function(){
 		
 	});
 	/* 修改备注模态窗口中的 更新 按钮 */
-
+	
+	/* 市场活动详情页中的删除 *//* 市场活动详情页中的删除 *//* 市场活动详情页中的删除 *//* 市场活动详情页中的删除 *//* 市场活动详情页中的删除 */
+	$("#deleteMarketActivityDetailBtn").click(function(){
+		$.ajax({
+			url:"workbench/acitivty/detail/deleteMarketActivityDetail.do",
+			data:{id:"${param.id}"},
+			type:"post",
+			success:function(data){
+				if (data.success) {
+					alert("删除成功");
+					window.location.href="workbench/activity/index.jsp";
+				}else {
+					alert("删除失败");
+				}
+			}
+			
+		});
+	})
+	/* 市场活动详情页中的删除 *//* 市场活动详情页中的删除 *//* 市场活动详情页中的删除 *//* 市场活动详情页中的删除 *//* 市场活动详情页中的删除 */
 })
 
 /* 局部刷新 */ /* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 */
@@ -523,11 +541,8 @@ $(function(){
 		<div
 			style="position: relative; height: 50px; width: 250px; top: -72px; left: 700px;">
 			<button type="button" id="editMarketActivityDetailBtn" class="btn btn-default">
-				<span class="glyphicon glyphicon-edit"></span> 编辑jsp
-			</button>
-			<button type="button" class="btn btn-danger">
-				<span class="glyphicon glyphicon-minus"></span> 删除
-			</button>
+				<span class="glyphicon glyphicon-edit"></span> 编辑jsp </button>
+			<button id="deleteMarketActivityDetailBtn" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span> 删除 </button>
 		</div>
 	</div>
 

@@ -246,6 +246,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		budgetCost=#{budgetCost},actualCost=#{actualCost},description=#{description},editBy=#{editBy},editTime=#{editTime}
 		where id=#{id}
 	</update>
+	
+	<!-- int deleteMarketActivityDetail(String id); -->
+	<delete id="deleteMarketActivityDetail" parameterType="string">
+		delete from tbl_marketing_activities where id = #{id}
+	</delete>
 
 
 

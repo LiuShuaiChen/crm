@@ -6,6 +6,7 @@ import java.util.Map;
 import com.bjpowernode.crm.commons.vo.PaginationVO;
 import com.bjpowernode.crm.utils.SqlSessionutils;
 import com.bjpowernode.crm.workbench.activity.dao.MarketActivityDao;
+import com.bjpowernode.crm.workbench.activity.dao.MarketActivityRemarkDao;
 import com.bjpowernode.crm.workbench.activity.domain.MarketActivity;
 import com.bjpowernode.crm.workbench.activity.service.MarketActivityService;
 
@@ -17,6 +18,8 @@ import com.bjpowernode.crm.workbench.activity.service.MarketActivityService;
 public class MarketActivityServiceImpl implements MarketActivityService {
 
 	private MarketActivityDao marketActivityDao = SqlSessionutils.getSession().getMapper(MarketActivityDao.class);
+	
+	private MarketActivityRemarkDao marketActivityRemarkDao = SqlSessionutils.getSession().getMapper(MarketActivityRemarkDao.class);
 
 	/**
 	 * 市场活动创建
@@ -49,6 +52,7 @@ public class MarketActivityServiceImpl implements MarketActivityService {
 	 */
 	@Override
 	public int deleteMarketActivityByIds(String[] ids) {
+		marketActivityRemarkDao.deleteMarketActivityRemarkByActivityIds(ids);
 		return marketActivityDao.deleteMarketActivityById(ids);
 
 	}
@@ -96,6 +100,12 @@ public class MarketActivityServiceImpl implements MarketActivityService {
 	@Override
 	public int updateEditMarketActivityDetailByMarketActivity(MarketActivity marketActivity) {
 		return marketActivityDao.updateEditMarketActivityDetailByMarketActivity(marketActivity);
+	}
+
+	@Override
+	public int deleteMarketActivityDetail(String id) {
+		marketActivityRemarkDao.deleteMarketActivityRemarkByActivityId(id);
+		return marketActivityDao.deleteMarketActivityDetail(id);
 	}
 
 
