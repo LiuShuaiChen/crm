@@ -125,16 +125,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- Clue editClueById(String id); -->
 	<select id="editClueById" parameterType="string" resultType="clue">
-		select
-		cl.id, user1.name as owner, cl.company, cl.phone, cl.website, dv1.text as grade, dv2.text as industry, cl.annualIncome, cl.empNums, cl.country, cl.province, cl.city, cl.street, cl.zipcode, cl.description, cl.fullName, dv3.text as appellation, dv4.text as source, cl.email, cl.mphone, cl.job, dv5.text as state,user3.name as editBy, cl.editTime, cl.contactSummary, cl.nextContactTime 
+		select * 
 		from tbl_clue cl
-		left join tbl_dictionary_value dv1 on cl.grade = dv1.id 
-		left join tbl_dictionary_value dv2 on cl.industry = dv2.id 
-		left join tbl_dictionary_value dv3 on cl.appellation = dv3.id 
-		left join tbl_dictionary_value dv4 on cl.source = dv4.id 
-		left join tbl_dictionary_value dv5 on cl.state = dv5.id 
-		left join tbl_user user1 on cl.owner = user1.id 
-		left join tbl_user user3 on cl.editBy = user3.id
 		where cl.id = #{id}
 	</select>
 	

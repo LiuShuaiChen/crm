@@ -233,7 +233,6 @@ $(function(){
 					});
 					
 					$("#edit-owner").html(htmlStr);
-
 					$("#edit-clueId").val(data.clue.id);
 					$("#edit-company").val(data.clue.company);
 					$("#edit-appellation").val(data.clue.appellation);
@@ -257,7 +256,7 @@ $(function(){
 					$("#edit-city").val(data.clue.city);
 					$("#edit-street").val(data.clue.street);
 					$("#edit-zipcode").val(data.clue.zipcode);
-					
+
 					//显示模态窗口
 					$("#editClueModal").modal("show");
 					
@@ -293,7 +292,7 @@ $(function(){
 		var description = $("#edit-description").val();
 		var contactSummary = $("#edit-contactSummary").val();
 		var nextContactTime = $("#edit-nextContactTime").val();
-		var country = $("#edit-country").val()
+		var country = $("#edit-country").val();
 		var province = $("#edit-province").val();
 		var city= $("#edit-city").val();
 		var street= $("#edit-street").val();
@@ -648,7 +647,7 @@ function display(pageNo, pageSize){
 						<span aria-hidden="true">×</span>
 					</button>
 					<h4 class="modal-title" id="myModalLabel">修改线索</h4>
-					<input type="text" id="edit-clueId">
+					<input type="hidden" id="edit-clueId">
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" role="form">
@@ -658,9 +657,6 @@ function display(pageNo, pageSize){
 								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="edit-owner">
-									<option>zhangsan</option>
-									<option>lisi</option>
-									<option>wangwu</option>
 								</select>
 							</div>
 							<label for="edit-company" class="col-sm-2 control-label">公司<span

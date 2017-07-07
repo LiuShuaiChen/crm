@@ -465,13 +465,10 @@ $(function(){
 								class="col-sm-2 control-label">名称<span
 								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control"
-									id="edit-marketActivityName" value="发传单">
+								<input type="text" class="form-control" id="edit-marketActivityName" value="发传单">
 							</div>
-							<label for="edit-marketActivityState"
-								class="col-sm-2 control-label">状态</label>
+							<label for="edit-marketActivityState" class="col-sm-2 control-label">状态</label>
 							<div class="col-sm-10" style="width: 300px;">
-
 								<select class="form-control" id="edit-marketActivityState">
 									<option></option>
 									<c:if test="${not empty acitivityStatusList }">

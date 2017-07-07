@@ -32,27 +32,7 @@
 <script type="text/javascript">
 
 	$(function(){
-		
-		//以下日历插件在FF中存在兼容问题，在IE浏览器中可以正常使用。
-		/*
-		$("#startTime").datetimepicker({
-			minView: "month",
-			language:  'zh-CN',
-			format: 'yyyy-mm-dd',
-	        autoclose: true,
-	        todayBtn: true,
-	        pickerPosition: "bottom-left"
-		});
-		
-		$("#endTime").datetimepicker({
-			minView: "month",
-			language:  'zh-CN',
-			format: 'yyyy-mm-dd',
-	        autoclose: true,
-	        todayBtn: true,
-	        pickerPosition: "bottom-left"
-		});
-		*/
+
 		
 		//定制字段
 		$("#definedColumns > li").click(function(e) {
