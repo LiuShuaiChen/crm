@@ -530,10 +530,7 @@ $(function(){
 	<!-- 大标题 -->
 	<div style="position: relative; left: 40px; top: -30px;">
 		<div class="page-header">
-			<h3 id="activityTitle">
-				市场活动-${marketActivity.name } <small>${marketActivity.startDate }
-					~ ${marketActivity.endDate }</small>
-			</h3>
+			<h3 id="activityTitle">市场活动-${marketActivity.name } <small>${marketActivity.startDate }~ ${marketActivity.endDate }</small></h3>
 		</div>
 		<div
 			style="position: relative; height: 50px; width: 250px; top: -72px; left: 700px;">

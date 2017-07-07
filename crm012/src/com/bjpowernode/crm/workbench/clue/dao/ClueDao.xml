@@ -125,9 +125,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- Clue editClueById(String id); -->
 	<select id="editClueById" parameterType="string" resultType="clue">
-		select * 
-		from tbl_clue cl
-		where cl.id = #{id}
+		select * from tbl_clue where id = #{id}
 	</select>
 	
 	

@@ -16,12 +16,15 @@
 <head>
 <base href="<%=basePath %>">
 <meta charset="UTF-8">
-
-<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css"
-	type="text/css" rel="stylesheet" />
+<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
-<script type="text/javascript"
-	src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+
+<!--  PAGINATION plugin -->
+<link rel="stylesheet" type="text/css" href="jquery/bs_pagination/jquery.bs_pagination.min.css">
+<script type="text/javascript" src="jquery/bs_pagination/jquery.bs_pagination.min.js"></script>
+<script type="text/javascript" src="jquery/bs_pagination/localization/en.js"></script>
+
 
 <script type="text/javascript">
 
@@ -62,8 +65,194 @@
 		$(".myHref").mouseout(function(){
 			$(this).children("span").css("color","#E6E6E6");
 		});
+		
 	});
 	
+	
+
+	
+</script>
+<script type="text/javascript">
+
+
+	/* 获取id 编辑 线索 *//* 获取id 编辑 线索 *//* 获取id 编辑 线索 *//* 获取id 编辑 线索 *//* 获取id 编辑 线索 */
+	$(function(){
+		
+
+		$("#editClueDateilBtn").click(function(){
+			$.ajax({
+				url:"workbench/clue/edit.do",
+				data:{
+					id:$("#edit-clueId").val()
+				},
+				type:"post",
+				success:function(data){
+					if (data.success) {
+						//设置所有者
+						var htmlStr = "";
+						$.each(data.userList,function(index,obj){
+							if(obj.id == data.clue.owner){
+								htmlStr+="<option value='"+obj.id+"' selected>"+obj.name+"</option>";
+							}else{
+								htmlStr+="<option value='"+obj.id+"'>"+obj.name+"</option>";
+							}
+						});
+						$("#edit-owner").html(htmlStr);
+						$("#edit-clueId").val(data.clue.id);
+						$("#edit-company").val(data.clue.company);
+						$("#edit-appellation").val(data.clue.appellation);
+						$("#edit-fullName").val(data.clue.fullName);
+						$("#edit-job").val(data.clue.job);
+						$("#edit-email").val(data.clue.email);
+						$("#edit-phone").val(data.clue.phone);
+						$("#edit-website").val(data.clue.website);
+						$("#edit-mphone").val(data.clue.mphone);
+						$("#edit-state").val(data.clue.state);
+						$("#edit-source").val(data.clue.source);
+						$("#edit-empNums").val(data.clue.empNums);
+						$("#edit-industry").val(data.clue.industry);
+						$("#edit-grade").val(data.clue.grade);
+						$("#edit-annualIncome").val(data.clue.annualIncome);
+						$("#edit-description").val(data.clue.description);
+						$("#edit-contactSummary").val(data.clue.contactSummary);
+						$("#edit-nextContactTime").val(data.clue.nextContactTime);
+						$("#edit-province").val(data.clue.province);
+						$("#edit-country").val(data.clue.country)
+						$("#edit-city").val(data.clue.city);
+						$("#edit-street").val(data.clue.street);
+						$("#edit-zipcode").val(data.clue.zipcode);
+
+						//显示模态窗口
+						$("#editClueModal").modal("show");
+						
+					}else {
+						alert("获取线索失败");
+						$("#editClueModal").modal("hide");
+					}
+				}
+			});
+			/* 获取id 编辑 线索 *//* 获取id 编辑 线索 *//* 获取id 编辑 线索 *//* 获取id 编辑 线索 *//* 获取id 编辑 线索 *//* 获取id 编辑 线索 */
+			
+			
+			/* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 */
+			$("#updateClueDetailBtn").click(function(){
+				
+				//获取表单
+				var id = $("#edit-clueId").val();
+				var owner = $("#edit-owner").val();
+				var company = $("#edit-company").val();
+				var appellation = $("#edit-appellation").val();
+				var fullName = $("#edit-fullName").val();
+				var job = $("#edit-job").val();
+				var email = $("#edit-email").val();
+				var phone = $("#edit-phone").val();
+				var website = $("#edit-website").val();
+				var mphone = $("#edit-mphone").val();
+				var state = $("#edit-state").val();
+				var source = $("#edit-source").val();
+				var empNums = $("#edit-empNums").val();
+				var industry = $("#edit-industry").val();
+				var grade = $("#edit-grade").val();
+				var annualIncome = $("#edit-annualIncome").val();
+				var description = $("#edit-description").val();
+				var contactSummary = $("#edit-contactSummary").val();
+				var nextContactTime = $("#edit-nextContactTime").val();
+				var country = $("#edit-country").val();
+				var province = $("#edit-province").val();
+				var city= $("#edit-city").val();
+				var street= $("#edit-street").val();
+				var zipcode = $("#edit-zipcode").val();
+				
+				//发送请求
+				$.ajax({
+					url:"workbench/clue/update.do",
+					data:{
+						id:id,
+						owner:owner,
+						company:company,
+						appellation:appellation,
+						fullName:fullName,
+						job:job,
+						email:email,
+						phone:phone,
+						mphone:mphone,
+						website:website,
+						state:state,
+						source:source,
+						empNums:empNums,
+						industry:industry,
+						grade:grade,
+						annualIncome:annualIncome,
+						description:description,
+						contactSummary:contactSummary,
+						nextContactTime:nextContactTime,
+						country:country,
+						province:province,
+						city:city,
+						street:street,
+						zipcode:zipcode
+					},
+					type:"post",
+					success:function(data){
+						if (data.success) {
+							$("#editClueModal").modal("hide");
+							reflushDetailClue();
+						}else {
+							alert("更新线索失败");
+							$("#editClueModal").modal("show");
+						}
+					}
+				});
+				
+			});
+			
+			/* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 */
+		})
+		
+		/* 局部刷新 */ /* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 */
+		function reflushDetailClue(){
+			$.ajax({
+				url:"workbench/clue/detail.do",
+				data:{
+					id:"${param.id}"
+				},
+				type:"post",
+				success:function(data){
+					if(data.success){
+						// 修改后标题
+						$("#clueTitle").html(data.clue.fullName + data.clue.appellation +"<small> "  + data.clue.company + "</small>" );
+						// 修改后详细信息
+						$("#clueFullNameAndAppellation").html(data.clue.name + data.clue.appellation);
+						$("#clueOwner").html(data.clue.owner);
+						$("#clueCompany").html(data.clue.company);
+						$("#clueJob").html(data.clue.job);
+						$("#clueEmail").html(data.clue.email);
+						$("#cluePhone").html(data.clue.phone);
+						$("#clueWebsite").html(data.clue.website);
+						$("#clueMphone").html(data.clue.mphone);
+						$("#clueState").html(data.clue.state);
+						$("#clueSource").html(data.clue.source);
+						$("#clueEmpnums").html(data.clue.empNums);
+						$("#clueIndustry").html(data.clue.industry);
+						$("#clueGrade").html(data.clue.grade);
+						$("#clueAnnuaincome").html(data.clue.annualIncome);
+						$("#clueEditBy").html(data.clue.editBy + "&nbsp;&nbsp;");
+						$("#clueEditTime").html(data.clue.editTime);
+						$("#clueDescription").html(data.clue.description);
+						$("#clueContactSummary").html(data.clue.contactSummary);
+						$("#clueNextContactTime").html(data.clue.nextContactTime);
+						$("#clueCountry").html(data.clue.country);
+						$("#clueProvince").html(data.clue.province);
+						$("#clueStreet").html(data.clue.street);
+						$("#clueZipcode").html(data.clue.zipcode);
+					}else{
+						alert("刷新失败");
+					}
+				}
+			});
+		}
+		/* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 */
+	})
 </script>
 
 </head>
@@ -167,39 +356,36 @@
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" role="form">
-
+						<input type="hidden" id="edit-clueId" value="${clue.id }">
 						<div class="form-group">
-							<label for="edit-clueOwner" class="col-sm-2 control-label">所有者</label>
+						
+							<label for="edit-owner" class="col-sm-2 control-label">所有者</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<select class="form-control" id="edit-clueOwner">
-									<option>zhangsan</option>
-									<option>lisi</option>
-									<option>wangwu</option>
+								<select class="form-control" id="edit-owner">
 								</select>
 							</div>
 							<label for="edit-company" class="col-sm-2 control-label">公司</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-company"
-									value="动力节点">
+								<input type="text" class="form-control" id="edit-company" value="${clue.company }">
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label for="edit-call" class="col-sm-2 control-label">称呼</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<select class="form-control" id="edit-call">
+								<select class="form-control" id="edit-appellation">
 									<option></option>
-									<option selected>先生</option>
-									<option>夫人</option>
-									<option>女士</option>
-									<option>博士</option>
-									<option>教授</option>
+									<c:if test="${!empty appellationList }">
+										<c:forEach var="at" items="${appellationList }">
+											<option value="${at.id }">${at.text }</option>
+										</c:forEach>
+									</c:if>
 								</select>
 							</div>
 							<label for="edit-surname" class="col-sm-2 control-label">姓名</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-surname"
-									value="李四">
+								<input type="text" class="form-control" id="edit-fullName"
+									value="${clue.fullName }">
 							</div>
 						</div>
 
@@ -207,12 +393,12 @@
 							<label for="edit-job" class="col-sm-2 control-label">职位</label>
 							<div class="col-sm-10" style="width: 300px;">
 								<input type="text" class="form-control" id="edit-job"
-									value="CTO">
+									value="${clue.job }">
 							</div>
 							<label for="edit-email" class="col-sm-2 control-label">邮箱</label>
 							<div class="col-sm-10" style="width: 300px;">
 								<input type="text" class="form-control" id="edit-email"
-									value="lisi@bjpowernode.com">
+									value="${clue.email }">
 							</div>
 						</div>
 
@@ -220,12 +406,12 @@
 							<label for="edit-phone" class="col-sm-2 control-label">电话</label>
 							<div class="col-sm-10" style="width: 300px;">
 								<input type="text" class="form-control" id="edit-phone"
-									value="010-84846003">
+									value="${clue.phone }">
 							</div>
 							<label for="edit-website" class="col-sm-2 control-label">网站</label>
 							<div class="col-sm-10" style="width: 300px;">
 								<input type="text" class="form-control" id="edit-website"
-									value="http://www.bjpowernode.com">
+									value="${clue.website }">
 							</div>
 						</div>
 
@@ -233,19 +419,17 @@
 							<label for="edit-mphone" class="col-sm-2 control-label">手机</label>
 							<div class="col-sm-10" style="width: 300px;">
 								<input type="text" class="form-control" id="edit-mphone"
-									value="12345678901">
+									value="${clue.mphone }">
 							</div>
 							<label for="edit-status" class="col-sm-2 control-label">状态</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<select class="form-control" id="edit-status">
+								<select class="form-control" id="edit-state">
 									<option></option>
-									<option>试图联系</option>
-									<option>将来联系</option>
-									<option selected>已联系</option>
-									<option>虚假线索</option>
-									<option>丢失线索</option>
-									<option>未联系</option>
-									<option>需要条件</option>
+									<c:if test="${!empty clueStateList }">
+										<c:forEach var="cs" items="${clueStateList }">
+											<option value="${cs.id }">${cs.text }</option>
+										</c:forEach>
+									</c:if>
 								</select>
 							</div>
 						</div>
@@ -255,26 +439,17 @@
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="edit-source">
 									<option></option>
-									<option selected>广告</option>
-									<option>推销电话</option>
-									<option>员工介绍</option>
-									<option>外部介绍</option>
-									<option>在线商场</option>
-									<option>合作伙伴</option>
-									<option>公开媒介</option>
-									<option>销售邮件</option>
-									<option>合作伙伴研讨会</option>
-									<option>内部研讨会</option>
-									<option>交易会</option>
-									<option>web下载</option>
-									<option>web调研</option>
-									<option>聊天</option>
+									<c:if test="${!empty sourceList }">
+										<c:forEach var="sl" items="${sourceList }">
+											<option value="${sl.id }">${sl.text }</option>
+										</c:forEach>
+									</c:if>
 								</select>
 							</div>
 							<label for="edit-empnums" class="col-sm-2 control-label">员工数</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-empnums"
-									value="100">
+								<input type="text" class="form-control" id="edit-empNums"
+									value="${clue.empNums }">
 							</div>
 						</div>
 
@@ -283,33 +458,22 @@
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="edit-industry">
 									<option></option>
-									<option>应用服务提供商</option>
-									<option>数据/电信/OEM</option>
-									<option>企业资源管理</option>
-									<option>政府/军队</option>
-									<option>大企业</option>
-									<option>管理软件提供商</option>
-									<option>MSP（管理服务提供商）</option>
-									<option>网络设备（企业）</option>
-									<option>非管理软件提供商</option>
-									<option>光网络</option>
-									<option>服务提供商</option>
-									<option selected>中小企业</option>
-									<option>存储设备</option>
-									<option>存储服务提供商</option>
-									<option>系统集成</option>
-									<option>无线企业</option>
+									<c:if test="${!empty industryList }">
+										<c:forEach var="indu" items="${industryList }">
+											<option value="${indu.id }">${indu.text }</option>
+										</c:forEach>
+									</c:if>
 								</select>
 							</div>
 							<label for="edit-grade" class="col-sm-2 control-label">等级</label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="edit-grade">
 									<option></option>
-									<option selected>已获得</option>
-									<option>激活的</option>
-									<option>市场失败</option>
-									<option>项目取消</option>
-									<option>关闭</option>
+									<c:if test="${!empty industryList }">
+										<c:forEach var="grade" items="${gradeList }">
+											<option value="${grade.id }">${grade.text }</option>
+										</c:forEach>
+									</c:if>
 								</select>
 							</div>
 						</div>
@@ -317,14 +481,14 @@
 						<div class="form-group">
 							<label for="edit-yearIncome" class="col-sm-2 control-label">年收入</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-yearIncome"
-									value="10,000,000">
+								<input type="text" class="form-control" id="edit-annualIncome"
+									value="${clue.annualIncome }">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="edit-describe" class="col-sm-2 control-label">描述</label>
 							<div class="col-sm-10" style="width: 81%;">
-								<textarea class="form-control" rows="3" id="edit-describe">这是一条线索的描述信息</textarea>
+								<textarea class="form-control" rows="3" id="edit-description">${clue.description }</textarea>
 							</div>
 						</div>
 
@@ -336,14 +500,13 @@
 								<label for="edit-contactSummary" class="col-sm-2 control-label">联系纪要</label>
 								<div class="col-sm-10" style="width: 81%;">
 									<textarea class="form-control" rows="3"
-										id="edit-contactSummary">这个线索即将被转换</textarea>
+										id="edit-contactSummary">${clue.contactSummary }</textarea>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="edit-nextContactTime" class="col-sm-2 control-label">下次联系时间</label>
 								<div class="col-sm-10" style="width: 300px;">
-									<input type="text" class="form-control"
-										id="edit-nextContactTime" value="2017-05-01">
+									<input type="text" class="form-control" id="edit-nextContactTime" readonly value="${clue.nextContactTime }">
 								</div>
 							</div>
 						</div>
@@ -356,12 +519,12 @@
 								<label for="edit-country" class="col-sm-2 control-label">国家/地区</label>
 								<div class="col-sm-10" style="width: 300px;">
 									<input type="text" class="form-control" id="edit-country"
-										value="中国">
+										value="${clue.country }">
 								</div>
 								<label for="edit-province" class="col-sm-2 control-label">省/市</label>
 								<div class="col-sm-10" style="width: 300px;">
 									<input type="text" class="form-control" id="edit-province"
-										value="北京市">
+										value="${clue.province }">
 								</div>
 							</div>
 
@@ -369,12 +532,12 @@
 								<label for="edit-city" class="col-sm-2 control-label">城市</label>
 								<div class="col-sm-10" style="width: 300px;">
 									<input type="text" class="form-control" id="edit-city"
-										value="北京市">
+										value="${clue.city }">
 								</div>
 								<label for="edit-street" class="col-sm-2 control-label">街道</label>
 								<div class="col-sm-10" style="width: 300px;">
 									<input type="text" class="form-control" id="edit-street"
-										value="亦庄大族企业湾10号楼A座3层">
+										value="${clue.street }">
 								</div>
 							</div>
 
@@ -382,7 +545,7 @@
 								<label for="edit-zipcode" class="col-sm-2 control-label">邮编</label>
 								<div class="col-sm-10" style="width: 300px;">
 									<input type="text" class="form-control" id="edit-zipcode"
-										value="100176">
+										value="${clue.zipcode }">
 								</div>
 							</div>
 						</div>
@@ -391,7 +554,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">更新</button>
+					<button type="button" class="btn btn-default" id="updateClueDetailBtn" >更新</button>
 				</div>
 			</div>
 		</div>
@@ -407,21 +570,17 @@
 	<!-- 大标题 -->
 	<div style="position: relative; left: 40px; top: -30px;">
 		<div class="page-header">
-			<h3>
-				${clue.fullName } ${clue.appellation } <small>${clue.company }</small>
+			<h3 id="clueTitle"> ${clue.fullName } ${clue.appellation } <small>${clue.company }</small>
 			</h3>
 		</div>
-		<div
-			style="position: relative; height: 50px; width: 500px; top: -72px; left: 700px;">
+		<div style="position: relative; height: 50px; width: 500px; top: -72px; left: 700px;">
 			<button type="button" class="btn btn-default">
 				<span class="glyphicon glyphicon-envelope"></span> 发送邮件
 			</button>
-			<button type="button" class="btn btn-default"
-				onclick="window.location.href='convert.html';">
+			<button type="button" class="btn btn-default" onclick="window.location.href='convert.html';">
 				<span class="glyphicon glyphicon-retweet"></span> 转换
 			</button>
-			<button type="button" class="btn btn-default" data-toggle="modal"
-				data-target="#editClueModal">
+			<button id="editClueDateilBtn" type="button" class="btn btn-default" data-toggle="modal" data-target="#editClueModal">
 				<span class="glyphicon glyphicon-edit"></span> 编辑
 			</button>
 			<button type="button" class="btn btn-danger">
@@ -436,13 +595,13 @@
 			<div style="width: 300px; color: gray;">名称</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>${clue.fullName } ${clue.appellation }</b>
+				<b id="clueFullNameAndAppellation">${clue.fullName } ${clue.appellation }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">所有者</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>${clue.owner }</b>
+				<b id="clueOwner">${clue.owner }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -453,13 +612,13 @@
 			<div style="width: 300px; color: gray;">公司</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>${clue.company }</b>
+				<b id="clueCompany">${clue.company }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">职位</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>${clue.job }</b>
+				<b id="clueJob">${clue.job }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -468,15 +627,14 @@
 		</div>
 		<div style="position: relative; left: 40px; height: 30px; top: 20px;">
 			<div style="width: 300px; color: gray;">邮箱</div>
-			<div
-				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>${clue.email }</b>
+			<div style="width: 300px; position: relative; left: 200px; top: -20px;">
+				<b id="clueEmail">${clue.email }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">电话</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>${clue.phone }</b>
+				<b id="cluePhone">${clue.phone }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -487,13 +645,13 @@
 			<div style="width: 300px; color: gray;">网站</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>${clue.website }</b>
+				<b id="clueWebsite">${clue.website }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">手机</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>${clue.mphone }</b>
+				<b id="clueMphone">${clue.mphone }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -504,13 +662,13 @@
 			<div style="width: 300px; color: gray;">状态</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>${clue.state }</b>
+				<b id="clueState">${clue.state }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">来源</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>${clue.source }</b>
+				<b id="clueSource">${clue.source }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -521,13 +679,13 @@
 			<div style="width: 300px; color: gray;">员工数</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>${clue.empNums }</b>
+				<b id="clueEmpnums">${clue.empNums }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">行业</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>${clue.industry }</b>
+				<b id="clueIndustry">${clue.industry }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -538,13 +696,13 @@
 			<div style="width: 300px; color: gray;">等级</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>${clue.grade }</b>
+				<b id="clueGrade">${clue.grade }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">收入</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>${clue.annualIncome }</b>
+				<b id="clueAnnuaincome">${clue.annualIncome }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -565,8 +723,7 @@
 			<div style="width: 300px; color: gray;">修改者</div>
 			<div
 				style="width: 500px; position: relative; left: 200px; top: -20px;">
-				<b>${clue.editBy }&nbsp;&nbsp;</b><small
-					style="font-size: 10px; color: gray;">${clue.editTime }</small>
+				<b id="clueEditBy">${clue.editBy }&nbsp;&nbsp;</b><small style="font-size: 10px; color: gray;" id="clueEditTime">${clue.editTime }</small>
 			</div>
 			<div
 				style="height: 1px; width: 550px; background: #D5D5D5; position: relative; top: -20px;"></div>
@@ -575,7 +732,7 @@
 			<div style="width: 300px; color: gray;">描述</div>
 			<div
 				style="width: 630px; position: relative; left: 200px; top: -20px;">
-				<b> ${clue.description }</b>
+				<b id="clueDescription"> ${clue.description }</b>
 			</div>
 			<div
 				style="height: 1px; width: 850px; background: #D5D5D5; position: relative; top: -20px;"></div>
@@ -584,7 +741,7 @@
 			<div style="width: 300px; color: gray;">联系纪要</div>
 			<div
 				style="width: 630px; position: relative; left: 200px; top: -20px;">
-				<b> ${clue.contactSummary } </b>
+				<b id="clueContactSummary"> ${clue.contactSummary } </b>
 			</div>
 			<div
 				style="height: 1px; width: 850px; background: #D5D5D5; position: relative; top: -20px;"></div>
@@ -593,7 +750,7 @@
 			<div style="width: 300px; color: gray;">下次联系时间</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>${clue.nextContactTime }</b>
+				<b id="clueNextContactTime">${clue.nextContactTime }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -20px;"></div>
@@ -609,13 +766,13 @@
 			<div style="width: 300px; color: gray;">国家/地区</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>${clue.country }</b>
+				<b id="clueCountry">${clue.country }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">省/市</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>${clue.province }</b>
+				<b id="clueProvince">${clue.province }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -626,13 +783,13 @@
 			<div style="width: 300px; color: gray;">城市</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>${clue.city }</b>
+				<b id="clueCity">${clue.city }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">街道</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>${clue.street }</b>
+				<b id="clueStreet">${clue.street }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -643,7 +800,7 @@
 			<div style="width: 300px; color: gray;">邮编</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>${clue.zipcode }</b>
+				<b id="clueZipcode">${clue.zipcode }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -20px;"></div>

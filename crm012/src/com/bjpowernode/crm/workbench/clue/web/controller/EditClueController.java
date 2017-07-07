@@ -45,7 +45,7 @@ public class EditClueController extends HttpServlet {
 		
 		//获取所有者
 		UserService userService = (UserService) ServiceFactory.getService(new UserServiceImpl());
-		List<User>userList = userService.queryAllUsers();
+		List<User> userList = userService.queryAllUsers();
 		
 		Map<String, Object> map = new HashMap<String,Object>();
 		
@@ -62,7 +62,7 @@ public class EditClueController extends HttpServlet {
 		System.err.println(json);
 		request.setAttribute("data", json);
 		request.getRequestDispatcher("/data.jsp").forward(request, response);
-		
+
 	}
 
 	/**

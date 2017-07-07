@@ -340,6 +340,7 @@ $(function(){
 				}
 			}
 		});
+
 		
 	})
 	/* 修改线索 完成update *//* 修改线索 完成update *//* 修改线索 完成update *//* 修改线索 完成update *//* 修改线索 完成update */
@@ -653,8 +654,7 @@ function display(pageNo, pageSize){
 					<form class="form-horizontal" role="form">
 
 						<div class="form-group">
-							<label for="edit-owner" class="col-sm-2 control-label">所有者<span
-								style="font-size: 15px; color: red;">*</span></label>
+							<label for="edit-owner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="edit-owner">
 								</select>
@@ -804,8 +804,7 @@ function display(pageNo, pageSize){
 							<div class="form-group">
 								<label for="edit-nextContactTime" class="col-sm-2 control-label">下次联系时间</label>
 								<div class="col-sm-10" style="width: 300px;">
-									<input type="text" class="form-control"
-										id="edit-nextContactTime" readonly value="2017-05-01">
+									<input type="text" class="form-control" id="edit-nextContactTime" readonly value="2017-05-01">
 								</div>
 							</div>
 						</div>
