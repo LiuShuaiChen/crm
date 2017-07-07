@@ -53,9 +53,18 @@ public class ClueServiceImpl implements ClueService {
 		return clueDao.queryClueForDetail(id);
 	}
 
-	
-	public static void main(String[] args) {
-		System.out.println(new ClueServiceImpl().queryClueForDetail("0a7688eba8c74b1384196f75681ecbbe"));
+
+
+	@Override
+	public Clue editClueById(String id) {
+		// TODO Auto-generated method stub
+		return clueDao.editClueById(id);
+	}
+
+	@Override
+	public int updateClue(Clue clue) {
+		// TODO Auto-generated method stub
+		return clueDao.updateClue(clue);
 	}
 
 	

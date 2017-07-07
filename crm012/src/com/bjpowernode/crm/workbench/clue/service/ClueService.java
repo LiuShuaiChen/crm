@@ -26,6 +26,24 @@ public interface ClueService {
 	 */
 	PaginationVO<Clue> queryClueForPageByCondition(Map<String, Object> map);
 
+	/**
+	 * 根据id  获取线索 转发到详细页中
+	 * @param id
+	 * @return
+	 */
 	Clue queryClueForDetail(String id);
+
+	/**
+	 * 根据id 获取线索 转发到 修改模态窗口中
+	 * @param id
+	 * @return
+	 */
+	Clue editClueById(String id);
+
+	/**
+	 * 线索首页  更新 线索
+	 * @return
+	 */
+	int updateClue(Clue clue);
 
 }

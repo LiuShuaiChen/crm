@@ -14,36 +14,39 @@ import javax.servlet.http.HttpSession;
 import com.bjpowernode.crm.settings.qx.user.domain.User;
 import com.bjpowernode.crm.utils.DateUtils;
 import com.bjpowernode.crm.utils.ServiceFactory;
-import com.bjpowernode.crm.utils.UUIDutils;
 import com.bjpowernode.crm.workbench.clue.domain.Clue;
 import com.bjpowernode.crm.workbench.clue.service.ClueService;
 import com.bjpowernode.crm.workbench.clue.service.impl.ClueServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Servlet implementation class SaveClueController
+ * 更新 线索 线索列表中的 修改 模态窗口中的 更新
+ * 
+ * @author LauShuaichen
+ * 
+ * Servlet implementation class UpdateClueController
  */
-@WebServlet("/worbench/clue/saveClue.do")
-public class SaveClueController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+@WebServlet("/workbench/clue/update.do")
+public class UpdateClueController extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		System.out.println("com.bjpowernode.crm.workbench.clue.web.controller.AddNewClueController");
-		// 获取表单
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.err.println("com.bjpowernode.crm.workbench.clue.web.controller.UpdateClueController");
+
+		//获取表单
+		String id = request.getParameter("id");
 		String owner = request.getParameter("owner");
 		String company = request.getParameter("company");
-		String phone = request.getParameter("phone");
+		String appellation = request.getParameter("appellation");
 		String fullName = request.getParameter("fullName");
 		String job = request.getParameter("job");
 		String email = request.getParameter("email");
-		String appellation = request.getParameter("appellation");
-		String website = request.getParameter("website");
+		String phone = request.getParameter("phone");
 		String mphone = request.getParameter("mphone");
+		String website = request.getParameter("website");
 		String state = request.getParameter("state");
 		String source = request.getParameter("source");
 		String empNums = request.getParameter("empNums");
@@ -53,25 +56,24 @@ public class SaveClueController extends HttpServlet {
 		String description = request.getParameter("description");
 		String contactSummary = request.getParameter("contactSummary");
 		String nextContactTime = request.getParameter("nextContactTime");
-		
-		String country = request.getParameter("country");
 		String province = request.getParameter("province");
+		String country = request.getParameter("country");
 		String city = request.getParameter("city");
 		String street = request.getParameter("street");
 		String zipcode = request.getParameter("zipcode");
 		
-
+		//封装对象
 		Clue clue = new Clue();
-		clue.setId(UUIDutils.getUUid());
+		clue.setId(id);
 		clue.setOwner(owner);
 		clue.setCompany(company);
-		clue.setPhone(phone);
+		clue.setAppellation(appellation);
 		clue.setFullName(fullName);
 		clue.setJob(job);
 		clue.setEmail(email);
-		clue.setAppellation(appellation);
-		clue.setWebsite(website);
+		clue.setPhone(phone);
 		clue.setMphone(mphone);
+		clue.setWebsite(website);
 		clue.setState(state);
 		clue.setSource(source);
 		clue.setEmpNums(Integer.parseInt(empNums));
@@ -81,25 +83,24 @@ public class SaveClueController extends HttpServlet {
 		clue.setDescription(description);
 		clue.setContactSummary(contactSummary);
 		clue.setNextContactTime(nextContactTime);
-		clue.setCountry(country);
 		clue.setProvince(province);
+		clue.setCountry(country);
 		clue.setCity(city);
 		clue.setStreet(street);
 		clue.setZipcode(zipcode);
 		
-
-		HttpSession httpSession = request.getSession();
-		User user = (User) httpSession.getAttribute("user");
-
-		clue.setCreateBy(user.getId());
-		clue.setCreateTime(DateUtils.getDate());
-
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		
+		clue.setEditBy(user.getId());
+		clue.setEditTime(DateUtils.getDate());
+		
+		//调用service
 		ClueService clueService = (ClueService) ServiceFactory.getService(new ClueServiceImpl());
-
-		// 创建新线索
-		int ret = clueService.createClue(clue);
-
-		Map<String, Object> map = new HashMap<String, Object>();
+		int ret = clueService.updateClue(clue);
+		
+		Map<String, Object> map = new HashMap<String,Object>();
+		
 		if (ret > 0) {
 			map.put("success", true);
 		}else {
@@ -116,9 +117,8 @@ public class SaveClueController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.doGet(request, response);
 	}
 
 }

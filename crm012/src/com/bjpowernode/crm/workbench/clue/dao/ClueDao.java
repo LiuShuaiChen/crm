@@ -35,4 +35,18 @@ public interface ClueDao {
 	 */
 	Clue queryClueForDetail(String id);
 
+	/**
+	 * 根据id 获取线索对象 放到修改模态窗口中
+	 * @param id
+	 * @return
+	 */
+	Clue editClueById(String id);
+
+	/**
+	 * 线索 首页 更新
+	 * @param clue
+	 * @return
+	 */
+	int updateClue(Clue clue);
+
 }

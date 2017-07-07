@@ -123,92 +123,228 @@ $(function(){
 	
 	
 	/* 保存新创建的线索 *保存新创建的线索 *保存新创建的线索 *保存新创建的线索 *保存新创建的线索 *保存新创建的线索 *保存新创建的线索 */
-				
 	$("#saveNewClueBtn").click(function() {
-					var owner = $("#create-owner").val();
-					var company = $("#create-company").val();
-					var phone = $("#create-phone").val();
-					var fullName = $("#create-fullName").val();
-					var job = $("#create-job").val();
-					var email = $("#create-email").val();
-					var appellation = $("#create-appellation").val();
-					var website = $("#create-website").val();
-					var mphone = $("#create-mphone").val();
-					var state = $("#create-state").val();
-					var source = $("#create-source").val();
-					var empNums = $("#create-empNums").val();
-					var industry = $("#create-industry").val();
-					var grade = $("#create-grade").val();
-					var annualIncome = $("#create-annualIncome").val();
-					var description = $("#create-description").val();
-					var contactSummary = $("#create-contactSummary").val();
-					var nextContactTime = $("#create-nextContactTime").val();
-					var country = $("#create-country").val();
-					var province = $("#create-province").val();
-					var city = $("#create-city").val();
-					var street = $("#create-street").val();
-					var zipcode = $("#create-zipcode").val();
+		var owner = $("#create-owner").val();
+		var company = $("#create-company").val();
+		var phone = $("#create-phone").val();
+		var fullName = $("#create-fullName").val();
+		var job = $("#create-job").val();
+		var email = $("#create-email").val();
+		var appellation = $("#create-appellation").val();
+		var website = $("#create-website").val();
+		var mphone = $("#create-mphone").val();
+		var state = $("#create-state").val();
+		var source = $("#create-source").val();
+		var empNums = $("#create-empNums").val();
+		var industry = $("#create-industry").val();
+		var grade = $("#create-grade").val();
+		var annualIncome = $("#create-annualIncome").val();
+		var description = $("#create-description").val();
+		var contactSummary = $("#create-contactSummary").val();
+		var nextContactTime = $("#create-nextContactTime").val();
+		var country = $("#create-country").val();
+		var province = $("#create-province").val();
+		var city = $("#create-city").val();
+		var street = $("#create-street").val();
+		var zipcode = $("#create-zipcode").val();
+		
+		//表单验证 ** 名称不能为空**
+		if (fullName == null || fullName.length == 0) {
+			alert("名称不能为空");
+			return;
+		}
+		//表单验证 ** 公司名称不能为空**
+		if (company == null || company.length == 0) {
+			alert("名称不能为空");
+			return;
+		}
+		
+		$.ajax({
+			url:'worbench/clue/saveClue.do',
+			type:'post',
+			data:{
+				owner:owner,
+				company:company,
+				phone:phone,
+				fullName:fullName,
+				job:job,
+				email:email,
+				appellation:appellation,
+				website:website,
+				mphone:mphone,
+				state:state,
+				source:source,
+				empNums:empNums,
+				industry:industry,
+				grade:grade,
+				annualIncome:annualIncome,
+				description:description,
+				contactSummary:contactSummary,
+				nextContactTime:nextContactTime,
+				country:country,
+				province:province,
+				city:city,
+				street:street,
+				zipcode:zipcode
+			},
+			success:function(data){
+				if(data.success){
+					//关闭模态窗口
+					$("#createClueModal").modal("hide");
+					//刷新列表
+					display(1,$("#pageNoDiv").bs_pagination('getOption', 'rowsPerPage'));
+				}else {
+					alert("添加失败");
+					//模态窗口不关闭
+					$("#createClueModal").modal("show");
+				}
+			}
+			
+		});
 					
-					//表单验证 ** 名称不能为空**
-					if (fullName == null || fullName.length == 0) {
-						alert("名称不能为空");
-						return;
-					}
-					//表单验证 ** 公司名称不能为空**
-					if (company == null || company.length == 0) {
-						alert("名称不能为空");
-						return;
-					}
-					
-					$.ajax({
-						url:'worbench/clue/saveClue.do',
-						type:'post',
-						data:{
-							owner:owner,
-							company:company,
-							phone:phone,
-							fullName:fullName,
-							job:job,
-							email:email,
-							appellation:appellation,
-							website:website,
-							mphone:mphone,
-							state:state,
-							source:source,
-							empNums:empNums,
-							industry:industry,
-							grade:grade,
-							annualIncome:annualIncome,
-							description:description,
-							contactSummary:contactSummary,
-							nextContactTime:nextContactTime,
-							country:country,
-							province:province,
-							city:city,
-							street:street,
-							zipcode:zipcode
-						},
-						success:function(data){
-							if(data.success){
-								//关闭模态窗口
-								$("#createClueModal").modal("hide");
-								//刷新列表
-								display(1,$("#pageNoDiv").bs_pagination('getOption', 'rowsPerPage'));
-								/*************************************************  */
-							}else {
-								alert("添加失败");
-								//模态窗口不关闭
-								$("#createClueModal").modal("show");
-							}
-						}
-						
-					});
-					
-				});
+	});
 	/* 保存新创建的线索 *保存新创建的线索 *保存新创建的线索 *保存新创建的线索 *保存新创建的线索 *保存新创建的线索 *保存新创建的线索 */
 	
 	
+	/* 获取id 拿到线索 放到修改模态窗口中 *//* 获取id 拿到线索 放到修改模态窗口中 *//* 获取id 拿到线索 放到修改模态窗口中 */
+	$("#editClueBtn").click(function(){
+		
+		if($("#clueListBody input[type='checkbox']:checked").size()!=1){
+			alert("请选择要修改的线索");
+			return;
+		}
+		
+		$.ajax({
+			url:"workbench/clue/edit.do",
+			data:{
+				id:$("#clueListBody input[type='checkbox']:checked").val()
+			},
+			type:"post",
+			success:function(data){
+				if (data.success) {
+					//设置所有者
+					var htmlStr = "";
+					$.each(data.userList,function(index,obj){
+						if(obj.id==data.clue.owner){
+							htmlStr+="<option value='"+obj.id+"' selected>"+obj.name+"</option>";
+						}else{
+							htmlStr+="<option value='"+obj.id+"'>"+obj.name+"</option>";
+						}
+					});
+					
+					$("#edit-owner").html(htmlStr);
 
+					$("#edit-clueId").val(data.clue.id);
+					$("#edit-company").val(data.clue.company);
+					$("#edit-appellation").val(data.clue.appellation);
+					$("#edit-fullName").val(data.clue.fullName);
+					$("#edit-job").val(data.clue.job);
+					$("#edit-email").val(data.clue.email);
+					$("#edit-phone").val(data.clue.phone);
+					$("#edit-website").val(data.clue.website);
+					$("#edit-mphone").val(data.clue.mphone);
+					$("#edit-state").val(data.clue.state);
+					$("#edit-source").val(data.clue.source);
+					$("#edit-empNums").val(data.clue.empNums);
+					$("#edit-industry").val(data.clue.industry);
+					$("#edit-grade").val(data.clue.grade);
+					$("#edit-annualIncome").val(data.clue.annualIncome);
+					$("#edit-description").val(data.clue.description);
+					$("#edit-contactSummary").val(data.clue.contactSummary);
+					$("#edit-nextContactTime").val(data.clue.nextContactTime);
+					$("#edit-province").val(data.clue.province);
+					$("#edit-country").val(data.clue.country)
+					$("#edit-city").val(data.clue.city);
+					$("#edit-street").val(data.clue.street);
+					$("#edit-zipcode").val(data.clue.zipcode);
+					
+					//显示模态窗口
+					$("#editClueModal").modal("show");
+					
+				}else {
+					alert("获取线索失败");
+					$("#editClueModal").modal("hide");
+				}
+			}
+		});
+		
+	});
+	/* 获取id 拿到线索 放到修改模态窗口中 *//* 获取id 拿到线索 放到修改模态窗口中 *//* 获取id 拿到线索 放到修改模态窗口中 */
+	
+	/* 修改线索 完成update *//* 修改线索 完成update *//* 修改线索 完成update *//* 修改线索 完成update *//* 修改线索 完成update */
+	$("#updateClueBtn").click(function(){
+		//获取表单
+		var id = $("#edit-clueId").val();
+		var owner = $("#edit-owner").val();
+		var company = $("#edit-company").val();
+		var appellation = $("#edit-appellation").val();
+		var fullName = $("#edit-fullName").val();
+		var job = $("#edit-job").val();
+		var email = $("#edit-email").val();
+		var phone = $("#edit-phone").val();
+		var website = $("#edit-website").val();
+		var mphone = $("#edit-mphone").val();
+		var state = $("#edit-state").val();
+		var source = $("#edit-source").val();
+		var empNums = $("#edit-empNums").val();
+		var industry = $("#edit-industry").val();
+		var grade = $("#edit-grade").val();
+		var annualIncome = $("#edit-annualIncome").val();
+		var description = $("#edit-description").val();
+		var contactSummary = $("#edit-contactSummary").val();
+		var nextContactTime = $("#edit-nextContactTime").val();
+		var country = $("#edit-country").val()
+		var province = $("#edit-province").val();
+		var city= $("#edit-city").val();
+		var street= $("#edit-street").val();
+		var zipcode = $("#edit-zipcode").val();
+		
+		//表单验证
+		
+		//发送请求
+		$.ajax({
+			url:"workbench/clue/update.do",
+			data:{
+				id:id,
+				owner:owner,
+				company:company,
+				appellation:appellation,
+				fullName:fullName,
+				job:job,
+				email:email,
+				phone:phone,
+				mphone:mphone,
+				website:website,
+				state:state,
+				source:source,
+				empNums:empNums,
+				industry:industry,
+				grade:grade,
+				annualIncome:annualIncome,
+				description:description,
+				contactSummary:contactSummary,
+				nextContactTime:nextContactTime,
+				country:country,
+				province:province,
+				city:city,
+				street:street,
+				zipcode:zipcode
+			},
+			type:"post",
+			success:function(data){
+				if (data.success) {
+					$("#editClueModal").modal("hide");
+					display($("#pageNoDiv").bs_pagination('getOption', 'currentPage'),$("#pageNoDiv").bs_pagination('getOption', 'rowsPerPage'));
+				}else {
+					alert("更新线索失败");
+					$("#editClueModal").modal("show");
+				}
+			}
+		});
+		
+	})
+	/* 修改线索 完成update *//* 修改线索 完成update *//* 修改线索 完成update *//* 修改线索 完成update *//* 修改线索 完成update */
+	
 });
 
 /* 线索列表显示 *//* 线索列表显示 *//* 线索列表显示 *//* 线索列表显示 *//* 线索列表显示 *//* 线索列表显示 *//* 线索列表显示 */
@@ -390,20 +526,11 @@ function display(pageNo, pageSize){
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="create-source">
 									<option></option>
-									<option>广告</option>
-									<option>推销电话</option>
-									<option>员工介绍</option>
-									<option>外部介绍</option>
-									<option>在线商场</option>
-									<option>合作伙伴</option>
-									<option>公开媒介</option>
-									<option>销售邮件</option>
-									<option>合作伙伴研讨会</option>
-									<option>内部研讨会</option>
-									<option>交易会</option>
-									<option>web下载</option>
-									<option>web调研</option>
-									<option>聊天</option>
+									<c:if test="${!empty sourceList }">
+										<c:forEach var="sl" items="${sourceList }">
+											<option value="${sl.id }">${sl.text }</option>
+										</c:forEach>
+									</c:if>
 								</select>
 							</div>
 							<label for="create-empNums" class="col-sm-2 control-label">员工数</label>
@@ -521,6 +648,7 @@ function display(pageNo, pageSize){
 						<span aria-hidden="true">×</span>
 					</button>
 					<h4 class="modal-title" id="myModalLabel">修改线索</h4>
+					<input type="text" id="edit-clueId">
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" role="form">
@@ -729,7 +857,7 @@ function display(pageNo, pageSize){
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">更新</button>
+					<button id="updateClueBtn" type="button" class="btn btn-primary" >更新</button>
 				</div>
 			</div>
 		</div>
@@ -900,8 +1028,7 @@ function display(pageNo, pageSize){
 					<button id="createClueBtn" type="button" class="btn btn-primary">
 						<span class="glyphicon glyphicon-plus"></span> 创建
 					</button>
-					<button type="button" class="btn btn-default" data-toggle="modal"
-						data-target="#editClueModal">
+					<button id="editClueBtn" type="button" class="btn btn-default">
 						<span class="glyphicon glyphicon-pencil"></span> 修改
 					</button>
 					<button type="button" class="btn btn-danger">

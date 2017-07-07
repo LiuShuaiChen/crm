@@ -1,4 +1,4 @@
-package com.bjpowernode.crm.workbench.activity.web.controller;
+package com.bjpowernode.crm.workbench.clue.web.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -11,56 +11,58 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bjpowernode.crm.settings.qx.user.dao.UserDao;
 import com.bjpowernode.crm.settings.qx.user.domain.User;
 import com.bjpowernode.crm.settings.qx.user.service.UserService;
 import com.bjpowernode.crm.settings.qx.user.service.impl.UserServiceImpl;
 import com.bjpowernode.crm.utils.ServiceFactory;
-import com.bjpowernode.crm.utils.SqlSessionutils;
-import com.bjpowernode.crm.workbench.activity.domain.MarketActivity;
-import com.bjpowernode.crm.workbench.activity.service.MarketActivityService;
-import com.bjpowernode.crm.workbench.activity.service.impl.MarketActivityServiceImpl;
+import com.bjpowernode.crm.workbench.clue.domain.Clue;
+import com.bjpowernode.crm.workbench.clue.service.ClueService;
+import com.bjpowernode.crm.workbench.clue.service.impl.ClueServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
+ * 修改线索 获取id 拿到线索 放到 修改线索 模态窗口中
+ * 
  * @author LauShuaichen
- * 拿到市场活动id 取得要编辑市场活动
- * Servlet implementation class EditMarketActivityController
+ * Servlet implementation class EditClueController
  */
-@WebServlet("/workbench/activity/editMarketActivity.do")
-public class EditMarketActivityController extends HttpServlet {
+@WebServlet("/workbench/clue/edit.do")
+public class EditClueController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("com.bjpowernode.crm.workbench.activity.web.controller.EditMarketActivityController");
+		System.err.println("com.bjpowernode.crm.workbench.clue.web.controller.EditClueController");
+		
 		//获取表单
 		String id = request.getParameter("id");
+				
+		//调用service 拿到对象
+		ClueService clueService = (ClueService) ServiceFactory.getService(new ClueServiceImpl());
+		Clue clue = clueService.editClueById(id);
 		
-		MarketActivityService marketActivityService = (MarketActivityService) ServiceFactory.getService(new MarketActivityServiceImpl());
-		MarketActivity marketActivity = marketActivityService.queryMarketActivityById(id);
-		
+		//获取所有者
 		UserService userService = (UserService) ServiceFactory.getService(new UserServiceImpl());
-		//UserDao userDao = SqlSessionutils.getSession().getMapper(UserDao.class);
-		List<User> userList =  userService.queryAllUsers();
+		List<User>userList = userService.queryAllUsers();
 		
-		
-		//把marketActivity 和 userList 转成成json 返回客户端
 		Map<String, Object> map = new HashMap<String,Object>();
-		if (marketActivity != null) {
+		
+		if (clue != null) {
 			map.put("success", true);
-			map.put("marketActivity", marketActivity);
+			map.put("clue", clue);
 			map.put("userList", userList);
 		}else {
 			map.put("success", false);
 		}
 		
-		ObjectMapper mapper = new ObjectMapper();
-		String json = mapper.writeValueAsString(map);
+		//响应
+		String json = new ObjectMapper().writeValueAsString(map);
+		System.err.println(json);
 		request.setAttribute("data", json);
 		request.getRequestDispatcher("/data.jsp").forward(request, response);
+		
 	}
 
 	/**
