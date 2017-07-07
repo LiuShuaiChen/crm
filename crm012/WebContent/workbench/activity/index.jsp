@@ -370,7 +370,71 @@ $(function(){
 		
 		
 		
-	})
+	});
+	
+	/* 市场活动列表 导出 ***********************************************/
+	//给"导出"按钮添加单击事件
+	$("#exportActivityBtn").click(function(){
+		window.location.href=
+		"workbench/activity/exportMarketActivity.do?name="
+		+$.trim($("#query-name").val())
+		+"&owner="+$.trim($("#query-owner").val())
+		+"&type="+$("#query-type").val()
+		+"&state="+$("#query-state").val()
+		+"&startDate="+$.trim($("#query-startDate").val())
+		+"&endDate="+$.trim($("#query-endDate").val());
+	});
+	/* 市场活动列表 导出 ***********************************************/
+	
+	
+	/* 导入市场活动********导入市场活动************导入市场活动*******导入市场活动导入市场活动导入市场活动******/
+	$("#importActivityBtn").click(function(){
+		//收集参数
+		var maFile=$("#activityFile")[0].files[0];
+		
+		var fileName=$("#activityFile").val();
+		var suffix=(fileName.substr(fileName.lastIndexOf(".")+1)).toUpperCase();
+		if(!(suffix=='XLS'||suffix=='XLSX')){
+			alert("只能上传XLS或者XLSX类型的文件！");
+			return;
+		}
+		
+		if(maFile.size>1024*1024*5){
+			alert("上传文件不能超过5M!");
+			return;
+		}
+		
+		
+		//发送请求
+		/*
+		FormData是jquery提供的一个接口，可以，模拟键值对向服务器提交参数；
+		它最大的优势是可以提交二进制数据。
+		*/
+		var formData=new FormData();
+		formData.append("activityFile",maFile);
+		$.ajax({
+			url:'workbench/activity/remark/importMarketActivity.do',
+			data:formData,
+			type:'post',
+			processData:false,//processData主要是配合contentType使用的，在ajax对参数进行x-www-form-urlencoded编码之前，把所有的数据统一转化为字符串；现在，不需要进行x-www-form-urlencoded格式的编码，则也不需要进行字符串转化了。
+			contentType:false,//默认情况下，ajax向服务器发送请求采用x-www-form-urlencoded编码格式，这种格式只能处理文本数据；如果有上传文件这种二进制数据，则要设置contentType为false,使ajax不再对参数做x-www-form-urlencoded格式的编码
+			success:function(data){
+				if(data.success){
+					alert("成功导入"+data.count+"条数据！");
+					$("#importActivityModal").modal("hide");
+					display(1,$("#pageNoDiv").bs_pagination('getOption', 'rowsPerPage'));
+				}else{
+					alert("导入失败！请检查文件格式！");
+					$("#importActivityModal").modal("show");
+				}
+			}
+		});
+	
+	});
+	
+	
+	/* 导入市场活动********导入市场活动************导入市场活动*******导入市场活动导入市场活动导入市场活动******/
+	
 	
 });
 
@@ -519,69 +583,9 @@ $(function(){
 		/* //******* ********** ************** 市场活动列表显示******************** ********** **** ********** ********* */
 		
 		
-		/* 市场活动列表 导出 ***********************************************/
-		//给"导出"按钮添加单击事件
-		$("#exportActivityBtn").click(function(){
-			window.location.href=
-			"workbench/activity/exportMarketActivity.do?name="
-			+$.trim($("#query-name").val())
-			+"&owner="+$.trim($("#query-owner").val())
-			+"&type="+$("#query-type").val()
-			+"&state="+$("#query-state").val()
-			+"&startDate="+$.trim($("#query-startDate").val())
-			+"&endDate="+$.trim($("#query-endDate").val());
-		});
-		/* 市场活动列表 导出 ***********************************************/
 		
-		
-		/* 导入市场活动********导入市场活动************导入市场活动*******导入市场活动导入市场活动导入市场活动******/
-		$("#importActivityBtn").click(function(){
-			//收集参数
-			var maFile=$("#activityFile")[0].files[0];
-			
-			var fileName=$("#activityFile").val();
-			var suffix=(fileName.substr(fileName.lastIndexOf(".")+1)).toUpperCase();
-			if(!(suffix=='XLS'||suffix=='XLSX')){
-				alert("只能上传XLS或者XLSX类型的文件！");
-				return;
-			}
-			
-			if(maFile.size>1024*1024*5){
-				alert("上传文件不能超过5M!");
-				return;
-			}
-			
-			
-			//发送请求
-			/*
-			FormData是jquery提供的一个接口，可以，模拟键值对向服务器提交参数；
-			它最大的优势是可以提交二进制数据。
-			*/
-			var formData=new FormData();
-			formData.append("activityFile",maFile);
-			$.ajax({
-				url:'workbench/activity/remark/importMarketActivity.do',
-				data:formData,
-				type:'post',
-				processData:false,//processData主要是配合contentType使用的，在ajax对参数进行x-www-form-urlencoded编码之前，把所有的数据统一转化为字符串；现在，不需要进行x-www-form-urlencoded格式的编码，则也不需要进行字符串转化了。
-				contentType:false,//默认情况下，ajax向服务器发送请求采用x-www-form-urlencoded编码格式，这种格式只能处理文本数据；如果有上传文件这种二进制数据，则要设置contentType为false,使ajax不再对参数做x-www-form-urlencoded格式的编码
-				success:function(data){
-					if(data.success){
-						alert("成功导入"+data.count+"条数据！");
-						$("#importActivityModal").modal("hide");
-						display(1,$("#pageNoDiv").bs_pagination('getOption', 'rowsPerPage'));
-					}else{
-						alert("导入失败！请检查文件格式！");
-						$("#importActivityModal").modal("show");
-					}
-				}
-			});
-		
-		});
-		
-		
-		/* 导入市场活动********导入市场活动************导入市场活动*******导入市场活动导入市场活动导入市场活动******/
 	}
+	
 
 </script>
 <title>Insert title here</title>

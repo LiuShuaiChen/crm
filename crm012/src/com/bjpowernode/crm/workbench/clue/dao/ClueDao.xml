@@ -12,7 +12,114 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(#{id},#{owner},#{company},#{phone},#{website},#{grade},#{industry},#{annualIncome},#{empNums},#{country},#{province},#{city},#{street},#{zipcode},#{description},#{fullName},#{appellation},#{source},#{email},#{mphone},#{job},#{state},#{createBy},#{createTime},#{editBy},#{editTime},#{contactSummary},#{nextContactTime})
 	</insert>
 
-
+	<!-- 分页查询 查询所有记录 -->
+	<!-- List<Clue> queryClueForPageByCondition(Map<String, Object> map); -->
+	<select id="queryClueForPageByCondition" parameterType="map" resultType="clue">
+		select
+		cl.id, user1.name as owner, cl.company, cl.phone, cl.website, dv1.text as grade, dv2.text as industry, cl.annualIncome, cl.empNums, cl.country, cl.province, cl.city, cl.street, cl.zipcode, cl.description, cl.fullName, dv3.text as appellation, cl.source, cl.email, cl.mphone, cl.job, dv5.text as state, user2.name as createBy, cl.createTime, user3.name as editBy, cl.editTime, cl.contactSummary, cl.nextContactTime 
+		from tbl_clue cl
+		left join tbl_dictionary_value dv1 on cl.grade = dv1.id 
+		left join tbl_dictionary_value dv2 on cl.industry = dv2.id 
+		left join tbl_dictionary_value dv3 on cl.appellation = dv3.id 
+		left join tbl_dictionary_value dv5 on cl.state = dv5.id 
+		left join tbl_user user1 on cl.owner = user1.id 
+		left join tbl_user user2 on cl.createBy = user2.id 
+		left join tbl_user user3 on cl.editBy = user3.id
+		<where>
+			<if test="fullName != null and fullName != ''">
+				and cl.fullName like '%' #{fullName} '%'
+			</if>
+			<if test="company != null and company != ''">
+				and cl.company like '%' #{company} '%'
+			</if>
+			<if test="phone != null and phone != ''">
+				and cl.phone like '%' #{phone} '%'
+			</if>
+			<if test="source != null and source != ''">
+				and cl.source like '%' #{source} '%'
+			</if>
+			<if test="owner != null and owner != ''">
+				and user1.name like '%' #{owner} '%'
+			</if>
+			<if test="mphone != null and mphone != ''">
+				and cl.mphone like '%' #{mphone} '%'
+			</if>
+			<if test="state != null and state != ''">
+				and dv5.text like '%' #{state} '%'
+			</if>
+			<if test="industry != null and industry != ''">
+				and cl.industry like '%' #{industry} '%'
+			</if>
+			<if test="grade != null and grade != ''">
+				and dv1.text like '%' #{grade} '%'
+			</if>
+			
+		</where>
+			order by cl.createTime desc
+			limit #{beginNo},#{pageSize}
+		
+	</select>
+	
+	<!-- 分页查询 查询记录总数 -->
+	<!-- long queryTotalCountOfClueForPageByCondition(Map<String, Object> map); -->
+	<select id="queryTotalCountOfClueForPageByCondition" parameterType="map" resultType="long">
+		select count(*) from tbl_clue cl
+		left join tbl_dictionary_value dv1 on cl.grade = dv1.id 
+		left join tbl_dictionary_value dv2 on cl.industry = dv2.id 
+		left join tbl_dictionary_value dv3 on cl.appellation = dv3.id 
+		left join tbl_dictionary_value dv5 on cl.state = dv5.id 
+		left join tbl_user user1 on cl.owner = user1.id 
+		left join tbl_user user2 on cl.createBy = user2.id 
+		left join tbl_user user3 on cl.editBy = user3.id
+		<where>
+			<if test="fullName != null and fullName != ''">
+				and cl.fullName like '%' #{fullName} '%'
+			</if>
+			<if test="company != null and company != ''">
+				and cl.company like '%' #{company} '%'
+			</if>
+			<if test="phone != null and phone != ''">
+				and cl.phone like '%' #{phone} '%'
+			</if>
+			<if test="source != null and source != ''">
+				and cl.source like '%' #{source} '%'
+			</if>
+			<if test="owner != null and owner != ''">
+				and user1.name like '%' #{owner} '%'
+			</if>
+			<if test="mphone != null and mphone != ''">
+				and cl.mphone like '%' #{mphone} '%'
+			</if>
+			<if test="state != null and state != ''">
+				and dv5.text like '%' #{state} '%'
+			</if>
+			<if test="industry != null and industry != ''">
+				and cl.industry like '%' #{industry} '%'
+			</if>
+			<if test="grade != null and grade != ''">
+				and dv1.text like '%' #{grade} '%'
+			</if>
+			
+		</where>
+	</select>
+	
+	
+	<!-- Clue queryClueForDetail(String id); -->
+	<select id="queryClueForDetail" parameterType="string" resultType="clue">
+		select
+		cl.id, user1.name as owner, cl.company, cl.phone, cl.website, dv1.text as grade, dv2.text as industry, cl.annualIncome, cl.empNums, cl.country, cl.province, cl.city, cl.street, cl.zipcode, cl.description, cl.fullName, dv3.text as appellation, cl.source, cl.email, cl.mphone, cl.job, dv5.text as state, user2.name as createBy, cl.createTime, user3.name as editBy, cl.editTime, cl.contactSummary, cl.nextContactTime 
+		from tbl_clue cl
+		left join tbl_dictionary_value dv1 on cl.grade = dv1.id 
+		left join tbl_dictionary_value dv2 on cl.industry = dv2.id 
+		left join tbl_dictionary_value dv3 on cl.appellation = dv3.id 
+		left join tbl_dictionary_value dv5 on cl.state = dv5.id 
+		left join tbl_user user1 on cl.owner = user1.id 
+		left join tbl_user user2 on cl.createBy = user2.id 
+		left join tbl_user user3 on cl.editBy = user3.id
+		where cl.id = #{id}
+	</select>
+	
+	
 </mapper>
 
 

@@ -35,39 +35,37 @@ public class SaveClueController extends HttpServlet {
 			throws ServletException, IOException {
 		System.out.println("com.bjpowernode.crm.workbench.clue.web.controller.AddNewClueController");
 		// 获取表单
-		String id = request.getParameter("id");
-		String name = "应当存在客户表中";
-		String owner = request.getParameter("clueOwner");
+		String owner = request.getParameter("owner");
 		String company = request.getParameter("company");
 		String phone = request.getParameter("phone");
+		String fullName = request.getParameter("fullName");
+		String job = request.getParameter("job");
+		String email = request.getParameter("email");
+		String appellation = request.getParameter("appellation");
 		String website = request.getParameter("website");
-		String grade = request.getParameter("grade");
+		String mphone = request.getParameter("mphone");
+		String state = request.getParameter("state");
+		String source = request.getParameter("source");
+		String empNums = request.getParameter("empNums");
 		String industry = request.getParameter("industry");
-		String annualIncome = "99999123";
-		String empNums = "1999923";
-
+		String grade = request.getParameter("grade");
+		String annualIncome = request.getParameter("annualIncome");
+		String description = request.getParameter("description");
+		String contactSummary = request.getParameter("contactSummary");
+		String nextContactTime = request.getParameter("nextContactTime");
+		
 		String country = request.getParameter("country");
 		String province = request.getParameter("province");
 		String city = request.getParameter("city");
 		String street = request.getParameter("street");
 		String zipcode = request.getParameter("zipcode");
-		String description = request.getParameter("describe");
-		String fullName = "需要转存联系人表"; // 转存到联系人表
-		String appellation = request.getParameter("call");
-		String source = request.getParameter("source");
-		String email = request.getParameter("email");
-		String mphone = request.getParameter("mphone");
-		String job = request.getParameter("job");
-		String state = request.getParameter("status");
-
-		String contactSummary = request.getParameter("contactSummary");
-		String nextContactTime = request.getParameter("nextContactTime");
+		
 
 		Clue clue = new Clue();
 		clue.setId(UUIDutils.getUUid());
 		clue.setOwner(owner);
 		clue.setCompany(company);
-		clue.setPhone(mphone);
+		clue.setPhone(phone);
 		clue.setWebsite(website);
 		clue.setGrade(grade);
 		clue.setIndustry(industry);
@@ -85,6 +83,8 @@ public class SaveClueController extends HttpServlet {
 		clue.setMphone(mphone);
 		clue.setJob(job);
 		clue.setState(state);
+		clue.setContactSummary(contactSummary);
+		clue.setNextContactTime(nextContactTime);
 
 		HttpSession httpSession = request.getSession();
 		User user = (User) httpSession.getAttribute("user");

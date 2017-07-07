@@ -1,5 +1,9 @@
 package com.bjpowernode.crm.workbench.clue.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
+import com.bjpowernode.crm.commons.vo.PaginationVO;
 import com.bjpowernode.crm.utils.ServiceFactory;
 import com.bjpowernode.crm.utils.SqlSessionutils;
 import com.bjpowernode.crm.utils.UUIDutils;
@@ -16,30 +20,43 @@ public class ClueServiceImpl implements ClueService {
 	
 	private ClueDao clueDao = SqlSessionutils.getSession().getMapper(ClueDao.class);
 
+	/**
+	 * 创建新线索
+	 */
 	@Override
 	public int createClue(Clue clue) {
 		return clueDao.createClue(clue);
 	}
 
-//	public static void main(String[] args) {
-////		Clue clue = new Clue();
-////		clue.setId(UUIDutils.getUUid());
-////		clue.setOwner("aa");
-////		clue.setCompany("aa");
-////		clue.setFullName("aa");
-////		clue.setCity("aaa");
-////		clue.setAppellation("aa");
-////		clue.setCreateBy("aaa");
-////		clue.setCountry("china");
-//		
-//		Clue clue = new Clue(UUIDutils.getUUid(), "aa", "aa", "aa", "aa", "aa", "aa", 11, 22, "aa", "aa", "aa", "aaa", "aaa", "aa", "sa", "aa", "aa", "dssads", "aa", "aa", "aa", "aa", "2017年7月4日", "dsa", "2017年7月4日09:50:49", "aa", "aa");
-//		
-//		ClueService clueService = (ClueService) ServiceFactory.getService(new ClueServiceImpl());
-//		int ret = clueService.createClue(clue);
-//		System.out.println(ret);
-//		
-//		
-//	}
+	/**
+	 * 线索首页 分页查询
+	 */
+	@Override
+	public PaginationVO<Clue> queryClueForPageByCondition(Map<String, Object> map) {
+		//调用dao 查询记录列表
+		List<Clue> clueList = clueDao.queryClueForPageByCondition(map);
+		//调用dao 查询记录总数
+		long totalCount = clueDao.queryTotalCountOfClueForPageByCondition(map);
+		
+		//把clueList totalCount转换成vo
+		PaginationVO<Clue> vo = new PaginationVO<Clue>();
+		vo.setDataList(clueList);
+		vo.setTotalCount(totalCount);
+		return vo;
+	}
+
+	/**
+	 * 查看线索明细
+	 */
+	@Override
+	public Clue queryClueForDetail(String id) {
+		return clueDao.queryClueForDetail(id);
+	}
+
+	
+	public static void main(String[] args) {
+		System.out.println(new ClueServiceImpl().queryClueForDetail("0a7688eba8c74b1384196f75681ecbbe"));
+	}
 
 	
 

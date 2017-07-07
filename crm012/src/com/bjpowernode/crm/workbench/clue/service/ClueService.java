@@ -1,5 +1,8 @@
 package com.bjpowernode.crm.workbench.clue.service;
 
+import java.util.Map;
+
+import com.bjpowernode.crm.commons.vo.PaginationVO;
 import com.bjpowernode.crm.workbench.clue.domain.Clue;
 
 /**
@@ -15,5 +18,14 @@ public interface ClueService {
 	 * @return
 	 */
 	int createClue(Clue clue);
+
+	/**
+	 * 分页查询线索
+	 * @param map
+	 * @return
+	 */
+	PaginationVO<Clue> queryClueForPageByCondition(Map<String, Object> map);
+
+	Clue queryClueForDetail(String id);
 
 }

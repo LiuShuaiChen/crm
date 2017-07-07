@@ -1,13 +1,27 @@
-<!DOCTYPE html>
+<%@page import="java.lang.annotation.Target"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	System.out.println("/crm012/WebContent/workbench/clue/detail.jsp");
+%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<base href="<%=basePath %>">
 <meta charset="UTF-8">
 
-<link href="../../jquery/bootstrap_3.3.0/css/bootstrap.min.css"
+<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css"
 	type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="../../jquery/jquery-1.11.1-min.js"></script>
+<script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
 <script type="text/javascript"
-	src="../../jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+	src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
 
@@ -394,7 +408,7 @@
 	<div style="position: relative; left: 40px; top: -30px;">
 		<div class="page-header">
 			<h3>
-				李四先生 <small>动力节点</small>
+				${clue.fullName } ${clue.appellation } <small>${clue.company }</small>
 			</h3>
 		</div>
 		<div
@@ -422,13 +436,13 @@
 			<div style="width: 300px; color: gray;">名称</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>李四先生</b>
+				<b>${clue.fullName } ${clue.appellation }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">所有者</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>zhangsan</b>
+				<b>${clue.owner }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -439,13 +453,13 @@
 			<div style="width: 300px; color: gray;">公司</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>动力节点</b>
+				<b>${clue.company }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">职位</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>CTO</b>
+				<b>${clue.job }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -456,13 +470,13 @@
 			<div style="width: 300px; color: gray;">邮箱</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>lisi@bjpowernode.com</b>
+				<b>${clue.email }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">电话</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>010-84846003</b>
+				<b>${clue.phone }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -473,13 +487,13 @@
 			<div style="width: 300px; color: gray;">网站</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>http://www.bjpowernode.com</b>
+				<b>${clue.website }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">手机</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>12345678901</b>
+				<b>${clue.mphone }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -490,13 +504,13 @@
 			<div style="width: 300px; color: gray;">状态</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>已联系</b>
+				<b>${clue.state }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">来源</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>广告</b>
+				<b>${clue.source }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -507,13 +521,13 @@
 			<div style="width: 300px; color: gray;">员工数</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>100</b>
+				<b>${clue.empNums }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">行业</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>中小企业</b>
+				<b>${clue.industry }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -524,13 +538,13 @@
 			<div style="width: 300px; color: gray;">等级</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>已获得</b>
+				<b>${clue.grade }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">收入</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>10,000,000</b>
+				<b>${clue.annualIncome }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -541,8 +555,8 @@
 			<div style="width: 300px; color: gray;">创建者</div>
 			<div
 				style="width: 500px; position: relative; left: 200px; top: -20px;">
-				<b>zhangsan&nbsp;&nbsp;</b><small
-					style="font-size: 10px; color: gray;">2017-01-18 10:10:10</small>
+				<b>${clue.createBy }&nbsp;&nbsp;</b><small
+					style="font-size: 10px; color: gray;">${clue.createTime }</small>
 			</div>
 			<div
 				style="height: 1px; width: 550px; background: #D5D5D5; position: relative; top: -20px;"></div>
@@ -551,8 +565,8 @@
 			<div style="width: 300px; color: gray;">修改者</div>
 			<div
 				style="width: 500px; position: relative; left: 200px; top: -20px;">
-				<b>zhangsan&nbsp;&nbsp;</b><small
-					style="font-size: 10px; color: gray;">2017-01-19 10:10:10</small>
+				<b>${clue.editBy }&nbsp;&nbsp;</b><small
+					style="font-size: 10px; color: gray;">${clue.editTime }</small>
 			</div>
 			<div
 				style="height: 1px; width: 550px; background: #D5D5D5; position: relative; top: -20px;"></div>
@@ -561,7 +575,7 @@
 			<div style="width: 300px; color: gray;">描述</div>
 			<div
 				style="width: 630px; position: relative; left: 200px; top: -20px;">
-				<b> 这是一条线索的描述信息 </b>
+				<b> ${clue.description }</b>
 			</div>
 			<div
 				style="height: 1px; width: 850px; background: #D5D5D5; position: relative; top: -20px;"></div>
@@ -570,7 +584,7 @@
 			<div style="width: 300px; color: gray;">联系纪要</div>
 			<div
 				style="width: 630px; position: relative; left: 200px; top: -20px;">
-				<b> 这条线索即将被转换 </b>
+				<b> ${clue.contactSummary } </b>
 			</div>
 			<div
 				style="height: 1px; width: 850px; background: #D5D5D5; position: relative; top: -20px;"></div>
@@ -579,7 +593,7 @@
 			<div style="width: 300px; color: gray;">下次联系时间</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>2017-05-01</b>
+				<b>${clue.nextContactTime }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -20px;"></div>
@@ -595,13 +609,13 @@
 			<div style="width: 300px; color: gray;">国家/地区</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>中国</b>
+				<b>${clue.country }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">省/市</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>北京市</b>
+				<b>${clue.province }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -612,13 +626,13 @@
 			<div style="width: 300px; color: gray;">城市</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>北京市</b>
+				<b>${clue.city }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">街道</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>亦庄大族企业湾10号楼A座3层</b>
+				<b>${clue.street }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -629,7 +643,7 @@
 			<div style="width: 300px; color: gray;">邮编</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>100176</b>
+				<b>${clue.zipcode }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -20px;"></div>
@@ -644,7 +658,7 @@
 
 		<!-- 备注1 -->
 		<div class="remarkDiv" style="height: 60px;">
-			<img title="zhangsan" src="../../image/user-thumbnail.png"
+			<img title="zhangsan" src="image/user-thumbnail.png"
 				style="width: 30px; height: 30px;">
 			<div style="position: relative; top: -40px; left: 40px;">
 				<h5>哎呦！</h5>
@@ -665,7 +679,7 @@
 
 		<!-- 备注2 -->
 		<div class="remarkDiv" style="height: 60px;">
-			<img title="zhangsan" src="../../image/user-thumbnail.png"
+			<img title="zhangsan" src="image/user-thumbnail.png"
 				style="width: 30px; height: 30px;">
 			<div style="position: relative; top: -40px; left: 40px;">
 				<h5>呵呵！</h5>

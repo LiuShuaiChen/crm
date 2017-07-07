@@ -1,44 +1,43 @@
 package com.bjpowernode.crm.workbench.clue.web.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bjpowernode.crm.settings.qx.user.domain.User;
-import com.bjpowernode.crm.settings.qx.user.service.UserService;
-import com.bjpowernode.crm.settings.qx.user.service.impl.UserServiceImpl;
 import com.bjpowernode.crm.utils.ServiceFactory;
+import com.bjpowernode.crm.workbench.clue.domain.Clue;
+import com.bjpowernode.crm.workbench.clue.service.ClueService;
+import com.bjpowernode.crm.workbench.clue.service.impl.ClueServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * 创建线索模态窗口中  显示字段 ==> 所有者
+ * 查看线索明细
  * @author LauShuaichen
- * Servlet implementation class QueryClueUserController
+ * Servlet implementation class LookClueDetailController
  */
-@WebServlet("/workbench/clue/queryUser.do")
-public class QueryClueUserController extends HttpServlet {
+@WebServlet("/workbench/clue/detail.do")
+public class LookClueDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.err.println("com.bjpowernode.crm.workbench.clue.web.controller.QueryClueUserController");
+		System.out.println("com.bjpowernode.crm.workbench.clue.web.controller.LookClueDetailController");
 		
-		UserService userService = (UserService) ServiceFactory.getService(new UserServiceImpl());
-		List<User> userList = userService.queryAllUsers();
+		String id = request.getParameter("id");
+		
+		ClueService clueService = (ClueService) ServiceFactory.getService(new ClueServiceImpl());
+		Clue clue = clueService.queryClueForDetail(id);
+		
+		//备注没有写
 		
 		
-		String json = new ObjectMapper().writeValueAsString(userList);
-		request.setAttribute("data", json);
-		request.getRequestDispatcher("/data.jsp").forward(request, response);
+		request.setAttribute("clue", clue);
+		request.getRequestDispatcher("/workbench/clue/detail.jsp").forward(request, response);
 		
 	}
 
@@ -46,7 +45,7 @@ public class QueryClueUserController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		this.doGet(request, response);
 	}
 
 }
