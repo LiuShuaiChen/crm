@@ -16,17 +16,34 @@
 <head>
 <base href="<%=basePath %>">
 <meta charset="UTF-8">
+
 <link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<link href="jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="jquery/bs_pagination/jquery.bs_pagination.min.css">
+
 <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
 <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
-
-<!--  PAGINATION plugin -->
-<link rel="stylesheet" type="text/css" href="jquery/bs_pagination/jquery.bs_pagination.min.css">
+<script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
 <script type="text/javascript" src="jquery/bs_pagination/jquery.bs_pagination.min.js"></script>
 <script type="text/javascript" src="jquery/bs_pagination/localization/en.js"></script>
-
+<script type="text/javascript" src="jquery/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="jquery/bs_pagination/jquery.bs_pagination.min.css"></script>
+<script type="text/javascript" src="jquery/datetimepicker/css/bootstrap-datetimepicker.css"></script>
 
 <script type="text/javascript">
+	
+	$(function(){
+		$('#edit-nextContactTime').datetimepicker({
+			  language: 'zh-CN',//显示中文
+			  format: 'yyyy-mm-dd',//显示格式
+			  minView: "month",//设置只显示到月份
+			  initialDate: new Date(),//初始化当前日期
+			  autoclose: true,//选中自动关闭
+			  todayBtn: true,//显示今日按钮
+			  clearBtn:true//显示清空按钮
+		});
+	});
 
 	//默认情况下取消和保存按钮是隐藏的
 	var cancelAndSaveBtnDefault = true;
@@ -207,43 +224,56 @@
 			});
 			
 			/* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 */
+			
+			
+			/*添加备注 单击 保存 按钮事件  */
+			$("#saveClueRemarkBtn").click(function(){
+				
+			});
+			
+			
+			
 		})
 		
 		/* 局部刷新 */ /* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 */
 		function reflushDetailClue(){
 			$.ajax({
-				url:"workbench/clue/detail.do",
+				url:"workbench/clue/detail/reflushClueDetail.do",
 				data:{
 					id:"${param.id}"
 				},
 				type:"post",
 				success:function(data){
 						// 修改后详细信息
-						$("#clueFullname").html(data.clue.fullName);
-						$("#clueAppellation").html(data.clue.appellation);
-						$("#clueCompany").html(data.clue.company);
-						$("#clueOwner").html(data.clue.owner);
-						$("#clueCompany").html(data.clue.company);
-						$("#clueJob").html(data.clue.job);
-						$("#clueEmail").html(data.clue.email);
-						$("#cluePhone").html(data.clue.phone);
-						$("#clueWebsite").html(data.clue.website);
-						$("#clueMphone").html(data.clue.mphone);
-						$("#clueState").html(data.clue.state);
-						$("#clueSource").html(data.clue.source);
-						$("#clueEmpnums").html(data.clue.empNums);
-						$("#clueIndustry").html(data.clue.industry);
-						$("#clueGrade").html(data.clue.grade);
-						$("#clueAnnuaincome").html(data.clue.annualIncome);
-						$("#clueEditBy").html(data.clue.editBy + "&nbsp;&nbsp;");
-						$("#clueEditTime").html(data.clue.editTime);
-						$("#clueDescription").html(data.clue.description);
-						$("#clueContactSummary").html(data.clue.contactSummary);
-						$("#clueNextContactTime").html(data.clue.nextContactTime);
-						$("#clueCountry").html(data.clue.country);
-						$("#clueProvince").html(data.clue.province);
-						$("#clueStreet").html(data.clue.street);
-						$("#clueZipcode").html(data.clue.zipcode);
+						if (data.success) {
+							
+							$("#clueTitle").html(data.clue.fullName + data.clue.appellation +"<small> " + data.clue.company + "</small>" )
+							$("#clueFullNameAndAppellation").html(data.clue.fullName + data.clue.appellation)
+							$("#clueOwner").html(data.clue.owner);
+							$("#clueCompany").html(data.clue.company);
+							$("#clueJob").html(data.clue.job);
+							$("#clueEmail").html(data.clue.email);
+							$("#cluePhone").html(data.clue.phone);
+							$("#clueWebsite").html(data.clue.website);
+							$("#clueMphone").html(data.clue.mphone);
+							$("#clueState").html(data.clue.state);
+							$("#clueSource").html(data.clue.source);
+							$("#clueEmpnums").html(data.clue.empNums);
+							$("#clueIndustry").html(data.clue.industry);
+							$("#clueGrade").html(data.clue.grade);
+							$("#clueAnnuaincome").html(data.clue.annualIncome);
+							$("#clueEditBy").html(data.clue.editBy + "&nbsp;&nbsp;");
+							$("#clueEditTime").html(data.clue.editTime);
+							$("#clueDescription").html(data.clue.description);
+							$("#clueContactSummary").html(data.clue.contactSummary);
+							$("#clueNextContactTime").html(data.clue.nextContactTime);
+							$("#clueCountry").html(data.clue.country);
+							$("#clueProvince").html(data.clue.province);
+							$("#clueStreet").html(data.clue.street);
+							$("#clueZipcode").html(data.clue.zipcode);
+						}else {
+							alert("详细页面刷新失败");
+						}
 				}
 			});
 		}
@@ -253,6 +283,39 @@
 
 </head>
 <body>
+	
+	<!-- 修改备注的模态窗口 -->
+		<div class="modal fade" id="editClueRemarkModal" role="dialog">
+			<div class="modal-dialog" role="document" style="width: 85%;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">×</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">修改市场活动备注</h4>
+					</div>
+					<div class="modal-body">
+						<input id="remarkId" type="hidden">
+						<form class="form-horizontal" role="form">
+							<div class="form-group">
+								<label for="edit-describe" class="col-sm-2 control-label">备注</label>
+								<div class="col-sm-10" style="width: 81%;">
+									<textarea class="form-control" rows="3" id="edit-noteContent"></textarea>
+								</div>
+							</div>
+	
+						</form>
+	
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button id="updateMarketActivityReamrkBtn" type="button" class="btn btn-primary" data-dismiss="modal">更新</button>
+					</div>
+				</div>
+			</div>
+		</div>	
+	
+
 
 	<!-- 解除关联的模态窗口 -->
 	<div class="modal fade" id="unbundModal" role="dialog">
@@ -514,34 +577,29 @@
 							<div class="form-group">
 								<label for="edit-country" class="col-sm-2 control-label">国家/地区</label>
 								<div class="col-sm-10" style="width: 300px;">
-									<input type="text" class="form-control" id="edit-country"
-										value="${clue.country }">
+									<input type="text" class="form-control" id="edit-country" value="${clue.country }">
 								</div>
 								<label for="edit-province" class="col-sm-2 control-label">省/市</label>
 								<div class="col-sm-10" style="width: 300px;">
-									<input type="text" class="form-control" id="edit-province"
-										value="${clue.province }">
+									<input type="text" class="form-control" id="edit-province" value="${clue.province }">
 								</div>
 							</div>
 
 							<div class="form-group">
 								<label for="edit-city" class="col-sm-2 control-label">城市</label>
 								<div class="col-sm-10" style="width: 300px;">
-									<input type="text" class="form-control" id="edit-city"
-										value="${clue.city }">
+									<input type="text" class="form-control" id="edit-city" value="${clue.city }">
 								</div>
 								<label for="edit-street" class="col-sm-2 control-label">街道</label>
 								<div class="col-sm-10" style="width: 300px;">
-									<input type="text" class="form-control" id="edit-street"
-										value="${clue.street }">
+									<input type="text" class="form-control" id="edit-street" value="${clue.street }">
 								</div>
 							</div>
 
 							<div class="form-group">
 								<label for="edit-zipcode" class="col-sm-2 control-label">邮编</label>
 								<div class="col-sm-10" style="width: 300px;">
-									<input type="text" class="form-control" id="edit-zipcode"
-										value="${clue.zipcode }">
+									<input type="text" class="form-control" id="edit-zipcode" value="${clue.zipcode }">
 								</div>
 							</div>
 						</div>
@@ -566,7 +624,7 @@
 	<!-- 大标题 -->
 	<div style="position: relative; left: 40px; top: -30px;">
 		<div class="page-header">
-			<h3 id="clueTitle"> <b id="clueFullname">${clue.fullName }</b> <b id="clueAppellation">${clue.appellation }</b> <small><b id="clueCompany">${clue.company }</b></small>
+			<h3 id="clueTitle">${clue.fullName } ${clue.appellation } <small>${clue.company }</small></h3>
 			</h3>
 		</div>
 		<div style="position: relative; height: 50px; width: 500px; top: -72px; left: 700px;">
@@ -851,15 +909,12 @@
 			</div>
 		</div>
 
-		<div id="remarkDiv"
-			style="background-color: #E6E6E6; width: 870px; height: 90px;">
+		<div id="remarkDiv" style="background-color: #E6E6E6; width: 870px; height: 90px;">
 			<form role="form" style="position: relative; top: 10px; left: 10px;">
-				<textarea id="remark" class="form-control"
-					style="width: 850px; resize: none;" rows="2" placeholder="添加备注..."></textarea>
-				<p id="cancelAndSaveBtn"
-					style="position: relative; left: 737px; top: 10px; display: none;">
+				<textarea id="remark" class="form-control" style="width: 850px; resize: none;" rows="2" placeholder="添加备注..."></textarea>
+				<p id="cancelAndSaveBtn" style="position: relative; left: 737px; top: 10px; display: none;">
 					<button id="cancelBtn" type="button" class="btn btn-default">取消</button>
-					<button type="button" class="btn btn-primary">保存</button>
+					<button id="saveClueRemarkBtn" type="button" class="btn btn-primary">保存</button>
 				</p>
 			</form>
 		</div>

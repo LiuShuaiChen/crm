@@ -210,7 +210,7 @@ $(function(){
 		//收集参数
 		var noteContent = $.trim($("#remark").val());
 		var activityId = '${marketActivity.id}';
-		
+
 		//表单验证  例如验证一些和谐信息
 		if (noteContent == null || noteContent.length == 0) {
 			alert("备注内容不能为空");
