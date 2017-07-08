@@ -195,8 +195,8 @@
 					type:"post",
 					success:function(data){
 						if (data.success) {
-							$("#editClueModal").modal("hide");
 							reflushDetailClue();
+							$("#editClueModal").modal("hide");
 						}else {
 							alert("更新线索失败");
 							$("#editClueModal").modal("show");
@@ -218,11 +218,10 @@
 				},
 				type:"post",
 				success:function(data){
-					if(data.success){
-						// 修改后标题
-						$("#clueTitle").html(data.clue.fullName + data.clue.appellation +"<small> "  + data.clue.company + "</small>" );
 						// 修改后详细信息
-						$("#clueFullNameAndAppellation").html(data.clue.name + data.clue.appellation);
+						$("#clueFullname").html(data.clue.fullName);
+						$("#clueAppellation").html(data.clue.appellation);
+						$("#clueCompany").html(data.clue.company);
 						$("#clueOwner").html(data.clue.owner);
 						$("#clueCompany").html(data.clue.company);
 						$("#clueJob").html(data.clue.job);
@@ -245,9 +244,6 @@
 						$("#clueProvince").html(data.clue.province);
 						$("#clueStreet").html(data.clue.street);
 						$("#clueZipcode").html(data.clue.zipcode);
-					}else{
-						alert("刷新失败");
-					}
 				}
 			});
 		}
@@ -570,7 +566,7 @@
 	<!-- 大标题 -->
 	<div style="position: relative; left: 40px; top: -30px;">
 		<div class="page-header">
-			<h3 id="clueTitle"> ${clue.fullName } ${clue.appellation } <small>${clue.company }</small>
+			<h3 id="clueTitle"> <b id="clueFullname">${clue.fullName }</b> <b id="clueAppellation">${clue.appellation }</b> <small><b id="clueCompany">${clue.company }</b></small>
 			</h3>
 		</div>
 		<div style="position: relative; height: 50px; width: 500px; top: -72px; left: 700px;">
