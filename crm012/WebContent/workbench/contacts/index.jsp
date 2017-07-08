@@ -1,21 +1,35 @@
-<!DOCTYPE html>
+<%@page import="java.lang.annotation.Target"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	System.out.println("/crm008/WebContent/workbench/clue/index.jsp");
+%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<base href="<%=basePath %>">
 <meta charset="UTF-8">
 
-<link href="../../jquery/bootstrap_3.3.0/css/bootstrap.min.css"
+<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css"
 	type="text/css" rel="stylesheet" />
 <link
-	href="../../jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css"
+	href="jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css"
 	type="text/css" rel="stylesheet" />
 
-<script type="text/javascript" src="../../jquery/jquery-1.11.1-min.js"></script>
+<script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
 <script type="text/javascript"
-	src="../../jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+	src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript"
-	src="../../jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
+	src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript"
-	src="../../jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
+	src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
 
 <script type="text/javascript">
 
@@ -33,98 +47,104 @@
 </head>
 <body>
 
-	<!-- 创建客户的模态窗口 -->
-	<div class="modal fade" id="createCustomerModal" role="dialog">
+
+	<!-- 创建联系人的模态窗口 -->
+	<div class="modal fade" id="createContactsModal" role="dialog">
 		<div class="modal-dialog" role="document" style="width: 85%;">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">
+					<button type="button" class="close"
+						onclick="$('#createContactsModal').modal('hide');">
 						<span aria-hidden="true">×</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">创建客户</h4>
+					<h4 class="modal-title" id="myModalLabel">创建联系人</h4>
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" role="form">
 
 						<div class="form-group">
-							<label for="create-customerOwner" class="col-sm-2 control-label">所有者<span
+							<label for="create-contactsOwner" class="col-sm-2 control-label">所有者<span
 								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
-								<select class="form-control" id="create-customerOwner">
+								<select class="form-control" id="create-contactsOwner">
 									<option>zhangsan</option>
 									<option>lisi</option>
 									<option>wangwu</option>
 								</select>
 							</div>
-							<label for="create-customerName" class="col-sm-2 control-label">名称<span
+							<label for="create-clueSource" class="col-sm-2 control-label">来源</label>
+							<div class="col-sm-10" style="width: 300px;">
+								<select class="form-control" id="create-clueSource">
+									<option></option>
+									<option>广告</option>
+									<option>推销电话</option>
+									<option>员工介绍</option>
+									<option>外部介绍</option>
+									<option>在线商场</option>
+									<option>合作伙伴</option>
+									<option>公开媒介</option>
+									<option>销售邮件</option>
+									<option>合作伙伴研讨会</option>
+									<option>内部研讨会</option>
+									<option>交易会</option>
+									<option>web下载</option>
+									<option>web调研</option>
+									<option>聊天</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="create-surname" class="col-sm-2 control-label">姓名<span
 								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-customerName">
+								<input type="text" class="form-control" id="create-surname">
 							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="create-grade" class="col-sm-2 control-label">等级</label>
+							<label for="create-call" class="col-sm-2 control-label">称呼</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<select class="form-control" id="create-grade">
+								<select class="form-control" id="create-call">
 									<option></option>
-									<option>已获得</option>
-									<option>激活的</option>
-									<option>市场失败</option>
-									<option>项目取消</option>
-									<option>关闭</option>
-								</select>
-							</div>
-							<label for="create-phone" class="col-sm-2 control-label">电话</label>
-							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-phone">
-							</div>
-						</div>
-
-						<div class="form-group">
-
-							<label for="create-website" class="col-sm-2 control-label">网站</label>
-							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-website">
-							</div>
-
-							<label for="create-annualIncome" class="col-sm-2 control-label">年收入</label>
-							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-annualIncome">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="create-empnums" class="col-sm-2 control-label">员工数</label>
-							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="create-empnums">
-							</div>
-							<label for="create-hangye" class="col-sm-2 control-label">行业</label>
-							<div class="col-sm-10" style="width: 300px;">
-								<select class="form-control" id="create-hangye">
-									<option></option>
-									<option>应用服务提供商</option>
-									<option>数据/电信/OEM</option>
-									<option>企业资源管理</option>
-									<option>政府/军队</option>
-									<option>大企业</option>
-									<option>管理软件提供商</option>
-									<option>MSP（管理服务提供商）</option>
-									<option>网络设备（企业）</option>
-									<option>非管理软件提供商</option>
-									<option>光网络</option>
-									<option>服务提供商</option>
-									<option>中小企业</option>
-									<option>存储设备</option>
-									<option>存储服务提供商</option>
-									<option>系统集成</option>
-									<option>无线企业</option>
+									<option>先生</option>
+									<option>夫人</option>
+									<option>女士</option>
+									<option>博士</option>
+									<option>教授</option>
 								</select>
 							</div>
 
 						</div>
 
 						<div class="form-group">
+							<label for="create-job" class="col-sm-2 control-label">职位</label>
+							<div class="col-sm-10" style="width: 300px;">
+								<input type="text" class="form-control" id="create-job">
+							</div>
+							<label for="create-mphone" class="col-sm-2 control-label">手机</label>
+							<div class="col-sm-10" style="width: 300px;">
+								<input type="text" class="form-control" id="create-mphone">
+							</div>
+						</div>
+
+						<div class="form-group" style="position: relative;">
+							<label for="create-email" class="col-sm-2 control-label">邮箱</label>
+							<div class="col-sm-10" style="width: 300px;">
+								<input type="text" class="form-control" id="create-email">
+							</div>
+							<label for="create-birth" class="col-sm-2 control-label">生日</label>
+							<div class="col-sm-10" style="width: 300px;">
+								<input type="text" class="form-control" id="create-birth">
+							</div>
+						</div>
+
+						<div class="form-group" style="position: relative;">
+							<label for="create-customerName" class="col-sm-2 control-label">客户名称</label>
+							<div class="col-sm-10" style="width: 300px;">
+								<input type="text" class="form-control" id="create-customerName"
+									placeholder="支持自动补全，输入客户不存在则新建">
+							</div>
+						</div>
+
+						<div class="form-group" style="position: relative;">
 							<label for="create-describe" class="col-sm-2 control-label">描述</label>
 							<div class="col-sm-10" style="width: 81%;">
 								<textarea class="form-control" rows="3" id="create-describe"></textarea>
@@ -134,31 +154,42 @@
 						<div
 							style="height: 1px; width: 103%; background-color: #D5D5D5; left: -13px; position: relative;"></div>
 
-						<div style="position: relative; top: 15px;">
+						<div class="form-group" style="position: relative; top: 13px;">
+							<label for="create-contactSummary" class="col-sm-2 control-label">联系纪要</label>
+							<div class="col-sm-10" style="width: 81%;">
+								<textarea class="form-control" rows="3"
+									id="create-contactSummary"></textarea>
+							</div>
+						</div>
+
+						<div
+							style="height: 1px; width: 103%; background-color: #D5D5D5; left: -13px; position: relative; top: 10px;"></div>
+
+						<div style="position: relative; top: 20px;">
 							<div class="form-group">
-								<label for="create-country" class="col-sm-2 control-label">开票地址-国家/地区</label>
+								<label for="create-country" class="col-sm-2 control-label">邮寄地址-国家/地区</label>
 								<div class="col-sm-10" style="width: 300px;">
 									<input type="text" class="form-control" id="create-country">
 								</div>
-								<label for="create-province" class="col-sm-2 control-label">开票地址-省/市</label>
+								<label for="create-province" class="col-sm-2 control-label">邮寄地址-省/市</label>
 								<div class="col-sm-10" style="width: 300px;">
 									<input type="text" class="form-control" id="create-province">
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label for="create-city" class="col-sm-2 control-label">开票地址-城市</label>
+								<label for="create-city" class="col-sm-2 control-label">邮寄地址-城市</label>
 								<div class="col-sm-10" style="width: 300px;">
 									<input type="text" class="form-control" id="create-city">
 								</div>
-								<label for="create-street" class="col-sm-2 control-label">开票地址-街道</label>
+								<label for="create-street" class="col-sm-2 control-label">邮寄地址-街道</label>
 								<div class="col-sm-10" style="width: 300px;">
 									<input type="text" class="form-control" id="create-street">
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label for="create-zipcode" class="col-sm-2 control-label">开票地址-邮编</label>
+								<label for="create-zipcode" class="col-sm-2 control-label">邮寄地址-邮编</label>
 								<div class="col-sm-10" style="width: 300px;">
 									<input type="text" class="form-control" id="create-zipcode">
 								</div>
@@ -175,145 +206,156 @@
 		</div>
 	</div>
 
-	<!-- 修改客户的模态窗口 -->
-	<div class="modal fade" id="editCustomerModal" role="dialog">
+	<!-- 修改联系人的模态窗口 -->
+	<div class="modal fade" id="editContactsModal" role="dialog">
 		<div class="modal-dialog" role="document" style="width: 85%;">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">×</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">修改客户</h4>
+					<h4 class="modal-title" id="myModalLabel">修改联系人</h4>
 				</div>
 				<div class="modal-body">
 					<form class="form-horizontal" role="form">
 
 						<div class="form-group">
-							<label for="edit-customerOwner" class="col-sm-2 control-label">所有者<span
+							<label for="edit-contactsOwner" class="col-sm-2 control-label">所有者<span
 								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
-								<select class="form-control" id="edit-customerOwner">
-									<option>zhangsan</option>
+								<select class="form-control" id="edit-contactsOwner">
+									<option selected>zhangsan</option>
 									<option>lisi</option>
 									<option>wangwu</option>
 								</select>
 							</div>
-							<label for="edit-customerName" class="col-sm-2 control-label">名称<span
+							<label for="edit-clueSource" class="col-sm-2 control-label">来源</label>
+							<div class="col-sm-10" style="width: 300px;">
+								<select class="form-control" id="edit-clueSource">
+									<option></option>
+									<option selected>广告</option>
+									<option>推销电话</option>
+									<option>员工介绍</option>
+									<option>外部介绍</option>
+									<option>在线商场</option>
+									<option>合作伙伴</option>
+									<option>公开媒介</option>
+									<option>销售邮件</option>
+									<option>合作伙伴研讨会</option>
+									<option>内部研讨会</option>
+									<option>交易会</option>
+									<option>web下载</option>
+									<option>web调研</option>
+									<option>聊天</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="edit-surname" class="col-sm-2 control-label">姓名<span
 								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
+								<input type="text" class="form-control" id="edit-surname"
+									value="李四">
+							</div>
+							<label for="edit-call" class="col-sm-2 control-label">称呼</label>
+							<div class="col-sm-10" style="width: 300px;">
+								<select class="form-control" id="edit-call">
+									<option></option>
+									<option selected>先生</option>
+									<option>夫人</option>
+									<option>女士</option>
+									<option>博士</option>
+									<option>教授</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="edit-job" class="col-sm-2 control-label">职位</label>
+							<div class="col-sm-10" style="width: 300px;">
+								<input type="text" class="form-control" id="edit-job"
+									value="CTO">
+							</div>
+							<label for="edit-mphone" class="col-sm-2 control-label">手机</label>
+							<div class="col-sm-10" style="width: 300px;">
+								<input type="text" class="form-control" id="edit-mphone"
+									value="12345678901">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="edit-email" class="col-sm-2 control-label">邮箱</label>
+							<div class="col-sm-10" style="width: 300px;">
+								<input type="text" class="form-control" id="edit-email"
+									value="lisi@bjpowernode.com">
+							</div>
+							<label for="edit-birth" class="col-sm-2 control-label">生日</label>
+							<div class="col-sm-10" style="width: 300px;">
+								<input type="text" class="form-control" id="edit-birth">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="edit-customerName" class="col-sm-2 control-label">客户名称</label>
+							<div class="col-sm-10" style="width: 300px;">
 								<input type="text" class="form-control" id="edit-customerName"
-									value="动力节点">
+									placeholder="支持自动补全，输入客户不存在则新建" value="动力节点">
 							</div>
 						</div>
-
-						<div class="form-group">
-							<label for="edit-grade" class="col-sm-2 control-label">等级</label>
-							<div class="col-sm-10" style="width: 300px;">
-								<select class="form-control" id="edit-grade">
-									<option></option>
-									<option selected>已获得</option>
-									<option>激活的</option>
-									<option>市场失败</option>
-									<option>项目取消</option>
-									<option>关闭</option>
-								</select>
-							</div>
-							<label for="edit-phone" class="col-sm-2 control-label">电话</label>
-							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-phone"
-									value="010-84846003">
-							</div>
-						</div>
-
-						<div class="form-group">
-
-							<label for="edit-website" class="col-sm-2 control-label">网站</label>
-							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-website"
-									value="http://www.bjpowernode.com">
-							</div>
-
-							<label for="edit-annualIncome" class="col-sm-2 control-label">年收入</label>
-							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-annualIncome"
-									value="10,000,000">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label for="edit-empnums" class="col-sm-2 control-label">员工数</label>
-							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-empnums"
-									value="100">
-							</div>
-							<label for="edit-industry" class="col-sm-2 control-label">行业</label>
-							<div class="col-sm-10" style="width: 300px;">
-								<select class="form-control" id="edit-industry">
-									<option></option>
-									<option>应用服务提供商</option>
-									<option>数据/电信/OEM</option>
-									<option>企业资源管理</option>
-									<option>政府/军队</option>
-									<option>大企业</option>
-									<option>管理软件提供商</option>
-									<option>MSP（管理服务提供商）</option>
-									<option>网络设备（企业）</option>
-									<option>非管理软件提供商</option>
-									<option>光网络</option>
-									<option>服务提供商</option>
-									<option selected>中小企业</option>
-									<option>存储设备</option>
-									<option>存储服务提供商</option>
-									<option>系统集成</option>
-									<option>无线企业</option>
-								</select>
-							</div>
-
-						</div>
-
-
 
 						<div class="form-group">
 							<label for="edit-describe" class="col-sm-2 control-label">描述</label>
 							<div class="col-sm-10" style="width: 81%;">
-								<textarea class="form-control" rows="3" id="edit-describe"></textarea>
+								<textarea class="form-control" rows="3" id="edit-describe">这是一条线索的描述信息</textarea>
 							</div>
 						</div>
 
 						<div
 							style="height: 1px; width: 103%; background-color: #D5D5D5; left: -13px; position: relative;"></div>
 
-						<div style="position: relative; top: 15px;">
+						<div class="form-group" style="position: relative; top: 13px;">
+							<label for="create-contactSummary" class="col-sm-2 control-label">联系纪要</label>
+							<div class="col-sm-10" style="width: 81%;">
+								<textarea class="form-control" rows="3"
+									id="create-contactSummary"></textarea>
+							</div>
+						</div>
+
+						<div
+							style="height: 1px; width: 103%; background-color: #D5D5D5; left: -13px; position: relative; top: 10px;"></div>
+
+						<div style="position: relative; top: 20px;">
 							<div class="form-group">
-								<label for="edit-country" class="col-sm-2 control-label">开票地址-国家/地区</label>
+								<label for="create-country" class="col-sm-2 control-label">邮寄地址-国家/地区</label>
 								<div class="col-sm-10" style="width: 300px;">
-									<input type="text" class="form-control" id="edit-country"
+									<input type="text" class="form-control" id="create-country"
 										value="中国">
 								</div>
-								<label for="edit-province" class="col-sm-2 control-label">开票地址-省/市</label>
+								<label for="create-province" class="col-sm-2 control-label">邮寄地址-省/市</label>
 								<div class="col-sm-10" style="width: 300px;">
-									<input type="text" class="form-control" id="edit-province"
+									<input type="text" class="form-control" id="create-province"
 										value="北京市">
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label for="edit-city" class="col-sm-2 control-label">开票地址-城市</label>
+								<label for="create-city" class="col-sm-2 control-label">邮寄地址-城市</label>
 								<div class="col-sm-10" style="width: 300px;">
-									<input type="text" class="form-control" id="edit-city"
+									<input type="text" class="form-control" id="create-city"
 										value="北京市">
 								</div>
-								<label for="edit-street" class="col-sm-2 control-label">开票地址-街道</label>
+								<label for="create-street" class="col-sm-2 control-label">邮寄地址-街道</label>
 								<div class="col-sm-10" style="width: 300px;">
-									<input type="text" class="form-control" id="edit-street"
-										value="大兴区大族企业湾10号楼A座3层">
+									<input type="text" class="form-control" id="create-street"
+										value="大兴区亦庄大族企业湾10号楼A座3层">
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label for="edit-zipcode" class="col-sm-2 control-label">开票地址-邮编</label>
+								<label for="create-zipcode" class="col-sm-2 control-label">邮寄地址-邮编</label>
 								<div class="col-sm-10" style="width: 300px;">
-									<input type="text" class="form-control" id="edit-zipcode"
+									<input type="text" class="form-control" id="create-zipcode"
 										value="100176">
 								</div>
 							</div>
@@ -330,15 +372,15 @@
 	</div>
 
 
-	<!-- 导入客户的模态窗口 -->
-	<div class="modal fade" id="importActivityModal" role="dialog">
+	<!-- 导入联系人的模态窗口 -->
+	<div class="modal fade" id="importContactsModal" role="dialog">
 		<div class="modal-dialog" role="document" style="width: 85%;">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">×</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">导入客户</h4>
+					<h4 class="modal-title" id="myModalLabel">导入联系人</h4>
 				</div>
 				<div class="modal-body" style="height: 350px;">
 					<div style="position: relative; top: 20px; left: 50px;">
@@ -374,26 +416,19 @@
 	<div>
 		<div style="position: relative; left: 10px; top: -10px;">
 			<div class="page-header">
-				<h3>客户列表</h3>
+				<h3>联系人列表</h3>
 			</div>
 		</div>
 	</div>
 
 	<div
-		style="position: relative; top: -20px; left: 0px; width: 130%; height: 100%;">
+		style="position: relative; top: -20px; left: 0px; width: 100%; height: 100%;">
 
-		<div style="width: 130%; position: absolute; top: 5px; left: 10px;">
+		<div style="width: 200%; position: absolute; top: 5px; left: 10px;">
 
 			<div class="btn-toolbar" role="toolbar" style="height: 80px;">
 				<form class="form-inline" role="form"
 					style="position: relative; top: 8%; left: 5px;">
-
-					<div class="form-group">
-						<div class="input-group">
-							<div class="input-group-addon">名称</div>
-							<input class="form-control" type="text">
-						</div>
-					</div>
 
 					<div class="form-group">
 						<div class="input-group">
@@ -404,14 +439,14 @@
 
 					<div class="form-group">
 						<div class="input-group">
-							<div class="input-group-addon">电话</div>
+							<div class="input-group-addon">姓名</div>
 							<input class="form-control" type="text">
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="input-group">
-							<div class="input-group-addon">网站</div>
+							<div class="input-group-addon">客户名称</div>
 							<input class="form-control" type="text">
 						</div>
 					</div>
@@ -420,40 +455,31 @@
 
 					<div class="form-group">
 						<div class="input-group">
-							<div class="input-group-addon">等级</div>
-							<select class="form-control" id="edit-grade">
+							<div class="input-group-addon">来源</div>
+							<select class="form-control" id="edit-clueSource">
 								<option></option>
-								<option>已获得</option>
-								<option>激活的</option>
-								<option>市场失败</option>
-								<option>项目取消</option>
-								<option>关闭</option>
+								<option>广告</option>
+								<option>推销电话</option>
+								<option>员工介绍</option>
+								<option>外部介绍</option>
+								<option>在线商场</option>
+								<option>合作伙伴</option>
+								<option>公开媒介</option>
+								<option>销售邮件</option>
+								<option>合作伙伴研讨会</option>
+								<option>内部研讨会</option>
+								<option>交易会</option>
+								<option>web下载</option>
+								<option>web调研</option>
+								<option>聊天</option>
 							</select>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<div class="input-group">
-							<div class="input-group-addon">行业</div>
-							<select class="form-control" id="edit-industry">
-								<option></option>
-								<option>应用服务提供商</option>
-								<option>数据/电信/OEM</option>
-								<option>企业资源管理</option>
-								<option>政府/军队</option>
-								<option>大企业</option>
-								<option>管理软件提供商</option>
-								<option>MSP（管理服务提供商）</option>
-								<option>网络设备（企业）</option>
-								<option>非管理软件提供商</option>
-								<option>光网络</option>
-								<option>服务提供商</option>
-								<option>中小企业</option>
-								<option>存储设备</option>
-								<option>存储服务提供商</option>
-								<option>系统集成</option>
-								<option>无线企业</option>
-							</select>
+							<div class="input-group-addon">生日</div>
+							<input class="form-control" type="text">
 						</div>
 					</div>
 
@@ -462,14 +488,14 @@
 				</form>
 			</div>
 			<div class="btn-toolbar" role="toolbar"
-				style="background-color: #F7F7F7; height: 50px; position: relative; top: 5px;">
+				style="background-color: #F7F7F7; height: 50px; position: relative; top: 10px;">
 				<div class="btn-group" style="position: relative; top: 18%;">
 					<button type="button" class="btn btn-primary" data-toggle="modal"
-						data-target="#createCustomerModal">
+						data-target="#createContactsModal">
 						<span class="glyphicon glyphicon-plus"></span> 创建
 					</button>
 					<button type="button" class="btn btn-default" data-toggle="modal"
-						data-target="#editCustomerModal">
+						data-target="#editContactsModal">
 						<span class="glyphicon glyphicon-pencil"></span> 修改
 					</button>
 					<button type="button" class="btn btn-danger">
@@ -478,7 +504,7 @@
 				</div>
 				<div class="btn-group" style="position: relative; top: 18%;">
 					<button type="button" class="btn btn-default" data-toggle="modal"
-						data-target="#importActivityModal">
+						data-target="#importContactsModal">
 						<span class="glyphicon glyphicon-import"></span> 导入
 					</button>
 					<button type="button" class="btn btn-default">
@@ -496,21 +522,23 @@
 					</button>
 					<ul id="definedColumns" class="dropdown-menu" role="menu">
 						<li><a href="javascript:void(0);"><input type="checkbox" />
-								名称</a></li>
+								姓名</a></li>
+						<li><a href="javascript:void(0);"><input type="checkbox" />
+								称呼</a></li>
+						<li><a href="javascript:void(0);"><input type="checkbox" />
+								客户名称</a></li>
 						<li><a href="javascript:void(0);"><input type="checkbox" />
 								所有者</a></li>
 						<li><a href="javascript:void(0);"><input type="checkbox" />
-								等级</a></li>
+								来源</a></li>
 						<li><a href="javascript:void(0);"><input type="checkbox" />
-								电话</a></li>
+								邮箱</a></li>
 						<li><a href="javascript:void(0);"><input type="checkbox" />
-								网站</a></li>
+								生日</a></li>
 						<li><a href="javascript:void(0);"><input type="checkbox" />
-								行业</a></li>
+								职位</a></li>
 						<li><a href="javascript:void(0);"><input type="checkbox" />
-								年收入</a></li>
-						<li><a href="javascript:void(0);"><input type="checkbox" />
-								员工数</a></li>
+								手机</a></li>
 						<li><a href="javascript:void(0);"><input type="checkbox" />
 								创建者</a></li>
 						<li><a href="javascript:void(0);"><input type="checkbox" />
@@ -523,6 +551,8 @@
 								地址</a></li>
 						<li><a href="javascript:void(0);"><input type="checkbox" />
 								描述</a></li>
+						<li><a href="javascript:void(0);"><input type="checkbox" />
+								联系纪要</a></li>
 					</ul>
 				</div>
 
@@ -537,69 +567,75 @@
 					</form>
 				</div>
 			</div>
-			<div style="position: relative; top: 10px;">
+			<div style="position: relative; top: 20px;">
 				<table class="table table-hover">
 					<thead>
 						<tr style="color: #B3B3B3;">
 							<td><input type="checkbox" /></td>
-							<td>名称</td>
+							<td>姓名</td>
+							<td>称呼</td>
+							<td>客户名称</td>
 							<td>所有者</td>
-							<td>等级</td>
-							<td>电话</td>
-							<td>网站</td>
-							<td>行业</td>
-							<td>年收入</td>
-							<td>员工数</td>
+							<td>来源</td>
+							<td>邮箱</td>
+							<td>生日</td>
+							<td>职位</td>
+							<td>手机</td>
 							<td>创建者</td>
 							<td>创建时间</td>
 							<td>修改者</td>
 							<td>修改时间</td>
 							<td>地址</td>
-							<td width="10%">描述</td>
+							<td>描述</td>
+							<td>联系纪要</td>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><input type="checkbox" /></td>
-							<td><a style="text-decoration: none; cursor: pointer;"
-								onclick="window.location.href='detail.html';">动力节点</a></td>
-							<td>zhangsan</td>
-							<td>已获得</td>
-							<td>010-84846003</td>
-							<td>http://www.bjpowernode.com</td>
-							<td>中小企业</td>
-							<td>10,000,000</td>
-							<td>100</td>
-							<td>zhangsan</td>
-							<td>2017-01-18 10:10:10</td>
-							<td>zhangsan</td>
-							<td>2017-01-19 10:10:10</td>
-							<td></td>
-							<td>这是一条线索的描述信息 （线索转换之后会将线索的描述转换到客户的描述中）</td>
-						</tr>
 						<tr class="active">
 							<td><input type="checkbox" /></td>
 							<td><a style="text-decoration: none; cursor: pointer;"
-								onclick="window.location.href='detail.html';">动力节点</a></td>
+								onclick="window.location.href='detail.html';">李四</a></td>
+							<td>先生</td>
+							<td>动力节点</td>
 							<td>zhangsan</td>
-							<td>已获得</td>
-							<td>010-84846003</td>
-							<td>http://www.bjpowernode.com</td>
-							<td>中小企业</td>
-							<td>10,000,000</td>
-							<td>100</td>
+							<td>广告</td>
+							<td>lisi@bjpowernode.com</td>
+							<td></td>
+							<td>CTO</td>
+							<td>12345678901</td>
 							<td>zhangsan</td>
 							<td>2017-01-18 10:10:10</td>
 							<td>zhangsan</td>
 							<td>2017-01-19 10:10:10</td>
+							<td>中国北京市大兴区大族企业湾10号楼A座3层</td>
+							<td>这是一条线索的描述信息 （线索转换之后会将线索的描述转换到联系人的描述中）</td>
 							<td></td>
-							<td>这是一条线索的描述信息 （线索转换之后会将线索的描述转换到客户的描述中）</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" /></td>
+							<td><a style="text-decoration: none; cursor: pointer;"
+								onclick="window.location.href='detail.html';">李四</a></td>
+							<td>先生</td>
+							<td>动力节点</td>
+							<td>zhangsan</td>
+							<td>广告</td>
+							<td>lisi@bjpowernode.com</td>
+							<td></td>
+							<td>CTO</td>
+							<td>12345678901</td>
+							<td>zhangsan</td>
+							<td>2017-01-18 10:10:10</td>
+							<td>zhangsan</td>
+							<td>2017-01-19 10:10:10</td>
+							<td>中国北京市大兴区大族企业湾10号楼A座3层</td>
+							<td>这是一条线索的描述信息 （线索转换之后会将线索的描述转换到联系人的描述中）</td>
+							<td></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 
-			<div style="height: 50px; position: relative; top: 30px;">
+			<div style="height: 50px; position: relative; top: 10px;">
 				<div>
 					<button type="button" class="btn btn-default"
 						style="cursor: default;">

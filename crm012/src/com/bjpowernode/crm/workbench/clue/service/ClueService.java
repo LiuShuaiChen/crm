@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.bjpowernode.crm.commons.vo.PaginationVO;
 import com.bjpowernode.crm.workbench.clue.domain.Clue;
+import com.bjpowernode.crm.workbench.clue.remark.domain.ClueRemark;
 
 /**
  * 线索 业务处理接口
@@ -45,5 +46,6 @@ public interface ClueService {
 	 * @return
 	 */
 	int updateClue(Clue clue);
+
 
 }

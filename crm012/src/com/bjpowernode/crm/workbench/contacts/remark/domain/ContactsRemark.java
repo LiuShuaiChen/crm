@@ -1,11 +1,11 @@
-package com.bjpowernode.crm.workbench.clue.remark.domain;
+package com.bjpowernode.crm.workbench.contacts.remark.domain;
 
 /**
- * 线索 备注
+ * 联系人备注 领域模型  实体类
  * @author LauShuaichen
  *
  */
-public class ClueRemark {
+public class ContactsRemark {
 
 	private String id;
 	private String notePerson;
@@ -13,15 +13,8 @@ public class ClueRemark {
 	private String noteTime;
 	private String editPerson;
 	private String editTime;
-	@Override
-	public String toString() {
-		return "ClueRemark [id=" + id + ", notePerson=" + notePerson + ", noteContent=" + noteContent + ", noteTime="
-				+ noteTime + ", editPerson=" + editPerson + ", editTime=" + editTime + ", editFlag=" + editFlag
-				+ ", clueId=" + clueId + "]";
-	}
-
 	private int editFlag;
-	private String clueId;
+	private String contactsId;
 
 	public String getId() {
 		return id;
@@ -79,12 +72,12 @@ public class ClueRemark {
 		this.editFlag = editFlag;
 	}
 
-	public String getClueId() {
-		return clueId;
+	public String getContactsId() {
+		return contactsId;
 	}
 
-	public void setClueId(String clueId) {
-		this.clueId = clueId;
+	public void setContactsId(String contactsId) {
+		this.contactsId = contactsId;
 	}
 
 }

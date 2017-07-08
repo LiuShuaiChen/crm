@@ -92,10 +92,60 @@
 <script type="text/javascript">
 
 
-	/* 获取id 编辑 线索 *//* 获取id 编辑 线索 *//* 获取id 编辑 线索 *//* 获取id 编辑 线索 *//* 获取id 编辑 线索 */
 	$(function(){
 		
+		/*添加备注 单击 保存 按钮事件  *//*添加备注 单击 保存 按钮事件  *//*添加备注 单击 保存 按钮事件  *//*添加备注 单击 保存 按钮事件  *//*添加备注 单击 保存 按钮事件  *//*添加备注 单击 保存 按钮事件  */
+		$("#saveClueRemarkBtn").click(function(){
+			//收集参数
+			var noteContent=$.trim($("#remark").val());
+			var clueId=$("#edit-clueId").val();
+			
+			//表单验证
+			if(noteContent==null||noteContent.length==0){
+				alert("备注内容不能为空！");
+				return;
+			}
 
+			//发送请求
+			$.ajax({
+				url:"workbench/clue/detail/remark/createClueRemark.do",
+				data:{
+					noteContent:noteContent,
+					clueId:clueId
+				},
+				type:"post",
+				success:function(data){
+					if(data.success){
+						//更新备注列表
+						var htmlStr="";
+						htmlStr+="<div id='div_"+data.remark.id+"' class='remarkDiv' style='height: 60px;'>";
+						htmlStr+="<img title='${user.name }' src='image/user-thumbnail.png' style='width: 30px; height:30px;'>";
+						htmlStr+="<div style='position: relative; top: -40px; left: 40px;' >";
+						htmlStr+="<h5>"+data.remark.noteContent+"</h5>";
+						htmlStr+="<font color='gray'>线索</font> <font color='gray'>-</font> <b>${clue.fullName } ${clue.company}</b> <small style='color: gray;'> "+data.remark.noteTime+" 由${user.name }创建</small>";
+						htmlStr+="<div style='position: relative; left: 500px; top: -30px; height: 30px; width: 100px; display: none;'>";
+						htmlStr+="<a remark-id='"+data.remark.id+"' name='editA' class='myHref' href='javascript:void(0);'><span class='glyphicon glyphicon-edit' style='font-size: 20px; color: #E6E6E6;'></span></a>";
+						htmlStr+="&nbsp;&nbsp;&nbsp;&nbsp;";
+						htmlStr+="<a remark-id='"+data.remark.id+"' name='removeA' class='myHref' href='javascript:void(0);'><span class='glyphicon glyphicon-remove' style='font-size: 20px; color: #E6E6E6;'></span></a>";
+						htmlStr+="</div>";
+						htmlStr+="</div>";
+						htmlStr+="</div>";
+						$("#remarkDiv").before(htmlStr);
+						//清空输入框
+						$("#remark").val('');
+					}else{
+						alert("添加失败！");
+					}
+				}
+			});
+			
+		});
+		/*添加备注 单击 保存 按钮事件  *//*添加备注 单击 保存 按钮事件  *//*添加备注 单击 保存 按钮事件  *//*添加备注 单击 保存 按钮事件  *//*添加备注 单击 保存 按钮事件  *//*添加备注 单击 保存 按钮事件  */
+		
+		
+		
+
+	/* 获取id 编辑 线索 *//* 获取id 编辑 线索 *//* 获取id 编辑 线索 *//* 获取id 编辑 线索 *//* 获取id 编辑 线索 */
 		$("#editClueDateilBtn").click(function(){
 			$.ajax({
 				url:"workbench/clue/edit.do",
@@ -226,13 +276,6 @@
 			/* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 *//* 更新编辑 线索 */
 			
 			
-			/*添加备注 单击 保存 按钮事件  */
-			$("#saveClueRemarkBtn").click(function(){
-				
-			});
-			
-			
-			
 		})
 		
 		/* 局部刷新 */ /* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 */
@@ -269,6 +312,7 @@
 							$("#clueNextContactTime").html(data.clue.nextContactTime);
 							$("#clueCountry").html(data.clue.country);
 							$("#clueProvince").html(data.clue.province);
+							$("#clueCity").html(data.clue.city);
 							$("#clueStreet").html(data.clue.street);
 							$("#clueZipcode").html(data.clue.zipcode);
 						}else {
@@ -862,52 +906,27 @@
 	</div>
 
 	<!-- 备注 -->
-	<div style="position: relative; top: 60px; left: 40px;">
+	<div id="remarkDivList" style="position: relative; top: 60px; left: 40px;">
 		<div class="page-header">
-			<h4>备注</h4>
+			<h4>线索备注</h4>
 		</div>
-
-		<!-- 备注1 -->
-		<div class="remarkDiv" style="height: 60px;">
-			<img title="zhangsan" src="image/user-thumbnail.png"
-				style="width: 30px; height: 30px;">
-			<div style="position: relative; top: -40px; left: 40px;">
-				<h5>哎呦！</h5>
-				<font color="gray">线索</font> <font color="gray">-</font> <b>李四先生-动力节点</b>
-				<small style="color: gray;"> 2017-01-22 10:10:10 由zhangsan</small>
-				<div
-					style="position: relative; left: 500px; top: -30px; height: 30px; width: 100px; display: none;">
-					<a class="myHref" href="javascript:void(0);"><span
-						class="glyphicon glyphicon-edit"
-						style="font-size: 20px; color: #E6E6E6;"></span></a>
-					&nbsp;&nbsp;&nbsp;&nbsp; <a class="myHref"
-						href="javascript:void(0);"><span
-						class="glyphicon glyphicon-remove"
-						style="font-size: 20px; color: #E6E6E6;"></span></a>
+		
+		<c:if test="${not empty remarkList }">
+			<c:forEach var="remark" items="${remarkList }">
+				 <div id="div_${remark.id }" class="remarkDiv" style="height: 60px;">
+					<img title="${remark.notePerson }" src="image/user-thumbnail.png" style="width: 30px; height:30px;">
+					<div style="position: relative; top: -40px; left: 40px;" >
+						<h5>${remark.noteContent }</h5>
+						<font color="gray">线索</font> <font color="gray">-</font> <b>${clue.fullName }</b> <small style="color: gray;"> ${remark.editFlag==0?remark.noteTime:remark.editTime } 由${remark.editFlag==0?remark.notePerson:remark.editPerson }${remark.editFlag==0?'创建':'修改' }</small>
+						<div style="position: relative; left: 500px; top: -30px; height: 30px; width: 100px; display: none;">
+							<a remark-id="${remark.id }" name='editA' class="myHref" href="javascript:void(0);"><span class="glyphicon glyphicon-edit" style="font-size: 20px; color: #E6E6E6;"></span></a>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<a remark-id="${remark.id }" name='removeA' class="myHref" href="javascript:void(0);"><span class="glyphicon glyphicon-remove" style="font-size: 20px; color: #E6E6E6;"></span></a>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-
-		<!-- 备注2 -->
-		<div class="remarkDiv" style="height: 60px;">
-			<img title="zhangsan" src="image/user-thumbnail.png"
-				style="width: 30px; height: 30px;">
-			<div style="position: relative; top: -40px; left: 40px;">
-				<h5>呵呵！</h5>
-				<font color="gray">线索</font> <font color="gray">-</font> <b>李四先生-动力节点</b>
-				<small style="color: gray;"> 2017-01-22 10:20:10 由zhangsan</small>
-				<div
-					style="position: relative; left: 500px; top: -30px; height: 30px; width: 100px; display: none;">
-					<a class="myHref" href="javascript:void(0);"><span
-						class="glyphicon glyphicon-edit"
-						style="font-size: 20px; color: #E6E6E6;"></span></a>
-					&nbsp;&nbsp;&nbsp;&nbsp; <a class="myHref"
-						href="javascript:void(0);"><span
-						class="glyphicon glyphicon-remove"
-						style="font-size: 20px; color: #E6E6E6;"></span></a>
-				</div>
-			</div>
-		</div>
+			</c:forEach>
+		</c:if>
 
 		<div id="remarkDiv" style="background-color: #E6E6E6; width: 870px; height: 90px;">
 			<form role="form" style="position: relative; top: 10px; left: 10px;">

@@ -1,6 +1,8 @@
 package com.bjpowernode.crm.workbench.clue.web.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bjpowernode.crm.utils.ServiceFactory;
 import com.bjpowernode.crm.workbench.clue.domain.Clue;
+import com.bjpowernode.crm.workbench.clue.remark.domain.ClueRemark;
+import com.bjpowernode.crm.workbench.clue.remark.service.ClueRemarkService;
+import com.bjpowernode.crm.workbench.clue.remark.service.impl.ClueRemarkServiceImpl;
 import com.bjpowernode.crm.workbench.clue.service.ClueService;
 import com.bjpowernode.crm.workbench.clue.service.impl.ClueServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,9 +39,14 @@ public class LookClueDetailController extends HttpServlet {
 		Clue clue = clueService.queryClueForDetail(id);
 		
 		//备注没有写
+		//调用service 查询所有 该线索的所有备注
+		ClueRemarkService clueRemarkService = (ClueRemarkService) ServiceFactory.getService(new ClueRemarkServiceImpl());
+		List<ClueRemark>clueRemarkList = clueRemarkService.ListingClueRemark(id);
 		
 		
 		request.setAttribute("clue", clue);
+		request.setAttribute("remarkList", clueRemarkList);
+		
 		request.getRequestDispatcher("/workbench/clue/detail.jsp").forward(request, response);
 		
 	}
