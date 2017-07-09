@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bjpowernode.crm.workbench.customer.dao.CustomerDao">
+	
+	<!-- 创建新的客户 -->
+	<!-- int SaveCustomer(Customer customer); -->
+	<insert id="SaveCustomer" parameterType="customer">
+		insert into tbl_customer 
+		(id,owner,name,grade,phone,website,annualIncome,empNums,industry,description,country,province,city,street,zipcode,createBy,createTime)
+		values
+		(#{id}, #{owner}, #{name}, #{grade}, #{phone}, #{website}, #{annualIncome}, #{empNums}, #{industry}, #{description}, #{country}, #{province}, #{city}, #{street}, #{zipcode}, #{createBy}, #{createTime})
+	</insert>
+	
+	<!-- Customer editCustomerById(String id); -->
+	<select id="editCustomerById" parameterType="string" resultType="Customer">
+		
+	</select>
+
+</mapper>
+
+
+
+
