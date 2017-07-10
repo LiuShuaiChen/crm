@@ -2,6 +2,7 @@ package com.bjpowernode.crm.workbench.customer.domain;
 
 /**
  * 客户 实体类 领域模型
+ * 
  * @author LauShuaichen
  *
  */
@@ -13,7 +14,7 @@ public class Customer {
 	private String grade;
 	private String phone;
 	private String website;
-	private String annualIncome;
+	private int annualIncome;
 	private int empNums;
 	private String industry;
 	private String description;
@@ -75,11 +76,11 @@ public class Customer {
 		this.website = website;
 	}
 
-	public String getAnnualIncome() {
+	public int getAnnualIncome() {
 		return annualIncome;
 	}
 
-	public void setAnnualIncome(String annualIncome) {
+	public void setAnnualIncome(int annualIncome) {
 		this.annualIncome = annualIncome;
 	}
 

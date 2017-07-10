@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bjpowernode.crm.workbench.customer.dao.CustomerDao">
+
+	<!-- int CreateContactsRemark(ContactsRemark contactsRemark); -->
+	<insert id="CreateContactsRemark" parameterType="contactsRemark">
+		insert into tbl_contacts_remark (id,notePerson,noteContent,noteTime,editFlag,contactsId)
+		values (#{id}, #{notePerson}, #{noteContent}, #{noteTime}, #{editFlag}, #{contactsId})
+	</insert>
+	
+	<!-- ContactsRemark editContactsRemark(String id); -->
+	<select id="editContactsRemark" parameterType="string">
+		select * from tbl_contacts_remark
+	</select>
+	
+	<!-- int updateContactsRemaerk(ContactsRemark contactsRemark); -->
+	<update id="updateContactsRemaerk" parameterType="contactsRemark">
+		update tbl_contacts_remark set
+		noteContent = #{noteContent}, editFlag = #{editFlag}, editPerson = #{editPerson}, editTime = #{editTime}
+		where id = #{id}
+	</update>
+	
+	<!-- int deleteContactsRemark(String id); -->
+	<delete id="deleteContactsRemark" parameterType="string">
+		delete from tbl_contacts_remark
+		where id = #{id}
+	</delete>
+	
+</mapper>
+
+
+
+

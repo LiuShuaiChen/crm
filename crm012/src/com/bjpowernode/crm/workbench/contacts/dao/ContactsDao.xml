@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bjpowernode.crm.workbench.customer.dao.CustomerDao">
+
+	<!-- int createContacts(Contacts contacts); -->
+	<insert id="createContacts" parameterType="contacts">
+		insert into tbl_contacts (id,owner,source,appellation,fullName,email,job,mphone,description,country,province,city,street,zipcode,birth,customerId,createBy,createTime,contactSummary)
+		values(#{id}, #{owner}, #{source}, #{appellation}, #{fullName}, #{email}, #{job}, #{mphone}, #{description}, #{country}, #{province}, #{city}, #{street}, #{zipcode}, #{birth}, #{customerId}, #{createBy}, #{createTime}, #{contactSummary})
+	</insert>
+	
+	<!-- Contacts EditContactsGetById(String id); -->
+	<select id="EditContactsGetById" parameterType="string" resultType="Contacts">
+		select * from tbl_contacts
+	</select>
+ 	
+ 	
+ 	<!-- int updateContacts(Contacts contacts); -->
+ 	<update id="updateContacts" parameterType="contacts">
+ 		update tbl_contacts set(owner = #{owner},source = #{source}, appellation = #{appellation}, fullName = #{fullName},email = #{email}, job = #{job},mphone = #{mphone}, description = #{description}, country = #{country}, province = #{province},city = #{city}, street = #{street}, zipcode = #{zipcode}, birth = #{birth}, contactSummary= #{contactSummary}, editBy = #{editBy},editTime = #{editTime})
+ 		where id = #{id}
+ 	</update>
+ 	
+ 	<!-- int deleteContacts(String id); -->
+ 	<delete id="deleteContacts" parameterType="string">
+ 		delete from tbl_contacts
+ 		where id = #{id}
+ 	</delete>
+	
+</mapper>
+
+
+
+

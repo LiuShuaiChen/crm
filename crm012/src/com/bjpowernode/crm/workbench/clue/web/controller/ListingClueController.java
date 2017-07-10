@@ -52,16 +52,17 @@ public class ListingClueController extends HttpServlet {
 		
 		//封装参数
 		Map<String, Object>map = new HashMap<String,Object>();
+
 		long pageNo = 1;
 		if (pageNoStr != null && pageNoStr.trim().length() > 0) {
 			pageNo = Long.parseLong(pageNoStr);
 		}
-		
+
 		int pageSize = 5;
 		if (pageSizeStr != null && pageSizeStr.trim().length() > 0) {
 			pageSize = Integer.parseInt(pageSizeStr);
 		}
-		
+
 		long beginNo = (pageNo - 1) * pageSize;
 		map.put("beginNo", beginNo);
 		map.put("pageSize", pageSize);

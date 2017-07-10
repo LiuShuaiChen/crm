@@ -11,10 +11,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<package name="com.bjpowernode.crm.workbench.clue.domain" />
 		<package name="com.bjpowernode.crm.workbench.clue.remark.domain"/>
 		<package name="com.bjpowernode.crm.workbench.customer.domain"/>
-		
+		<package name="com.bjpowernode.crm.workbench.customer.remark.domain"/>
+		<package name="com.bjpowernode.crm.workbench.contacts.domain"/>
+		<package name="com.bjpowernode.crm.workbench.contacts.remark.domain"/>
 		
 
 	</typeAliases>
+	
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
@@ -26,6 +29,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 			</dataSource>
 		</environment>
 	</environments>
+	
 	<mappers>
 		<mapper resource="com/bjpowernode/crm/settings/dictionary/dao/DictionaryTypeDao.xml" />
 		<mapper resource="com/bjpowernode/crm/settings/dictionary/dao/DictionaryValueDao.xml" />
@@ -36,8 +40,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="com/bjpowernode/crm/workbench/activity/dao/MarketActivityRemarkDao.xml" />
 		<mapper resource="com/bjpowernode/crm/workbench/clue/remark/dao/ClueRemarkDao.xml"/>
 		<mapper resource="com/bjpowernode/crm/workbench/customer/dao/CustomerDao.xml"/>
-		
-		
+		<mapper resource="com/bjpowernode/crm/workbench/customer/remark/dao/CustomerRemarkDao.xml"/>
+		<mapper resource="com/bjpowernode/crm/workbench/contacts/dao/ContactsDao.xml"/>
+		<mapper resource="com/bjpowernode/crm/workbench/contacts/remark/dao/ContactRemarkDao.xml"/>
 
 	</mappers>
 

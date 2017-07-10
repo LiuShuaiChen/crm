@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bjpowernode.crm.workbench.customer.remark.dao">
+	
+	<!-- 添加新的客户备注 -->
+	<!-- int createCustomerRemark(CustomerRemark customerRemark); -->
+	<insert id="createCustomerRemark" parameterType="customerRemark">
+		insert into tbl_customer_remark
+		(id,notePerson,noteContent,noteTime,editFlag,customerId)
+		values
+		#{id}, #{notePerson}, #{noteContent}, #{noteTime}, #{editFlag}, #{customerId}
+	</insert>
+	
+	<!-- 联表查询 -->
+	<!-- int editCustomerRemark(String id); -->
+	<select id="editCustomerRemark" parameterType="string">
+		select user1.name as notePerson, cr.noteContent, cr.noteTime, cr.editFlag, c.name as customerId
+		from tbl_customer_remark cr
+		left join tbl_user user1 on cr.notePerson = user1.id 
+		left join tbl_customer c on cr.customerId = c.id 
+		where id = #{id}
+	</select>
+
+	<!-- 更新客户备注 -->
+	<!-- int updateCustomerRemark(CustomerRemark customerRemark); -->
+	<update id="updateCustomerRemark" parameterType="customerRemark">
+		update tbl_customer_remark set notePerson = #{notePerson}, editPerson = #{editPerson}, editTime = #{editTime}, editFlag = #{editFlag}
+		where id = #{id}
+	</update>
+
+	<!-- 删除客户备注 -->
+	<!-- int deleteCustomerRemark(String id); -->
+	<delete id="deleteCustomerRemark" parameterType="string">
+		delete tbl_customer_remark
+		where id = #{id}
+	</delete>
+	
+	<!-- 查询客户所有备注 -->
+	<!-- List<CustomerRemark> lookCustomerRemarkForCustomer(String id); -->
+	<select id="lookCustomerRemarkForCustomer" parameterType="string" resultType="CustomerRemark">
+		select user1.name as notePerson, cr.noteContent, cr.noteTime, cr.editFlag, c.name as customerId
+		from tbl_customer_remark cr
+		left join tbl_user user1 on cr.notePerson = user1.id 
+		left join tbl_customer c on cr.customerId = c.id 
+		where customerId = #{id}
+	</select>
+</mapper>
+
+
+
+

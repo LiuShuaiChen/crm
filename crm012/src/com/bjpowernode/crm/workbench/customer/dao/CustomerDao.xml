@@ -11,12 +11,108 @@
 		values
 		(#{id}, #{owner}, #{name}, #{grade}, #{phone}, #{website}, #{annualIncome}, #{empNums}, #{industry}, #{description}, #{country}, #{province}, #{city}, #{street}, #{zipcode}, #{createBy}, #{createTime})
 	</insert>
-	
+	<!-- 获取某个客户 -->
 	<!-- Customer editCustomerById(String id); -->
 	<select id="editCustomerById" parameterType="string" resultType="Customer">
-		
+		select * from tbl_customer where id = #{id}
 	</select>
 
+	<!-- 更新某个客户 -->
+	<!-- int updateCustomer(Customer customer); -->
+	<update id="updateCustomer" parameterType="customer">
+		update tbl_customer set 
+		owner = #{owner}, name = #{name}, grade = #{grade}, phone = #{phone}, website = #{website}, annualIncome = #{annualIncome}, empNums = #{empNums}, industry = #{industry}, description = #{description}, country = #{country}, province = #{province}, city = #{city}, street = #{street}, zipcode = #{zipcode}, editBy = #{editBy}, editTime = #{editTime}
+		where id = #{id} 
+	</update>
+	
+	<!-- 删除某个客户 -->
+	<!-- int deleteCustomer(String id); -->
+	<delete id="deleteCustomer" parameterType="int">
+		delete from tbl_customer where id= #{id}; 
+	</delete>
+	
+	<!-- List<Customer> queryCustomerForPageByCondition(Map<String, Object> map); -->
+	<select id="queryCustomerForPageByCondition" parameterType="map" resultType="Customer">
+		select
+		cs.id, user1.name as owner, cs.name, dv1.text as grade, cs.website, cs.annualIncome, cs.empNums, dv2.text as industry, cs.description, cs.country, cs.province, cs.city, cs.street, cs.zipcode, user2.name as createBy, cs.createTime, user3.name as editBy, cs.editTime
+		from tbl_customer cs
+		left join tbl_user user1 on cs.owner = user1.id 
+		join tbl_dictionary_value dv1 on cs.grade = dv1.id
+		join tbl_dictionary_value dv2 on cs.industry = dv2.id
+		left join tbl_user user2 on cs.createBy = user2.id 
+		join tbl_user user3 on cs.editBy = user3.id
+		<where>
+			<if test="name != null and name != ''">
+				and cs.name like '%' #{name}'%'
+			</if>
+			<if test="owner != null and onwer != ''">
+				and user1.name like '%'{owner}'%'
+			</if>
+			<if test="grade != null and grade != ''">
+				and dv1.text like '%'{grade}'%'
+			</if>
+			<if test="phone != null and phone != ''">
+				and cs.phone like '%'{phone}'%'
+			</if>
+			<if test="website != null and website !=''">
+				and cs.website like '%'{website}'%'
+			</if>
+			<if test="industry != null and industry != ''">
+				and dv2.text like '%'{industry}'%'
+			</if>
+		</where>
+			order by cs.createTime desc
+			limit #{beginNo},#{pageSize}
+	</select>
+	
+	<!-- 查询记录总数 -->
+	<!-- long queryTotalCountOfCustomerForPageByCondition(Map<String, Object> map); -->
+	<select id="queryTotalCountOfCustomerForPageByCondition" parameterType="map" resultType="long">
+		select count(*)
+		from tbl_customer cs
+		left join tbl_user user1 on cs.owner = user1.id 
+		join tbl_dictionary_value dv1 on cs.grade = dv1.id
+		join tbl_dictionary_value dv2 on cs.industry = dv2.id
+		left join tbl_user user2 on cs.createBy = user2.id 
+		join tbl_user user3 on cs.editBy = user3.id
+		<where>
+			<if test="name != null and name != ''">
+				and cs.name like '%' #{name}'%'
+			</if>
+			<if test="owner != null and onwer != ''">
+				and user1.name like '%'{owner}'%'
+			</if>
+			<if test="grade != null and grade != ''">
+				and dv1.text like '%'{grade}'%'
+			</if>
+			<if test="phone != null and phone != ''">
+				and cs.phone like '%'{phone}'%'
+			</if>
+			<if test="website != null and website !=''">
+				and cs.website like '%'{website}'%'
+			</if>
+			<if test="industry != null and industry != ''">
+				and dv2.text like '%'{industry}'%'
+			</if>
+		</where>
+	</select>
+	
+	
+	
+	<!-- Customer lookCustomerDetail(String id); -->
+	<select id="lookCustomerDetail" parameterType="string" resultType="Customer">
+		select
+		cs.id, user1.name as owner, cs.name, dv1.text as grade, cs.website, cs.annualIncome, cs.empNums, dv2.text as industry, cs.description, cs.country, cs.province, cs.city, cs.street, cs.zipcode, user2.name as createBy, cs.createTime, user3.name as editBy, cs.editTime
+		from tbl_customer cs
+		left join tbl_user user1 on cs.owner = user1.id 
+		join tbl_dictionary_value dv1 on cs.grade = dv1.id
+		join tbl_dictionary_value dv2 on cs.industry = dv2.id
+		left join tbl_user user2 on cs.createBy = user2.id 
+		join tbl_user user3 on cs.editBy = user3.id
+		where id = #{id}
+	</select>
+	
+	
 </mapper>
 
 

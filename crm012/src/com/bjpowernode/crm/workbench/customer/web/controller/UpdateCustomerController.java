@@ -14,35 +14,33 @@ import javax.servlet.http.HttpSession;
 import com.bjpowernode.crm.settings.qx.user.domain.User;
 import com.bjpowernode.crm.utils.DateUtils;
 import com.bjpowernode.crm.utils.ServiceFactory;
-import com.bjpowernode.crm.utils.UUIDutils;
 import com.bjpowernode.crm.workbench.customer.domain.Customer;
 import com.bjpowernode.crm.workbench.customer.service.CustomerService;
 import com.bjpowernode.crm.workbench.customer.service.impl.CustomerServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * 添加新的 客户
- * 
- * @author LauShuaichen Servlet implementation class SaveCustomerController
+ * 获取表单 更新客户信息
+ * @author LauShuaichen
+ * Servlet implementation class UpdateCustomerController
  */
-@WebServlet("/worbench/customer/SaveCustomer.do")
-public class SaveCustomerController extends HttpServlet {
+@WebServlet("/workbench/customer/updateCustomer.do")
+public class UpdateCustomerController extends HttpServlet {
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		System.out.println("com.bjpowernode.crm.workbench.customer.web.controller.SaveCustomerController");
-
-		// 获取表单
-		String owner = request.getParameter("owner");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("com.bjpowernode.crm.workbench.customer.web.controller.UpdateCustomerController");
+		
+		//获取表单
+		String id = request.getParameter("id");
+		//公司名称作为客户名称
 		String name = request.getParameter("name");
 		String grade = request.getParameter("grade");
 		String phone = request.getParameter("phone");
 		String website = request.getParameter("website");
-		String annualIncome = request.getParameter("annualIncome");
+		String annualIncomeStr = request.getParameter("annualIncome");
 		String empNumsStr = request.getParameter("empNums");
 		String industry = request.getParameter("industry");
 		String description = request.getParameter("description");
@@ -51,57 +49,56 @@ public class SaveCustomerController extends HttpServlet {
 		String city = request.getParameter("city");
 		String street = request.getParameter("street");
 		String zipcode = request.getParameter("zipcode");
-		String createBy = request.getParameter("createBy");
-		String createTime = request.getParameter("createTime");
 
-		// 封装对象
+		//封装对象
 		Customer customer = new Customer();
-		customer.setId(UUIDutils.getUUid());
-		customer.setOwner(owner);
+		customer.setId(id);
 		customer.setName(name);
 		customer.setGrade(grade);
 		customer.setPhone(phone);
 		customer.setWebsite(website);
-		customer.setAnnualIncome(Integer.parseInt(annualIncome));
+		customer.setAnnualIncome(Integer.parseInt(annualIncomeStr));
 		customer.setEmpNums(Integer.parseInt(empNumsStr));
 		customer.setIndustry(industry);
 		customer.setDescription(description);
+		customer.setCountry(country);
 		customer.setProvince(province);
 		customer.setCity(city);
 		customer.setStreet(street);
 		customer.setZipcode(zipcode);
-
+		
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-
-		customer.setCreateBy(user.getId());
-		customer.setCreateTime(DateUtils.getDate());
-
-		// 调用service 保存客户信息持久化
+		
+		customer.setEditBy(user.getId());
+		customer.setEditTime(DateUtils.getDate());
+		
+		//调用service 将对象持久化
 		CustomerService customerService = (CustomerService) ServiceFactory.getService(new CustomerServiceImpl());
-		int ret = customerService.SaveCustomer(customer);
-
-		// 根据处理结果 返回响应
-		Map<String, Object> map = new HashMap<String, Object>();
-		if (ret > 0) {
+		
+		int ret = customerService.updateCustomer(customer);
+		
+		Map<String, Object> map  = new HashMap<String, Object>();
+		
+		if (ret > 0 ) {
 			map.put("success", true);
-		} else {
+		}else {
 			map.put("success", false);
 		}
-
+		
 		String json = new ObjectMapper().writeValueAsString(map);
-
+		
+		System.out.println("发送的请求==>" + json);
+		
 		request.setAttribute("data", json);
 		request.getRequestDispatcher("/data.jsp").forward(request, response);
-
+		
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.doGet(request, response);
 	}
 
