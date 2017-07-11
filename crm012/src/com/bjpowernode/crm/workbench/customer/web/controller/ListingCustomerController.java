@@ -80,6 +80,9 @@ public class ListingCustomerController extends HttpServlet {
 		
 		//转换json 响应json
 		String json = new ObjectMapper().writeValueAsString(vo);
+		
+		System.out.println(json);
+		
 		request.setAttribute("data", json);
 		request.getRequestDispatcher("/data.jsp").forward(request, response);
 

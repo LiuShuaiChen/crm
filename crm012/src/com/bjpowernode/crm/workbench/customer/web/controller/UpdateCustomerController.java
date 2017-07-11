@@ -35,6 +35,9 @@ public class UpdateCustomerController extends HttpServlet {
 		
 		//获取表单
 		String id = request.getParameter("id");
+		
+		String owner = request.getParameter("owner");
+				
 		//公司名称作为客户名称
 		String name = request.getParameter("name");
 		String grade = request.getParameter("grade");
@@ -54,6 +57,7 @@ public class UpdateCustomerController extends HttpServlet {
 		Customer customer = new Customer();
 		customer.setId(id);
 		customer.setName(name);
+		customer.setOwner(owner);
 		customer.setGrade(grade);
 		customer.setPhone(phone);
 		customer.setWebsite(website);

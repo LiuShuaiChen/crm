@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.bjpowernode.crm.workbench.customer.dao.CustomerDao">
+<mapper namespace="com.bjpowernode.crm.workbench.contacts.dao.ContactsDao">
 
 	<!-- int createContacts(Contacts contacts); -->
 	<insert id="createContacts" parameterType="contacts">
-		insert into tbl_contacts (id,owner,source,appellation,fullName,email,job,mphone,description,country,province,city,street,zipcode,birth,customerId,createBy,createTime,contactSummary)
-		values(#{id}, #{owner}, #{source}, #{appellation}, #{fullName}, #{email}, #{job}, #{mphone}, #{description}, #{country}, #{province}, #{city}, #{street}, #{zipcode}, #{birth}, #{customerId}, #{createBy}, #{createTime}, #{contactSummary})
+		insert into tbl_contacts
+		(id,owner,source,appellation,fullName,email,job,mphone,description,country,province,city,street,zipcode,birth,customerId,createBy,createTime,contactSummary)
+		values
+		(#{id}, #{owner}, #{source}, #{appellation}, #{fullName}, #{email}, #{job}, #{mphone}, #{description}, #{country}, #{province}, #{city}, #{street}, #{zipcode}, #{birth}, #{customerId}, #{createBy}, #{createTime}, #{contactSummary})
 	</insert>
 	
 	<!-- Contacts EditContactsGetById(String id); -->

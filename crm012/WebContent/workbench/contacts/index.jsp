@@ -24,12 +24,9 @@
 	type="text/css" rel="stylesheet" />
 
 <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
-<script type="text/javascript"
-	src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript"
-	src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="jquery/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
 
 <script type="text/javascript">
 
@@ -44,6 +41,119 @@
 	});
 	
 </script>
+
+<script type="text/javascript">
+$(function(){
+	
+	$("#createContactsBtn").click(function(){
+		
+		//清空表单
+		$("#create-contactsOwner").val("");
+		$("#create-clueSource").val("");
+		$("#create-surname").val("");
+		$("#create-appellation").val("");
+		$("#create-job").val("");
+		$("#create-mphone").val("");
+		$("#create-email").val("");
+		$("#create-birth").val("");
+		$("#create-customerName").val("");
+		$("#create-description").val("");
+		$("#create-contactSummary").val("");
+		$("#create-country").val("");
+		$("#create-province").val("");
+		$("#create-city").val("");
+		$("#create-street").val("");
+		$("#create-zipcode").val("");
+		
+		//获取所有者 信息 
+		$.ajax({
+			url:'settings/qx/user/GetUserOwner.do',
+			type:'post',
+			success:function(data){
+				//设置所有者
+				var htmlStr="";
+				$.each(data,function(index,obj){
+					if (obj.id == '${user.id}') {
+						htmlStr += "<option value= '"+obj.id+"' selected>" + obj.name + "</option>";
+					}else {
+						htmlStr += "<option value= '"+obj.id+"'>" + obj.name + "</option>";
+					}
+				});
+				$("#create-contactsOwner").html(htmlStr);
+				//显示模态窗口
+				$("#createContactsModal").modal("show");
+			}
+		});
+	});
+	
+	
+	$("#saveContactsBtn").click(function(){
+		
+		//获取参数
+		var owner = $("#create-contactsOwner").val();
+		var source = $("#create-clueSource").val();
+		var fullName = $("#create-surname").val();
+		var appellation = $("#create-appellation").val();
+		var job = $("#create-job").val();
+		var mphone = $("#create-mphone").val();
+		var email = $("#create-email").val();
+		var birth = $("#create-birth").val();
+		var customerName = $("#create-customerName").val();
+		var description = $("#create-description").val();
+		var contactSummary = $("#create-contactSummary").val();
+		var country = $("#create-country").val();
+		var province = $("#create-province").val();
+		var city = $("#create-city").val();
+		var street = $("#create-street").val();
+		var zipcode = $("#create-zipcode").val();
+		
+		//表单验证
+		
+		
+		//发送请求
+		$.ajax({
+			url:"workbench/contacts/createContacts.do",
+			data:{
+				owner:owner,
+				source:source,
+				fullName:fullName,
+				appellation:appellation,
+				job:job,
+				mphone:mphone,
+				email:email,
+				birth:birth,
+				customerName:customerName,
+				description:description,
+				contactSummary:contactSummary,
+				country:country,
+				province:province,
+				city:city,
+				street:street,
+				zipcode:zipcode
+			},
+			type:"post",
+			success:function(data){
+				if (data.success) {
+					//创建成果 模态窗口关闭 刷新列表
+					$("#createContactsModal").modal("hide");
+					/* display(1,$("#pageNoDiv").bs_pagination('getOption', 'rowsPerPage')); */
+					
+				}else {
+					alert("创建联系人失败");
+					//模态窗口不关闭
+					$("#createContactsModal").modal("show");
+				}
+			}
+		})
+		
+	});
+	
+	
+	
+})
+</script>
+
+
 </head>
 <body>
 
@@ -67,29 +177,20 @@
 								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="create-contactsOwner">
-									<option>zhangsan</option>
+								<!-- 	<option>zhangsan</option>
 									<option>lisi</option>
-									<option>wangwu</option>
+									<option>wangwu</option> -->
 								</select>
 							</div>
 							<label for="create-clueSource" class="col-sm-2 control-label">来源</label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="create-clueSource">
 									<option></option>
-									<option>广告</option>
-									<option>推销电话</option>
-									<option>员工介绍</option>
-									<option>外部介绍</option>
-									<option>在线商场</option>
-									<option>合作伙伴</option>
-									<option>公开媒介</option>
-									<option>销售邮件</option>
-									<option>合作伙伴研讨会</option>
-									<option>内部研讨会</option>
-									<option>交易会</option>
-									<option>web下载</option>
-									<option>web调研</option>
-									<option>聊天</option>
+									<c:if test="${!empty sourceList }">
+										<c:forEach var="sl" items="${sourceList }">
+											<option value="${sl.id }">${sl.text }</option>
+										</c:forEach>
+									</c:if>
 								</select>
 							</div>
 						</div>
@@ -102,13 +203,13 @@
 							</div>
 							<label for="create-call" class="col-sm-2 control-label">称呼</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<select class="form-control" id="create-call">
+								<select class="form-control" id="create-appellation">
 									<option></option>
-									<option>先生</option>
-									<option>夫人</option>
-									<option>女士</option>
-									<option>博士</option>
-									<option>教授</option>
+								<c:if test="${!empty appellationList }">
+										<c:forEach var="at" items="${appellationList }">
+											<option value="${at.id }">${at.text }</option>
+										</c:forEach>
+									</c:if>
 								</select>
 							</div>
 
@@ -147,7 +248,7 @@
 						<div class="form-group" style="position: relative;">
 							<label for="create-describe" class="col-sm-2 control-label">描述</label>
 							<div class="col-sm-10" style="width: 81%;">
-								<textarea class="form-control" rows="3" id="create-describe"></textarea>
+								<textarea class="form-control" rows="3" id="create-description"></textarea>
 							</div>
 						</div>
 
@@ -200,7 +301,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
+					<button id="saveContactsBtn" type="button" class="btn btn-primary" >保存</button>
 				</div>
 			</div>
 		</div>
@@ -233,20 +334,11 @@
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="edit-clueSource">
 									<option></option>
-									<option selected>广告</option>
-									<option>推销电话</option>
-									<option>员工介绍</option>
-									<option>外部介绍</option>
-									<option>在线商场</option>
-									<option>合作伙伴</option>
-									<option>公开媒介</option>
-									<option>销售邮件</option>
-									<option>合作伙伴研讨会</option>
-									<option>内部研讨会</option>
-									<option>交易会</option>
-									<option>web下载</option>
-									<option>web调研</option>
-									<option>聊天</option>
+									<c:if test="${!empty sourceList }">
+										<c:forEach var="sl" items="${sourceList }">
+											<option value="${sl.id }">${sl.text }</option>
+										</c:forEach>
+									</c:if>
 								</select>
 							</div>
 						</div>
@@ -262,11 +354,11 @@
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="edit-call">
 									<option></option>
-									<option selected>先生</option>
-									<option>夫人</option>
-									<option>女士</option>
-									<option>博士</option>
-									<option>教授</option>
+								<c:if test="${!empty appellationList }">
+										<c:forEach var="at" items="${appellationList }">
+											<option value="${at.id }">${at.text }</option>
+										</c:forEach>
+									</c:if>
 								</select>
 							</div>
 						</div>
@@ -458,20 +550,11 @@
 							<div class="input-group-addon">来源</div>
 							<select class="form-control" id="edit-clueSource">
 								<option></option>
-								<option>广告</option>
-								<option>推销电话</option>
-								<option>员工介绍</option>
-								<option>外部介绍</option>
-								<option>在线商场</option>
-								<option>合作伙伴</option>
-								<option>公开媒介</option>
-								<option>销售邮件</option>
-								<option>合作伙伴研讨会</option>
-								<option>内部研讨会</option>
-								<option>交易会</option>
-								<option>web下载</option>
-								<option>web调研</option>
-								<option>聊天</option>
+								<c:if test="${!empty sourceList }">
+										<c:forEach var="sl" items="${sourceList }">
+											<option value="${sl.id }">${sl.text }</option>
+										</c:forEach>
+									</c:if>
 							</select>
 						</div>
 					</div>
@@ -490,8 +573,7 @@
 			<div class="btn-toolbar" role="toolbar"
 				style="background-color: #F7F7F7; height: 50px; position: relative; top: 10px;">
 				<div class="btn-group" style="position: relative; top: 18%;">
-					<button type="button" class="btn btn-primary" data-toggle="modal"
-						data-target="#createContactsModal">
+					<button type="button" class="btn btn-primary" id="createContactsBtn">
 						<span class="glyphicon glyphicon-plus"></span> 创建
 					</button>
 					<button type="button" class="btn btn-default" data-toggle="modal"

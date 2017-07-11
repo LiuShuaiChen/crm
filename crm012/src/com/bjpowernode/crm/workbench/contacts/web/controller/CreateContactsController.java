@@ -19,6 +19,7 @@ import com.bjpowernode.crm.utils.UUIDutils;
 import com.bjpowernode.crm.workbench.contacts.domain.Contacts;
 import com.bjpowernode.crm.workbench.contacts.service.ContactsService;
 import com.bjpowernode.crm.workbench.contacts.service.impl.ContactsServiceImpl;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 创建联系人
@@ -92,6 +93,9 @@ public class CreateContactsController extends HttpServlet {
 			map.put("success", false);
 		}
 		
+		String json = new ObjectMapper().writeValueAsString(map);
+		request.setAttribute("data", json);
+		request.getRequestDispatcher("/data.jsp").forward(request, response);
 
 	}
 

@@ -18,6 +18,7 @@ import com.bjpowernode.crm.workbench.customer.remark.service.CustomerRemarkServi
 import com.bjpowernode.crm.workbench.customer.remark.service.impl.CustomerRemarkServiceImpl;
 import com.bjpowernode.crm.workbench.customer.service.CustomerService;
 import com.bjpowernode.crm.workbench.customer.service.impl.CustomerServiceImpl;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 跳转到详细页中 显示该客户的明细页 and 备注
@@ -32,8 +33,7 @@ public class LookCustomerDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("com.bjpowernode.crm.workbench.customer.web.controller.LookCustomerDetailController");
 
 		// 获取 客户的id
@@ -44,19 +44,11 @@ public class LookCustomerDetailController extends HttpServlet {
 		Customer customer = customerService.lookCustomerDetail(id);
 
 		// 根据id 查询该客户的备注
-		CustomerRemarkService customerRemarkService = (CustomerRemarkService) ServiceFactory
-				.getService(new CustomerRemarkServiceImpl());
-		List<CustomerRemark> remark = customerRemarkService.lookCustomerRemarkForCustomer(id);
+		//CustomerRemarkService customerRemarkService = (CustomerRemarkService) ServiceFactory.getService(new CustomerRemarkServiceImpl());
+		//List<CustomerRemark> remark = customerRemarkService.lookCustomerRemarkForCustomer(id);
 
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		if (customer != null) {
-			map.put("success", true);
-			map.put("customer", customer);
-			map.put("remark", remark);
-		} else {
-			map.put("success", false);
-		}
+		request.setAttribute("customer", customer);
+		request.getRequestDispatcher("/workbench/customer/detail.jsp").forward(request, response);
 
 	}
 

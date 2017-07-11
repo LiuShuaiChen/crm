@@ -65,6 +65,10 @@ $(function(){
 	})
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~时间插件 ~~~~~~~~~~~结束~~~~~~~~~~~~~~~~~~~~~~~~~~~  */  
 	
+	//给"查询"按钮添加单击事件
+		$("#queryConditionBtn").click(function(){
+			display(1,$("#pageNoDiv").bs_pagination('getOption', 'rowsPerPage'));
+		});
 	
 	
 	/* 创建线索 *//* 创建线索 *//* 创建线索 *//* 创建线索 *//* 创建线索 *//* 创建线索 *//* 创建线索 *//* 创建线索 */
@@ -447,8 +451,7 @@ function display(pageNo, pageSize){
 					<form class="form-horizontal" role="form">
 
 						<div class="form-group">
-							<label for="create-owner" class="col-sm-2 control-label">所有者<span
-								style="font-size: 15px; color: red;">*</span></label>
+							<label for="create-owner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="create-owner"></select>
 							</div>
@@ -1012,6 +1015,7 @@ function display(pageNo, pageSize){
 				<br>
 					<button id="queryConditionBtn" type="submit" class="btn btn-default">查询</button>
 			</div>
+			
 			
 			
 			<div class="btn-toolbar" role="toolbar"

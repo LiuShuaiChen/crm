@@ -37,13 +37,13 @@ public class SaveCustomerController extends HttpServlet {
 		System.out.println("com.bjpowernode.crm.workbench.customer.web.controller.SaveCustomerController");
 
 		// 获取表单
-		String owner = request.getParameter("owner");
-		String name = request.getParameter("name");
+		String owner = request.getParameter("customerOwner");
+		String name = request.getParameter("customerName");
 		String grade = request.getParameter("grade");
 		String phone = request.getParameter("phone");
 		String website = request.getParameter("website");
 		String annualIncome = request.getParameter("annualIncome");
-		String empNumsStr = request.getParameter("empNums");
+		String empNumsStr = request.getParameter("empnums");
 		String industry = request.getParameter("industry");
 		String description = request.getParameter("description");
 		String country = request.getParameter("country");
@@ -51,8 +51,6 @@ public class SaveCustomerController extends HttpServlet {
 		String city = request.getParameter("city");
 		String street = request.getParameter("street");
 		String zipcode = request.getParameter("zipcode");
-		String createBy = request.getParameter("createBy");
-		String createTime = request.getParameter("createTime");
 
 		// 封装对象
 		Customer customer = new Customer();
@@ -66,6 +64,7 @@ public class SaveCustomerController extends HttpServlet {
 		customer.setEmpNums(Integer.parseInt(empNumsStr));
 		customer.setIndustry(industry);
 		customer.setDescription(description);
+		customer.setCountry(country);
 		customer.setProvince(province);
 		customer.setCity(city);
 		customer.setStreet(street);

@@ -34,31 +34,31 @@
 	<!-- List<Customer> queryCustomerForPageByCondition(Map<String, Object> map); -->
 	<select id="queryCustomerForPageByCondition" parameterType="map" resultType="Customer">
 		select
-		cs.id, user1.name as owner, cs.name, dv1.text as grade, cs.website, cs.annualIncome, cs.empNums, dv2.text as industry, cs.description, cs.country, cs.province, cs.city, cs.street, cs.zipcode, user2.name as createBy, cs.createTime, user3.name as editBy, cs.editTime
+		cs.id, user1.name as owner, cs.name, dv1.text as grade, cs.phone, cs.website, cs.annualIncome, cs.empNums, dv2.text as industry, cs.description, cs.country, cs.province, cs.city, cs.street, cs.zipcode, user2.name as createBy, cs.createTime, user3.name as editBy, cs.editTime
 		from tbl_customer cs
 		left join tbl_user user1 on cs.owner = user1.id 
-		join tbl_dictionary_value dv1 on cs.grade = dv1.id
-		join tbl_dictionary_value dv2 on cs.industry = dv2.id
+		left join tbl_dictionary_value dv1 on cs.grade = dv1.id
+		left join tbl_dictionary_value dv2 on cs.industry = dv2.id
 		left join tbl_user user2 on cs.createBy = user2.id 
-		join tbl_user user3 on cs.editBy = user3.id
+		left join tbl_user user3 on cs.editBy = user3.id
 		<where>
 			<if test="name != null and name != ''">
-				and cs.name like '%' #{name}'%'
+				and cs.name like '%' #{name} '%'
 			</if>
 			<if test="owner != null and onwer != ''">
-				and user1.name like '%'{owner}'%'
+				and user1.name like '%' #{owner} '%'
 			</if>
 			<if test="grade != null and grade != ''">
-				and dv1.text like '%'{grade}'%'
+				and dv1.text like '%' #{grade} '%'
 			</if>
 			<if test="phone != null and phone != ''">
-				and cs.phone like '%'{phone}'%'
+				and cs.phone like '%' #{phone} '%'
 			</if>
 			<if test="website != null and website !=''">
-				and cs.website like '%'{website}'%'
+				and cs.website like '%' #{website} '%'
 			</if>
 			<if test="industry != null and industry != ''">
-				and dv2.text like '%'{industry}'%'
+				and dv2.text like '%' #{industry} '%'
 			</if>
 		</where>
 			order by cs.createTime desc
@@ -71,28 +71,28 @@
 		select count(*)
 		from tbl_customer cs
 		left join tbl_user user1 on cs.owner = user1.id 
-		join tbl_dictionary_value dv1 on cs.grade = dv1.id
-		join tbl_dictionary_value dv2 on cs.industry = dv2.id
+		left join tbl_dictionary_value dv1 on cs.grade = dv1.id
+		left join tbl_dictionary_value dv2 on cs.industry = dv2.id
 		left join tbl_user user2 on cs.createBy = user2.id 
-		join tbl_user user3 on cs.editBy = user3.id
+		left join tbl_user user3 on cs.editBy = user3.id
 		<where>
 			<if test="name != null and name != ''">
-				and cs.name like '%' #{name}'%'
+				and cs.name like '%' #{name} '%'
 			</if>
 			<if test="owner != null and onwer != ''">
-				and user1.name like '%'{owner}'%'
+				and user1.name like '%' #{owner} '%'
 			</if>
 			<if test="grade != null and grade != ''">
-				and dv1.text like '%'{grade}'%'
+				and dv1.text like '%' #{grade} '%'
 			</if>
 			<if test="phone != null and phone != ''">
-				and cs.phone like '%'{phone}'%'
+				and cs.phone like '%' #{phone} '%'
 			</if>
 			<if test="website != null and website !=''">
-				and cs.website like '%'{website}'%'
+				and cs.website like '%' #{website} '%'
 			</if>
 			<if test="industry != null and industry != ''">
-				and dv2.text like '%'{industry}'%'
+				and dv2.text like '%' #{industry} '%'
 			</if>
 		</where>
 	</select>
@@ -102,14 +102,14 @@
 	<!-- Customer lookCustomerDetail(String id); -->
 	<select id="lookCustomerDetail" parameterType="string" resultType="Customer">
 		select
-		cs.id, user1.name as owner, cs.name, dv1.text as grade, cs.website, cs.annualIncome, cs.empNums, dv2.text as industry, cs.description, cs.country, cs.province, cs.city, cs.street, cs.zipcode, user2.name as createBy, cs.createTime, user3.name as editBy, cs.editTime
+		cs.id, user1.name as owner, cs.name, dv1.text as grade, cs.phone, cs.website, cs.annualIncome, cs.empNums, dv2.text as industry, cs.description, cs.country, cs.province, cs.city, cs.street, cs.zipcode, user2.name as createBy, cs.createTime, user3.name as editBy, cs.editTime
 		from tbl_customer cs
 		left join tbl_user user1 on cs.owner = user1.id 
-		join tbl_dictionary_value dv1 on cs.grade = dv1.id
-		join tbl_dictionary_value dv2 on cs.industry = dv2.id
+		left join tbl_dictionary_value dv1 on cs.grade = dv1.id
+		left join tbl_dictionary_value dv2 on cs.industry = dv2.id
 		left join tbl_user user2 on cs.createBy = user2.id 
-		join tbl_user user3 on cs.editBy = user3.id
-		where id = #{id}
+		left join tbl_user user3 on cs.editBy = user3.id
+		where cs.id = #{id}
 	</select>
 	
 	

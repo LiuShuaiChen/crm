@@ -1,13 +1,27 @@
-<!DOCTYPE html>
+<%@page import="java.lang.annotation.Target"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	System.out.println("/crm008/WebContent/workbench/clue/index.jsp");
+%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<base href="<%=basePath %>">
 <meta charset="UTF-8">
 
-<link href="../../jquery/bootstrap_3.3.0/css/bootstrap.min.css"
+<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css"
 	type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="../../jquery/jquery-1.11.1-min.js"></script>
+<script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
 <script type="text/javascript"
-	src="../../jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+	src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
 
@@ -95,9 +109,9 @@
 								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
 								<select class="form-control" id="create-contactsOwner">
-									<option>zhangsan</option>
+									<!-- <option>zhangsan</option>
 									<option>lisi</option>
-									<option>wangwu</option>
+									<option>wangwu</option> -->
 								</select>
 							</div>
 							<label for="create-clueSource" class="col-sm-2 control-label">来源</label>
@@ -388,8 +402,7 @@
 	<div style="position: relative; left: 40px; top: -30px;">
 		<div class="page-header">
 			<h3>
-				动力节点 <small><a href="http://www.bjpowernode.com"
-					target="_blank">http://www.bjpowernode.com</a></small>
+				${customer.name } <small><a href="${customer.website }" target="_blank">${customer.website }</a></small>
 			</h3>
 		</div>
 		<div
@@ -410,13 +423,13 @@
 			<div style="width: 300px; color: gray;">所有者</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>zhangsan</b>
+				<b>${customer.owner }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">等级</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>已联系</b>
+				<b>${customer.grade }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -427,13 +440,13 @@
 			<div style="width: 300px; color: gray;">名称</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>动力节点</b>
+				<b>${customer.name }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">电话</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>010-84846003</b>
+				<b>${customer.phone }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -444,13 +457,13 @@
 			<div style="width: 300px; color: gray;">行业</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>中小企业</b>
+				<b>${customer.industry }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">网站</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b><a href="http://www.bjpowernode.com" target="_blank">http://www.bjpowernode.com</a></b>
+				<b><a href="${customer.website }" target="_blank">${customer.website }</a></b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -461,13 +474,13 @@
 			<div style="width: 300px; color: gray;">年收入</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>10,000,000</b>
+				<b>${customer.annualIncome }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">员工数</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>100</b>
+				<b>${customer.empNums }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -478,8 +491,8 @@
 			<div style="width: 300px; color: gray;">创建者</div>
 			<div
 				style="width: 500px; position: relative; left: 200px; top: -20px;">
-				<b>zhangsan&nbsp;&nbsp;</b><small
-					style="font-size: 10px; color: gray;">2017-01-18 10:10:10</small>
+				<b>${customer.createBy }&nbsp;&nbsp;</b><small
+					style="font-size: 10px; color: gray;">${customer.createTime }</small>
 			</div>
 			<div
 				style="height: 1px; width: 550px; background: #D5D5D5; position: relative; top: -20px;"></div>
@@ -488,8 +501,8 @@
 			<div style="width: 300px; color: gray;">修改者</div>
 			<div
 				style="width: 500px; position: relative; left: 200px; top: -20px;">
-				<b>zhangsan&nbsp;&nbsp;</b><small
-					style="font-size: 10px; color: gray;">2017-01-19 10:10:10</small>
+				<b>${customer.editBy }&nbsp;&nbsp;</b><small
+					style="font-size: 10px; color: gray;">${customer.editTime }</small>
 			</div>
 			<div
 				style="height: 1px; width: 550px; background: #D5D5D5; position: relative; top: -20px;"></div>
@@ -498,7 +511,7 @@
 			<div style="width: 300px; color: gray;">描述</div>
 			<div
 				style="width: 630px; position: relative; left: 200px; top: -20px;">
-				<b> 这是一条线索的描述信息 </b>
+				<b> ${customer.description }</b>
 			</div>
 			<div
 				style="height: 1px; width: 850px; background: #D5D5D5; position: relative; top: -20px;"></div>
@@ -514,13 +527,13 @@
 			<div style="width: 300px; color: gray;">开票地址-国家/地区</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>中国</b>
+				<b>${customer.country }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">开票地址-省/市</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>北京</b>
+				<b>${customer.province }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -531,13 +544,13 @@
 			<div style="width: 300px; color: gray;">开票地址-城市</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>北京</b>
+				<b>${customer.city }</b>
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">开票地址-街道</div>
 			<div
 				style="width: 300px; position: relative; left: 650px; top: -60px;">
-				<b>大兴区大族企业湾10号楼A座3层</b>
+				<b>${customer.street }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
@@ -548,7 +561,7 @@
 			<div style="width: 300px; color: gray;">开票地址-邮编</div>
 			<div
 				style="width: 300px; position: relative; left: 200px; top: -20px;">
-				<b>1000000</b>
+				<b>${customer.zipcode }</b>
 			</div>
 			<div
 				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -20px;"></div>
@@ -563,7 +576,7 @@
 
 		<!-- 备注1 -->
 		<div class="remarkDiv" style="height: 60px;">
-			<img title="zhangsan" src="../../image/user-thumbnail.png"
+			<img title="zhangsan" src="image/user-thumbnail.png"
 				style="width: 30px; height: 30px;">
 			<div style="position: relative; top: -40px; left: 40px;">
 				<h5>哎呦！</h5>
@@ -584,7 +597,7 @@
 
 		<!-- 备注2 -->
 		<div class="remarkDiv" style="height: 60px;">
-			<img title="zhangsan" src="../../image/user-thumbnail.png"
+			<img title="zhangsan" src="image/user-thumbnail.png"
 				style="width: 30px; height: 30px;">
 			<div style="position: relative; top: -40px; left: 40px;">
 				<h5>呵呵！</h5>
