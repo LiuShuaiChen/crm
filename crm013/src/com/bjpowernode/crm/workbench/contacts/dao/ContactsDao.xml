@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bjpowernode.crm.workbench.contacts.dao.ContactsDao">
+
+	<!-- int createContacts(Contacts contacts); -->
+	<insert id="createContacts" parameterType="contacts">
+		insert into tbl_contacts
+		(id,owner,source,appellation,fullName,email,job,mphone,description,country,province,city,street,zipcode,birth,customerId,createBy,createTime,contactSummary)
+		values
+		(#{id}, #{owner}, #{source}, #{appellation}, #{fullName}, #{email}, #{job}, #{mphone}, #{description}, #{country}, #{province}, #{city}, #{street}, #{zipcode}, #{birth}, #{customerId}, #{createBy}, #{createTime}, #{contactSummary})
+	</insert>
+	
+	<!-- Contacts EditContactsGetById(String id); -->
+	<select id="EditContactsGetById" parameterType="string" resultType="Contacts">
+		select * from tbl_contacts
+	</select>
+ 	
+ 	
+ 	<!-- int updateContacts(Contacts contacts); -->
+ 	<update id="updateContacts" parameterType="contacts">
+ 		update tbl_contacts set(owner = #{owner},source = #{source}, appellation = #{appellation}, fullName = #{fullName},email = #{email}, job = #{job},mphone = #{mphone}, description = #{description}, country = #{country}, province = #{province},city = #{city}, street = #{street}, zipcode = #{zipcode}, birth = #{birth}, contactSummary= #{contactSummary}, editBy = #{editBy},editTime = #{editTime})
+ 		where id = #{id}
+ 	</update>
+ 	
+ 	<!-- int deleteContacts(String id); -->
+ 	<delete id="deleteContacts" parameterType="string">
+ 		delete from tbl_contacts
+ 		where id = #{id}
+ 	</delete>
+	
+	<!-- 查询记录列表 -->
+	<!-- List<Contacts> listingContactsForPage(Map<String, Object> map); -->
+	<select id="listingContactsForPage" parameterType="map" resultType="contacts">
+		select ct.id, u1.name as owner, dv1.text as source, dv2.text as appellation, ct.fullName, ct.birth, ct.mphone, ct.email, ct.job, ct.description, ct.country, ct.province, ct.city, ct.street, ct.zipcode, cs.name as customerId, u2.name as createBy, ct.createTime, u3.name as editBy, ct.editTime, ct.contactSummary
+		from tbl_contacts ct
+		left join tbl_user u1 on ct.owner = u1.id
+		left join tbl_dictionary_value dv1 on ct.source = dv1.id
+		left join tbl_dictionary_value dv2 on ct.appellation = dv2.id
+		left join tbl_customer cs on ct.customerId = cs.id
+		left join tbl_user u2 on ct.createBy = u2.id
+		left join tbl_user u3 on ct.editBy = u3.id
+		<where>
+			<if test="owner != null and owner != ''">
+				and u1.name like '%'#{owner}'%'
+			</if>
+			<if test="fullName != null and fullName != ''">
+				and fullName like '%'#{fullName}'%'
+			</if>
+			<if test="source != null and source != ''">
+				and source like '%'#{source}'%'
+			</if>
+			<if test="birth != null and birth != ''">
+				and birth like '%'#{birth}'%'
+			</if>
+		</where>
+		order by ct.createTime desc
+		limit #{beginNo},#{pageSize}
+	</select>
+
+
+	<!-- 查询记录总数 -->
+	<!-- long listingContactsForTotal(Map<String, Object> map); -->
+	<select id="listingContactsForTotal" parameterType="map" resultType="long">
+		select count(*) as totalCount
+		from tbl_contacts ct
+		left join tbl_user u1 on ct.owner = u1.id
+		left join tbl_dictionary_value dv1 on ct.source = dv1.id
+		left join tbl_dictionary_value dv2 on ct.appellation = dv2.id
+		left join tbl_customer cs on ct.customerId = cs.id
+		left join tbl_user u2 on ct.createBy = u2.id
+		left join tbl_user u3 on ct.editBy = u3.id
+		<where>
+			<if test="owner != null and owner != ''">
+				and u1.name like '%'#{owner}'%'
+			</if>
+			<if test="fullName != null and fullName != ''">
+				and fullName like '%'#{fullName}'%'
+			</if>
+			<if test="source != null and source != ''">
+				and source like '%'#{source}'%'
+			</if>
+			<if test="birth != null and birth != ''">
+				and birth like '%'#{birth}'%'
+			</if>
+		</where>
+	</select>
+	
+	
+</mapper>
+
+
+
+

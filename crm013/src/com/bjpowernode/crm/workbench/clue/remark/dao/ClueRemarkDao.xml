@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bjpowernode.crm.workbench.clue.remark.dao.ClueRemarkDao">
+
+	<!-- 添加新线索备注 -->
+	<!-- int createClueRemark(ClueRemark clueRemark); -->
+	<insert id="createClueRemark" parameterType="clueRemark">
+		insert into tbl_clue_remark (id,notePerson,noteContent,noteTime,editFlag,clueId)
+		values (#{id}, #{notePerson}, #{noteContent}, #{noteTime}, #{editFlag}, #{clueId})
+	</insert>
+
+	<!-- 查询该线索中所有备注 -->
+	<!-- List<ClueRemark> ListingClueRemark(String clueId); -->
+	<select id="ListingClueRemark" parameterType="string" resultType="clueRemark">
+		select cr.id, cr.noteContent, user1.name as notePerson, cr.noteTime, user2.name as editPerson, cr.editTime, cl.fullName as clueId
+		from tbl_clue_remark cr
+		left join tbl_user user1 on cr.notePerson=user1.id
+		left join tbl_user user2 on cr.editPerson=user2.id
+		join tbl_clue cl on cr.clueId = cl.id
+		where clueId = #{clueId}
+		order by cr.noteTime;
+	</select>
+
+</mapper>
+
+
+
+

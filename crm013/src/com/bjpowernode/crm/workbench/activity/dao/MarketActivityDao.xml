@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjpowernode.crm.workbench.activity.dao.MarketActivityDao">
+
+	<!-- int insertCreateMarketActivity(MarketActivity marketActivity); -->
+	<insert id="insertCreateMarketActivity" parameterType="MarketActivity">
+		insert
+		into tbl_marketing_activities
+		{id, owner, type, name, state, startDate,
+		endDate, budgetCost, actualCost,
+		description, createBy, createTime,
+		editBy, editTime}
+		values
+		(#{id},#{owner},#{type},#{name},#{state},#{startDate},#{endDate},#{budgetCost},#{actualCost},#{description},#{createBy},#{createTime},#{editBy},#{editTime})
+	</insert>
+
+
+	<!-- List<MarketActivity> queryMarketActivityForPageByCondition(Map<String, 
+		Object>map); -->
+	<select id="queryMarketActivityForPageByCondition" resultType="MarketActivity">
+		select ma.id,ma.name,dv1.text as type,dv2.text as state,ma.startDate,ma.endDate,u1.name as owner,ma.budgetCost,ma.actualCost, u2.name as createBy,ma.createTime,u3.name as editBy,ma.editTime,ma.description
+		from tbl_marketing_activities ma
+		left join tbl_dictionary_value dv1 on ma.type=dv1.id
+		left join tbl_dictionary_value dv2 on ma.state=dv2.id
+		join tbl_user u1 on ma.owner=u1.id
+		join tbl_user u2 on ma.createBy=u2.id
+		left join tbl_user u3 on ma.editBy=u3.id
+		<where>
+			<if test="name!=null and name!=''">
+				and ma.name like '%' #{name} '%'
+			</if>
+			<if test="owner!=null and owner!=''">
+				and u1.name like '%' #{owner} '%'
+			</if>
+			<if test="type!=null and type!=''">
+				and ma.type=#{type}
+			</if>
+			<if test="state!=null and state!=''">
+				and ma.state=#{state}
+			</if>
+			<if test="startDate!=null and startDate!=''">
+				and ma.startDate&gt;=#{startDate}
+			</if>
+			<if test="endDate!=null and endDate!=''">
+				and ma.endDate&lt;=#{endDate}
+			</if>
+		</where>
+		order by ma.createTime desc
+		limit #{beginNo},#{pageSize}
+	</select>
+
+
+
+	<!-- long queryTotalCountofMarketActivityByCondition(Map<String, Object>map); -->
+	<select id="queryTotalCountofMarketActivityByCondition" parameterType="map" resultType="long">
+		select count(*) as totalCount
+		from tbl_marketing_activities ma
+		left join
+		tbl_dictionary_value dv1 on ma.type=dv1.id
+		left join
+		tbl_dictionary_value dv2 on ma.state=dv2.id
+		join tbl_user u1 on
+		ma.owner=u1.id
+		join tbl_user u2 on ma.createBy=u2.id
+		left join tbl_user
+		u3 on ma.editBy=u3.id
+		<where>
+			<if test="name!=null and name!=''">
+				and ma.name like '%' #{name} '%'
+			</if>
+			<if test="owner!=null and owner!=''">
+				and u1.name like '%' #{owner} '%'
+			</if>
+			<if test="type!=null and type!=''">
+				and ma.type=#{type}
+			</if>
+			<if test="state!=null and state!=''">
+				and ma.state=#{state}
+			</if>
+			<if test="startDate!=null and startDate!=''">
+				and ma.startDate &gt;= #{startDate}
+			</if>
+			<if test="endDate!=null and endDate!=''">
+				and ma.endDate &lt;= #{endDate}
+			</if>
+		</where>
+	</select>
+
+
+	<!-- int deleteMarketActivityById(String[] ids); -->
+	<delete id="deleteMarketActivityById">
+		delete from tbl_marketing_activities where id in
+		<foreach collection="array" item="id" open="(" close=")"
+			separator=",">
+			#{id}
+		</foreach>
+	</delete>
+
+
+	<!-- MarketActivity queryMarketActivityById(String id); -->
+	<select id="queryMarketActivityById" parameterType="string" resultType="MarketActivity">
+
+		select id, owner, type, name, state, startDate, endDate, budgetCost, actualCost, description, createBy, createTime, editBy, editTime
+		from tbl_marketing_activities
+		where id = #{id}
+	</select>
+
+
+
+
+	<!-- int updateEditMarketActivity(MarketActivity marketActivity); -->
+	<update id="updateEditMarketActivity" parameterType="marketActivity">
+		update
+		tbl_marketing_activities set
+		owner=#{owner},type=#{type},name=#{name},state=#{state},startDate=#{startDate},endDate=#{endDate},
+		budgetCost=#{budgetCost},actualCost=#{actualCost},description=#{description},editBy=#{editBy},editTime=#{editTime}
+		where id=#{id}
+	</update>
+
+	<!-- 根据市场活动id 拿到市场活动 detail 信息 -->
+	<!-- MarketActivity queryMarketActivityForDetailById(String id); -->
+	<select id="queryMarketActivityForDetailById" resultType="marketActivity">
+		select
+		ma.id,ma.name,dv1.text as type,dv2.text as
+		state,ma.startDate,ma.endDate,u1.name as
+		owner,ma.budgetCost,ma.actualCost,
+		u2.name as
+		createBy,ma.createTime,u3.name as
+		editBy,ma.editTime,ma.description
+		from tbl_marketing_activities ma
+		left
+		join tbl_dictionary_value dv1 on
+		ma.type=dv1.id
+		left join
+		tbl_dictionary_value dv2 on ma.state=dv2.id
+		join tbl_user u1 on
+		ma.owner=u1.id
+		join tbl_user u2 on ma.createBy=u2.id
+		left join tbl_user
+		u3 on ma.editBy=u3.id
+		where ma.id=#{id}
+	</select>
+
+
+	<!-- 根据id 拿到 市场活动明细 铺到 编辑模态窗口中 -->
+	<!-- MarketActivity updateEditMarketActivityDetail(String id); -->
+	<select id="updateEditMarketActivityDetail" parameterType="string" resultType="MarketActivity">
+		select ma.id,ma.name,dv1.text as type,dv2.text as
+		state,ma.startDate,ma.endDate,u1.name as
+		owner,ma.budgetCost,ma.actualCost,
+		u2.name as
+		createBy,ma.createTime,u3.name as
+		editBy,ma.editTime,ma.description
+		from tbl_marketing_activities ma
+		left
+		join tbl_dictionary_value dv1 on
+		ma.type=dv1.id
+		left join
+		tbl_dictionary_value dv2 on ma.state=dv2.id
+		join tbl_user u1 on
+		ma.owner=u1.id
+		join tbl_user u2 on ma.createBy=u2.id
+		left join tbl_user
+		u3 on ma.editBy=u3.id
+		where ma.id=#{id}
+	</select>
+
+
+	<!-- List<MarketActivity> queryMarketActivityByCondition(Map<String, Object> 
+		map); -->
+	<select id="queryMarketActivityByCondition" parameterType="map" resultType="MarketActivity">
+		select ma.id,ma.name,dv1.text as type,dv2.text as
+		state,ma.startDate,ma.endDate,u1.name as
+		owner,ma.budgetCost,ma.actualCost,
+		u2.name as
+		createBy,ma.createTime,u3.name as
+		editBy,ma.editTime,ma.description
+		from tbl_marketing_activities ma
+		left
+		join tbl_dictionary_value dv1 on
+		ma.type=dv1.id
+		left join
+		tbl_dictionary_value dv2 on ma.state=dv2.id
+		join tbl_user u1 on
+		ma.owner=u1.id
+		join tbl_user u2 on ma.createBy=u2.id
+		left join tbl_user
+		u3 on ma.editBy=u3.id
+		<where>
+			<if test="name!=null and name!=''">
+				and ma.name like '%' #{name} '%'
+			</if>
+			<if test="owner!=null and owner!=''">
+				and u1.name like '%' #{owner} '%'
+			</if>
+			<if test="type!=null and type!=''">
+				and ma.type=#{type}
+			</if>
+			<if test="state!=null and state!=''">
+				and ma.state=#{state}
+			</if>
+			<if test="startDate!=null and startDate!=''">
+				and ma.startDate&gt;=#{startDate}
+			</if>
+			<if test="endDate!=null and endDate!=''">
+				and ma.endDate&lt;=#{endDate}
+			</if>
+		</where>
+		order by ma.createTime desc
+	</select>
+	
+	
+	
+	<!-- int saveCreateMarketActivityByList(List<MarketActivity> activityList); -->
+	<insert id="saveCreateMarketActivityByList" parameterType="MarketActivity">
+		insert into
+		tbl_marketing_activities(id,owner,type,name,state,startDate,endDate,budgetCost,actualCost,description,createBy,createTime)
+		values
+		<foreach collection="list" item="obj" separator=",">
+			(#{obj.id},#{obj.owner},#{obj.type},#{obj.name},#{obj.state},#{obj.startDate},#{obj.endDate},#{obj.budgetCost},#{obj.actualCost},#{obj.description},#{obj.createBy},#{obj.createTime})
+		</foreach>
+	</insert>
+
+	<!-- int updateEditMarketActivityDetailByMarketActivity(MarketActivity marketActivity); -->
+	<update id="updateEditMarketActivityDetailByMarketActivity" parameterType="marketActivity">
+		update
+		tbl_marketing_activities set
+		owner=#{owner},type=#{type},name=#{name},state=#{state},startDate=#{startDate},endDate=#{endDate},
+		budgetCost=#{budgetCost},actualCost=#{actualCost},description=#{description},editBy=#{editBy},editTime=#{editTime}
+		where id=#{id}
+	</update>
+	
+	<!-- int deleteMarketActivityDetail(String id); -->
+	<delete id="deleteMarketActivityDetail" parameterType="string">
+		delete from tbl_marketing_activities where id = #{id}
+	</delete>
+
+
+
+</mapper>
+
+
+
+

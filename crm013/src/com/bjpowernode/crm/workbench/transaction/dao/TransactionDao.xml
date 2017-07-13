@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bjpowernode.crm.workbench.transaction.dao.TransactionDao">
+	
+	<!-- int createTransaction(Transaction transaction); -->
+	<insert id="createTransaction" parameterType="transaction">
+		insert into tbl_transaction 
+		(id,owner,amountOfMoney,name,expectedClosingDate,customerId,stage,type,source,activityId,contactsId,description,createBy,createTime,contactSummary,nextContactTime)
+		values
+		(#{id}, #{owner}, #{amountOfMoney}, #{name}, #{expectedClosingDate}, #{customerId}, #{stage}, #{type}, #{source}, #{activityId}, #{contactsId}, #{description}, #{createBy}, #{createTime}, #{contactSummary}, #{nextContactTime})
+	</insert>
+	
+	
+</mapper>
+
+
+
+
