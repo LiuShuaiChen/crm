@@ -90,5 +90,12 @@ public interface MarketActivityService {
 	 */
 	int deleteMarketActivityDetail(String id);
 
+	/**
+	 * 查询线索需要关联的市场活动
+	 * @param map
+	 * @return
+	 */
+	List<MarketActivity> bundClueMarketActivity(Map<String, Object> map);
+
 	
 }

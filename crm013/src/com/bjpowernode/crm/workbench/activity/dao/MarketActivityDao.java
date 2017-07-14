@@ -97,6 +97,13 @@ public interface MarketActivityDao {
 	 */
 	int deleteMarketActivityDetail(String id);
 
+	/**
+	 * 根据名称和clueId模糊查询市场活动
+	 * @param map
+	 * @return
+	 */
+	List<MarketActivity> bundClueMarketActivity(Map<String, Object> map);
+
 
 	
 }

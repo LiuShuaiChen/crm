@@ -108,6 +108,14 @@ public class MarketActivityServiceImpl implements MarketActivityService {
 		return marketActivityDao.deleteMarketActivityDetail(id);
 	}
 
+	/**
+	 * 根据名称和clueId模糊查询市场活动
+	 */
+	@Override
+	public List<MarketActivity> bundClueMarketActivity(Map<String, Object> map) {
+		return marketActivityDao.bundClueMarketActivity(map);
+	}
+
 
 	
 	

@@ -49,10 +49,10 @@ public class ListingCustomerController extends HttpServlet {
 		String website = request.getParameter("website");
 		String grade = request.getParameter("grade");
 		String industry = request.getParameter("industry");
-		
+
 		//封装参数
 		Map<String, Object> map = new HashMap<String,Object>();
-		
+
 		int pageNo = 1;
 		if (pageNoStr != null && pageNoStr.trim().length() > 0) {
 			pageNo = Integer.parseInt(pageNoStr);
@@ -62,27 +62,27 @@ public class ListingCustomerController extends HttpServlet {
 		if (pageSizeStr != null && pageSizeStr.trim().length() > 0) {
 			pageSize = Integer.parseInt(pageSizeStr);
 		}
-		
+
 		int beginNo = (pageNo - 1) * pageSize;
 		map.put("beginNo", beginNo);
 		map.put("pageSize", pageSize);
-		
+
 		map.put("name", name);
 		map.put("owner", owner);
 		map.put("phone", phone);
 		map.put("website", website);
 		map.put("grade", grade);
 		map.put("industry", industry);
-		
+
 		//调用service 
 		CustomerService customerService = (CustomerService) ServiceFactory.getService(new CustomerServiceImpl());
 		PaginationVO<Customer> vo = customerService.queryCustomerForPageByCondition(map);
-		
+
 		//转换json 响应json
 		String json = new ObjectMapper().writeValueAsString(vo);
-		
+
 		System.out.println(json);
-		
+
 		request.setAttribute("data", json);
 		request.getRequestDispatcher("/data.jsp").forward(request, response);
 

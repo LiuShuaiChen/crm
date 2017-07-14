@@ -187,9 +187,9 @@ $(function(){
 							htmlStr+="<option value='"+obj.id+"'>"+obj.name+"</option>";
 						}
 					});
-					
+
 					$("#edit-contactsOwner").html(htmlStr);
-					
+
 					$("#edit-contactsId").val(data.contacts.id);
 					$("#edit-clueSource").val(data.contacts.source);
 					$("#edit-surname").val(data.contacts.name);

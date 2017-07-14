@@ -93,7 +93,7 @@
 
 
 	$(function(){
-		
+
 		/*添加备注 单击 保存 按钮事件  *//*添加备注 单击 保存 按钮事件  *//*添加备注 单击 保存 按钮事件  *//*添加备注 单击 保存 按钮事件  *//*添加备注 单击 保存 按钮事件  *//*添加备注 单击 保存 按钮事件  */
 		$("#saveClueRemarkBtn").click(function(){
 			//收集参数
@@ -322,6 +322,57 @@
 			});
 		}
 		/* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 */
+		
+		
+		
+		/* 关联市场活动 *//* 关联市场活动 *//* 关联市场活动 *//* 关联市场活动 */
+		$("#bundActivityBtn").click(function(){
+
+			//清空body
+			$("#bundActivityTbody").html("");
+
+			//清空搜索框 
+			$("#bundActivityCase").val("");
+			
+			//显示模态窗口
+			$("#bundModal").modal("show");
+			
+			
+		})
+		/* 关联市场活动 *//* 关联市场活动 *//* 关联市场活动 *//* 关联市场活动 */
+		
+		//给市场活动关联 模态窗口中 搜索框 添加弹起事件
+		//给搜索框添加键盘弹起事件
+		$("#bundActivityCase").keyup(function(){
+			var name=this.value;
+			var clueId='${clue.id}';
+			$.ajax({
+				url:'workbench/clue/detail/bundClueMarketActivity.do',
+				data:{
+					name:name,
+					clueId:clueId
+				},
+				type:'post',
+				success:function(data){
+					var htmlStr="";
+					$.each(data,function(index,obj){
+						htmlStr+="<tr>";
+						htmlStr+="<td><input value='"+obj.id+"' type='checkbox'/></td>";
+						htmlStr+="<td>"+obj.name+"</td>";
+						htmlStr+="<td>"+obj.type+"</td>";
+						htmlStr+="<td>"+obj.state+"</td>";
+						htmlStr+="<td>"+obj.startDate+"</td>";
+						htmlStr+="<td>"+obj.endDate+"</td>";
+						htmlStr+="<td>"+obj.owner+"</td>";
+						htmlStr+="</tr>";
+					});
+					$("#activityListTBody").html(htmlStr);
+				}
+			});
+		});
+		//给搜索框添加键盘弹起事件
+		
+		
 	})
 </script>
 
@@ -358,7 +409,6 @@
 				</div>
 			</div>
 		</div>	
-	
 
 
 	<!-- 解除关联的模态窗口 -->
@@ -397,9 +447,7 @@
 						style="position: relative; top: 18%; left: 8px;">
 						<form class="form-inline" role="form">
 							<div class="form-group has-feedback">
-								<input type="text" class="form-control" style="width: 300px;"
-									placeholder="请输入市场活动名称，支持模糊查询"> <span
-									class="glyphicon glyphicon-search form-control-feedback"></span>
+								<input id="bundActivityCase" type="text" class="form-control" style="width: 300px;" placeholder="请输入市场活动名称，支持模糊查询"> <span class="glyphicon glyphicon-search form-control-feedback"></span>
 							</div>
 						</form>
 					</div>
@@ -417,31 +465,14 @@
 								<td></td>
 							</tr>
 						</thead>
-						<tbody>
-							<tr>
-								<td><input type="checkbox" /></td>
-								<td>发传单</td>
-								<td>广告</td>
-								<td>激活的</td>
-								<td>2020-10-10</td>
-								<td>2020-10-20</td>
-								<td>zhangsan</td>
-							</tr>
-							<tr>
-								<td><input type="checkbox" /></td>
-								<td>发传单</td>
-								<td>广告</td>
-								<td>激活的</td>
-								<td>2020-10-10</td>
-								<td>2020-10-20</td>
-								<td>zhangsan</td>
-							</tr>
+						<tbody id="activityListTBody">
+						
 						</tbody>
 					</table>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					<button type="button" class="btn btn-primary" data-dismiss="modal">关联</button>
+					<button type="button" class="btn btn-primary" id="relevanceActivityBtn">关联</button>
 				</div>
 			</div>
 		</div>
@@ -487,8 +518,7 @@
 							</div>
 							<label for="edit-surname" class="col-sm-2 control-label">姓名</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-fullName"
-									value="${clue.fullName }">
+								<input type="text" class="form-control" id="edit-fullName" value="${clue.fullName }">
 							</div>
 						</div>
 
@@ -669,7 +699,7 @@
 	<div style="position: relative; left: 40px; top: -30px;">
 		<div class="page-header">
 			<h3 id="clueTitle">${clue.fullName } ${clue.appellation } <small>${clue.company }</small></h3>
-			</h3>
+
 		</div>
 		<div style="position: relative; height: 50px; width: 500px; top: -72px; left: 700px;">
 			<button type="button" class="btn btn-default">
@@ -681,8 +711,7 @@
 			<button id="editClueDateilBtn" type="button" class="btn btn-default" data-toggle="modal" data-target="#editClueModal">
 				<span class="glyphicon glyphicon-edit"></span> 编辑
 			</button>
-			<button type="button" class="btn btn-danger">
-				<span class="glyphicon glyphicon-minus"></span> 删除
+			<button type="button" class="btn btn-danger"> <span class="glyphicon glyphicon-minus"></span> 删除
 			</button>
 		</div>
 	</div>
@@ -959,8 +988,8 @@
 							<td></td>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
+					<tbody id="bundActivityTbody">
+						<!-- <tr>
 							<td>发传单</td>
 							<td>广告</td>
 							<td>激活的</td>
@@ -969,7 +998,7 @@
 							<td>zhangsan</td>
 							<td><a href="javascript:void(0);" data-toggle="modal"
 								data-target="#unbundModal" style="text-decoration: none;"><span
-									class="glyphicon glyphicon-remove"></span>解除关联</a></td>
+								class="glyphicon glyphicon-remove"></span>解除关联</a></td>
 						</tr>
 						<tr>
 							<td>发传单</td>
@@ -980,16 +1009,14 @@
 							<td>zhangsan</td>
 							<td><a href="javascript:void(0);" data-toggle="modal"
 								data-target="#unbundModal" style="text-decoration: none;"><span
-									class="glyphicon glyphicon-remove"></span>解除关联</a></td>
-						</tr>
+								class="glyphicon glyphicon-remove"></span>解除关联</a></td>
+						</tr> -->
 					</tbody>
 				</table>
 			</div>
 
 			<div>
-				<a href="javascript:void(0);" data-toggle="modal"
-					data-target="#bundModal" style="text-decoration: none;"><span
-					class="glyphicon glyphicon-plus"></span>关联市场活动</a>
+				<a id="bundActivityBtn" href="javascript:void(0);" style="text-decoration: none;"><span class="glyphicon glyphicon-plus"></span>关联市场活动</a>
 			</div>
 		</div>
 	</div>

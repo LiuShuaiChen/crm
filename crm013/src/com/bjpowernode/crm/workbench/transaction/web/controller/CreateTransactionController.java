@@ -84,6 +84,7 @@ public class CreateTransactionController extends HttpServlet {
 		int ret = transactionService.CreateTransaction(transaction);
 
 		Map<String, Object> map = new HashMap<String, Object>();
+		
 		if (ret > 0) {
 			map.put("success", true);
 		} else {

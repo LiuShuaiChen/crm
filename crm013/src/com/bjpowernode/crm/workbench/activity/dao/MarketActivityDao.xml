@@ -237,6 +237,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from tbl_marketing_activities where id = #{id}
 	</delete>
 
+	<!-- List<MarketActivity> bundClueMarketActivity(Map<String, Object> map); -->
+	<select id="bundClueMarketActivity" parameterType="marketActivity" resultType="MarketActivity">
+		select ma.id,ma.name,dv1.text as type,dv2.text as state,ma.startDate,ma.endDate,u.name as owner
+		from tbl_marketing_activities ma
+		left join tbl_dictionary_value dv1 on ma.type=dv1.id
+		left join tbl_dictionary_value dv2 on ma.state=dv2.id
+		join tbl_user u on ma.owner=u.id
+		where ma.name like '%' #{name} '%' and ma.id not in 
+		(
+			select activityId
+			from tbl_clue_activity_relation where clueId=#{clueId}
+		)
+	</select>
 
 
 </mapper>
