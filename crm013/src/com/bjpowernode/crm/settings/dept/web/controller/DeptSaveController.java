@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.bjpowernode.crm.settings.dept.domain.Dept;
 import com.bjpowernode.crm.settings.dept.service.DeptService;
 import com.bjpowernode.crm.settings.dept.service.impl.DeptServiceImpl;
@@ -29,7 +31,7 @@ public class DeptSaveController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("com.bjpowernode.crm.settings.dept.web.controller.DeptSaveController");
-
+		
 		String id = UUIDutils.getUUid();
 		String no = request.getParameter("no");
 		String name = request.getParameter("name");
