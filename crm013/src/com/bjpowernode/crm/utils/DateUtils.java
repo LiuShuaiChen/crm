@@ -12,7 +12,6 @@ public class DateUtils {
 	
 	private final static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-	//不允许实例化
 	private DateUtils() {
 	}
 

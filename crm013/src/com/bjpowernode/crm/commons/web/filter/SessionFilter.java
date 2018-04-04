@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
+import org.apache.log4j.Logger;
+
 import com.bjpowernode.crm.settings.qx.user.domain.User;
 
 public class SessionFilter implements Filter {
@@ -73,7 +75,6 @@ public class SessionFilter implements Filter {
 	}
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		System.out.println("==========================过滤器");
 		config = filterConfig;
 	}
 

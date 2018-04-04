@@ -315,8 +315,8 @@ $(function(){
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td><a style="text-decoration: none; cursor: pointer;"
-								onclick="window.location.href='detail.html';">动力节点-交易01</a></td>
-							<td>动力节点</td>
+								onclick="window.location.href='detail.html';">Administrator-交易01</a></td>
+							<td>Administrator</td>
 							<td>5,000</td>
 							<td>2017-02-07</td>
 							<td>谈判/复审</td>
@@ -337,8 +337,8 @@ $(function(){
 						<tr>
 							<td><input type="checkbox" /></td>
 							<td><a style="text-decoration: none; cursor: pointer;"
-								onclick="window.location.href='detail.html';">动力节点-交易01</a></td>
-							<td>动力节点</td>
+								onclick="window.location.href='detail.html';">Administrator-交易01</a></td>
+							<td>Administrator</td>
 							<td>5,000</td>
 							<td>2017-02-07</td>
 							<td>谈判/复审</td>

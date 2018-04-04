@@ -527,7 +527,7 @@ $(function(){
 							<label for="edit-customerName" class="col-sm-2 control-label">名称<span
 								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-customerName" value="动力节点">
+								<input type="text" class="form-control" id="edit-customerName" value="Administrator">
 							</div>
 						</div>
 
@@ -842,7 +842,7 @@ $(function(){
 						<!-- <tr>
 							<td><input type="checkbox" /></td>
 							<td><a style="text-decoration: none; cursor: pointer;"
-								onclick="window.location.href='detail.html';">动力节点</a></td>
+								onclick="window.location.href='detail.html';">Administrator</a></td>
 							<td>zhangsan</td>
 							<td>已获得</td>
 							<td>010-84846003</td>
@@ -860,7 +860,7 @@ $(function(){
 						<tr class="active">
 							<td><input type="checkbox" /></td>
 							<td><a style="text-decoration: none; cursor: pointer;"
-								onclick="window.location.href='detail.html';">动力节点</a></td>
+								onclick="window.location.href='detail.html';">Administrator</a></td>
 							<td>zhangsan</td>
 							<td>已获得</td>
 							<td>010-84846003</td>

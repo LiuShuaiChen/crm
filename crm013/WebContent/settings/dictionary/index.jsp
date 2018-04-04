@@ -150,7 +150,7 @@
 		style="height: 50px; background-color: #3C3C3C; width: 100%;">
 		<div
 			style="position: absolute; top: 5px; left: 0px; font-size: 30px; font-weight: 400; color: white; font-family: 'times new roman'">
-			CRM &nbsp;<span style="font-size: 12px;">&copy;2017&nbsp;刘帅辰</span>
+			CRM &nbsp;<span style="font-size: 12px;">&copy;2017&nbsp;Administrator</span>
 		</div>
 		<div style="position: absolute; top: 15px; right: 15px;">
 			<ul>

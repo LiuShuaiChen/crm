@@ -663,7 +663,7 @@ function display(pageNo, pageSize){
 								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
 								<input type="text" class="form-control" id="edit-company"
-									value="动力节点">
+									value="Administrator">
 							</div>
 						</div>
 

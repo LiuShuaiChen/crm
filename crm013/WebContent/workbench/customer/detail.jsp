@@ -264,7 +264,7 @@
 								style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
 								<input type="text" class="form-control" id="edit-customerName"
-									value="动力节点">
+									value="Administrator">
 							</div>
 						</div>
 
@@ -580,7 +580,7 @@
 				style="width: 30px; height: 30px;">
 			<div style="position: relative; top: -40px; left: 40px;">
 				<h5>哎呦！</h5>
-				<font color="gray">联系人</font> <font color="gray">-</font> <b>李四先生-北京动力节点</b>
+				<font color="gray">联系人</font> <font color="gray">-</font> <b>李四先生-北京Administrator</b>
 				<small style="color: gray;"> 2017-01-22 10:10:10 由zhangsan</small>
 				<div
 					style="position: relative; left: 500px; top: -30px; height: 30px; width: 100px; display: none;">
@@ -601,7 +601,7 @@
 				style="width: 30px; height: 30px;">
 			<div style="position: relative; top: -40px; left: 40px;">
 				<h5>呵呵！</h5>
-				<font color="gray">联系人</font> <font color="gray">-</font> <b>李四先生-北京动力节点</b>
+				<font color="gray">联系人</font> <font color="gray">-</font> <b>李四先生-北京Administrator</b>
 				<small style="color: gray;"> 2017-01-22 10:20:10 由zhangsan</small>
 				<div
 					style="position: relative; left: 500px; top: -30px; height: 30px; width: 100px; display: none;">
@@ -653,7 +653,7 @@
 					<tbody>
 						<tr>
 							<td><a href="javascript:void(0);"
-								style="text-decoration: none;">动力节点-交易01</a></td>
+								style="text-decoration: none;">Administrator-交易01</a></td>
 							<td>5,000</td>
 							<td>谈判/复审</td>
 							<td>90</td>

@@ -539,7 +539,7 @@ $(function(){
 							<label for="edit-customerName" class="col-sm-2 control-label">客户名称</label>
 							<div class="col-sm-10" style="width: 300px;">
 								<input type="text" class="form-control" id="edit-customerName"
-									placeholder="支持自动补全，输入客户不存在则新建" value="动力节点">
+									placeholder="支持自动补全，输入客户不存在则新建" value="Administrator">
 							</div>
 						</div>
 
@@ -820,7 +820,7 @@ $(function(){
 							<td><a style="text-decoration: none; cursor: pointer;"
 								onclick="window.location.href='detail.html';">李四</a></td>
 							<td>先生</td>
-							<td>动力节点</td>
+							<td>Administrator</td>
 							<td>zhangsan</td>
 							<td>广告</td>
 							<td>lisi@bjpowernode.com</td>
@@ -840,7 +840,7 @@ $(function(){
 							<td><a style="text-decoration: none; cursor: pointer;"
 								onclick="window.location.href='detail.html';">李四</a></td>
 							<td>先生</td>
-							<td>动力节点</td>
+							<td>Administrator</td>
 							<td>zhangsan</td>
 							<td>广告</td>
 							<td>lisi@bjpowernode.com</td>
