@@ -1,10 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%	
 	    String path = request.getContextPath();
 	    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-	    System.out.println("/crm002/WebContent/settings/dictionary/value/index.jsp");
     %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -62,7 +60,7 @@
 	<div>
 		<div style="position: relative; left: 30px; top: -10px;">
 			<div class="page-header">
-				<h3>字典值列表JSP</h3>
+				<h3>字典值列表</h3>
 			</div>
 		</div>
 	</div>

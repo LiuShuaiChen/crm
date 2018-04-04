@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getAll" parameterType="map" resultMap="rDept">
 		select
-		id,no,name,manager,phone,description from tbl_dept
+		id,no,name,manager,phone,description from tbl_dept ORDER BY NO
 		limit #{skipCount},
 		#{pageCount}
 	</select>

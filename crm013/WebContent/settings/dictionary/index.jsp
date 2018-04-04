@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -49,7 +48,7 @@
 	
 </script>
 
-<title>Insert title here</title>
+<title>数据字典表</title>
 </head>
 <body>
 	<!-- 我的资料 -->
@@ -190,10 +189,10 @@
 			<ul id="no1" class="nav nav-pills nav-stacked">
 				<li class="liClass"><a href="settings/dictionary/type/list.do"
 					target="workareaFrame"><span class="glyphicon glyphicon-book"></span>
-						字典类型JSP</a></li>
+						字典类型</a></li>
 				<li class="liClass"><a href="settings/dictionary/value/list.do"
 					target="workareaFrame"><span class="glyphicon glyphicon-list"></span>
-						字典值JSP</a></li>
+						字典值</a></li>
 			</ul>
 
 			<!-- 分割线 -->

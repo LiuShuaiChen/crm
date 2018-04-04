@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 		String path = request.getContextPath();
 		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-		System.out.println("/crm003/WebContent/settings/dept/index.jsp");
 	%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -11,12 +9,9 @@
 <head>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css"
-	type="text/css" rel="stylesheet" />
-
+<link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
-<script type="text/javascript"
-	src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
 $(function(){
@@ -254,7 +249,7 @@ $(function(){
 
 			})
 </script>
-<title>Insert title here</title>
+<title>部门列表</title>
 </head>
 <body>
 
@@ -561,27 +556,11 @@ $(function(){
 					</tr>
 				</thead>
 				<tbody id="myBody">
-					<!-- <tr class="active">
-						<td><input type="checkbox" /></td>
-						<td>1110</td>
-						<td>财务部</td>
-						<td>张飞</td>
-						<td>010-84846005</td>
-						<td>description info</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" /></td>
-						<td>1120</td>
-						<td>销售部</td>
-						<td>关羽</td>
-						<td>010-84846006</td>
-						<td>description info</td>
-					</tr> -->
 				</tbody>
 			</table>
 		</div>
 
-		<div style="height: 50px; position: relative; top: 0px; left: 30px;">
+		<div style="height: 50px; width: 500px; position: relative; top: 0px; left: 30px;">
 
 			<div>
 				<button type="button" class="btn btn-default"

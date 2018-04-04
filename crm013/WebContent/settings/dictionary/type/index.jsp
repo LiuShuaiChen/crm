@@ -65,7 +65,7 @@ $(function(){
 	<div>
 		<div style="position: relative; left: 30px; top: -10px;">
 			<div class="page-header">
-				<h3>字典类型列表JSP</h3>
+				<h3>字典类型列表</h3>
 			</div>
 		</div>
 	</div>
