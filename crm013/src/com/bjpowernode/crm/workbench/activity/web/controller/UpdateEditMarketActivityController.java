@@ -9,7 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.bjpowernode.crm.settings.qx.user.domain.User;
+import com.bjpowernode.crm.utils.DateUtils;
 import com.bjpowernode.crm.utils.ServiceFactory;
 import com.bjpowernode.crm.workbench.activity.domain.MarketActivity;
 import com.bjpowernode.crm.workbench.activity.service.MarketActivityService;
@@ -42,7 +45,9 @@ public class UpdateEditMarketActivityController extends HttpServlet {
 		String budgetCost = request.getParameter("budgetCost");
 		String description = request.getParameter("description");
 		
-		
+		HttpSession session = request.getSession();
+		User loginUser = (User) session.getAttribute("user");
+
 		//封装参数
 		MarketActivity marketActivity = new MarketActivity();
 		marketActivity.setId(id);
@@ -55,6 +60,8 @@ public class UpdateEditMarketActivityController extends HttpServlet {
 		marketActivity.setActualCost(Long.parseLong(actualCost));
 		marketActivity.setBudgetCost(Long.parseLong(budgetCost));
 		marketActivity.setDescription(description);
+		marketActivity.setEditBy(loginUser.getId());
+		marketActivity.setEditTime(DateUtils.getDate());
 		
 		//调用service 保存 更新信息
 		MarketActivityService marketActivityService = (MarketActivityService) ServiceFactory.getService(new MarketActivityServiceImpl());
