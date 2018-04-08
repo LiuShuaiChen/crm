@@ -460,7 +460,6 @@ $(function(){
 				</tr>
 			</thead>
 			<tbody id="mytBody">
-
 			</tbody>
 		</table>
 

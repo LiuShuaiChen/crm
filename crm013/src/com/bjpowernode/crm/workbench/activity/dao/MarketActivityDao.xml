@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and ma.endDate&lt;=#{endDate}
 			</if>
 		</where>
-		order by ma.createTime desc
+		order by ma.createTime DESC, ma.name DESC
 		limit #{beginNo},#{pageSize}
 	</select>
 

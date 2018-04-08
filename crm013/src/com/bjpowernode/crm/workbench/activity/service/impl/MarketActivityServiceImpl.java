@@ -1,5 +1,6 @@
 package com.bjpowernode.crm.workbench.activity.service.impl;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +37,7 @@ public class MarketActivityServiceImpl implements MarketActivityService {
 	public PaginationVO<MarketActivity> queryMarketActivityForPageByCondition(Map<String, Object> map) {
 		// 调用dao查询记录列表
 		List<MarketActivity> activityList = marketActivityDao.queryMarketActivityForPageByCondition(map);
+		Collections.sort(activityList);
 		// 调用dao查询记录总数
 		long totalCount = marketActivityDao.queryTotalCountofMarketActivityByCondition(map);
 
