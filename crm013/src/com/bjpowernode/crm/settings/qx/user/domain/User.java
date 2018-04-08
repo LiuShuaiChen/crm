@@ -60,7 +60,7 @@ public class User {
 	}
 
 	public String getEmail() {
-		return email;
+		return email==null?"":email;
 	}
 
 	public void setEmail(String email) {
@@ -68,7 +68,13 @@ public class User {
 	}
 
 	public String getLockStatus() {
-		return lockStatus;
+		if ("0".equals(lockStatus)){
+			return "锁定";
+		}else if ("1".equals(lockStatus)){
+			return "启用";
+		}else {
+			return null;
+		}
 	}
 
 	public void setLockStatus(String lockStatus) {
@@ -92,7 +98,7 @@ public class User {
 	}
 
 	public String getDeptId() {
-		return deptId;
+		return deptId==null?"":deptId;
 	}
 
 	public void setDeptId(String deptId) {
@@ -100,7 +106,7 @@ public class User {
 	}
 
 	public String getCreateBy() {
-		return createBy;
+		return createBy==null?"":createBy;
 	}
 
 	public void setCreateBy(String createBy) {
@@ -108,7 +114,7 @@ public class User {
 	}
 
 	public String getCreateTime() {
-		return createTime;
+		return createTime==null?"":createTime;
 	}
 
 	public void setCreateTime(String createTime) {
@@ -116,7 +122,7 @@ public class User {
 	}
 
 	public String getEditBy() {
-		return editBy;
+		return editBy==null?"":editBy;
 	}
 
 	public void setEditBy(String editBy) {
@@ -124,7 +130,7 @@ public class User {
 	}
 
 	public String getEditTime() {
-		return editTime;
+		return editTime==null?"":editTime;
 	}
 
 	public void setEditTime(String editTime) {

@@ -51,7 +51,19 @@ $(function(){
 					$("#myTotal").html(total);
 					
 					$(data.uList).each(function(){
-						$("#mytBody").append("<tr class='active' ><td><input type='checkbox' name='xz' value='"+this.id+"' /></td><td>"+((++count)+(pageNo-1) * pageCount)+"</td><td><a  href='settings/qx/user/detail.jsp?id="+this.id+"'>"+this.loginAct+"</a></td><td>"+this.name+"</td><td>"+this.deptId+"</td><td>"+this.email+"</td><td>"+this.expireTime+"</td><td>"+this.allowIps+"</td><td><a href='javascript:void(0);' id='zt' aaa='"+this.id+"' style='text-decoration: none;'>"+this.lockStatus+"</a></td><td>"+this.createBy+"</td><td>"+this.createTime+"</td><td>"+this.editBy+"</td><td>"+this.editTime+"</td></tr>")
+						$("#mytBody").append("<tr class='active' ><td>" +
+							"<input type='checkbox' name='xz' value='"+this.id+"' /></td>" +
+							"<td>"+((++count)+(pageNo-1) * pageCount)+"</td>" +
+							"<td><a href='settings/qx/user/detail.jsp?id="+this.id+"'>"+this.loginAct+"</a></td>" +
+							"<td>"+this.name+"</td>" +
+							"<td>"+(this.deptId==null?'':this.deptId)+"</td>" +
+							"<td>"+this.email+"</td>" +
+							"<td>"+this.expireTime+"</td>" +
+							"<td>"+this.allowIps+"</td>" +
+							"<td><a href='javascript:void(0);' id='zt' aaa='"+this.id+"' style='text-decoration: none;'>"+this.lockStatus+"</a></td>" +
+							"<td>"+this.createBy+"</td><td>"+this.createTime+"</td>" +
+							"<td>"+this.editBy+"</td>" +
+							"<td>"+this.editTime+"</td></tr>")
 					})
 					btnCss();
 				},

@@ -506,17 +506,17 @@ $(function(){
 				if ($("#definedColumns input[name=editBy]").prop("checked")) {
 					htmlStr += "<td name = 'editBy'>"+(obj.editBy==null?'':obj.editBy)+"</td>";
 				}else {
-					htmlStr += "<td name = 'editBy' style='display:none'>"+(obj.editBy==null?'':obj.editBy)+"</td>";
+					htmlStr += "<td name = 'editBy' style='display:none'>"+obj.editBy+"</td>";
 				}
 				
 				if ($("#definedColumns input[name=editTime]").prop("checked")) {
 					htmlStr += "<td name = 'editTime'>"+(obj.editTime==null?'':obj.editTime)+"</td>";
 				}else {
-					htmlStr += "<td name = 'editTime' style='display:none'>"+(obj.editTime==null?'':obj.editTime)+"</td>";
+					htmlStr += "<td name = 'editTime' style='display:none'>"+obj.editTime+"</td>";
 				}
 				
 				if ($("#definedColumns input[name=description]").prop("checked")) {
-					htmlStr += "<td name = 'description'>"+obj.description+"</td>";
+					htmlStr += "<td name = 'description'>"+(obj.description==null?'':obj.description)+"</td>";
 				}else {
 					htmlStr += "<td name = 'description' style='display:none'>"+obj.description+"</td>";
 				}
@@ -568,7 +568,7 @@ $(function(){
 	
 
 </script>
-<title>Insert title here</title>
+<title>市场活动</title>
 </head>
 <body>
 	<!-- 创建市场活动的模态窗口 -->

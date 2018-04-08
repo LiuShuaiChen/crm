@@ -67,8 +67,7 @@ public class QueryMarketActivityForPageController extends HttpServlet {
 		map.put("endDate", endDate);
 
 		// 调用service方法 查询市场活动
-		MarketActivityService marketActivityService = (MarketActivityService) ServiceFactory
-				.getService(new MarketActivityServiceImpl());
+		MarketActivityService marketActivityService = (MarketActivityService) ServiceFactory.getService(new MarketActivityServiceImpl());
 		PaginationVO<MarketActivity> vo = marketActivityService.queryMarketActivityForPageByCondition(map);
 
 		// 把vo转换成json对象

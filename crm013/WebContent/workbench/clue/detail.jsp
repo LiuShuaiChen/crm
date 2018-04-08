@@ -1,7 +1,6 @@
 <%@page import="java.lang.annotation.Target"%>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
 	String path = request.getContextPath();
@@ -32,7 +31,7 @@
 <script type="text/javascript" src="jquery/datetimepicker/css/bootstrap-datetimepicker.css"></script>
 
 <script type="text/javascript">
-	
+    window.jQuery = window.$ = jQuery;
 	$(function(){
 		$('#edit-nextContactTime').datetimepicker({
 			  language: 'zh-CN',//显示中文
@@ -322,9 +321,7 @@
 			});
 		}
 		/* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 */
-		
-		
-		
+
 		/* 关联市场活动 *//* 关联市场活动 *//* 关联市场活动 *//* 关联市场活动 */
 		$("#bundActivityBtn").click(function(){
 
@@ -336,9 +333,8 @@
 			
 			//显示模态窗口
 			$("#bundModal").modal("show");
-			
-			
-		})
+
+		});
 		/* 关联市场活动 *//* 关联市场活动 *//* 关联市场活动 *//* 关联市场活动 */
 		
 		//给市场活动关联 模态窗口中 搜索框 添加弹起事件
@@ -975,8 +971,7 @@
 				<h4>市场活动</h4>
 			</div>
 			<div style="position: relative; top: 0px;">
-				<table id="activityTable" class="table table-hover"
-					style="width: 900px;">
+				<table id="activityTable" class="table table-hover" style="width: 900px;">
 					<thead>
 						<tr style="color: #B3B3B3;">
 							<td>名称</td>
@@ -989,7 +984,7 @@
 						</tr>
 					</thead>
 					<tbody id="bundActivityTbody">
-						<!-- <tr>
+						 <tr>
 							<td>发传单</td>
 							<td>广告</td>
 							<td>激活的</td>
@@ -1010,7 +1005,7 @@
 							<td><a href="javascript:void(0);" data-toggle="modal"
 								data-target="#unbundModal" style="text-decoration: none;"><span
 								class="glyphicon glyphicon-remove"></span>解除关联</a></td>
-						</tr> -->
+						</tr>
 					</tbody>
 				</table>
 			</div>

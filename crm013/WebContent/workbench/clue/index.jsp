@@ -433,7 +433,7 @@ function display(pageNo, pageSize){
 </script>
 
 
-<title>Insert title here</title>
+<title>线索(潜在客户)</title>
 </head>
 <body>
 
@@ -908,8 +908,7 @@ function display(pageNo, pageSize){
 		</div>
 	</div>
 
-	<div
-		style="position: relative; top: -20px; left: 0px; width: 100%; height: 100%;">
+	<div style="position: relative; top: -20px; left: 0px; width: 100%; height: 100%;">
 
 		<div style="width: 200%; position: absolute; top: 5px; left: 10px;">
 

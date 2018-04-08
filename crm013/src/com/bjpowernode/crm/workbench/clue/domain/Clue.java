@@ -150,7 +150,7 @@ public class Clue {
 	}
 
 	public String getDescription() {
-		return description;
+		return description==null?"":description;
 	}
 
 	public void setDescription(String description) {
@@ -230,7 +230,7 @@ public class Clue {
 	}
 
 	public String getEditBy() {
-		return editBy;
+		return editBy==null?"":editBy;
 	}
 
 	public void setEditBy(String editBy) {
@@ -238,7 +238,7 @@ public class Clue {
 	}
 
 	public String getEditTime() {
-		return editTime;
+		return editTime==null?"":editTime;
 	}
 
 	public void setEditTime(String editTime) {
