@@ -63,8 +63,7 @@ public class UpdateMarketActivityDetailByIdController extends HttpServlet {
 		marketActivity.setEditBy(((User)request.getSession().getAttribute("user")).getId());
 
 		// 调用service
-		MarketActivityService marketActivityService = (MarketActivityService) ServiceFactory
-				.getService(new MarketActivityServiceImpl());
+		MarketActivityService marketActivityService = (MarketActivityService) ServiceFactory.getService(new MarketActivityServiceImpl());
 		int ret = marketActivityService.updateEditMarketActivityDetailByMarketActivity(marketActivity);
 
 		Map<String, Object> map = new HashMap<String, Object>();

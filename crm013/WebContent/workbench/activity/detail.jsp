@@ -3,6 +3,7 @@
 		String path = request.getContextPath();
 		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 		System.out.println("/crm010/WebContent/workbench/activity/detail.html");
+		System.out.println(basePath);
     %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -97,7 +98,6 @@ $(function(){
 			},
 			type:'post',
 			success:function(data){
-		
 					
 			 //设置所有者
 				var htmlStr="";
@@ -132,6 +132,7 @@ $(function(){
 	
 	/* ******************************市场活动详情页 更新************************************************************ */
 	$("#UpdateMarketActivityDetailBtn").click(function(){
+
 		//获取参数
 		var id="${param.id}";
 		var owner = $("#edit-marketActivityOwner").val();
@@ -185,9 +186,9 @@ $(function(){
 			type:'post',
 			success:function(data){
 				if(data.success){
+					reflushDetailMarketActivity();
 					$("#editActivityModal").modal("hide");
 					//更新列表  局部刷新市场活动详细信息
-					reflushDetailMarketActivity();
 					//关闭模态窗口
 				}else {
 					alert("更新失败");
@@ -349,41 +350,42 @@ $(function(){
 		});
 	})
 	/* 市场活动详情页中的删除 *//* 市场活动详情页中的删除 *//* 市场活动详情页中的删除 *//* 市场活动详情页中的删除 *//* 市场活动详情页中的删除 */
-})
+	reflushDetailMarketActivity();
+});
 
 /* 局部刷新 */ /* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 */
-	function reflushDetailMarketActivity(){
-		$.ajax({
-			url:"workbench/activity/detail/editMarketActivityDetail.do",
-			data:{
-				id:"${param.id}"
-			},
-			type:"post",
-			success:function(data){
-				if(data.success){
-					// 修改后标题
-					$("#activityTitle").html("市场活动-"+data.marketActivity.name+"<small>  "+data.marketActivity.startDate+" ~ "+data.marketActivity.endDate+"</small>");
-					// 修改后详细信息
-					$("#marketActivityOwner").html(data.marketActivity.owner);
-					$("#marketActivityType").html(data.marketActivity.type);
-					$("#marketActivityState").html(data.marketActivity.state);
-					$("#marketActivityName").html(data.marketActivity.name);
-					$("#marketActivityStartDate").html(data.marketActivity.startDate);
-					$("#marketActivityEndDate").html(data.marketActivity.endDate);
-					$("#marketActivityActualCost").html(data.marketActivity.actualCost);
-					$("#MarketActivityBudgetCost").html(data.marketActivity.budgetCost);
-					$("#marketActivityEditBy").html(data.marketActivity.editBy+"&nbsp;&nbsp;");
-					$("#marketActivityEditTime").html(data.marketActivity.editTime);
-					$("#marketActivityDescription").html(data.marketActivity.description);
-					// 修改后备注信息中(市场活动名称改变)
-					$("b[name='marketingActivitiesId']").html(data.marketActivity.name);
-				}else{
-					alert("刷新失败");
-				}
+function reflushDetailMarketActivity(){
+	$.ajax({
+		url:"workbench/activity/detail/editMarketActivityDetail.do",
+		data:{
+			id:"${param.id}"
+		},
+		type:"post",
+		success:function(data){
+			if(data.success){
+				// 修改后标题
+				$("#activityTitle").html("市场活动-"+data.marketActivity.name+"<small>  "+data.marketActivity.startDate+" ~ "+data.marketActivity.endDate+"</small>");
+				// 修改后详细信息
+				$("#marketActivityOwner").html(data.marketActivity.owner);
+				$("#marketActivityType").html(data.marketActivity.type);
+				$("#marketActivityState").html(data.marketActivity.state);
+				$("#marketActivityName").html(data.marketActivity.name);
+				$("#marketActivityStartDate").html(data.marketActivity.startDate);
+				$("#marketActivityEndDate").html(data.marketActivity.endDate);
+				$("#marketActivityActualCost").html(data.marketActivity.actualCost);
+				$("#marketActivityBudgetCost").html(data.marketActivity.budgetCost);
+				$("#marketActivityEditBy").html(data.marketActivity.editBy+"&nbsp;&nbsp;");
+				$("#marketActivityEditTime").html(data.marketActivity.editTime);
+				$("#marketActivityDescription").html(data.marketActivity.description);
+				// 修改后备注信息中(市场活动名称改变)
+				$("b[name='marketingActivitiesId']").html(data.marketActivity.name);
+			}else{
+				alert("刷新失败");
 			}
-		});
-	}
-	/* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 */
+		}
+	});
+}
+/* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 *//* 局部刷新 */
 
 </script>
 
@@ -535,7 +537,7 @@ $(function(){
 		<div
 			style="position: relative; height: 50px; width: 250px; top: -72px; left: 700px;">
 			<button type="button" id="editMarketActivityDetailBtn" class="btn btn-default">
-				<span class="glyphicon glyphicon-edit"></span> 编辑jsp </button>
+				<span class="glyphicon glyphicon-edit"></span> 编辑 </button>
 			<button id="deleteMarketActivityDetailBtn" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span> 删除 </button>
 		</div>
 	</div>
@@ -567,48 +569,35 @@ $(function(){
 			</div>
 			<div
 				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">状态</div>
-			<div
-				style="width: 300px; position: relative; left: 650px; top: -60px;">
+			<div style="width: 300px; position: relative; left: 650px; top: -60px;">
 				<b id="marketActivityState">${marketActivity.state }</b>
 			</div>
-			<div
-				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
-			<div
-				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px; left: 450px;"></div>
+			<div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
+			<div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px; left: 450px;"></div>
 		</div>
 		<div style="position: relative; left: 40px; height: 30px; top: 20px;">
 			<div style="width: 300px; color: gray;">开始日期</div>
-			<div
-				style="width: 300px; position: relative; left: 200px; top: -20px;">
+			<div style="width: 300px; position: relative; left: 200px; top: -20px;">
 				<b id="marketActivityStartDate">${marketActivity.startDate }</b>
 			</div>
-			<div
-				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">结束日期</div>
-			<div
-				style="width: 300px; position: relative; left: 650px; top: -60px;">
+			<div style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">结束日期</div>
+			<div style="width: 300px; position: relative; left: 650px; top: -60px;">
 				<b id="marketActivityEndDate">${marketActivity.endDate }</b>
 			</div>
-			<div
-				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
-			<div
-				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px; left: 450px;"></div>
+			<div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
+			<div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px; left: 450px;"></div>
 		</div>
 		<div style="position: relative; left: 40px; height: 30px; top: 30px;">
 			<div style="width: 300px; color: gray;">实际成本</div>
-			<div
-				style="width: 300px; position: relative; left: 200px; top: -20px;">
+			<div style="width: 300px; position: relative; left: 200px; top: -20px;">
 				<b id="marketActivityActualCost">${marketActivity.actualCost }</b>
 			</div>
-			<div
-				style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">预算成本</div>
-			<div
-				style="width: 300px; position: relative; left: 650px; top: -60px;">
+			<div style="width: 300px; position: relative; left: 450px; top: -40px; color: gray;">预算成本</div>
+			<div style="width: 300px; position: relative; left: 650px; top: -60px;">
 				<b id="marketActivityBudgetCost">${marketActivity.budgetCost }</b>
 			</div>
-			<div
-				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
-			<div
-				style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px; left: 450px;"></div>
+			<div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px;"></div>
+			<div style="height: 1px; width: 400px; background: #D5D5D5; position: relative; top: -60px; left: 450px;"></div>
 		</div>
 		<div style="position: relative; left: 40px; height: 30px; top: 40px;">
 			<div style="width: 300px; color: gray;">创建者</div>
