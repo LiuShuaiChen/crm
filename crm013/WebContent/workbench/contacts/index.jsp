@@ -248,7 +248,7 @@ $(function(){
 					htmlStr+="<td><input type='checkbox' /></td>";
 					htmlStr+="<td><a style='text-decoration: none; cursor: pointer;' onclick='window.location.href='detail.html';'>"+obj.fullName+"</a></td>";
 					htmlStr+="<td>"+obj.appellation+"</td>";
-					htmlStr+="<td>"+obj.customerId+"</td>";
+					htmlStr+="<td>"+(obj.customerId==null ? '' : obj.customerId)+"</td>";
 					htmlStr+="<td>"+obj.owner+"</td>";
 					htmlStr+="<td>"+obj.source+"</td>";
 					htmlStr+="<td>"+obj.email+"</td>";
