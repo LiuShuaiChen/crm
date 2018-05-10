@@ -252,13 +252,13 @@ $(function(){
 					htmlStr+="<td>"+obj.owner+"</td>";
 					htmlStr+="<td>"+obj.source+"</td>";
 					htmlStr+="<td>"+obj.email+"</td>";
-					htmlStr+="<td>"+obj.birth+"</td>";
+					htmlStr+="<td>"+(obj.birth==null ? '' : obj.birth)+"</td>";
 					htmlStr+="<td>"+obj.job+"</td>";
 					htmlStr+="<td>"+obj.mphone+"</td>";
 					htmlStr+="<td>"+obj.createBy+"</td>";
 					htmlStr+="<td>"+obj.createTime+"</td>";
-					htmlStr+="<td>"+obj.editBy+"</td>";
-					htmlStr+="<td>"+obj.editTime+"</td>";
+					htmlStr+="<td>"+(obj.editBy==null ? '' : obj.editBy)+"</td>";
+					htmlStr+="<td>"+(obj.editTime==null ? '' :obj.editTime)+"</td>";
 					htmlStr+="<td>"+obj.country + obj.province + obj.city + obj.street + obj.zipcode+"</td>";
 					htmlStr+="<td>"+obj.description+"</td>";
 					htmlStr+="<td>"+obj.contactSummary+"</td>";

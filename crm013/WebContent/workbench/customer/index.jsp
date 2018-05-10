@@ -78,9 +78,9 @@ $(function(){
 					htmlStr += "<td>"+(obj.website==null?'':obj.website)+"</td>";
 					htmlStr += "<td>"+(obj.industry==null?'':obj.industry)+"</td>";
 					htmlStr += "<td>"+(obj.annualIncome==null?'':obj.annualIncome)+"</td>";
-					htmlStr += "<td>"+obj.empNums+"</td>";
-					htmlStr += "<td>"+obj.createBy+"</td>";
-					htmlStr += "<td>"+obj.createTime+"</td>";
+					htmlStr += "<td>"+(obj.empNums==null? '' :obj.empNums)+"</td>";
+					htmlStr += "<td>"+(obj.createBy==null?'':obj.createBy)+"</td>";
+					htmlStr += "<td>"+(obj.createTime==null ?'':obj.createTime)+"</td>";
 					htmlStr += "<td>"+(obj.editBy==null?'':obj.editBy)+"</td>";
 					htmlStr += "<td>"+(obj.editTime==null?'':obj.editTime)+"</td>";
 					htmlStr += "<td>"+(obj.country==null?'':obj.country) + (obj.province==null?'':obj.province) + (obj.city==null?'':obj.city) + (obj.street==null?'':obj.street) +"</td>";
